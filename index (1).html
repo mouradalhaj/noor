@@ -1,0 +1,818 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl" data-theme="dark" data-font="m">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no,viewport-fit=cover"/>
+<meta name="theme-color" content="#071711"/>
+<meta name="apple-mobile-web-app-capable" content="yes"/>
+<meta name="mobile-web-app-capable" content="yes"/>
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent"/>
+<meta name="description" content="نور: ساعة تفاعلية لأسماء الله الحسنى ومسبحة إلكترونية بصوت الخرز، وعدادات محفوظة على جهازك."/>
+<title>نور · الأسماء الحسنى والتسبيح</title>
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%23071711'/%3E%3Ccircle cx='32' cy='32' r='17' fill='none' stroke='%23d9b661' stroke-width='3'/%3E%3Ccircle cx='32' cy='32' r='5' fill='%23d9b661'/%3E%3Cpath d='M46 10l1.6 3.2 3.2 1.6-3.2 1.6-1.6 3.2-1.6-3.2-3.2-1.6 3.2-1.6z' fill='%23f2d992'/%3E%3C/svg%3E"/>
+<link rel="preconnect" href="https://fonts.googleapis.com"/>
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+<link href="https://fonts.googleapis.com/css2?family=Amiri:wght@400;700&family=Cairo:wght@400;600;700;800&family=Reem+Kufi:wght@400;600;700&display=swap" rel="stylesheet"/>
+<style>
+*{margin:0;padding:0;box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+:root{
+  --bg:#071711; --bg2:#0a2019; --card:#0d261d; --card2:#103024;
+  --line:#1d4534; --ink:#eee9dc; --muted:#9cb8aa;
+  --gold:#d9b661; --gold2:#f2d992; --emerald:#1e7a5a; --teal:#2fae86; --danger:#e0836b;
+  --f-disp:'Reem Kufi','Amiri','Noto Sans Arabic','Geeza Pro',serif;
+  --f-ui:'Cairo','Noto Sans Arabic','Tajawal',system-ui,sans-serif;
+  --f-read:'Amiri','Noto Naskh Arabic',serif;
+}
+:root[data-theme="light"]{
+  --bg:#f3eee1; --bg2:#ebe3cd; --card:#fdfaf1; --card2:#f5efdc;
+  --line:#dcd1b2; --ink:#173429; --muted:#5f7d6c;
+  --gold:#a97f22; --gold2:#8a671a; --emerald:#177356; --teal:#1e8a68; --danger:#b8543c;
+}
+html[data-font="s"]{font-size:14px}
+html[data-font="m"]{font-size:16px}
+html[data-font="l"]{font-size:18px}
+html{scroll-behavior:smooth}
+body{
+  font-family:var(--f-ui); background:var(--bg); color:var(--ink);
+  min-height:100vh; overflow-x:hidden; overscroll-behavior-y:contain;
+  transition:background .35s ease,color .35s ease;
+}
+body::before{
+  content:''; position:fixed; inset:0; pointer-events:none; z-index:0;
+  background:
+    radial-gradient(900px 480px at 50% -8%, rgba(47,174,134,.13), transparent 60%),
+    radial-gradient(640px 420px at 100% 100%, rgba(217,182,97,.08), transparent 55%),
+    url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='56' height='56' viewBox='0 0 56 56'%3E%3Cpath d='M28 10l6.5 12-6.5 12-6.5-12z' fill='none' stroke='%23d9b661' stroke-opacity='.06'/%3E%3C/svg%3E");
+}
+#app{max-width:520px;margin:0 auto;padding:14px 16px calc(108px + env(safe-area-inset-bottom));position:relative;z-index:1}
+button{font-family:inherit;color:inherit}
+::placeholder{color:var(--muted);opacity:.7}
+
+/* ====== شاشات ====== */
+.screen{display:none}
+.screen.active{display:block;animation:fadeUp .4s ease}
+@keyframes fadeUp{from{opacity:0;transform:translateY(14px)}to{opacity:1;transform:none}}
+@keyframes pop{from{transform:scale(.25);opacity:0}}
+
+/* ====== عناصر عامة ====== */
+.card{background:linear-gradient(160deg,var(--card),var(--card2));border:1px solid var(--line);border-radius:20px;box-shadow:0 8px 24px rgba(0,0,0,.16)}
+.sh{display:flex;align-items:center;gap:10px;padding:10px 4px 6px}
+.sh h1{font-family:var(--f-disp);font-size:1.32rem;font-weight:700}
+.badge{font-size:.75rem;color:var(--gold2);border:1px solid var(--line);background:var(--bg2);border-radius:999px;padding:3px 12px;font-weight:700}
+.hint{font-size:.72rem;color:var(--muted)}
+.center{text-align:center}
+.chip{padding:9px 14px;border-radius:999px;border:1px solid var(--line);background:var(--card);color:var(--muted);white-space:nowrap;font-size:.84rem;font-weight:700;cursor:pointer;transition:.2s}
+.chip.on{background:linear-gradient(135deg,var(--emerald),var(--teal));color:#fff;border-color:transparent;box-shadow:0 6px 16px rgba(47,174,134,.28)}
+.btn{border:1px solid var(--line);background:var(--card);color:var(--ink);padding:11px 16px;border-radius:14px;font-weight:700;font-size:.88rem;cursor:pointer;transition:.2s}
+.btn:active{transform:scale(.96)}
+.btn.gold{background:linear-gradient(135deg,var(--gold),#b98d2f);color:#231a08;border:none;box-shadow:0 8px 20px rgba(217,182,97,.25)}
+.btn.danger{color:var(--danger);border-color:rgba(224,131,107,.35)}
+.inp{width:100%;background:var(--bg2);border:1px solid var(--line);border-radius:14px;padding:12px 14px;color:var(--ink);font-family:inherit;font-size:.95rem;outline:none;transition:.2s}
+.inp:focus{border-color:var(--gold)}
+.inp[type=number]{direction:ltr;text-align:center}
+.scroll-x{display:flex;gap:8px;overflow-x:auto;padding:6px 2px 10px;scrollbar-width:none;-webkit-overflow-scrolling:touch}
+.scroll-x::-webkit-scrollbar{display:none}
+
+/* ====== الرئيسية ====== */
+.basmala{text-align:center;font-family:var(--f-read);color:var(--gold2);font-size:1.08rem;margin-top:6px}
+.greet{padding:16px 4px 4px}
+.greet h1{font-family:var(--f-disp);font-size:1.5rem;font-weight:700}
+.greet .sub{font-size:.78rem;color:var(--muted);margin-top:5px}
+.grid2{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:14px}
+.feat{position:relative;overflow:hidden;padding:16px 14px;border-radius:22px;border:1px solid var(--line);background:linear-gradient(160deg,var(--card),var(--card2));text-align:right;display:flex;flex-direction:column;gap:6px;cursor:pointer;transition:transform .15s;box-shadow:0 8px 24px rgba(0,0,0,.16)}
+.feat:active{transform:scale(.96)}
+.feat b{font-size:1rem}
+.feat span{font-size:.72rem;color:var(--muted);line-height:1.7}
+.feat svg{width:46px;height:46px;margin-bottom:2px}
+.feat::after{content:'';position:absolute;top:-30px;left:-30px;width:110px;height:110px;border-radius:50%;background:radial-gradient(circle,rgba(217,182,97,.15),transparent 70%)}
+.stats{display:grid;grid-template-columns:repeat(3,1fr);gap:6px;margin-top:12px;padding:14px 8px}
+.stats>div{text-align:center;display:flex;flex-direction:column;gap:2px}
+.stats b{font-size:1.28rem;color:var(--gold2)}
+.stats span{font-size:.68rem;color:var(--muted)}
+.quote{margin-top:12px;text-align:center;padding:16px 18px}
+.aya{font-family:var(--f-read);font-size:1.06rem;line-height:2}
+.src{font-size:.7rem;color:var(--muted);margin-top:6px}
+
+/* ====== ساعة الأسماء ====== */
+.clockwrap{position:relative;width:100%;max-width:340px;margin:8px auto 0;cursor:pointer;touch-action:manipulation;user-select:none;-webkit-user-select:none}
+.clockwrap svg{width:100%;height:auto;display:block}
+.clock-center{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:0 25%;pointer-events:none;gap:3px}
+.nnum{font-size:.68rem;color:var(--gold);letter-spacing:.06em}
+.nname{font-family:var(--f-disp);font-size:clamp(1.1rem,6vw,1.55rem);line-height:1.55;color:var(--ink);font-weight:700}
+.nen{font-size:.7rem;color:var(--muted);direction:ltr}
+.needle{transform-box:view-box;transform-origin:160px 160px;transition:transform .9s cubic-bezier(.22,1,.36,1)}
+#prog{transition:stroke-dashoffset .9s ease;opacity:.85}
+.namecard{margin:16px auto 0;max-width:430px;padding:14px 16px;cursor:pointer}
+.lockwrap .exp{transition:filter .55s ease,opacity .55s ease}
+.lockwrap:not(.open) .exp{filter:blur(7px);opacity:.4;user-select:none;-webkit-user-select:none}
+.rowl{display:flex;justify-content:space-between;align-items:center;margin-bottom:8px}
+.tag{font-size:.7rem;color:var(--gold2);font-weight:800;border:1px solid var(--line);border-radius:999px;padding:3px 10px;background:var(--bg2)}
+.nc-en{display:block;direction:ltr;text-align:right;font-size:.85rem;color:var(--gold);margin-bottom:6px;font-weight:700}
+.exp{font-family:var(--f-read);font-size:1.04rem;line-height:1.95}
+.ctrls{display:flex;justify-content:center;align-items:center;gap:18px;margin-top:18px}
+.rbtn{width:52px;height:52px;border-radius:50%;border:1px solid var(--line);background:var(--card);display:grid;place-items:center;cursor:pointer;transition:.2s;box-shadow:0 6px 18px rgba(0,0,0,.2)}
+.rbtn svg{width:22px;height:22px}
+.rbtn:active{transform:scale(.9)}
+.rbtn.main{width:66px;height:66px;background:linear-gradient(135deg,var(--gold),#b98d2f);color:#231a08;border:none;box-shadow:0 10px 26px rgba(217,182,97,.3)}
+.rbtn.on{box-shadow:0 0 0 3px rgba(217,182,97,.28),0 10px 26px rgba(217,182,97,.3)}
+.subhint{text-align:center;margin-top:14px;line-height:1.9}
+.subhint b{color:var(--gold2)}
+
+/* ====== المسبحة ====== */
+.tapzone{position:relative;display:block;width:100%;max-width:340px;margin:6px auto 0;padding:0;border:1px solid var(--line);border-radius:24px;cursor:pointer;overflow:hidden;touch-action:manipulation;user-select:none;-webkit-user-select:none;background:linear-gradient(160deg,var(--card),var(--card2));transition:transform .12s}
+.tapzone:active{transform:scale(.982)}
+.tapzone svg{width:100%;height:auto;display:block}
+.bead{fill:url(#beadg);stroke:rgba(217,182,97,.3);stroke-width:1;transition:fill .25s}
+.bead.hot{fill:url(#ggrad);stroke:var(--gold)}
+.ring{transform-box:view-box;transform-origin:130px 130px;transition:transform .32s cubic-bezier(.3,1.25,.45,1)}
+.beads-center{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;pointer-events:none;gap:2px}
+.b-dh{font-size:.85rem;color:var(--gold2);font-weight:700;max-width:58%;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+#cnt{font-size:3rem;font-weight:800;line-height:1.15}
+.b-tgt{font-size:.78rem;color:var(--muted)}
+.ripple{position:absolute;width:14px;height:14px;border-radius:50%;background:rgba(217,182,97,.35);transform:translate(-50%,-50%);animation:rip .62s ease-out forwards;pointer-events:none}
+@keyframes rip{to{width:170px;height:170px;opacity:0}}
+.targets{display:flex;align-items:center;gap:8px;margin:14px 2px 0;flex-wrap:wrap}
+.targets .lbl{font-size:.8rem;color:var(--muted);white-space:nowrap}
+.chipsrow{display:flex;gap:8px;flex-wrap:wrap}
+.ct{display:none;gap:8px;margin-top:10px}
+.ct.show{display:flex}
+.trow{display:flex;align-items:center;gap:12px;margin-top:14px;flex-wrap:wrap}
+.tstat{font-size:.8rem;color:var(--muted)}
+.tstat b{color:var(--gold2)}
+.addcard{margin-top:14px;padding:12px 16px}
+.addcard summary{cursor:pointer;font-size:.88rem;font-weight:700;color:var(--gold2);list-style:none}
+.addcard summary::-webkit-details-marker{display:none}
+.addr{display:flex;gap:8px;margin-top:12px}
+
+/* ====== الإعدادات ====== */
+.set{margin-top:12px;padding:14px 16px}
+.set h3{font-size:.92rem;color:var(--gold2);margin-bottom:2px;font-weight:800}
+.srow{display:flex;align-items:center;justify-content:space-between;gap:10px;padding:11px 0;border-bottom:1px dashed var(--line)}
+.srow:last-child{border-bottom:none}
+.lbl2{font-size:.88rem}
+.set p.small{font-size:.76rem;color:var(--muted);line-height:1.9;margin-top:8px}
+.seg{display:flex;background:var(--bg2);border:1px solid var(--line);border-radius:14px;padding:4px;gap:4px;min-width:170px}
+.seg button{flex:1;padding:7px 6px;border-radius:10px;border:none;background:none;color:var(--muted);font-size:.78rem;font-weight:700;cursor:pointer;transition:.2s;white-space:nowrap}
+.seg button.on{background:linear-gradient(135deg,var(--gold),#b98d2f);color:#231a08}
+.tgl{width:46px;height:27px;border-radius:999px;background:var(--bg2);border:1px solid var(--line);position:relative;cursor:pointer;transition:.25s;flex-shrink:0}
+.tgl::after{content:'';position:absolute;top:3px;right:3px;width:19px;height:19px;border-radius:50%;background:var(--muted);transition:.25s}
+.tgl.on{background:linear-gradient(135deg,var(--emerald),var(--teal));border-color:transparent}
+.tgl.on::after{transform:translateX(-19px);background:#fff}
+.crow{display:flex;justify-content:space-between;align-items:center;gap:10px;padding:9px 2px;border-bottom:1px dashed var(--line)}
+.crow:last-child{border-bottom:none}
+.crow span{font-size:.88rem}
+.mini-del{background:none;border:1px solid rgba(224,131,107,.4);color:var(--danger);border-radius:10px;padding:5px 12px;font-size:.76rem;font-weight:700;cursor:pointer}
+.dim{color:var(--muted);font-size:.84rem;padding:6px 0}
+details.doc{border-bottom:1px dashed var(--line);padding:10px 0}
+details.doc:last-child{border-bottom:none}
+details.doc summary{cursor:pointer;font-size:.88rem;font-weight:700;list-style:none;display:flex;justify-content:space-between;align-items:center;gap:8px}
+details.doc summary::-webkit-details-marker{display:none}
+details.doc summary::after{content:'+';color:var(--gold);font-size:1.15rem;font-weight:800}
+details.doc[open] summary::after{content:'−'}
+details.doc .body{font-size:.8rem;color:var(--muted);line-height:1.95;padding-top:8px}
+details.doc .body ol{padding-right:18px;display:grid;gap:6px;margin-top:4px}
+details.doc .body b{color:var(--gold2)}
+
+/* ====== الشريط السفلي ====== */
+#nav{position:fixed;bottom:0;left:0;right:0;z-index:60;display:flex;justify-content:center;padding:8px 14px calc(10px + env(safe-area-inset-bottom));background:linear-gradient(to top,var(--bg) 32%,transparent);pointer-events:none}
+#nav .bar{pointer-events:auto;display:flex;gap:2px;width:100%;max-width:430px;background:rgba(13,38,29,.88);background:color-mix(in srgb,var(--card) 88%,transparent);border:1px solid var(--line);border-radius:26px;padding:6px;backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px);box-shadow:0 14px 40px rgba(0,0,0,.35)}
+:root[data-theme="light"] #nav .bar{background:rgba(253,250,241,.9)}
+.nav-b{flex:1;display:flex;flex-direction:column;align-items:center;gap:3px;padding:9px 2px;border:none;background:none;color:var(--muted);border-radius:20px;font-size:.66rem;font-weight:700;cursor:pointer;transition:.25s}
+.nav-b svg{width:22px;height:22px}
+.nav-b.on{color:var(--gold2);background:rgba(217,182,97,.12)}
+
+/* ====== الاحتفال والتنبيه ====== */
+#celebrate{position:fixed;inset:0;background:rgba(4,12,9,.74);backdrop-filter:blur(6px);-webkit-backdrop-filter:blur(6px);display:none;align-items:center;justify-content:center;z-index:80;padding:24px}
+#celebrate.show{display:flex}
+.cele{position:relative;text-align:center;padding:28px 30px;border-radius:26px;max-width:340px;width:100%;background:linear-gradient(160deg,var(--card),var(--card2));border:1px solid var(--gold);animation:pop .45s cubic-bezier(.2,1.4,.4,1)}
+.ok{width:84px;height:84px;border-radius:50%;background:linear-gradient(135deg,var(--gold),#b98d2f);display:grid;place-items:center;margin:0 auto 14px;box-shadow:0 12px 30px rgba(217,182,97,.4)}
+.ok svg{width:40px;height:40px}
+.cele h2{font-family:var(--f-disp);font-size:1.3rem;margin-bottom:6px}
+.cele p{font-size:.85rem;color:var(--muted);margin-bottom:4px}
+#burst{position:absolute;left:50%;top:56px;width:0;height:0}
+.bdot{position:absolute;width:8px;height:8px;border-radius:50%;background:var(--gold);transform:rotate(var(--a)) translateX(0);opacity:1;animation:burst .85s ease-out forwards}
+@keyframes burst{to{transform:rotate(var(--a)) translateX(95px) scale(.15);opacity:0}}
+#toast{position:fixed;bottom:calc(96px + env(safe-area-inset-bottom));left:50%;transform:translateX(-50%) translateY(20px);background:var(--card);border:1px solid var(--gold);color:var(--ink);padding:10px 20px;border-radius:999px;opacity:0;transition:.3s;z-index:90;font-size:.84rem;pointer-events:none;box-shadow:0 10px 30px rgba(0,0,0,.4);max-width:88vw;text-align:center}
+#toast.show{opacity:1;transform:translateX(-50%) translateY(0)}
+</style>
+</head>
+<body>
+<svg width="0" height="0" style="position:absolute" aria-hidden="true"><defs>
+<linearGradient id="ggrad" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#f2d992"/><stop offset="1" stop-color="#a97e1f"/></linearGradient>
+<radialGradient id="beadg" cx="35%" cy="30%" r="95%"><stop offset="0" stop-color="#43997a"/><stop offset="1" stop-color="#123c2e"/></radialGradient>
+</defs></svg>
+<div id="app">
+<!-- ====== الرئيسية ====== -->
+<section id="screen-home" class="screen">
+  <p class="basmala">بِسْمِ اللَّهِ الرَّحْمَٰنِ الرَّحِيمِ</p>
+  <header class="greet">
+    <h1>السلامُ عليكم ورحمةُ الله</h1>
+    <p class="sub"><span id="greet2"></span> · <span id="hijri"></span> <span id="greg"></span></p>
+  </header>
+  <div class="grid2">
+    <button type="button" class="feat" data-go="names">
+      <svg viewBox="0 0 64 64" aria-hidden="true">
+        <circle cx="32" cy="34" r="22" fill="none" stroke="var(--gold)" stroke-width="2.5"/>
+        <line x1="32" y1="34" x2="32" y2="19" stroke="var(--gold)" stroke-width="2.5" stroke-linecap="round"/>
+        <line x1="32" y1="34" x2="41" y2="38" stroke="var(--teal)" stroke-width="2.5" stroke-linecap="round"/>
+        <circle cx="32" cy="34" r="2.6" fill="var(--gold2)"/>
+        <path d="M50 8l1.8 3.6 3.6 1.8-3.6 1.8-1.8 3.6-1.8-3.6-3.6-1.8 3.6-1.8z" fill="var(--gold2)" opacity=".9"/>
+      </svg>
+      <b>الأسماء الحسنى</b><span>ساعة تفاعلية لمئة اسمٍ بالعربية والإنجليزية مع شرحٍ خفي</span>
+    </button>
+    <button type="button" class="feat" data-go="tasbih">
+      <svg viewBox="0 0 64 64" aria-hidden="true">
+        <circle cx="32" cy="30" r="20" fill="none" stroke="var(--gold)" stroke-width="2.4" stroke-dasharray="4 5.5" stroke-linecap="round"/>
+        <circle cx="32" cy="6.5" r="3.4" fill="var(--gold)"/>
+        <path d="M32 50v6m0 0l-3 5m3-5l3 5" fill="none" stroke="var(--teal)" stroke-width="2.2" stroke-linecap="round"/>
+      </svg>
+      <b>المسبحة</b><span>تسبيح بصوت الخرز والعدّ الآلي: ٣٣ أو ١٠٠ أو ما تشاء</span>
+    </button>
+  </div>
+  <div class="stats card">
+    <div><b id="stDay">٠</b><span>تسبيح اليوم</span></div>
+    <div><b id="stAll">٠</b><span>الإجمالي المحفوظ</span></div>
+    <div><b id="stRounds">٠</b><span>جولات اليوم</span></div>
+  </div>
+  <div class="quote card">
+    <p class="aya">﴿ وَلِلَّهِ الْأَسْمَاءُ الْحُسْنَىٰ فَادْعُوهُ بِهَا ﴾</p>
+    <p class="src">سورة الأعراف · الآية ١٨٠</p>
+  </div>
+  <div class="quote card">
+    <p class="aya">«إنَّ للهِ تسعةً وتسعينَ اسمًا، مائةً إلا واحدًا، مَن أحصاها دخل الجنةَ»</p>
+    <p class="src">رواه البخاري ومسلم</p>
+  </div>
+</section>
+
+<!-- ====== ساعة الأسماء الحسنى ====== -->
+<section id="screen-names" class="screen">
+  <header class="sh"><h1>ساعة الأسماء الحسنى</h1><span class="badge" id="badgeNames">١٠٠</span></header>
+  <div class="clockwrap" id="clockwrap">
+    <svg viewBox="0 0 320 320" aria-hidden="true">
+      <circle cx="160" cy="160" r="156" fill="var(--card2)" stroke="var(--line)" stroke-width="1"/>
+      <circle cx="160" cy="160" r="112" fill="var(--bg2)" stroke="var(--line)" stroke-width="1"/>
+      <g id="ticks"></g>
+      <circle id="prog" cx="160" cy="160" r="154" fill="none" stroke="url(#ggrad)" stroke-width="2.5" stroke-linecap="round" transform="rotate(-90 160 160)"/>
+      <g id="needle" class="needle">
+        <line x1="160" y1="168" x2="160" y2="58" stroke="url(#ggrad)" stroke-width="3" stroke-linecap="round"/>
+        <circle cx="160" cy="160" r="7" fill="url(#ggrad)"/>
+        <circle cx="160" cy="160" r="3" fill="var(--bg)"/>
+      </g>
+    </svg>
+    <div class="clock-center">
+      <span id="n-num" class="nnum"></span>
+      <b id="n-ar" class="nname"></b>
+      <span id="n-en" class="nen"></span>
+    </div>
+  </div>
+  <div class="namecard card lockwrap" id="explock">
+    <div class="rowl"><span class="tag">الشرح</span><span class="hint">المس هنا لكشف الشرح أو إخفائه</span></div>
+    <b id="nc-en" class="nc-en"></b>
+    <p id="n-desc" class="exp"></p>
+  </div>
+  <div class="ctrls">
+    <button type="button" id="btnPrev" class="rbtn" aria-label="الاسم السابق"><svg viewBox="0 0 24 24"><path d="M9 6l6 6-6 6" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
+    <button type="button" id="btnPlay" class="rbtn main" aria-label="تشغيل أو إيقاف الدوران">
+      <svg id="icPlay" viewBox="0 0 24 24"><path d="M8 5v14l11-7z" fill="currentColor"/></svg>
+      <svg id="icPause" viewBox="0 0 24 24" style="display:none"><path d="M7 5h4v14H7zM13 5h4v14h-4z" fill="currentColor"/></svg>
+    </button>
+    <button type="button" id="btnNext" class="rbtn" aria-label="الاسم التالي"><svg viewBox="0 0 24 24"><path d="M15 6l-6 6 6 6" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
+  </div>
+  <p class="hint center subhint">المس يمين الساعة للتالي ويسارها للسابق · يدور تلقائيًا كل <b id="spdTxt">٦</b> ثوانٍ (المدة من الإعدادات)</p>
+</section>
+<!-- ====== المسبحة ====== -->
+<section id="screen-tasbih" class="screen">
+  <header class="sh"><h1>المسبحة</h1><span class="badge">الإجمالي: <b id="sumAll">٠</b></span></header>
+  <div class="scroll-x" id="dhikrChips"></div>
+  <button type="button" id="tapzone" class="tapzone" aria-label="اضغط للتسبيح">
+    <svg viewBox="0 0 260 260" aria-hidden="true">
+      <g id="ring" class="ring">
+        <g id="beads"></g>
+        <line x1="130" y1="24" x2="130" y2="36" stroke="var(--line)" stroke-width="2"/>
+        <circle cx="130" cy="16" r="10" fill="url(#beadg)" stroke="var(--gold)" stroke-width="1.4"/>
+        <line x1="130" y1="226" x2="130" y2="246" stroke="url(#ggrad)" stroke-width="3" stroke-linecap="round"/>
+        <path d="M130 246l-7 12h14z" fill="url(#ggrad)" opacity=".85"/>
+      </g>
+    </svg>
+    <div class="beads-center"><span id="b-dh" class="b-dh"></span><b id="cnt">٠</b><span id="tgt" class="b-tgt"></span></div>
+  </button>
+  <div class="targets"><span class="lbl">الهدف:</span><div id="targetChips" class="chipsrow"></div></div>
+  <div id="customTarget" class="ct">
+    <input id="ctVal" class="inp" type="number" min="1" max="99999" inputmode="numeric" placeholder="عدد مخصص مثل 50"/>
+    <button type="button" id="ctSet" class="btn gold">تحديد</button>
+  </div>
+  <div class="trow">
+    <button type="button" id="resetRound" class="btn">تصفير الجولة</button>
+    <span class="tstat">اليوم: <b id="dayC">٠</b></span>
+    <span class="tstat">هذا الذكر: <b id="totC">٠</b></span>
+  </div>
+  <details class="addcard card">
+    <summary>إضافة ذكر مخصص</summary>
+    <div class="addr"><input id="newDhikr" class="inp" maxlength="40" placeholder="اكتب الذكر هنا"/><button type="button" id="addBtn" class="btn gold">إضافة</button></div>
+  </details>
+  <p class="hint center subhint">كل نقرة تسبيحة مع صوت الخرز واهتزاز خفيف · عند اكتمال العدد يظهر الاحتفال</p>
+</section>
+
+<!-- ====== الإعدادات ====== -->
+<section id="screen-settings" class="screen">
+  <header class="sh"><h1>الإعدادات</h1></header>
+  <div class="set card">
+    <h3>الصوت والاهتزاز</h3>
+    <div class="srow"><span class="lbl2">أصوات التفاعل</span><button type="button" id="tgSound" class="tgl" aria-label="الصوت"></button></div>
+    <div class="srow"><span class="lbl2">اهتزاز عند اللمس</span><button type="button" id="tgVib" class="tgl" aria-label="الاهتزاز"></button></div>
+    <div class="srow"><span class="lbl2">نغمة تِكّة الساعة</span><button type="button" id="tgTick" class="tgl" aria-label="نغمة الساعة"></button></div>
+  </div>
+  <div class="set card">
+    <h3>ساعة الأسماء</h3>
+    <div class="srow"><span class="lbl2">دوران تلقائي</span><button type="button" id="tgAuto" class="tgl" aria-label="الدوران التلقائي"></button></div>
+    <div class="srow"><span class="lbl2">مدة كل اسم</span><div class="seg" id="segSpeed"><button type="button">٤ ث</button><button type="button">٦ ث</button><button type="button">١٠ ث</button><button type="button">١٥ ث</button></div></div>
+    <div class="srow"><span class="lbl2">إخفاء الشرح افتراضيًا</span><button type="button" id="tgHide" class="tgl" aria-label="إخفاء الشرح"></button></div>
+  </div>
+  <div class="set card">
+    <h3>المظهر</h3>
+    <div class="srow"><span class="lbl2">الوضع</span><div class="seg" id="segTheme"><button type="button">ليلي</button><button type="button">نهاري</button></div></div>
+    <div class="srow"><span class="lbl2">حجم الخط</span><div class="seg" id="segFont"><button type="button">صغير</button><button type="button">متوسط</button><button type="button">كبير</button></div></div>
+  </div>
+  <div class="set card">
+    <h3>أذكاري المخصصة</h3>
+    <div id="customList"></div>
+  </div>
+  <div class="set card">
+    <h3>البيانات</h3>
+    <div class="srow"><span class="lbl2">عدادات التسبيح</span><button type="button" id="resetCounts" class="btn danger">ضبط</button></div>
+    <div class="srow"><span class="lbl2">كل البيانات والإعدادات</span><button type="button" id="resetAll" class="btn danger">حذف</button></div>
+    <p class="small">بياناتك تُحفظ في التخزين المحلي لجهازك فقط، ولا تُرسل إلى أي جهة — حتى بعد إغلاق الصفحة وإعادة تشغيل الجهاز.</p>
+  </div>
+  <div class="set card">
+    <h3>التوثيق</h3>
+    <details class="doc">
+      <summary>عن تطبيق نور</summary>
+      <div class="body">نور رفيق ذكر بسيط يعمل من دون إنترنت: ساعة تفاعلية تعرض أسماء الله الحسنى بالعربية والإنجليزية مع شرح موجز، ومسبحة إلكترونية بصوت الخرز وعدادات محفوظة. صُمم للهاتف أولًا ويُستضاف مجانًا عبر GitHub Pages.
+      <br/><b>ملاحظة:</b> الحديث الشريف ذكر أن للأسماء «تسعة وتسعين» اسمًا، وفي الساعة مئة خانة لأننا أضفنا الاسم الأعظم «الله» إلى القائمة كما في اللوحات المشهورة، فتكتمل المئة.</div>
+    </details>
+    <details class="doc">
+      <summary>الخصوصية</summary>
+      <div class="body">لا حسابات ولا خوادم ولا إعلانات ولا تتبع. عداداتك وإعداداتك وأذكارك المخصصة تُخزن في ذاكرة جهازك عبر المتصفح، وتظل محفوظة بعد الإغلاق. حذف بيانات الموقع من المتصفح يحذفها نهائيًا.</div>
+    </details>
+    <details class="doc">
+      <summary>النشر والتحديث عبر GitHub</summary>
+      <div class="body"><ol>
+        <li>أنشئ حسابًا على github.com ثم اضغط زر «+» أعلى الصفحة واختر <b>New repository</b>.</li>
+        <li>سمِّه مثلًا <b>noor</b>، اجعله <b>Public</b>، ثم اضغط <b>Create repository</b>.</li>
+        <li>في صفحة المستودع اختر <b>uploading an existing file</b> واسحب ملف <b>index.html</b> ثم <b>Commit changes</b>.</li>
+        <li>افتح <b>Settings ← Pages</b>، واختر Branch: <b>main</b> والمجلد <b>/ (root)</b> ثم <b>Save</b>.</li>
+        <li>بعد دقيقة يصبح الموقع على الرابط: https://اسم-حسابك.github.io/noor/</li>
+        <li>للتحديث لاحقًا: افتح المستودع، اختر index.html ثم أيقونة القلم، عدّل، واضغط Commit — يتحدث الموقع تلقائيًا لكل الزوار.</li>
+      </ol></div>
+    </details>
+    <details class="doc">
+      <summary>سجل الإصدار</summary>
+      <div class="body"><b>v1.0.0</b> — الإطلاق الأول: ساعة الأسماء الحسنى (١٠٠ اسم مع الشرح)، المسبحة بصوت الخرز والاحتفال، أذكار مخصصة، إعدادات كاملة، حفظ محلي على الجهاز، وضع ليلي/نهاري، واهتزاز.</div>
+    </details>
+  </div>
+</section>
+</div>
+<!-- شاشة الاحتفال -->
+<div id="celebrate" role="dialog" aria-modal="true" aria-label="اكتمال الجولة">
+  <div class="cele">
+    <div id="burst"></div>
+    <div class="ok"><svg viewBox="0 0 24 24"><path d="M5 12.5l4.5 4.5L19 7.5" fill="none" stroke="#231a08" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+    <h2>تقبّل الله منك</h2>
+    <p id="c-txt"></p>
+    <p id="c-rounds"></p>
+    <button type="button" id="cBtn" class="btn gold" style="margin-top:14px">جولة جديدة</button>
+  </div>
+</div>
+
+<!-- الشريط السفلي -->
+<nav id="nav"><div class="bar">
+  <button type="button" class="nav-b on" data-go="home"><svg viewBox="0 0 24 24"><path d="M3 11.5L12 4l9 7.5" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/><path d="M5.5 10.5V20h13v-9.5" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg><span>الرئيسية</span></button>
+  <button type="button" class="nav-b" data-go="names"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="8.5" fill="none" stroke="currentColor" stroke-width="1.8"/><path d="M12 7.5V12l3 2" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg><span>الساعة</span></button>
+  <button type="button" class="nav-b" data-go="tasbih"><svg viewBox="0 0 24 24"><g fill="currentColor"><circle cx="12" cy="4.6" r="1.7"/><circle cx="7" cy="7.6" r="1.7"/><circle cx="17" cy="7.6" r="1.7"/><circle cx="5.4" cy="12.6" r="1.7"/><circle cx="18.6" cy="12.6" r="1.7"/><circle cx="7" cy="17.6" r="1.7"/><circle cx="17" cy="17.6" r="1.7"/></g><circle cx="12" cy="12.6" r="2.4" fill="currentColor"/></svg><span>التسبيح</span></button>
+  <button type="button" class="nav-b" data-go="settings"><svg viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><path d="M4 7h9M19 7h1M4 12h3M11 12h9M4 17h9M19 17h1"/><circle cx="16" cy="7" r="2"/><circle cx="8" cy="12" r="2"/><circle cx="16" cy="17" r="2"/></g></svg><span>الإعدادات</span></button>
+</div></nav>
+<div id="toast" role="status"></div>
+<script>
+"use strict";
+/* ============ أدوات مساعدة ============ */
+const $=s=>document.querySelector(s), $$=s=>Array.from(document.querySelectorAll(s));
+const AR=n=>Number(n).toLocaleString('ar-EG');
+const todayStr=()=>{const d=new Date();return d.getFullYear()+'-'+String(d.getMonth()+1).padStart(2,'0')+'-'+String(d.getDate()).padStart(2,'0')};
+const store={
+  get(k,d){try{const v=localStorage.getItem('noor:'+k);return v==null?d:JSON.parse(v)}catch(e){return d}},
+  set(k,v){try{localStorage.setItem('noor:'+k,JSON.stringify(v));return true}catch(e){return false}},
+  del(k){try{localStorage.removeItem('noor:'+k)}catch(e){}}
+};
+let storageWarned=false;
+function warnStorage(){ if(storageWarned)return; storageWarned=true; toast('تنبيه: التخزين غير متاح في هذا المتصفح، لن تُحفظ البيانات بعد الإغلاق'); }
+let toastT=null;
+function toast(msg){ const t=$('#toast'); if(!t)return; t.textContent=msg; t.classList.add('show'); clearTimeout(toastT); toastT=setTimeout(()=>t.classList.remove('show'),2600); }
+
+/* ============ الحالة والإعدادات ============ */
+let S=Object.assign({sound:true,vibrate:true,tickSound:true,autoPlay:true,speed:6,hideExp:true,theme:'dark',fontScale:'m'},store.get('settings',{}));
+function saveS(){ if(!store.set('settings',S)) warnStorage(); }
+
+/* ============ الصوت (مولَّد محليًا بلا ملفات) ============ */
+let AC=null;
+function ac(){ try{ if(!AC){ const C=window.AudioContext||window.webkitAudioContext; if(!C)return null; AC=new C(); } if(AC.state==='suspended')AC.resume(); return AC; }catch(e){ return null } }
+function click(freq,dur,vol){
+  if(!S.sound)return; const c=ac(); if(!c)return; const t=c.currentTime;
+  const o=c.createOscillator(); o.type='triangle'; o.frequency.value=freq;
+  const g=c.createGain(); g.gain.setValueAtTime(vol,t); g.gain.exponentialRampToValueAtTime(.0001,t+dur);
+  o.connect(g); g.connect(c.destination); o.start(t); o.stop(t+dur+.02);
+  const len=Math.floor(c.sampleRate*.04), nb=c.createBuffer(1,len,c.sampleRate), d=nb.getChannelData(0);
+  for(let i=0;i<len;i++)d[i]=(Math.random()*2-1)*Math.pow(1-i/len,2);
+  const n=c.createBufferSource(); n.buffer=nb;
+  const f=c.createBiquadFilter(); f.type='bandpass'; f.frequency.value=2400; f.Q.value=1.1;
+  const g2=c.createGain(); g2.gain.value=vol*.9;
+  n.connect(f); f.connect(g2); g2.connect(c.destination); n.start(t);
+}
+function tickS(){ if(S.sound&&S.tickSound) click(1500,.05,.09); }
+function tapS(){ if(S.sound) click(1820+Math.random()*160,.055,.22); }
+function chime(){
+  if(!S.sound)return; const c=ac(); if(!c)return;
+  [523.25,659.25,783.99,1046.5].forEach((fq,i)=>{ const t=c.currentTime+i*.14;
+    const o=c.createOscillator(); o.type='sine'; o.frequency.value=fq;
+    const g=c.createGain(); g.gain.setValueAtTime(0,t); g.gain.linearRampToValueAtTime(.16,t+.02); g.gain.exponentialRampToValueAtTime(.0001,t+.75);
+    o.connect(g); g.connect(c.destination); o.start(t); o.stop(t+.8);
+  });
+}
+function vib(p){ if(!S.vibrate)return; try{ if(navigator.vibrate)navigator.vibrate(p) }catch(e){} }
+
+/* ============ بيانات أسماء الله الحسنى (١٠٠: الاسم الأعظم + التسعة والتسعون) ============ */
+const NAMES=[
+{a:"الله",t:"Allah",m:"The One True God",d:"الاسم الأعظم الجامع لجميع صفات الكمال، يتعرف به العبد ربه ولا يُسمى به غيره؛ فكل الأسماء والصفات تنتظم تحته."},
+{a:"الرَّحْمَن",t:"Ar-Rahman",m:"The Most Compassionate",d:"ذو الرحمة الواسعة التي أحاطت بكل شيء؛ رحمة عامة لجميع الخلق في الدنيا، كافرهم ومؤمنهم."},
+{a:"الرَّحِيم",t:"Ar-Raheem",m:"The Most Merciful",d:"ذو الرحمة الخاصة الواصلة إلى المؤمنين في الدنيا والآخرة؛ فهو رحيم بعباده المؤمنين."},
+{a:"المَلِك",t:"Al-Malik",m:"The King",d:"المالك المتصرف في ملكه كيف يشاء؛ لا شريك له في ملكه، ولا ينقص سلطانه شيء."},
+{a:"القُدُّوس",t:"Al-Quddus",m:"The Most Holy",d:"المنزَّه عن كل نقص وعيب؛ الطاهر المقدَّس الذي تسبِّح له الملائكة، ولا يُشبَه بمخلوق."},
+{a:"السَّلَام",t:"As-Salam",m:"The Source of Peace",d:"السالم من كل عيب وآفة، ومانح السلام والأمان لعباده؛ وهو من أسماء الجنة."},
+{a:"المُؤْمِن",t:"Al-Mumin",m:"The Giver of Security",d:"الذي صدق بوعده، وأمِن عباده المؤمنين من خوفه، وأمِن خلقَه من ظلمه ونقصه."},
+{a:"المُهَيْمِن",t:"Al-Muhaymin",m:"The Guardian",d:"الرقيب الحافظ المتولي لكل شيء؛ لا يضيع منه شيء، ويرعى الخلق بالحكمة والرحمة."},
+{a:"العَزِيز",t:"Al-Aziz",m:"The Almighty",d:"الذي لا يُقهر ولا يُغلَب؛ ذو العزة التامة: عزة القوة والقهر والانتزاع."},
+{a:"الجَبَّار",t:"Al-Jabbar",m:"The Compeller",d:"الذي يجبر الكسير ويقضي المحتاج، ويقهر الجبابرة ويجبرهم على ما يشاء ولا يقدرون على المعصية."},
+{a:"المُتَكَبِّر",t:"Al-Mutakabbir",m:"The Supreme",d:"الذي تعالى وتكبَّر بعظمة ذاته وصفاته؛ والكِبرياء رداؤه، لا يليق ذلك بغيره."},
+{a:"الخَالِق",t:"Al-Khaliq",m:"The Creator",d:"المقدِّر للأشياء ثم الموجِد لها من العدم؛ خلق الخلق بحكمة على غير مثال سابق."},
+{a:"البَارِئ",t:"Al-Bari",m:"The Originator",d:"الذي خلق الخلق بريئًا من التفاوت وتناقض الصنع؛ مخترعهم من غير مثال سابق."},
+{a:"المُصَوِّر",t:"Al-Musawwir",m:"The Fashioner",d:"الذي صوَّر المخلوقات وأتقن صورها ورتَّبها؛ فما من صورة إلا وهو المختلِق لها."},
+{a:"الغَفَّار",t:"Al-Ghaffar",m:"The All-Forgiving",d:"كثير المغفرة الذي يغفر الذنوب مهما تكررت وعظمت لمن تاب؛ ويستر عيوب عباده."},
+{a:"القَهَّار",t:"Al-Qahhar",m:"The All-Prevailing",d:"الذي قهر كل شيء وذلَّت له الخلائق جميعًا؛ لا يقدر أحد على المعصية إلا بإذنه."},
+{a:"الوَهَّاب",t:"Al-Wahhab",m:"The Bestower",d:"كثير العطاء الذي يهب بلا سؤال ولا مقابلة؛ يهب النعم من حيث لا يحتسبها العبد."},
+{a:"الرَّزَّاق",t:"Ar-Razzaq",m:"The Provider",d:"الذي يتولى أرزاق الخلق جميعًا؛ وسع رزقه كل شيء، وأدّى ما أوجب عليهم."},
+{a:"الفَتَّاح",t:"Al-Fattah",m:"The Opener",d:"الذي يفتح أبواب الرحمة والرزق ونوافذ الخير، ويحكم بين عباده بالحق."},
+{a:"العَلِيم",t:"Al-Aleem",m:"The All-Knowing",d:"الذي أحاط علمه بالأشياء جميعًا ظاهرها وباطنها؛ لا يخفى عليه مثقال ذرة."},
+{a:"القَابِض",t:"Al-Qabid",m:"The Withholder",d:"الذي يقبض الأرزاق والأرواح والأحوال بحكمة ومصالح لا تدرك إلا بعلمه الواسع."},
+{a:"البَاسِط",t:"Al-Basit",m:"The Extender",d:"الذي يبسط الأرزاق ويوسِّعها لمن يشاء بفضله؛ ويجعل بعد العسر يسرًا."},
+{a:"الخَافِض",t:"Al-Khafid",m:"The Reducer",d:"الذي يخفض المعتدين الطغاة بالعدل، ويذلُّهم بعد تمكُّنهم، بقدر حكمة لا عيب فيها."},
+{a:"الرَّافِع",t:"Ar-Rafi",m:"The Exalter",d:"الذي يرفع أولياءه بالتقوى والعمل الصالح؛ ويرفع درجات العابدين الصابرين."},
+{a:"المُعِزّ",t:"Al-Muizz",m:"The Honourer",d:"الذي يمنح العزَّة لمن يشاء من عباده؛ فمن أعزَّه الله فلا مهانة له."},
+{a:"المُذِلّ",t:"Al-Mudhill",m:"The Dishonourer",d:"الذي يذل من يشاء بالعدل؛ ولا يذلُّه إلا لفضيحة معصيته وكفرانه."},
+{a:"السَّمِيع",t:"As-Sami",m:"The All-Hearing",d:"الذي يسمع كل شيء؛ يسمع دبيب النملة السوداء على الصخر السميج في الظلمة الدامسة."},
+{a:"البَصِير",t:"Al-Basir",m:"The All-Seeing",d:"الذي يرى كل شيء ولو كان دقيقًا خفيًا؛ لا يخفى عليه شيء من أعمال الخلق."},
+{a:"الحَكَم",t:"Al-Hakam",m:"The Judge",d:"الحاكم العدل الذي يحكم بالحق بين عباده؛ فحكمه لا يُنقَض ولا يُنقَّط."},
+{a:"العَدْل",t:"Al-Adl",m:"The Utterly Just",d:"الذي لا يظلم مثقال ذرة؛ وضع كل شيء في موضعه الصحيح بالحكمة التامة."},
+{a:"اللَّطِيف",t:"Al-Latif",m:"The Subtle, The Gentle",d:"لطيف بعباده؛ يُيسِّر الخير لهم من حيث لا يشعرون، وهو خبير بجوامع الأمور."},
+{a:"الخَبِير",t:"Al-Khabir",m:"The All-Aware",d:"الذي يعلم حقائق الأشياء وبواطنها وخفاياها؛ لا يغيب عنه شيء من الأسرار."},
+{a:"الحَلِيم",t:"Al-Halim",m:"The Forbearing",d:"الذي لا يعاجل العصاة بالعقوبة مع قدرته عليها؛ يمد لهم الأمد رجاء توبتهم."},
+{a:"العَظِيم",t:"Al-Azeem",m:"The Magnificent",d:"الذي له العظمة في ذاته وصفاته وأفعاله؛ لا شيء في الوجود أعظم منه."},
+{a:"الغَفُور",t:"Al-Ghafur",m:"The Great Forgiver",d:"الذي يغفر الذنوب ويستر العيوب؛ وسعت مغفرته كل شيء، ولا يعجزه عفوٌ كثير."},
+{a:"الشَّكُور",t:"Ash-Shakur",m:"The Most Appreciative",d:"الذي يجزي على القليل بالكثير؛ يشكر عمل عباده المؤمنين ولا يضيع محاسنهم."},
+{a:"العَلِيّ",t:"Al-Ali",m:"The Most High",d:"العالي على خلقه بذاته وقدره وقهره؛ له الشأن الأعلى والعلو التام."},
+{a:"الكَبِير",t:"Al-Kabir",m:"The Greatest",d:"الكبير في ذاته وصفاته؛ كل شيء دونه صغير، ولا يرهبه شيء ولا يخاف أحدًا."},
+{a:"الحَفِيظ",t:"Al-Hafiz",m:"The Preserver",d:"الذي يحفظ خلقه وأرزاقهم وأعمالهم؛ لا تضيع منه ذرة، ولا يغفل عن شيء."},
+{a:"المُقِيت",t:"Al-Muqit",m:"The Sustainer",d:"الذي يقتدر على أن يرزق خلقه ويتولى أقواتهم؛ يعطي كل ذي حقٍّ حقه."},
+{a:"الحَسِيب",t:"Al-Hasib",m:"The Reckoner",d:"الكافي من توكَّل عليه؛ وحاسب الخلق يوم القيامة على أعمالهم بإنصافه."},
+{a:"الجَلِيل",t:"Al-Jaleel",m:"The Majestic",d:"ذو الجلال والعظمة والقدر؛ لا تُوصف عظمته بمثل من عظم الخلق."},
+{a:"الكَرِيم",t:"Al-Kareem",m:"The Most Generous",d:"كثير الخير والعطاء بلا حدود؛ يعطي بلا سؤال ويتفضل على من سأل ومن لم يسأل."},
+{a:"الرَّقِيب",t:"Ar-Raqeeb",m:"The Watchful",d:"المراقب لأحوال عباده: أقوالهم وأعمالهم وضمائرهم؛ لا يغيب عنهم لحظة."},
+{a:"المُجِيب",t:"Al-Mujeeb",m:"The Responsive",d:"الذي يجيب دعوة من دعاه إذا دعاه؛ قريب من العباد يسمع همهمتهم وينجز حوائجهم."},
+{a:"الوَاسِع",t:"Al-Wasi",m:"The All-Encompassing",d:"الذي وسع علمه ورحمته وعطاؤه كل شيء؛ لا تنقص خزائنه إطلاقًا مهما أعطى."},
+{a:"الحَكِيم",t:"Al-Hakeem",m:"The All-Wise",d:"الذي أتقن كل خلقٍ وحكمٍ؛ يقدِّر الأمور بمنازلها الصحيحة ولا يخطئ في تقديره."},
+{a:"الوَدُود",t:"Al-Wadud",m:"The Most Loving",d:"الذي يحب عباده الصالحين ويحبُّونه؛ ويلطف بهم ويعفو عنهم ويرحمهم."},
+{a:"المَجِيد",t:"Al-Majeed",m:"The Glorious",d:"ذو الشرف والمجد والكرم؛ أفعاله كلها حسن، وأحواله كلها كريمة."},
+{a:"البَاعِث",t:"Al-Baith",m:"The Resurrector",d:"الذي يبعث الخلق يوم القيامة للحساب والجزاء؛ ويرسل الرسل إلى عباده بالهداية."},
+{a:"الشَّهِيد",t:"Ash-Shaheed",m:"The Witness",d:"الشاهد على كل شيء بحكمته وبصره؛ لا يغيب عنه شاهد ولا غائب."},
+{a:"الحَقّ",t:"Al-Haqq",m:"The Absolute Truth",d:"الثابت الذي لا يزول؛ وقاله حق ووعده حق ولقاؤه حق؛ وكل شيء آلٍ إلى مصادقه."},
+{a:"الوَكِيل",t:"Al-Wakeel",m:"The Trustee",d:"الكفيل بأرزاق الخلق وأمورهم؛ من فوَّض أمره إليه كفاه، وهو أمنيع وكيل."},
+{a:"القَوِيّ",t:"Al-Qawiyy",m:"The All-Strong",d:"التام القوة الذي لا يعجزه شيء في الأرض ولا في السماء؛ وهو العزيز القوي."},
+{a:"المَتِين",t:"Al-Mateen",m:"The Firm",d:"الشديد القوة الذي لا تنقطع قوته ولا يضعف؛ راسخ القدرة لا يعتريها فتور."},
+{a:"الوَلِيّ",t:"Al-Waliyy",m:"The Protecting Friend",d:"الناصر المتولي لشؤون أوليائه؛ يدير أمورهم بما يحب ويرضى، فمن وليَّه فقد كفاه."},
+{a:"الحَمِيد",t:"Al-Hameed",m:"The Praiseworthy",d:"المحمود على كل حال بذاته وصفاته وأفعاله؛ يستحق وحدَه كل الثناء والشكر."},
+{a:"المُحْصِي",t:"Al-Muhsi",m:"The All-Enumerating",d:"الذي أحصى كل شيء عدده وعرقه؛ ويعلم عدد الأرواح والقطرات والأعمال."},
+{a:"المُبْدِئ",t:"Al-Mubdi",m:"The Initiator",d:"الذي ابتدأ خلق الخلق من العدم على غير مثال سابق؛ فهو أول من خلق."},
+{a:"المُعِيد",t:"Al-Muid",m:"The Restorer",d:"الذي يعيد الخلق بعد موتهم للبعث والحساب؛ ويعيد الأمور على سننه الدائمة."},
+{a:"المُحْيِي",t:"Al-Muhyi",m:"The Giver of Life",d:"الذي يهب الحياة للأجساد ويحيي القلوب بذكره؛ ويوفي المؤمنين حياة الطمأنينة."},
+{a:"المُمِيت",t:"Al-Mumeet",m:"The Creator of Death",d:"الذي يقبض الأرواح بحكمة عند آجالها؛ ولا يعجزه موت أحياء الخلق جميعًا."},
+{a:"الحَيّ",t:"Al-Hayy",m:"The Ever-Living",d:"الحي بذاته الأبدية؛ حياته كاملة لا موت فيها ولا زوال، ولا ينام ولا يسهو."},
+{a:"القَيُّوم",t:"Al-Qayyum",m:"The Self-Sustaining",d:"القيِّم بذاته المقيم لغيره؛ قائم بنفسه لا يحتاج إلى أحد، ويتولى إصلاح الخلق."},
+{a:"الوَاجِد",t:"Al-Wajid",m:"The All-Perceiving",d:"الغني الذي لا يعوزه شيء؛ يجد كل ما يريد ويلتقي ما أراد، لا يفتقر إلى شيء."},
+{a:"المَاجِد",t:"Al-Maajid",m:"The Illustrious",d:"الكريم في أفعاله، الواسع الفضل؛ له الشرف والكرم في غاية الكمال."},
+{a:"الوَاحِد",t:"Al-Wahid",m:"The One",d:"المتوحد في ذاته وصفاته وأفعاله؛ لا شريك له ولا نظير ولا مثل."},
+{a:"الأَحَد",t:"Al-Ahad",m:"The Unique",d:"الفرد الذي لا ثاني له في ذاته ولا صفاته؛ وهو المقصود في الحوائج جميعًا."},
+{a:"الصَّمَد",t:"As-Samad",m:"The Eternal Refuge",d:"السيد المقصود في الحوائج؛ الغني عن كل شيء، وإليه ترغب الخلائق جميعًا."},
+{a:"القَادِر",t:"Al-Qadir",m:"The Capable",d:"التام القدرة الذي يفعل ما يشاء؛ لا يعجزه شيء، وإن شاء أفنى الخلق وأتى بخلقٍ جديد."},
+{a:"المُقْتَدِر",t:"Al-Muqtadir",m:"The Omnipotent",d:"الذي تبلغ قدرته غايتها؛ ينفذ ما يريد ولا يُرد أمره، ولا يعتريه ضعف."},
+{a:"المُقَدِّم",t:"Al-Muqaddim",m:"The Expediter",d:"الذي يقدِّم من يشاء بالفضل والكرم، ويقدِّم بعض الأمور على بعض بحكمة."},
+{a:"المُؤَخِّر",t:"Al-Muakhkhir",m:"The Delayer",d:"الذي يؤخر من يشاء بحكمة، ويضع الأمور في مراتبها لمصلحة لا تدرك إلا بعلمه."},
+{a:"الأَوَّل",t:"Al-Awwal",m:"The First",d:"الذي ليس قبله شيء؛ سابق على كل موجود بذاته وصفاته، لا بداية له."},
+{a:"الآخِر",t:"Al-Akhir",m:"The Last",d:"الذي ليس بعده شيء؛ الباقي بعد فناء الخلق جميعًا، لا نهاية لوجوده."},
+{a:"الظَّاهِر",t:"Az-Zahir",m:"The Manifest",d:"الذي فوق كل شيء قهرًا وسلطانًا؛ وظهرت آياته وقدرته في الخلق كلهم."},
+{a:"البَاطِن",t:"Al-Batin",m:"The Hidden",d:"الذي قرب من خلقه بعلمه ورحمته، ولا يُدرك كنه ذاته ولا يقارَب بنظَر البشر."},
+{a:"الوَالِي",t:"Al-Wali",m:"The Governor",d:"المتولي المدير لأمور الخلق؛ لا يضيع عنه شيء من شؤونهم ظاهرها وباطنها."},
+{a:"المُتَعَالِي",t:"Al-Mutaali",m:"The Most Exalted",d:"المنزَّه عن صفات المخلوقين؛ المتعالي بذاته وصفاته عن كل نقص ومنازع."},
+{a:"البَرّ",t:"Al-Barr",m:"The Source of Goodness",d:"المحسن إلى خلقه الواسع الإحسان؛ برُّه وإنعامه متواصل لا ينقطع."},
+{a:"التَّوَّاب",t:"At-Tawwab",m:"The Acceptor of Repentance",d:"الذي يقبل توبة عباده مرة بعد مرة؛ ويهدي التائبين إليه ويفرح بعودتهم."},
+{a:"المُنْتَقِم",t:"Al-Muntaqim",m:"The Avenger",d:"الذي ينتقم من الظالمين المعاندين بالعدل بعد استيفاء الحجج والإنذار."},
+{a:"العَفُوّ",t:"Al-Afuww",m:"The Pardoner",d:"الذي يمحو الذنوب ويعفو عن العباد؛ يمحوها ولا يشهر صاحبها ولا يعاتب عليه."},
+{a:"الرَّؤُوف",t:"Ar-Rauf",m:"The Most Kind",d:"شديد الرأفة والرحمة بعباده؛ أرحم بهم من الأم بولدها، ولا يعاقبهم بما يستحقون."},
+{a:"مَالِكُ الْمُلْك",t:"Malik-ul-Mulk",m:"Owner of All Sovereignty",d:"الذي يتصرف في ملكه كيف يشاء؛ يؤتي الملك من يشاء وينزعه ممن يشاء، وهو على كل شيء قدير."},
+{a:"ذُو الْجَلَالِ وَالْإِكْرَام",t:"Dhul-Jalali wal-Ikram",m:"Lord of Majesty and Generosity",d:"ذو العظمة والقدر التي تليق بجلاله، والإكرام والتكريم لمن يشاء من عباده."},
+{a:"المُقْسِط",t:"Al-Muqsit",m:"The Equitable",d:"العدل في حكمه وأفعاله؛ الذي يردّ الحقوق إلى أهلها ويقسم بين الخلق بالعدل."},
+{a:"الجَامِع",t:"Al-Jami",m:"The Gatherer",d:"الذي يجمع الخلق ليوم القيامة للحساب؛ ويجمع المتفرقات بحكمة، ويؤلف بين القلوب."},
+{a:"الغَنِيّ",t:"Al-Ghani",m:"The Self-Sufficient",d:"الغني عن كل شيء بذاته؛ كل من في السماوات والأرض فقراء إليه، وهو الغني الحميد."},
+{a:"المُغْنِي",t:"Al-Mughni",m:"The Enricher",d:"الذي يغني من يشاء من عباده بفضله؛ ويكفيهم ما أَهَمَّهم، فمن أغناه فلا فقر له."},
+{a:"المَانِع",t:"Al-Mani",m:"The Withholder",d:"الذي يمنع بحكمة ورحمة؛ ومن يمسك عنه عطاءً فهو خير له، ولا يعلم العبد ذلك."},
+{a:"الضَّارّ",t:"Ad-Darr",m:"The Creator of Harm",d:"الذي يقدَّر الضر بالعدل والحكمة؛ لا يقع ضرٌّ إلا بإذنه، وهو في كل ذلك حكيم."},
+{a:"النَّافِع",t:"An-Nafi",m:"The Creator of Good",d:"الذي يقدَّر النفع لمن يشاء؛ كل نفعٍ يقع في الخلق فمنه وحده لا شريك له."},
+{a:"النُّور",t:"An-Nur",m:"The Light",d:"نور السماوات والأرض؛ يهدي عباده ويجعل في الخلق أنوارًا، وينور قلوب أوليائه."},
+{a:"الهَادِي",t:"Al-Hadi",m:"The Guide",d:"الذي يهدي الخلق برسله وكتبه إلى الحق؛ ويسدِّد المؤمنين في أقوالهم وأفعالهم."},
+{a:"البَدِيع",t:"Al-Badi",m:"The Incomparable Originator",d:"الخالق المبدع للأشياء على غير مثال سابق؛ بديع صنعته في كل مخلوق يُنظَر إليه."},
+{a:"البَاقِي",t:"Al-Baqi",m:"The Everlasting",d:"الدائم الذي لا يفنى؛ يبقى ويفنى الخلق جميعًا، وله بقاء أزلي لا زوال فيه."},
+{a:"الوَارِث",t:"Al-Warith",m:"The Inheritor of All",d:"الذي يبقى بعد فناء الخلق؛ وترث الأرض ومن عليها، وهو خير الوارثين."},
+{a:"الرَّشِيد",t:"Ar-Rashid",m:"The Guide to Right Path",d:"الذي يرشد عباده إلى طرق الحق والاستقامة بحكمته؛ فما سلك به سبيلًا ضلَّ."},
+{a:"الصَّبُور",t:"As-Sabur",m:"The Most Patient",d:"الذي لا يعاجل العصاة بالعقوبة مع قدرته؛ يمد الأمد لهم رجاء توبتهم ولا يسرع في الجزاء."}
+];
+
+/* ============ التوجيه بين الشاشات ============ */
+const SCREENS=['home','names','tasbih','settings'];
+function go(id){
+  SCREENS.forEach(s=>{ const el=$('#screen-'+s); if(el) el.classList.toggle('active',s===id); });
+  $$('#nav .nav-b').forEach(b=>b.classList.toggle('on',b.dataset.go===id));
+  if(!store.set('screen',id)) warnStorage();
+  if(id==='names'){ if(S.autoPlay) startClock(true); } else stopClock();
+  if(id==='tasbih') renderTasbihStats();
+  window.scrollTo({top:0});
+}
+function bindNav(){ $$('[data-go]').forEach(b=>b.addEventListener('click',()=>go(b.dataset.go))); }
+
+/* ============ ساعة الأسماء الحسنى ============ */
+const STEP=3.6, CIRC=2*Math.PI*154;
+let ni=store.get('ni',0)%NAMES.length, acc=ni*STEP, playing=false, ckTimer=null;
+function buildTicks(){
+  const g=$('#ticks'); if(!g)return; let h='';
+  for(let i=0;i<NAMES.length;i++){
+    const a=(i*STEP-90)*Math.PI/180, major=i%10===0, mid=i%5===0;
+    const r1=major?128:(mid?133:137), r2=147;
+    h+='<line x1="'+(160+r1*Math.cos(a)).toFixed(1)+'" y1="'+(160+r1*Math.sin(a)).toFixed(1)+
+       '" x2="'+(160+r2*Math.cos(a)).toFixed(1)+'" y2="'+(160+r2*Math.sin(a)).toFixed(1)+
+       '" stroke="'+(major?'var(--gold)':'var(--line)')+'" stroke-width="'+(major?2:(mid?1.4:1))+'" stroke-opacity="'+(major?'.95':'.8')+'"/>';
+  }
+  g.innerHTML=h;
+}
+function renderName(anim){
+  const n=NAMES[ni];
+  $('#n-num').textContent=AR(ni+1)+' / '+AR(NAMES.length);
+  $('#n-ar').textContent=n.a;
+  $('#n-en').textContent=n.t;
+  $('#nc-en').textContent=n.t+' — '+n.m;
+  $('#n-desc').textContent=n.d;
+  const lock=$('#explock'); if(S.hideExp)lock.classList.remove('open'); else lock.classList.add('open');
+  const nd=$('#needle');
+  if(anim===false){ nd.style.transition='none'; }
+  nd.style.transform='rotate('+acc+'deg)';
+  if(anim===false){ void nd.getBoundingClientRect(); nd.style.transition=''; }
+  const p=$('#prog'); p.style.strokeDasharray=CIRC; p.style.strokeDashoffset=String(CIRC*(1-(ni+1)/NAMES.length));
+}
+function nextName(){ ni=(ni+1)%NAMES.length; acc+=STEP; afterNav(); }
+function prevName(){ ni=(ni-1+NAMES.length)%NAMES.length; acc-=STEP; afterNav(); }
+function afterNav(){
+  if(!store.set('ni',ni)) warnStorage();
+  renderName(); tickS();
+  if(playing) restartClockTimer();
+}
+function stopClockTimer(){ if(ckTimer){clearInterval(ckTimer);ckTimer=null;} }
+function restartClockTimer(){ stopClockTimer(); if(playing) ckTimer=setInterval(nextName,S.speed*1000); }
+function stopClock(){ playing=false; stopClockTimer(); syncPlayBtn(); }
+function startClock(force){ if(!force&&playing)return; playing=true; stopClockTimer(); ckTimer=setInterval(nextName,S.speed*1000); syncPlayBtn(); }
+function syncPlayBtn(){
+  $('#icPlay').style.display=playing?'none':'';
+  $('#icPause').style.display=playing?'':'none';
+  $('#btnPlay').classList.toggle('on',playing);
+}
+function bindClock(){
+  $('#btnNext').addEventListener('click',nextName);
+  $('#btnPrev').addEventListener('click',prevName);
+  $('#btnPlay').addEventListener('click',()=>{ playing?stopClock():startClock(); });
+  const cw=$('#clockwrap');
+  cw.addEventListener('pointerdown',e=>{
+    const r=cw.getBoundingClientRect(), dx=e.clientX-(r.left+r.width/2);
+    if(Math.abs(dx)<r.width*.15)return;
+    if(dx>0)nextName(); else prevName();
+  });
+  $('#explock').addEventListener('click',()=>{
+    const open=$('#explock').classList.toggle('open');
+    toast(open?'تم كشف الشرح':'أُخفي الشرح');
+  });
+}
+/* ============ المسبحة ============ */
+const BASE=['سبحان الله','الحمد لله','الله أكبر','أستغفر الله','لا إله إلا الله','سبحان الله وبحمده','لا حول ولا قوة إلا بالله','اللهم صلِّ وسلِّم على محمد'];
+let custom=store.get('custom',[]);
+let dh=store.get('dh',BASE[0]);
+let target=store.get('target',33);
+let cnt=store.get('round',0);
+let totals=store.get('totals',{});
+let day=store.get('day',null);
+if(!day||day.d!==todayStr()){ day={d:todayStr(),c:0,r:0}; }
+let accB=cnt*(360/33);
+const allDhikr=()=>BASE.concat(custom);
+function saveRound(){ let ok=true;
+  ok=store.set('round',cnt)&&ok; ok=store.set('day',day)&&ok; ok=store.set('totals',totals)&&ok;
+  ok=store.set('dh',dh)&&ok; ok=store.set('target',target)&&ok;
+  if(!ok)warnStorage();
+}
+function buildBeads(){
+  const g=$('#beads'); if(!g)return; let h='';
+  for(let i=0;i<33;i++){
+    const a=(i*(360/33)-90)*Math.PI/180;
+    h+='<circle class="bead" cx="'+(130+95*Math.cos(a)).toFixed(1)+'" cy="'+(130+95*Math.sin(a)).toFixed(1)+'" r="8.2"/>';
+  }
+  g.innerHTML=h;
+}
+function renderChips(){
+  const c=$('#dhikrChips'); c.innerHTML='';
+  allDhikr().forEach(d=>{
+    const b=document.createElement('button'); b.type='button';
+    b.className='chip'+(d===dh?' on':''); b.textContent=d;
+    b.addEventListener('click',()=>{ if(dh===d)return; dh=d; cnt=0; accB=0; saveRound(); renderChips(); renderTasbih(false); toast('الذكر الحالي: '+d); });
+    c.appendChild(b);
+  });
+}
+function renderTargets(){
+  const c=$('#targetChips'); c.innerHTML='';
+  [33,99,100].forEach(t=>{
+    const b=document.createElement('button'); b.type='button';
+    b.className='chip'+(t===target?' on':''); b.textContent=AR(t);
+    b.addEventListener('click',()=>{ target=t; if(cnt>target)cnt=target; accB=cnt*(360/33); saveRound(); renderTargets(); renderTasbih(false); });
+    c.appendChild(b);
+  });
+  const b=document.createElement('button'); b.type='button';
+  b.className='chip'+([33,99,100].indexOf(target)<0?' on':''); b.textContent='مخصص';
+  b.addEventListener('click',()=>{ $('#customTarget').classList.toggle('show'); });
+  c.appendChild(b);
+}
+function renderTasbih(anim){
+  $('#cnt').textContent=AR(cnt);
+  $('#tgt').textContent='من '+AR(target);
+  $('#b-dh').textContent=dh;
+  const ring=$('#ring');
+  if(anim===false) ring.style.transition='none';
+  ring.style.transform='rotate('+accB+'deg)';
+  if(anim===false){ void ring.getBoundingClientRect(); ring.style.transition=''; }
+  const h=(33-cnt%33)%33;
+  $$('#beads .bead').forEach((b,i)=>b.classList.toggle('hot',i===h&&cnt<target));
+}
+function renderTasbihStats(){
+  $('#dayC').textContent=AR(day.c);
+  $('#totC').textContent=AR(totals[dh]||0);
+  $('#sumAll').textContent=AR(Object.values(totals).reduce((a,b)=>a+b,0));
+}
+function spawnRipple(e){
+  const z=$('#tapzone'), r=z.getBoundingClientRect(), d=document.createElement('span');
+  d.className='ripple';
+  d.style.left=((e&&e.clientX)?e.clientX-r.left:r.width/2)+'px';
+  d.style.top=((e&&e.clientY)?e.clientY-r.top:r.height/2)+'px';
+  z.appendChild(d); setTimeout(()=>d.remove(),680);
+}
+function showCelebrate(){
+  $('#c-txt').textContent='أتممت '+AR(target)+' تسبيحة — '+dh;
+  $('#c-rounds').textContent='جولات اليوم: '+AR(day.r)+' · الإجمالي: '+AR(Object.values(totals).reduce((a,b)=>a+b,0));
+  const b=$('#burst'); b.innerHTML='';
+  for(let i=0;i<14;i++){ const s=document.createElement('i'); s.className='bdot';
+    s.style.setProperty('--a',(i*(360/14)+Math.random()*16)+'deg');
+    if(i%2)s.style.background='var(--teal)';
+    b.appendChild(s);
+  }
+  $('#celebrate').classList.add('show');
+}
+function tapBead(e){
+  if(day.d!==todayStr()){ day={d:todayStr(),c:0,r:0}; }
+  if(cnt>=target){ showCelebrate(); return; }
+  cnt++; day.c++; totals[dh]=(totals[dh]||0)+1; accB+=360/33;
+  renderTasbih(); saveRound(); tapS(); vib(12); spawnRipple(e);
+  if(cnt>=target){
+    day.r++; saveRound(); renderTasbihStats(); chime(); vib([60,70,60]);
+    setTimeout(showCelebrate,340);
+  }
+}
+function bindTasbih(){
+  $('#tapzone').addEventListener('pointerdown',tapBead);
+  $('#resetRound').addEventListener('click',()=>{ cnt=0; accB=0; saveRound(); renderTasbih(false); toast('تم تصفير الجولة'); });
+  $('#cBtn').addEventListener('click',()=>{ cnt=0; accB=0; saveRound(); renderTasbih(false); $('#celebrate').classList.remove('show'); });
+  $('#ctSet').addEventListener('click',()=>{
+    const v=Math.max(1,Math.min(99999,parseInt($('#ctVal').value,10)||0));
+    if(!v){ toast('اكتب عددًا صحيحًا'); return; }
+    target=v; saveRound(); renderTargets(); renderTasbih(false);
+    $('#customTarget').classList.remove('show');
+    toast('تم تحديد الهدف: '+AR(v));
+  });
+  $('#addBtn').addEventListener('click',addCustom);
+}
+function addCustom(){
+  const inp=$('#newDhikr'), v=inp.value.trim();
+  if(!v){ toast('اكتب نص الذكر أولًا'); return; }
+  if(allDhikr().indexOf(v)>=0){ toast('الذكر موجود مسبقًا'); return; }
+  if(custom.length>=8){ toast('الحد الأقصى ٨ أذكار مخصصة'); return; }
+  custom.push(v); store.set('custom',custom); inp.value='';
+  renderChips(); renderCustomList(); toast('أُضيف الذكر بنجاح');
+}
+function renderCustomList(){
+  const c=$('#customList'); c.innerHTML='';
+  if(!custom.length){ c.innerHTML='<p class="dim">لا توجد أذكار مخصصة بعد — أضفها من صفحة المسبحة أو من هنا.</p>'; return; }
+  custom.forEach(d=>{
+    const row=document.createElement('div'); row.className='crow';
+    const sp=document.createElement('span'); sp.textContent=d;
+    const del=document.createElement('button'); del.type='button'; del.className='mini-del'; del.textContent='حذف';
+    del.addEventListener('click',()=>{
+      custom=custom.filter(x=>x!==d);
+      if(dh===d){ dh=BASE[0]; cnt=0; accB=0; saveRound(); renderChips(); renderTasbih(false); }
+      store.set('custom',custom); renderCustomList(); toast('حُذف الذكر');
+    });
+    row.appendChild(sp); row.appendChild(del); c.appendChild(row);
+  });
+}
+
+/* ============ الإعدادات ============ */
+function applyTheme(){
+  document.documentElement.dataset.theme=S.theme;
+  const m=document.querySelector('meta[name=theme-color]'); if(m)m.content=(S.theme==='dark'?'#071711':'#f3eee1');
+}
+function applyFont(){ document.documentElement.dataset.font=S.fontScale||'m'; }
+function bindToggle(id,key,fn){
+  const el=$(id); el.classList.toggle('on',!!S[key]);
+  el.addEventListener('click',()=>{ S[key]=!S[key]; el.classList.toggle('on',!!S[key]); saveS(); if(fn)fn(); });
+}
+function bindSeg(id,vals,key,fn){
+  const bs=$(id).querySelectorAll('button');
+  const paint=()=>bs.forEach((b,i)=>b.classList.toggle('on',String(vals[i])===String(S[key])));
+  bs.forEach((b,i)=>b.addEventListener('click',()=>{ S[key]=vals[i]; saveS(); paint(); if(fn)fn(); }));
+  paint();
+}
+function bindSettings(){
+  bindToggle('#tgSound','sound',()=>{ if(S.sound)tapS(); });
+  bindToggle('#tgVib','vibrate',()=>{ if(S.vibrate)vib(20); });
+  bindToggle('#tgTick','tickSound',()=>{ if(S.tickSound)tickS(); });
+  bindToggle('#tgAuto','autoPlay',()=>{ if($('#screen-names').classList.contains('active')){ if(S.autoPlay)startClock(); else stopClock(); } });
+  bindToggle('#tgHide','hideExp',()=>renderName(false));
+  bindSeg('#segSpeed',[4,6,10,15],'speed',()=>{
+    $('#spdTxt').textContent=AR(S.speed);
+    if(playing)restartClockTimer();
+  });
+  bindSeg('#segTheme',['dark','light'],'theme',applyTheme);
+  bindSeg('#segFont',['s','m','l'],'fontScale',applyFont);
+  $('#resetCounts').addEventListener('click',()=>{
+    if(!confirm('إعادة ضبط جميع عدادات التسبيح؟'))return;
+    totals={}; day={d:todayStr(),c:0,r:0}; cnt=0; accB=0; saveRound();
+    renderTasbih(false); renderTasbihStats(); renderHomeStats(); toast('تم ضبط العدادات');
+  });
+  $('#resetAll').addEventListener('click',()=>{
+    if(!confirm('سيُحذف كل شيء: العدادات والإعدادات والأذكار المخصصة. هل أنت متأكد؟'))return;
+    ['settings','ni','totals','day','round','dh','target','custom','screen'].forEach(k=>store.del(k));
+    location.reload();
+  });
+}
+
+/* ============ الرئيسية ============ */
+function renderHomeStats(){
+  $('#stDay').textContent=AR(day.c);
+  $('#stAll').textContent=AR(Object.values(totals).reduce((a,b)=>a+b,0));
+  $('#stRounds').textContent=AR(day.r);
+}
+function renderDates(){
+  try{ $('#hijri').textContent=new Intl.DateTimeFormat('ar-SA-u-ca-islamic-umalqura',{day:'numeric',month:'long',year:'numeric'}).format(new Date())+' هـ ·'; }
+  catch(e){ $('#hijri').textContent=''; }
+  try{ $('#greg').textContent=' '+new Intl.DateTimeFormat('ar',{day:'numeric',month:'long',year:'numeric'}).format(new Date()); }
+  catch(e){ $('#greg').textContent=''; }
+  const h=new Date().getHours();
+  $('#greet2').textContent=(h<12?'صباح النور':(h<18?'طاب يومك':'مساء النور'))+' —';
+}
+
+/* ============ التشغيل ============ */
+function init(){
+  applyTheme(); applyFont();
+  buildTicks(); buildBeads();
+  renderName(false);
+  renderChips(); renderTargets(); renderTasbih(false); renderTasbihStats(); renderCustomList();
+  renderHomeStats(); renderDates();
+  $('#badgeNames').textContent=AR(NAMES.length);
+  $('#spdTxt').textContent=AR(S.speed);
+  bindNav(); bindClock(); bindTasbih(); bindSettings();
+  go(store.get('screen','home')||'home');
+  const unlock=()=>{ ac(); };
+  document.addEventListener('touchstart',unlock,{once:true,passive:true});
+  document.addEventListener('pointerdown',unlock,{once:true});
+}
+init();
+
+</script>
+</body>
+</html>
