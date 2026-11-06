@@ -7,7 +7,7 @@
 <meta name="apple-mobile-web-app-capable" content="yes"/>
 <meta name="mobile-web-app-capable" content="yes"/>
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent"/>
-<meta name="description" content="نور: رفيقك الإسلامي اليومي — ساعة أسماء الله الحسنى مع بطاقات نور موثقة، مسبحة بصوت الخرز، وشاشة نور اليوم: نية، تحدي الدقيقة، سماء الخير، مهمات يومية وتقويم، سجل دعواتك، وصية ومحاسبة — وكل البيانات محفوظة على جهازك."/>
+<meta name="description" content="نور: رفيقك الإسلامي اليومي — ساعة أسماء الله الحسنى مع بطاقات نور موثقة، مسبحة بصوت الخرز، وشاشة نور اليوم: عزيمة اليوم ومهماته، عملٌ لكل وقت، تحدي الدقيقة، سماء الخير بإحصائها، التقويم الهجري وأحداث الإسلام، سجل دعواتك، وصية ومحاسبة — وكل البيانات محفوظة على جهازك."/>
 <title>نور · الأسماء الحسنى والتسبيح</title>
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%23071711'/%3E%3Ccircle cx='32' cy='32' r='17' fill='none' stroke='%23d9b661' stroke-width='3'/%3E%3Ccircle cx='32' cy='32' r='5' fill='%23d9b661'/%3E%3Cpath d='M46 10l1.6 3.2 3.2 1.6-3.2 1.6-1.6 3.2-1.6-3.2-3.2-1.6 3.2-1.6z' fill='%23f2d992'/%3E%3C/svg%3E"/>
 <link rel="preconnect" href="https://fonts.googleapis.com"/>
@@ -93,6 +93,7 @@ html[data-font="s"]{font-size:14px}
 html[data-font="m"]{font-size:16px}
 html[data-font="l"]{font-size:18px}
 html{scroll-behavior:smooth}
+[hidden]{display:none !important} /* إصلاح: تمنع display:flex وغيرها من تجاوز hidden */
 body{
   font-family:var(--f-ui); background:var(--bg); color:var(--ink);
   min-height:100vh; overflow-x:hidden; overscroll-behavior-y:contain;
@@ -325,7 +326,7 @@ details.doc .body b{color:var(--gold2)}
   .rbtn.main{width:60px;height:60px}
 }
 
-/* ====== نور اليوم (v2.1.0) ====== */
+/* ====== نور اليوم (v2.2.0) ====== */
 .feat.wide{grid-column:1/-1;flex-direction:row;align-items:center;gap:14px}
 .feat.wide svg{margin:0;flex:none}
 .homeintent{margin-top:10px;padding:10px 14px;border-radius:14px;border:1px dashed var(--gold);color:var(--gold2);font-size:.82rem;line-height:1.9;background:linear-gradient(135deg,rgba(217,182,97,.09),transparent)}
@@ -396,6 +397,56 @@ details.doc .body b{color:var(--gold2)}
 .calcell .dots{display:flex;gap:2px}
 .calcell .dots i{width:4px;height:4px;border-radius:50%;display:block}
 .caldaylist{margin-top:10px;display:grid;gap:6px}
+/* --- عزيمة اليوم (v2.2.0) --- */
+.azsep{height:1px;background:var(--line);margin:13px 0 11px;border-radius:2px}
+.azitem{margin-top:9px;padding:10px 13px;border:1px solid var(--line);border-radius:13px;background:var(--bg2);font-size:.84rem;line-height:1.95}
+.azitem .azn{font-weight:800;color:var(--gold2);font-family:var(--f-read);font-size:.95rem}
+.azitem .azmotiv{margin-top:5px;color:var(--ink);font-size:.8rem}
+.azitem .azproof{margin-top:4px;font-size:.7rem;color:var(--muted);line-height:1.8}
+.aztasks{display:grid;gap:6px;margin-top:8px}
+.aztaskrow{display:flex;align-items:center;gap:9px;padding:8px 11px;border:1px solid var(--line);border-radius:11px;background:var(--bg2)}
+.aztaskrow .taskbox{width:20px;height:20px}
+.aztaskrow.done .tlabel{color:var(--muted);text-decoration:line-through}
+.aztaskrow .tlabel{font-size:.8rem}
+.aztaskrow .tmeta{font-size:.58rem;display:flex;align-items:center;gap:4px;color:var(--muted);margin-top:1px}
+.aztaskrow .tmeta i{width:5px;height:5px;border-radius:50%;display:inline-block}
+.azempty{font-size:.74rem;color:var(--muted);text-align:center;padding:7px}
+.azopen{width:100%;margin-top:10px;padding:10px}
+.azmini{font-size:.62rem;color:var(--muted);margin-inline-start:auto;flex:none}
+/* --- التقويم والتاريخ على الرئيسية (v2.2.0) --- */
+.calcard{margin-top:12px;padding:14px 16px}
+.calnicedates{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:10px}
+.calnicedates>div{padding:11px 8px;text-align:center;border:1px solid var(--line);border-radius:14px;background:var(--bg2);display:flex;flex-direction:column;gap:2px}
+.calnicedates b{font-size:.98rem;color:var(--gold2);font-family:var(--f-read);line-height:1.7}
+.calnicedates span{font-size:.62rem;color:var(--muted)}
+.calevlist{margin-top:10px;display:grid;gap:6px}
+.calev{display:flex;gap:9px;padding:10px 12px;border:1px solid var(--line);border-radius:13px;background:linear-gradient(135deg,rgba(217,182,97,.09),var(--bg2));align-items:flex-start}
+.calev .evstar{flex:none;width:16px;height:16px;margin-top:4px;color:var(--gold2)}
+.calev .evbody{flex:1;min-width:0}
+.calev .evt{font-weight:800;font-size:.84rem;line-height:1.7}
+.calev .evx{font-size:.74rem;color:var(--muted);margin-top:3px;line-height:1.85}
+.calev .evs{font-size:.62rem;color:var(--gold);margin-top:3px}
+.calcell .gd{font-size:.5rem;color:var(--muted);opacity:.85}
+.calcell .evmark{position:absolute;top:2px;inset-inline-start:4px;width:7px;height:7px}
+.calmonthev{margin-top:10px;display:grid;gap:5px}
+.calmonthev .mh{font-size:.72rem;font-weight:800;color:var(--gold2);margin-bottom:2px}
+.calmonthev .mev{display:flex;gap:8px;align-items:baseline;font-size:.74rem;line-height:1.85;padding:7px 10px;border:1px solid var(--line);border-radius:11px;background:var(--bg2)}
+.calmonthev .mev b{color:var(--gold2);flex:none;font-size:.72rem}
+/* --- تقرير سماء الخير (v2.2.0) --- */
+.skyseg{display:flex;background:var(--bg2);border:1px solid var(--line);border-radius:14px;padding:4px;gap:4px;margin-top:12px}
+.skyseg button{flex:1;padding:7px 4px;border-radius:10px;border:none;background:none;color:var(--muted);font-size:.74rem;font-weight:700;cursor:pointer;transition:.2s;white-space:nowrap}
+.skyseg button.on{background:linear-gradient(135deg,var(--gold),#b98d2f);color:#231a08}
+.statgrid{display:grid;grid-template-columns:repeat(3,1fr);gap:6px;margin-top:10px}
+.statgrid>div{padding:11px 4px;text-align:center;border:1px solid var(--line);border-radius:13px;background:var(--bg2);display:flex;flex-direction:column;gap:2px}
+.statgrid b{font-size:1.12rem;color:var(--gold2)}
+.statgrid span{font-size:.6rem;color:var(--muted)}
+.catbars{margin-top:10px;display:grid;gap:7px}
+.catbar{display:flex;align-items:center;gap:8px;font-size:.72rem}
+.catbar .cbt{flex:none;width:66px;color:var(--muted);display:flex;align-items:center;gap:5px}
+.catbar .cbt i{width:7px;height:7px;border-radius:50%;display:inline-block;flex:none}
+.catbar .cbtrack{flex:1;height:8px;border-radius:99px;background:var(--bg2);border:1px solid var(--line);overflow:hidden}
+.catbar .cbfill{height:100%;border-radius:99px;min-width:2px;transition:width .4s ease}
+.catbar .cbn{flex:none;width:34px;text-align:left;color:var(--gold2);font-weight:700}
 .taskrow{display:flex;align-items:center;gap:10px;padding:10px 12px;border:1px solid var(--line);border-radius:12px;background:var(--bg2);margin-top:7px}
 .taskbox{width:23px;height:23px;flex:none;border:1.6px solid var(--muted);border-radius:7px;display:grid;place-items:center;color:transparent;transition:.2s;cursor:pointer}
 .taskrow.done .taskbox{background:var(--gold);border-color:var(--gold);color:#231a08}
@@ -496,13 +547,27 @@ details.doc .body b{color:var(--gold2)}
         <path d="M46 40l2.2 5.5 5.5 2.2-5.5 2.2L46 55.4l-2.2-5.5-5.5-2.2 5.5-2.2z" fill="var(--gold2)" opacity=".9"/>
         <circle cx="52" cy="16" r="2.2" fill="var(--teal)"/>
       </svg>
-      <b>نور اليوم</b><span>نية اليوم · عملٌ لكل وقت · تحدي الدقيقة · سماء الخير · سجل دعواتك · وصية ومحاسبة</span>
+      <b>نور اليوم</b><span>عزيمة اليوم ومهماته · عملٌ لكل وقت · تحدي الدقيقة · سماء الخير · سجل دعواتك · وصية ومحاسبة</span>
     </button>
   </div>
   <div class="stats card">
     <div><b id="stDay">٠</b><span>تسبيح اليوم</span></div>
     <div><b id="stAll">٠</b><span>الإجمالي المحفوظ</span></div>
     <div><b id="stRounds">٠</b><span>جولات اليوم</span></div>
+  </div>
+  <!-- ====== التقويم والتاريخ (v2.2.0): هجري وميلادي + أحداث الإسلام في مثل هذا اليوم ====== -->
+  <div class="card calcard">
+    <div class="rowl"><span class="tag">التقويم والتاريخ</span><span class="hint">تقويم هجري وميلادي</span></div>
+    <div class="calnicedates">
+      <div><b id="calHj">—</b><span>التاريخ الهجري</span></div>
+      <div><b id="calGr">—</b><span>التاريخ الميلادي</span></div>
+    </div>
+    <div id="calTodayEvents" class="calevlist"></div>
+    <div class="calhead"><button type="button" id="calPrev2" class="btn">الشهر السابق</button><b id="calHead2"></b><button type="button" id="calNext2" class="btn">الشهر التالي</button></div>
+    <div class="calgrid" id="calGrid2"></div>
+    <div class="caldaylist" id="calDayList2"></div>
+    <div class="calmonthev" id="calMonthEvents"></div>
+    <p class="hint center" style="margin-top:8px">النقاط الملونة أسفل اليوم أعماله الموثقة من سماء الخير — اضغط اليوم لتقرأ تفاصيله وأحداثه</p>
   </div>
   <div class="quote card">
     <p class="aya">﴿ وَلِلَّهِ الْأَسْمَاءُ الْحُسْنَىٰ فَادْعُوهُ بِهَا ﴾</p>
@@ -514,23 +579,23 @@ details.doc .body b{color:var(--gold2)}
   </div>
 </section>
 
-<!-- ====== نور اليوم (v2.1.0) ====== -->
+<!-- ====== نور اليوم (v2.2.0) ====== -->
 <section id="screen-day" class="screen">
   <header class="dayhead">
     <h1>نور اليوم</h1>
     <p class="sub">خطوة صغيرة كل يوم: نيةٌ تُثبَّت، ذكرٌ يُنير، وعملٌ صالح يُحصى نجمةً في سمائك.</p>
   </header>
   <div class="card intentcard">
-    <div class="rowl"><span class="tag">نية اليوم</span><span class="hint">﴿إِنَّمَا الْأَعْمَالُ بِالنِّيَّاتِ﴾ · البخاري</span></div>
-    <p class="iq" id="intentQ">ما نيّتك اليوم؟</p>
-    <div class="chipsrow ichips" id="intentChips"></div>
-    <button type="button" id="intentCustom" class="chip" style="margin-top:9px">نيتي بكلماتي</button>
-    <div class="addrow" id="intentAddRow" hidden><input id="intentNew" class="inp" maxlength="120" placeholder="اكتب نيتك: مثل أزر صديقي المريض غدًا"/><button type="button" id="intentAddBtn" class="btn gold">أثبّتها</button></div>
-    <div id="intentDone" hidden>
-      <p class="intdone">ثبّتَ اللهُ قلبك على: <b id="intentTxt"></b></p>
-      <p class="hint" id="intentProof" style="margin-top:7px;line-height:1.9"></p>
-      <button type="button" id="intentChange" class="btn" style="margin-top:11px">تغيير النية</button>
-    </div>
+    <div class="rowl"><span class="tag">عزيمة اليوم</span><span class="hint">﴿إِنَّمَا الْأَعْمَالُ بِالنِّيَّاتِ﴾ · البخاري</span></div>
+    <p class="iq" id="azimaQ">ما عزائمك اليوم؟ اختر ما تشاء من النوايا</p>
+    <div class="chipsrow ichips" id="azimaChips"></div>
+    <button type="button" id="azimaCustom" class="chip" style="margin-top:9px">نيتي بكلماتي</button>
+    <div class="addrow" id="azimaAddRow" hidden><input id="azimaNew" class="inp" maxlength="120" placeholder="اكتب نيتك: مثل أزر صديقي المريض غدًا"/><button type="button" id="azimaAddBtn" class="btn gold">أثبّتها</button></div>
+    <div id="azimaList" hidden></div>
+    <div class="azsep"></div>
+    <div class="rowl"><span class="tag">مهمات اليوم</span><span class="hint" id="azTaskHint">كتابٌ تقرؤه، آيةً تحفظها، تفسيرًا تراجعه…</span></div>
+    <div id="azTasks" class="aztasks"></div>
+    <button type="button" id="azOpenTasks" class="btn gold azopen">فتح المهمات</button>
   </div>
   <div class="toolgrid">
     <button type="button" class="tool" data-tool="random"><span class="tico"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="4.4" y="4.4" width="15.2" height="15.2" rx="3.4" fill="none" stroke="currentColor" stroke-width="1.7"/><circle cx="9" cy="9" r="1.25" fill="currentColor"/><circle cx="12" cy="12" r="1.25" fill="currentColor"/><circle cx="15" cy="15" r="1.25" fill="currentColor"/></svg></span><b>ماذا أفعل الآن؟</b><span>اقتراح عشوائي نافع يبدأ به عملك</span></button>
@@ -713,7 +778,7 @@ details.doc .body b{color:var(--gold2)}
     </details>
     <details class="doc">
       <summary>سجل الإصدار</summary>
-      <div class="body"><b>v2.1.0</b> — «سماء الخير»: أُعيدت تسمية خريطة الخير إلى «سماء الخير»، وصارت النجوم صغيرة متلألئة يلوّنها نوعُ العمل: الصلاة أصفر، والقرآن أخضر، والذكر أزرق، والصدقة أحمر خفيف، وصلة الرحم وردي، والعلم بنفسجي، والخُلق تركوازي — بمفتاح ألوان أسفل السماء. وحلّ محل قائمة السجل «تقويم الخير»: تقويم شهري منظم تظهر فيه نقاط كل يوم الملونة بحسب ما وثّقته، وتضغط اليوم فتعرض أعماله. وأُضيفت «مهماتي اليومية»: توثّق بها أي عمل (صلاة، قرآن، ذكر، صدقة…) وتضغط مربعه عند إنجازه فتضيء نجمة، وتتجدد العلامة كل صباح. وتحت السماء كلمة: «املأ حياتك بأعمال الخير ولا تفتخر بها فهذا فضل الله عليك». وفي «نية اليوم» أمكن كتابة نية خاصة بكلماتك مع بقاء «ثبّتَ اللهُ قلبك» وجملة تحفيزية تناسبها. ووُسّع «القرآن وحالتي» إلى عشر حالات (أُضيفت: الثقيل بالذنوب، والمريض، والحائر في قرار، والكسلان، والشاكر، والوحيد). وأصبح «عملٌ لكل وقت» يعرض ساعةً حية بالوقت الحالي وثلاثة أعمال محببة لهذا الوقت من السنة، وأصبح «بنك الخيرات» مخزونًا كبيرًا من الأفكار لا يتكرر في اليوم مع خيار «فعلت / لم أفعل» يضيء نجمة عند الفعل، وأُضيفت أربعة عادات في «العادات عبادات» (الطعام، والسفر، والصحة والطهارة، والاستراحة)، ووُسّعت «محاسبتي قبل النوم» إلى ثمانية أسئلة بخيارات نعم/لا، وصار «كن سببًا في الخير» يشارك على واتساب آيةً أو حديثًا بشرحه أو قصةً دينية ملهمة قصيرة. وتحدي الدقيقة عند إتمامه نجمةٌ في السماء كما هو، و«أنا غاضب» بلا تغيير، وانتقل «ماذا أفعل الآن؟» إلى أول القائمة. وأُعيد رسم كل أيقونات نور اليوم بأيقونات مونو كرور بسيطة بدل الإيموجي.<br/><br/><b>v2.0.0</b> — «نور اليوم»: شاشة جديدة كاملة تحتوي أربع عشرة أداة ترافق المسلم في يومه: نية اليوم (ست نوايا سريعة موثقة مع حديثها)، اقتراح عمل صالح بحسب الوقت (من السحر إلى النوم)، تحدي الدقيقة بعدّاد دائري حي، خريطة الخير حيث يصبح كل عمل صالح نجمةً تتلألأ في سماء مستخدم، زر «أنا غاضب» بعلاج الغضب بالسنة في أربع خطوات، بنك الخيرات، «ماذا أفعل الآن؟»، تحويل العادات إلى عبادات (العمل والرياضة والدراسة والنوم)، سجل الدعوات مع قسم «فضل الله عليّ» لما استُجيب، حساب تقريبي لما بقي من العمر (أسابيع ورمضانات وجُمعات) تذكيرًا لا تخويفًا، القرآن حسب الحالة النفسية (قلق وحزن وخوف وهمّ) بآياتها وأدعيتها، محاسبتي قبل النوم بأربعة أسئلة، «نورٌ بينك وبين الله» للاعمال الخفية التي لا تُعرض أبدًا، وصية اليوم المتجددة، وكن سببًا في الخير لمشاركة الفائدة. ونجمة الخير تُضاف تلقائيًا عند إتمام جولة التسبيح أيضًا. وأُضيفت إزاحة أمانة للمحتوى تحت شريط حالة الآيفون (البطارية والشبكة) حتى لا يتداخل معه شيء.<br/><br/><b>v1.6.0</b> — بصُرٌ تامّ في العرض: أُعيد بناء درج الساعة من أساسه؛ فأصبح كل اسم يُرسَم على لوحة رسم داخلية بحجم كبير (حيث تشكيل الحروف العربية سليم دائمًا) ثم يُثبَّت على الدرج صورةً دقيقة — وعلاجٌ نهائي لمشكلة ظهور الأسماء معكوسة ومبعثرة الحروف في بعض المتصفحات والهواتف. وتنقّت «بطاقات النور» إلى ثلاثة أقسام فقط بلا أخطاء: المعنى، والدليل بمصدره، والدعاء بمصدره — حذفًا لقسمَي «عبرة لقلبك» و«سؤال تدبّر» بطلب صاحب التطبيق ترفعًا لدقة النص الديني. وتُحدَّث ألوان الدرج فورًا مع تغيير لوحة الألوان أو الوضع الليلي/النهاري.<br/><br/><b>v1.5.0</b> — ضبط درج الساعة: كُتبت الأسماء المئة مشكولةً بدقة، وأُصلح اتجاه الحروف العربية على الدرج فباتت متصلة سليمة القراءة، وكُبِّر خطها ووُضّحت. وأُعيدت صياغة «بطاقات النور» كلها (١٠٠ بطاقة) صياغةً فقهية لغويةً دقيقة: المعنى مأخوذ من فقه الاسم في كتاب التويجري و«المختصر»، والأدلة من القرآن والسنة المؤكدة (البخاري ومسلم وأبو داود والترمذي) مع ذكر المرجع في كل بطاقة. وتحسّنت المسبحة: خرز أصغر وأجمل، وخمس مسبحات (خشبية، زمردية، حجرية، لؤلؤية، سوداء)، وثلاثة أحجام وثلاثة أشكال للخرزة من الإعدادات.<br/><br/><b>v1.4.0</b> — اكتملت «بطاقات النور» للأسماء الحسنى كلها (١٠٠ بطاقة) موثقة من «مختصر فقه الأسماء الحسنى» للبدر و«التوحيد: أسماء الله الحسنى» للتويجري، ودُقِّقت مراجع الصفحات من المطبوعات نفسها. وفي الإعدادات قسم المظهر الجديد: خمس لوحات ألوان (زمردية، نيلية، رملية، وردية، دُرّية) لكل منها وضع ليلي ونهاري، وأربعة أنماط لخلفية الصفحة (زخرفة النجوم، الأرابيسك، النقاط، السادة) — تُحفظ كلها تلقائيًا.<br/><br/><b>v1.3.0</b> — لغة درج الأسماء: عربي أو English من الإعدادات، وإعادة تنسيق الدرج بحلقة مزدوجة وملاءمة تلقائية لعرض كل اسم فلا تداخل، ونبض قلبٍ حي داخل الساعة كما في المسبحة، وإظهار شاهد كل ذكر من القرآن والسنة في صفحة المسبحة.<br/><br/><b>v1.2.0</b> — اختيار صوت الساعة (تِك توك، جرس، خشبي) وصوت المسبحة (خرز، زجاج، خشب، ناعم)، واختيار شكل الساعة (كلاسيكي، مزخرف، بسيط) وشكل المسبحة، وخط لأسماء الله الحسنى (كوفي، نسخ، رقعة)، ظهور الشواهد على المسبحة، ونمط التسبيح اليدوي أو التحريك التلقائي، وعقرب ثوانٍ مع تدرّج متحرك ونبض قرب انتقال الاسم.<br/><br/><b>v1.1.0</b> — تحسين كامل لمقاسات الجوال (أندرويد وآيفون)، قرص الساعة كُتبت عليه الأسماء بخط رفيع جدًا بدل الدقائق والثواني، إظهار الشرح دائمًا، دقّات ساعة حقيقية (تِك وتوك)، سرعة من ١ إلى ١٠ ثوانٍ بمؤشر انزلاقي، ومسبحة خشبية واقعية بخيط وشرابة وصوت خرز محسّن.<br/><br/><b>v1.0.0</b> — الإطلاق الأول: ساعة الأسماء الحسنى (١٠٠ اسم مع الشرح)، المسبحة بصوت الخرز والاحتفال، أذكار مخصصة، إعدادات كاملة، حفظ محلي على الجهاز، وضع ليلي/نهاري، واهتزاز.</div>
+      <div class="body"><b>v2.2.0</b> — «عزيمة اليوم والتقويم والتاريخ»: صارت «نية اليوم» بطاقة «عزيمة اليوم» المضغوطة: تختار من عشر نوايا ما تشاء معًا (طلب العلم، برّ الوالدين، تحسين الخلق، الصدقة، إتقان العمل، حفظ اللسان، قراءة القرآن، الصلاة على وقتها، الاستغفار والدعاء، الصوم التطوعي)، وتضيف نيتك بكلماتك، وتبقى «ثبّتَ اللهُ قلبك» مع الجملة التحفيزية والحديث المعزز لكل نية. وأصبحت «مهمات اليوم» داخل بطاقة العزيمة: قراءة كتاب، حفظ آية، مراجعة تفسير… بمربعات إنجازٍ تتجدد يوميًا، وكل إنجاز يضيء نجمةً بلون عمله. وصارت «سماء الخير» لوحة عرضٍ وإحصاءٍ خالصة تحت تقريرها «كم سبحت» و«أعمال القرآن» و«نجوم الفترة» لليوم والأسبوع والشهر ومن البداية، بمقياسٍ لكل نوع عمل. وانتقل التقويم إلى الصفحة الرئيسية «التقويم والتاريخ»: تقويم هجري وميلادي بأحداث الإسلام الموثقة في مثل هذا اليوم — معارك وغزوات وفتوحات وانتصارات وهزائم ومواقيت العبادات — وتنقل بين الشهور الهجرية، ونجمةٌ ذهبية على يومه الحدث، ونقاطٌ بألوان أعمالك أسفل كل يوم، وضغط اليوم يعرض سماءه وأحداثه.<br/><br/><b>v2.1.0</b> — «سماء الخير»: أُعيدت تسمية خريطة الخير إلى «سماء الخير»، وصارت النجوم صغيرة متلألئة يلوّنها نوعُ العمل: الصلاة أصفر، والقرآن أخضر، والذكر أزرق، والصدقة أحمر خفيف، وصلة الرحم وردي، والعلم بنفسجي، والخُلق تركوازي — بمفتاح ألوان أسفل السماء. وحلّ محل قائمة السجل «تقويم الخير»: تقويم شهري منظم تظهر فيه نقاط كل يوم الملونة بحسب ما وثّقته، وتضغط اليوم فتعرض أعماله. وأُضيفت «مهماتي اليومية»: توثّق بها أي عمل (صلاة، قرآن، ذكر، صدقة…) وتضغط مربعه عند إنجازه فتضيء نجمة، وتتجدد العلامة كل صباح. وتحت السماء كلمة: «املأ حياتك بأعمال الخير ولا تفتخر بها فهذا فضل الله عليك». وفي «نية اليوم» أمكن كتابة نية خاصة بكلماتك مع بقاء «ثبّتَ اللهُ قلبك» وجملة تحفيزية تناسبها. ووُسّع «القرآن وحالتي» إلى عشر حالات (أُضيفت: الثقيل بالذنوب، والمريض، والحائر في قرار، والكسلان، والشاكر، والوحيد). وأصبح «عملٌ لكل وقت» يعرض ساعةً حية بالوقت الحالي وثلاثة أعمال محببة لهذا الوقت من السنة، وأصبح «بنك الخيرات» مخزونًا كبيرًا من الأفكار لا يتكرر في اليوم مع خيار «فعلت / لم أفعل» يضيء نجمة عند الفعل، وأُضيفت أربعة عادات في «العادات عبادات» (الطعام، والسفر، والصحة والطهارة، والاستراحة)، ووُسّعت «محاسبتي قبل النوم» إلى ثمانية أسئلة بخيارات نعم/لا، وصار «كن سببًا في الخير» يشارك على واتساب آيةً أو حديثًا بشرحه أو قصةً دينية ملهمة قصيرة. وتحدي الدقيقة عند إتمامه نجمةٌ في السماء كما هو، و«أنا غاضب» بلا تغيير، وانتقل «ماذا أفعل الآن؟» إلى أول القائمة. وأُعيد رسم كل أيقونات نور اليوم بأيقونات مونو كرور بسيطة بدل الإيموجي.<br/><br/><b>v2.0.0</b> — «نور اليوم»: شاشة جديدة كاملة تحتوي أربع عشرة أداة ترافق المسلم في يومه: نية اليوم (ست نوايا سريعة موثقة مع حديثها)، اقتراح عمل صالح بحسب الوقت (من السحر إلى النوم)، تحدي الدقيقة بعدّاد دائري حي، خريطة الخير حيث يصبح كل عمل صالح نجمةً تتلألأ في سماء مستخدم، زر «أنا غاضب» بعلاج الغضب بالسنة في أربع خطوات، بنك الخيرات، «ماذا أفعل الآن؟»، تحويل العادات إلى عبادات (العمل والرياضة والدراسة والنوم)، سجل الدعوات مع قسم «فضل الله عليّ» لما استُجيب، حساب تقريبي لما بقي من العمر (أسابيع ورمضانات وجُمعات) تذكيرًا لا تخويفًا، القرآن حسب الحالة النفسية (قلق وحزن وخوف وهمّ) بآياتها وأدعيتها، محاسبتي قبل النوم بأربعة أسئلة، «نورٌ بينك وبين الله» للاعمال الخفية التي لا تُعرض أبدًا، وصية اليوم المتجددة، وكن سببًا في الخير لمشاركة الفائدة. ونجمة الخير تُضاف تلقائيًا عند إتمام جولة التسبيح أيضًا. وأُضيفت إزاحة أمانة للمحتوى تحت شريط حالة الآيفون (البطارية والشبكة) حتى لا يتداخل معه شيء.<br/><br/><b>v1.6.0</b> — بصُرٌ تامّ في العرض: أُعيد بناء درج الساعة من أساسه؛ فأصبح كل اسم يُرسَم على لوحة رسم داخلية بحجم كبير (حيث تشكيل الحروف العربية سليم دائمًا) ثم يُثبَّت على الدرج صورةً دقيقة — وعلاجٌ نهائي لمشكلة ظهور الأسماء معكوسة ومبعثرة الحروف في بعض المتصفحات والهواتف. وتنقّت «بطاقات النور» إلى ثلاثة أقسام فقط بلا أخطاء: المعنى، والدليل بمصدره، والدعاء بمصدره — حذفًا لقسمَي «عبرة لقلبك» و«سؤال تدبّر» بطلب صاحب التطبيق ترفعًا لدقة النص الديني. وتُحدَّث ألوان الدرج فورًا مع تغيير لوحة الألوان أو الوضع الليلي/النهاري.<br/><br/><b>v1.5.0</b> — ضبط درج الساعة: كُتبت الأسماء المئة مشكولةً بدقة، وأُصلح اتجاه الحروف العربية على الدرج فباتت متصلة سليمة القراءة، وكُبِّر خطها ووُضّحت. وأُعيدت صياغة «بطاقات النور» كلها (١٠٠ بطاقة) صياغةً فقهية لغويةً دقيقة: المعنى مأخوذ من فقه الاسم في كتاب التويجري و«المختصر»، والأدلة من القرآن والسنة المؤكدة (البخاري ومسلم وأبو داود والترمذي) مع ذكر المرجع في كل بطاقة. وتحسّنت المسبحة: خرز أصغر وأجمل، وخمس مسبحات (خشبية، زمردية، حجرية، لؤلؤية، سوداء)، وثلاثة أحجام وثلاثة أشكال للخرزة من الإعدادات.<br/><br/><b>v1.4.0</b> — اكتملت «بطاقات النور» للأسماء الحسنى كلها (١٠٠ بطاقة) موثقة من «مختصر فقه الأسماء الحسنى» للبدر و«التوحيد: أسماء الله الحسنى» للتويجري، ودُقِّقت مراجع الصفحات من المطبوعات نفسها. وفي الإعدادات قسم المظهر الجديد: خمس لوحات ألوان (زمردية، نيلية، رملية، وردية، دُرّية) لكل منها وضع ليلي ونهاري، وأربعة أنماط لخلفية الصفحة (زخرفة النجوم، الأرابيسك، النقاط، السادة) — تُحفظ كلها تلقائيًا.<br/><br/><b>v1.3.0</b> — لغة درج الأسماء: عربي أو English من الإعدادات، وإعادة تنسيق الدرج بحلقة مزدوجة وملاءمة تلقائية لعرض كل اسم فلا تداخل، ونبض قلبٍ حي داخل الساعة كما في المسبحة، وإظهار شاهد كل ذكر من القرآن والسنة في صفحة المسبحة.<br/><br/><b>v1.2.0</b> — اختيار صوت الساعة (تِك توك، جرس، خشبي) وصوت المسبحة (خرز، زجاج، خشب، ناعم)، واختيار شكل الساعة (كلاسيكي، مزخرف، بسيط) وشكل المسبحة، وخط لأسماء الله الحسنى (كوفي، نسخ، رقعة)، ظهور الشواهد على المسبحة، ونمط التسبيح اليدوي أو التحريك التلقائي، وعقرب ثوانٍ مع تدرّج متحرك ونبض قرب انتقال الاسم.<br/><br/><b>v1.1.0</b> — تحسين كامل لمقاسات الجوال (أندرويد وآيفون)، قرص الساعة كُتبت عليه الأسماء بخط رفيع جدًا بدل الدقائق والثواني، إظهار الشرح دائمًا، دقّات ساعة حقيقية (تِك وتوك)، سرعة من ١ إلى ١٠ ثوانٍ بمؤشر انزلاقي، ومسبحة خشبية واقعية بخيط وشرابة وصوت خرز محسّن.<br/><br/><b>v1.0.0</b> — الإطلاق الأول: ساعة الأسماء الحسنى (١٠٠ اسم مع الشرح)، المسبحة بصوت الخرز والاحتفال، أذكار مخصصة، إعدادات كاملة، حفظ محلي على الجهاز، وضع ليلي/نهاري، واهتزاز.</div>
     </details>
   </div>
 </section>
@@ -1878,6 +1943,10 @@ const EVID={
 'اللهم صلِّ وسلِّم على محمد':{t:'«مَن صلَّى عليَّ صلاةً واحدةً صلَّى اللهُ عليه عشرَ صلواتٍ»',s:'رواه مسلم ٤٠٨'}
 };
 function saveRound(){ let ok=true;
+  /* سجل التسبيح اليومي (v2.2.0): لتقرير سماء الخير — كم سبحت في أسبوع/شهر/من البداية */
+  let hist=store.get('tsbHist',{}); if(!hist||typeof hist!=='object')hist={};
+  if(day&&day.c>0)hist[day.d]=day.c; pruneMap(hist,500);
+  ok=store.set('tsbHist',hist)&&ok;
   ok=store.set('round',cnt)&&ok; ok=store.set('day',day)&&ok; ok=store.set('totals',totals)&&ok;
   ok=store.set('dh',dh)&&ok; ok=store.set('target',target)&&ok;
   if(!ok)warnStorage();
@@ -2137,7 +2206,7 @@ function bindSettings(){
   });
   $('#resetAll').addEventListener('click',()=>{
     if(!confirm('سيُحذف كل شيء: العدادات والإعدادات والأذكار المخصصة وبيانات نور اليوم. هل أنت متأكد؟'))return;
-    ['settings','ni','totals','day','round','dh','target','custom','screen','intent','acct','stars','duas','secret','life','tasks','tasksDone','ideasShown'].forEach(k=>store.del(k));
+    ['settings','ni','totals','day','round','dh','target','custom','screen','intent','azima','tsbHist','acct','stars','duas','secret','life','tasks','tasksDone','ideasShown'].forEach(k=>store.del(k));
     location.reload();
   });
 }
@@ -2158,7 +2227,7 @@ function renderDates(){
   $('#greet2').textContent=(h<12?'صباح النور':(h<18?'طاب يومك':'مساء النور'))+' —';
 }
 
-/* ============ نور اليوم (v2.1.0) ============ */
+/* ============ نور اليوم (v2.2.0) ============ */
 /* المحتوى الديني هنا موثق: الآيات من المصحف، والأحاديث من الصحيحين والسنن
    المعتبرة مع ذكر المرجع، وما ليس له نص صريح يُذكر بوصفه منسوبًا. */
 function dayOfYear(){ const d=new Date(); return Math.floor((d-new Date(d.getFullYear(),0,0))/864e5); }
@@ -2166,14 +2235,18 @@ let nowClockT=null;
 function startNowClock(){ stopNowClock(); const f=()=>{ const e=$('#nowClock'); if(!e){stopNowClock();return;} const d=new Date(); e.textContent=AR(d.getHours())+':'+AR(d.getMinutes()).padStart(2,'٠')+':'+AR(d.getSeconds()).padStart(2,'٠'); }; f(); nowClockT=setInterval(f,1000); }
 function stopNowClock(){ if(nowClockT){clearInterval(nowClockT);nowClockT=null;} }
 
-/* --- النية اليومية --- */
-const INTENTS=[
+/* --- عزيمة اليوم (v2.2.0): نوايا متعددة + نيتي بكلماتي + الرسائل التحفيزية والحديث المعزز --- */
+const AZIMA_T=[
  {t:'طلب العلم',n:'طلبًا للعلم النافع والعمل به ونفعًا للمسلمين',p:'«مَن سلك طريقًا يطلب فيه علمًا سهَّل الله له طريقًا إلى الجنة»',s:'رواه مسلم (٢٦٩٩)'},
  {t:'برّ الوالدين',n:'برَّ الوالدين والدعاء لهما وصلة رحمهما',p:'«رِضَا الرَّبِّ فِي رِضَا الْوَالِدِ»',s:'رواه الترمذي (١٨٩٩) — حسن صحيح'},
  {t:'تحسين الخلق',n:'حسن الخلق مع الخلق جميعًا: أهلي وجاري ورفيقي',p:'«مَا مِنْ شَيْءٍ أَثْقَلُ فِي الْمِيزَانِ مِنْ حُسْنِ الْخُلُقِ»',s:'رواه أبو داود والترمذي — صحيح'},
  {t:'الصدقة',n:'صدقة خفية أو جهرية بقدر وسعي، ولو بكلمة طيبة',p:'«تَبَسُّمُكَ فِي وَجْهِ أَخِيكَ صَدَقَةٌ»',s:'رواه الترمذي (١٩٥٦) — حسن'},
  {t:'إتقان العمل',n:'إتقان عملي وصدقٌ في أداء الحقوق كافة',p:'«إِنَّ اللَّهَ يُحِبُّ إِذَا عَمِلَ أَحَدُكُمْ عَمَلًا أَنْ يُتْقِنَهُ»',s:'رواه البيهقي في شعب الإيمان — حسن'},
- {t:'حفظ اللسان',n:'حفظ اللسان من الغيبة والجدال وما لا ينفع',p:'«مَنْ كَانَ يُؤْمِنُ بِاللهِ وَالْيَوْمِ الْآخِرِ فَلْيَقُلْ خَيْرًا أَوْ لِيَصْمُتْ»',s:'متفق عليه · البخاري (٦٠١٨)'}
+ {t:'حفظ اللسان',n:'حفظ اللسان من الغيبة والجدال وما لا ينفع',p:'«مَنْ كَانَ يُؤْمِنُ بِاللهِ وَالْيَوْمِ الْآخِرِ فَلْيَقُلْ خَيْرًا أَوْ لِيَصْمُتْ»',s:'متفق عليه · البخاري (٦٠١٨)'},
+ {t:'قراءة القرآن',n:'وردًا من القرآن بتدبر ولو صفحة أو آية',p:'«خَيْرُكُمْ مَنْ تَعَلَّمَ الْقُرْآنَ وَعَلَّمَهُ»',s:'رواه البخاري (٥٠٢٧)'},
+ {t:'الصلاة على وقتها',n:'حفظ مواقيت الصلوات واستحقاقها بأدواتها',p:'«أَحَبُّ الأعمالِ إلى اللهِ الصلاةُ على وقتِها»',s:'متفق عليه · البخاري (٥٢٧)'},
+ {t:'الاستغفار والدعاء',n:'استغفارًا ثابتًا ودعاءً بقلب حاضر',p:'«إِنِّي لأستغفرُ اللهَ وأتوبُ إليه في اليومِ مائةَ مَرَّةٍ»',s:'رواه مسلم (٢٧٠٢)'},
+ {t:'صومٌ تطوعي',n:'صوم نفلة: أثنين وخميس أو أيام البيض',p:'«الصُّوم جُنَّة»',s:'متفق عليه · البخاري (١٩٠٣) ومسلم (١١٥١)'}
 ];
 const INTENT_MOTIV=[
  'ثبّتك الله، واعمل جاهدًا لإنجاز ما تنوى، واستعن بالله.',
@@ -2184,18 +2257,24 @@ const INTENT_MOTIV=[
  'ثبّتك الله؛ النية تصنع العبادة، والإخلاص يرفع العمل — فاجتهد.'
 ];
 function motivFor(t){ let h=0; for(let i=0;i<t.length;i++)h=(h*31+t.charCodeAt(i))>>>0; return INTENT_MOTIV[h%INTENT_MOTIV.length]; }
-let intent=store.get('intent',null);
-function intentOfToday(){
-  if(!intent||intent.d!==todayStr())return null;
-  if(intent.custom)return{t:intent.custom,n:null,custom:true,motiv:motivFor(intent.custom)};
-  return INTENTS[intent.id]||null;
-}
+/* azima: {d:'YYYY-MM-DD', ids:[...مؤشرات النوايا], customs:[نصوص النوايا الخاصة]} */
+let azima=store.get('azima',null);
+function azimaToday(){ return (azima&&azima.d===todayStr())?azima:null; }
+function azimaSave(){ if(!store.set('azima',azima))warnStorage(); }
+function azimaCount(){ const a=azimaToday(); if(!a)return 0; return (a.ids||[]).length+(a.customs||[]).length; }
 function renderHomeIntent(){
-  const it=intentOfToday(), el=$('#homeIntent'); if(!el)return;
-  if(it){ el.hidden=false; el.innerHTML='نيّتك اليوم: <b>'+it.t+'</b>'+(it.custom?' — ثبّتك الله':' — '+it.n); }
-  else el.hidden=true;
+  const el=$('#homeIntent'); if(!el)return;
+  const a=azimaToday();
+  if(!a||!azimaCount()){ el.hidden=true; return; }
+  const names=[];
+  (a.ids||[]).forEach(i=>{ if(AZIMA_T[i])names.push(AZIMA_T[i].t); });
+  (a.customs||[]).forEach(()=>names.push('نيتك الخاصة'));
+  const doneN=tasks&&tasks.length?tasks.filter(t=>(tasksDone[todayStr()]||[]).indexOf(t.id)>=0).length:0;
+  const tn=tasks&&tasks.length?(tasks.length===1?' مهمة':(tasks.length===2?' مهمتين':' مهمات')):'';
+  el.hidden=false;
+  el.innerHTML='عزيمة اليوم: <b>'+names.slice(0,2).join(' · ')+'</b>'+(names.length>2?' و'+AR(names.length-2)+' أخرى':'')
+  +(tasks&&tasks.length?' — أنجزت '+AR(doneN)+' من '+AR(tasks.length)+tn:'');
 }
-
 /* --- خريطة الخير (سماء النجوم) --- */
 /* ألوان النجوم في سماء الخير: لون لكل نوع عمل */
 const STARS_T=[
@@ -2230,6 +2309,36 @@ function renderSky(){
   });
   sv.innerHTML=h;
   const cnt=$('#skyCnt'); if(cnt)cnt.textContent=AR(sky.length);
+}
+/* --- تقرير سماء الخير (v2.2.0): كم سبحت، كم قرأت، ماذا فعلت في أسبوع/شهر/من البداية --- */
+function periodDates(p){
+  const set={};
+  const n=p==='day'?1:(p==='week'?7:(p==='month'?30:99999));
+  const t=new Date();
+  for(let i=0;i<n;i++){ const d=new Date(t); d.setDate(d.getDate()-i); set[dateStrOf(d)]=true; }
+  return set;
+}
+function buildSkyStats(p){
+  const box=$('#skyStats'), bars=$('#skyBars'); if(!box||!bars)return;
+  const set=periodDates(p);
+  /* التسبيح: من السجل اليومي — وقيمة اليوم الحية أولًا */
+  const hist=store.get('tsbHist',{})||{};
+  let tsb=0;
+  Object.keys(set).forEach(k=>{ const v=(k===todayStr()&&day&&day.d===todayStr())?Math.max(day.c||0,hist[k]||0):(hist[k]||0); tsb+=v; });
+  /* النجوم حسب الفئة */
+  const cats={}; let total=0;
+  sky.forEach(s=>{ if(set[s.d]){ cats[s.k]=(cats[s.k]||0)+1; total++; } });
+  const quran=cats.quran||0;
+  box.innerHTML='<div><b>'+AR(tsb)+'</b><span>تسبيحاتك</span></div>'
+  +'<div><b>'+AR(quran)+'</b><span>أعمال القرآن</span></div>'
+  +'<div><b>'+AR(total)+'</b><span>نجوم الفترة</span></div>';
+  let mx=1; STARS_T.forEach(m=>{ mx=Math.max(mx,cats[m.k]||0); });
+  bars.innerHTML=STARS_T.map(m=>{
+    const v=cats[m.k]||0, w=Math.round(v/mx*100);
+    return '<div class="catbar"><span class="cbt"><i style="background:'+m.c+'"></i>'+m.t+'</span>'
+    +'<span class="cbtrack"><span class="cbfill" style="width:'+w+'%;background:'+m.c+'"></span></span>'
+    +'<span class="cbn">'+AR(v)+'</span></div>';
+  }).join('');
 }
 
 /* --- اقتراح العمل حسب الوقت: الوقت والساعة + أعمال محببة مذكورة بالسنة لهذا الوقت --- */
@@ -2521,7 +2630,7 @@ function saveDuas(){ if(!store.set('duas',duas))warnStorage(); }
 /* --- المهمات اليومية وتقويم الخير --- */
 let tasks=store.get('tasks',[]);
 let tasksDone=store.get('tasksDone',{});
-let calOff=0;
+
 function saveTasks(){ pruneMap(tasksDone,120); if(!store.set('tasks',tasks))warnStorage(); if(!store.set('tasksDone',tasksDone))warnStorage(); }
 function tasksOfToday(){ const d=tasksDone[todayStr()]; return d?d:[]; }
 function removeTaskStar(lbl){
@@ -2537,6 +2646,8 @@ function toggleTask(id){
   if(idx<0){ arr.push(id); addStar(t.k,lbl); tapS(); vib(25); toast('أُنجزت المهمة — أضاءت نجمة في سمائك'); }
   else{ arr.splice(idx,1); removeTaskStar(lbl); toast('أُلغيت العلامة — أتمّها بصدق لتضيء'); }
   saveTasks();
+  renderAzTasks();
+  renderHomeIntent();
   if(curTool==='tasks')openTool('tasks');
 }
 function delTask(id){
@@ -2544,42 +2655,173 @@ function delTask(id){
   tasks=tasks.filter(x=>x.id!==t.id);
   const arr=tasksDone[todayStr()];
   if(arr&&arr.indexOf(id)>=0){ arr.splice(arr.indexOf(id),1); removeTaskStar('مهمة: '+t.t); }
-  saveTasks(); toast('حُذفت المهمة');
+  saveTasks(); renderAzTasks(); renderHomeIntent(); toast('حُذفت المهمة');
 }
-function buildCal(){
-  const grid=$('#calGrid'), head=$('#calHead'); if(!grid)return;
-  const now=new Date(), base=new Date(now.getFullYear(),now.getMonth()-calOff,1);
-  const y=base.getFullYear(), mo=base.getMonth();
-  const MN=['يناير','فبراير','مارس','أبريل','مايو','يونيو','يوليو','أغسطس','سبتمبر','أكتوبر','نوفمبر','ديسمبر'];
-  head.textContent=MN[mo]+' '+String(y).replace(/\d/g,d=>'٠١٢٣٤٥٦٧٨٩'[d]);
-  const nx=$('#calNext'); if(nx)nx.disabled=calOff<=0;
-  const byDay={};
-  sky.forEach(s=>{ (byDay[s.d]=byDay[s.d]||[]).push(s); });
-  const first=new Date(y,mo,1).getDay();
-  const days=new Date(y,mo+1,0).getDate();
-  const tstr=todayStr();
+/* معاينة المهمات المصغرة داخل بطاقة العزيمة (v2.2.0) */
+function renderAzTasks(){
+  const box=$('#azTasks'); if(!box)return;
+  const done=tasksOfToday();
+  box.innerHTML='';
+  if(!tasks.length){ box.innerHTML='<p class="azempty">لا مهمات بعد — اضغط «فتح المهمات» وأضف: قراءة كتاب، حفظ آية، مراجعة تفسير…</p>'; return; }
+  tasks.forEach(t=>{
+    const isDone=done.indexOf(t.id)>=0, m=starMeta(t.k);
+    const r=document.createElement('div'); r.className='aztaskrow'+(isDone?' done':'');
+    r.innerHTML='<button type="button" class="taskbox" aria-label="إنجاز المهمة"><svg viewBox="0 0 24 24"><path d="M5 12.5l4.5 4.5L19 7.5" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/></svg></button>'
+    +'<div style="flex:1;min-width:0"><div class="tlabel">'+esc(t.t)+'</div><div class="tmeta"><i style="background:'+m.c+'"></i>'+m.t+'</div></div>'
+    +'<span class="azmini">'+(isDone?'أُنجزت':'لم تُنجز')+'</span>';
+    r.querySelector('.taskbox').addEventListener('click',()=>toggleTask(t.id));
+    box.appendChild(r);
+  });
+  const doneN=tasks.filter(t=>done.indexOf(t.id)>=0).length;
+  const hint=$('#azTaskHint');
+  if(hint)hint.textContent='أنجزت '+AR(doneN)+' من '+AR(tasks.length)+' — كل إنجاز نجمةٌ في سمائك';
+}
+/* --- التقويم والتاريخ (v2.2.0): تقويم هجري وميلادي + أحداث الإسلام الموثقة في مثل هذا اليوم --- */
+/* التواريخ هنا مشهورة موثقة في كتب السير والتاريخ المعتمدة، وحيثما خُصِم التاريخ ذُكر ذلك
+   أو أُثبت الحدث للشهر كله بلا تثبيت يوم، حفاظًا على الدقة التاريخية. */
+const HIJRI_MN=['محرم','صفر','ربيع الأول','ربيع الآخر','جمادى الأولى','جمادى الآخرة','رجب','شعبان','رمضان','شوال','ذو القعدة','ذو الحجة'];
+const GREG_MN=['يناير','فبراير','مارس','أبريل','مايو','يونيو','يوليو','أغسطس','سبتمبر','أكتوبر','نوفمبر','ديسمبر'];
+/* {m: شهر هجري, d: يوم (0 = حدث الشهر بلا يومٍ مثبت), y: سنة الهجرة (null = لا سنة), t, x} */
+const ISLAMIC_EVENTS=[
+ {m:1,d:1,y:null,t:'رأس السنة الهجرية',x:'بدأ المسلمون من زمن الفاروق عمر بن الخطاب رضي الله عنه يحسبون تقويمهم بهجرة النبي ﷺ — فهي البداية التي استمدت الأمة رحابها.'},
+ {m:1,d:10,y:61,t:'يوم عاشوراء',x:'صام النبي ﷺ يوم عاشوراء وأمر بصيامه، فلما فُرض رمضان صار نفلةً يُؤخذ بها: «فكان من شاء صامه ومن شاء أفطر» (متفق عليه)، وهو اليوم الذي كرم الله فيه بني إسرائيل؛ وفي سنة ٦١هـ وقعت مصيبة الطَّف باستشهاد الحسين بن علي رضي الله عنهما.'},
+ {m:1,d:0,y:24,t:'وفاة الفاروق عمر بن الخطاب رضي الله عنه',x:'طعنه اللقحُ أبو لؤلؤة المجوسي يوم الجمعة وهو في الصلاة، ومات في آخر محرم سنة ٢٤هـ على المشهور — وقد دعا له النبي ﷺ بالإعزاز قبل إسلامه: «اللهم أعِزَّ الإسلامَ بأحبِّ الناس إليك: عمرَ بن الخطاب أو أبي جهل بن هشام» (رواه الترمذي — صحيح).'},
+ {m:3,d:12,y:null,t:'المولد النبوي ووفاة النبي ﷺ',x:'وُلد النبي ﷺ يوم الاثنين في ربيع الأول من سنة الفيل بمكة، وكانت وفاته ﷺ في المشهور يوم الاثنين ١٢ ربيع الأول سنة ١١هـ — يومٌ واحدٌ جمع نبء البداية ونهاية الرسالة المباركة.'},
+ {m:3,d:1,y:1,t:'خروج النبي ﷺ من غار ثور',x:'خرج ﷺ من غار ثور متوجهًا إلى المدينة ليلة الاثنين، مصطفًى ربه بعدما قلَّ أنصاره وأوذي — فأوصلته الهجرة مجدًا، وبه أخذت الأمة تقويمها.'},
+ {m:3,d:12,y:1,t:'وصول النبي ﷺ إلى قباء',x:'وصل ﷺ إلى قباء يوم الاثنين وبنى مسجد قباء أولَ مسجدٍ أُسس على التقوى: ﴿لَّمَسْجِدٌ أُسِّسَ عَلَى التَّقْوَىٰ﴾ (التوبة: ١٨).'},
+ {m:3,d:20,y:857,t:'فتح القسطنطينية',x:'فُتحت القسطنطينية بقيادة محمد الفاتح العثماني في ٢٠ ربيع الأول سنة ٨٥٧هـ على المشهور — تحققًا لحديث النبي ﷺ: «لَتُفتَحَنَّ القسطنطينية فنِعْمَ الأميرُ أميرُها، ونِعْمَ الجيشُ ذلك الجيش» (رواه أحمد).'},
+ {m:4,d:0,y:897,t:'سقوط غرناطة — نهاية الأندلس',x:'سقطت غرناطة آخر معاقل المسلمين في الأندلس سنة ٨٩٧هـ الموافقة ١٤٩٢م (في ربيع الآخر على المشهور) بعد ثمانية قرون من مجدٍ وعلوم وعمارة — عبرةٌ من عبرات التاريخ لمن ترك الصنعة والثبات.'},
+ {m:5,d:0,y:8,t:'غزوة مؤتة',x:'أول مواجهة بين المسلمين والروم: قابل ثلاثةُ آلافٍ من المسلمين جيشًا عظيمًا، واستُشهد قادتها الثلاثة: زيد بن حارثة وجعفر بن أبي طالب وعبد الله بن رواحة رضي الله عنهم، وعاد الجيش ثابتًا لم يُنكسر (جمادى الأولى سنة ٨هـ — قيل غير ذلك).'},
+ {m:7,d:27,y:null,t:'الإسراء والمعراج',x:'الليلتُ العظيمة التي أكرم الله فيها نبيه ﷺ فرُفِع بالسراء ورُقِيَّ إلى ما لم يرقَ إليه أحد، وفُرضت فيها الصلوات الخمس — المشهور أنها كانت في السابع والعشرين من رجب، وليز فيه خلافُ أهل السير.'},
+ {m:7,d:24,y:583,t:'معركة حطين',x:'نصر الله صلاح الدين الأيوبي على الصليبيين يوم ٢٤ رجب سنة ٥٨٣هـ، ثم دخل القدسَ بعده بأيامٍ في جمعة ٢٧ من الشهر نفسه، ليعود بيتُ المقدس إلى المسلمين بعد ثمانٍ وثمانين سنة من الاحتلال.'},
+ {m:7,d:0,y:9,t:'غزوة تبوك — غزوة العسرة',x:'آخر غزوات ﷺ: خرج إلى تبوك في رجب سنة ٩هـ بثلاثين ألفًا من الصحابة في حرٍّ شديد ومسافةٍ بعيدة، فدخل الروم مسلَّمًا ولم يُقَع قتال — سميت العسرة لجلّ ما أُخرج فيها من الزاد والعدة.'},
+ {m:8,d:0,y:2,t:'تغيير القبلة إلى الكعبة',x:'غيّر الله القبلة من بيت المقدس إلى الكعبة في شعبان سنة ٢هـ: ﴿فَوَلِّ وَجْهَكَ شَطْرَ الْمَسْجِدِ الْحَرَامِ﴾ (البقرة: ١٤٤).'},
+ {m:8,d:15,y:null,t:'النصف من شعبان',x:'ليلةٌ عظيمة يغفر الله فيها لمن أراد — ورد فيها: «إِذَا كَانَتْ لَيْلَةُ النِّصْفِ مِنْ شَعْبَانَ فَقُومُوا اللَّيْلَ وَصُومُوا نَهَارَهُ» (رواه ابن ماجه ١٣٨٨ — حسَّنه لغيره محدثو العصر)؛ فأكثِر فيها من الاستغفار والدعاء.'},
+ {m:9,d:1,y:null,t:'بداية شهر الصيام',x:'﴿شَهْرُ رَمَضَانَ الَّذِي أُنزِلَ فِيهِ الْقُرْآنُ هُدًى لِّلنَّاسِ وَبَيِّنَاتٍ مِّنَ الْهُدَىٰ وَالْفُرْقَانِ﴾ (البقرة: ١٨٥) — بداية صيام الشهر الفاضل وقيامه وصدقه.'},
+ {m:9,d:17,y:2,t:'غزوة بدر الكبرى — يوم الفرقان',x:'أنصر الله المسلمين على قريش يوم ١٧ رمضان سنة ٢هـ على المشهور: قرابةُ ثلاثمائة مقاتلٍ أوَيروا ألفًا من أرباب الأوثان، وفيه نزلت بشارة النصر: ﴿وَيَوْمَئِذٍ يَفْرَحُ الْمُؤْمِنُونَ﴾ — فهو يوم الفرقان بين الحق والباطل.'},
+ {m:9,d:17,y:58,t:'وفاة أم المؤمنين عائشة رضي الله عنها',x:'تُوفّيت أم المؤمنين عائشة بنت أبي بكر الصدّيق رضي الله عنها يوم الجمعة ١٧ رمضان سنة ٥٨هـ — وكانت من أوسع أصحاب ﷺ فضلًا في العلم وشرح الشريعة.'},
+ {m:9,d:20,y:8,t:'فتح مكة',x:'عاد ﷺ إلى مكة في رمضان سنة ٨هـ بجيشٍ من عشرة آلاف ففتحها، وأمر بكُسر الأصنام التي حول الكعبة — وكانت ثلاثمائة وستين صنمًا (البخاري) — وقال لأهلها يوم الفتح: «اِذْهَبوا فَأَنْتُمُ الطُّلَقاءُ» — مشهورُ دخوله العشرين من رمضان.'},
+ {m:9,d:25,y:658,t:'معركة عين جالوت',x:'انتصر المسلمون بقيادة قُطز وبيبرس على المغول يوم ٢٥ رمضان سنة ٦٥٨هـ — أول هزيمةٍ كبرى حطّمت عزّة المغول وقطعت زحفهم نحو بلاد المسلمين.'},
+ {m:9,d:0,y:92,t:'فتح الأندلس',x:'عبر طارق بن زياد إلى الأندلس في رمضان سنة ٩٢هـ وهزم ملك القوط في معركة وادي لكة، واتخذ الشهر الفاضل عونًا على الظفر، فصارت الأندلس رحابًا إسلامية قرونًا.'},
+ {m:9,d:27,y:null,t:'ليلة القدر — من العشر الأواخر',x:'أجلُّ الليل: ﴿لَيْلَةُ الْقَدْرِ خَيْرٌ مِّنْ أَلْفِ شَهْرٍ﴾ — أمر ﷺ بالبحث عنها في العشر الأواخر من رمضان، وأكثر الروايات تجري إلى السابع والعشرين؛ فأحْيِها بالقيام والدعاء: «اللهم إنك عفوٌّ تحب العفو فاعفُ عني» (رواه الترمذي).'},
+ {m:10,d:1,y:null,t:'عيد الفطر',x:'عيدُ المسلمين الأول بعد صيام شهر رمضان: ﴿لِتُكْمِلُوا الْعِدَّةَ وَلِتُكَبِّرُوا اللَّهَ عَلَىٰ مَا هَدَاكُمْ وَلَعَلَّكُمْ تَشْكُرُونَ﴾ (البقرة: ١٨٥).'},
+ {m:10,d:7,y:3,t:'غزوة أُحد',x:'الغزوة التي استُشهد فيها سبعون من الصحابة في سباقهم الشهيد بمن فيهم سيد الشهداء حمزة بن عبد المطلب رضي الله عنه، في ٧ شوال سنة ٣هـ على المشهور — درسٌ في الخروج عن أمر النبي ﷺ والثبات.'},
+ {m:10,d:0,y:5,t:'غزوة الخندق (الأحزاب)',x:'حاصر أحزابُ قريش واليهود والغطفان المدينة في شوال سنة ٥هـ فحفر المسلمون الخندق، فأرسل الله ريحًا وجنودًا لم يروها: ﴿فَرَدَّ اللَّهُ أَحْزَابَهُمْ بِرِيحٍ وَجُنُودٍ لَّمْ يَرْوَا الْمُؤْمِنُونَ﴾ (الأحزاب: ٩).'},
+ {m:10,d:0,y:8,t:'غزوة حنين',x:'بعد فتح مكة بأيام قابل المسلمون هُوازنَ وثقيفًا في شوال سنة ٨هـ، فراوحهم فريقُهم أول المعركة ثم ثباتوا فكسبوا الظفرَ وغنيمةً عظيمة — درسٌ في ألا يحسب النصر نفسَه بل العدّة والثبات.'},
+ {m:12,d:9,y:null,t:'يوم عرفة',x:'«الحجُّ عَرَفة» (رواه أحمد)، ومن صام يوم عرفة كفَّرَ الله سنتين (متفق عليه)، وقال ﷺ: «أفضلُ الدعاء دعاءُ يوم عرفة» (رواه الترمذي — حسن صحيح)، وما من يومٍ أكثر من أن يعتق الله فيه عبدا من النار من يوم عرفة (رواه مسلم).'},
+ {m:12,d:10,y:null,t:'عيد الأضحى — يوم النحر',x:'«إنَّ أعظمَ الأيام عند اللهِ يومُ النَّحْر» (رواه ابن ماجه — صحيح): إحياءً لسنة إبراهيم الخليل عليه السلام، وفيه سنة الأضحية والتهليل من فجر عرفة إلى عصر آخر أيام التشريق.'},
+ {m:12,d:0,y:10,t:'حجة الوداع',x:'حجّ ﷺ في ذي الحجة سنة ١٠هـ مع مائة ألفٍ من الصحابة، وخطب فيهم الخطبة الكبيرة: «أيها الناس، إن دماءكم وأموالكم وأعراضكم عليكم حرام… وقد تركتُ فيكم ما إن اعتصمتم به لن تضلوا: كتابَ الله».'},
+ {m:12,d:18,y:35,t:'استشهاد عثمان بن عفان رضي الله عنه',x:'قتل المتمردون عثمان ذا النورين رضي الله عنه وهو صائمٌ يقرأ المصحف في داره يوم الجمعة في ١٨ ذي الحجة سنة ٣٥هـ على المشهور، وقد أخبر النبي ﷺ عنه إذ هو: «أُصيبا أن يُقتل مظلوماً» (البخاري) — وكان من أعظم فتن التاريخ.'}
+];
+function tabularHijri(d){
+  const gd=d.getDate(), gm=d.getMonth()+1, gy=d.getFullYear();
+  let jdn=Math.floor((1461*(gy+4800+Math.floor((gm-14)/12)))/4)+Math.floor((367*(gm-2-12*Math.floor((gm-14)/12)))/12)-Math.floor((3*Math.floor((gy+4900+Math.floor((gm-14)/12))/100))/4)+gd-32075;
+  let l=jdn-1948440+10632, n=Math.floor((l-1)/10631);
+  l=l-10631*n+354;
+  let j=(Math.floor((10985-l)/5316))*(Math.floor((50*l)/17719))+(Math.floor(l/5670))*(Math.floor((43*l)/15238));
+  l=l-(Math.floor((30-j)/15))*(Math.floor((17719*j)/50))-(Math.floor(j/16))*(Math.floor((15238*j)/43))+29;
+  const hd=Math.floor((24*l)/709), hm=Math.floor(l-(30*hd)/709), hy=30*n+j-30;
+  return{d:hd,m:hm,y:hy};
+}
+function hijriParts(d){
+  try{
+    const f=new Intl.DateTimeFormat('ar-SA-u-ca-islamic-umalqura-nu-latn',{day:'numeric',month:'numeric',year:'numeric'});
+    const p={}; f.formatToParts(d).forEach(x=>{ p[x.type]=x.value; });
+    const dd=parseInt(p.day,10), mm=parseInt(p.month,10), yy=parseInt(p.year,10);
+    if(dd&&mm&&yy&&mm>=1&&mm<=12&&yy>1300)return{d:dd,m:mm,y:yy};
+  }catch(e){}
+  return tabularHijri(d);
+}
+function dateStrOf(d){ return d.getFullYear()+'-'+String(d.getMonth()+1).padStart(2,'0')+'-'+String(d.getDate()).padStart(2,'0'); }
+function hijriNice(d){ const h=hijriParts(d); return AR(h.d)+' '+HIJRI_MN[h.m-1]+' '+AR(h.y)+' هـ'; }
+function gregNice(d){ return AR(d.getDate())+' '+GREG_MN[d.getMonth()]+' '+AR(d.getFullYear())+' م'; }
+function eventsOf(m,dd){ return ISLAMIC_EVENTS.filter(e=>e.m===m&&(e.d===dd||e.d===0)); }
+function evYear(e){ return e.y?('سنة '+AR(e.y)+'هـ'):''; }
+function evRow(e,withDay){
+  const day=withDay&&e.d?AR(e.d)+' '+HIJRI_MN[e.m-1]+' — ':'';
+  return '<div class="calev"><svg class="evstar" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3.2l1.8 5 5 1.8-5 1.8-1.8 5-1.8-5-5-1.8 5-1.8z" fill="currentColor"/></svg>'
+  +'<div class="evbody"><div class="evt">'+esc(e.t)+'</div><div class="evx">'+esc(e.x)+'</div>'
+  +'<div class="evs">'+day+evYear(e)+'</div></div></div>';
+}
+let calHOff=0;
+function hijriMonthStart(yh,mh){
+  const now=new Date(); let d=new Date(now.getFullYear(),now.getMonth(),now.getDate());
+  const th=hijriParts(d);
+  const step=(yh*12+mh)-(th.y*12+th.m);
+  d.setDate(d.getDate()+Math.round(step*29.53));
+  let back=0;
+  while(back<80){ const h=hijriParts(d); if(h.m===mh&&h.y===yh&&h.d===1)break; d.setDate(d.getDate()-1); back++; }
+  return back<80?d:null;
+}
+function renderCal2(){
+  const grid=$('#calGrid2'), head=$('#calHead2'); if(!grid)return;
+  const now=new Date(), th=hijriParts(now);
+  let yh=th.y, mh=th.m-calHOff;
+  while(mh<=0){ mh+=12; yh--; }
+  while(mh>12){ mh-=12; yh++; }
+  const start=hijriMonthStart(yh,mh);
+  const pv=$('#calPrev2'), nx=$('#calNext2');
+  if(nx)nx.disabled=calHOff<=0;
+  if(pv)pv.disabled=false;
+  /* التاريخان الجميلان: هجري وميلادي */
+  $('#calHj').textContent=hijriNice(now);
+  $('#calGr').textContent=gregNice(now);
+  /* أحداث اليوم */
+  const tEv=$('#calTodayEvents');
+  if(calHOff===0){
+    const evs=eventsOf(th.m,th.d);
+    tEv.innerHTML=evs.length?evs.map(e=>evRow(e,true)).join(''):
+      '<p class="dim center" style="padding:6px">لا أحداثٍ موثقة في مثل يومنا هذا — وأحسنُ الأيام ما زادك طاعةً لربك.</p>';
+  } else tEv.innerHTML='';
+  if(!start){ grid.innerHTML='<p class="dim center">تعذر بناء الشهر الهجري — جرّب مجددًا.</p>'; return; }
+  let d=new Date(start), n=0, gEnd=new Date(start);
+  const byDay={}; sky.forEach(s=>{ (byDay[s.d]=byDay[s.d]||[]).push(s); });
   const WDS=['أحد','اثنين','ثلاثاء','أربعاء','خميس','جمعة','سبت'];
+  const tstr=todayStr();
   let h=WDS.map(w=>'<span class="wd">'+w+'</span>').join('');
-  for(let i=0;i<first;i++)h+='<span class="calcell empty"></span>';
-  for(let d=1;d<=days;d++){
-    const ds=y+'-'+String(mo+1).padStart(2,'0')+'-'+String(d).padStart(2,'0');
-    const items=byDay[ds]||[];
+  for(let i=0;i<start.getDay();i++)h+='<span class="calcell empty"></span>';
+  while(true){
+    const hp=hijriParts(d);
+    if(hp.m!==mh||hp.y!==yh)break;
+    const ds=dateStrOf(d), items=byDay[ds]||[];
     const cats=[]; items.forEach(s=>{ if(cats.indexOf(s.k)<0)cats.push(s.k); });
-    let dots=cats.slice(0,4).map(k=>'<i style="background:'+starMeta(k).c+'"></i>').join('');
-    h+='<button type="button" class="calcell'+(ds===tstr?' today':'')+'" data-d="'+ds+'"><b>'+AR(d)+'</b><span class="dots">'+dots+'</span></button>';
+    const dots=cats.slice(0,4).map(k=>'<i style="background:'+starMeta(k).c+'"></i>').join('');
+    const evd=eventsOf(hp.m,hp.d).filter(e=>e.d>0).length;
+    h+='<button type="button" class="calcell'+(ds===tstr?' today':'')+'" data-d="'+ds+'" data-hd="'+AR(hp.d)+'" data-hm="'+hp.m+'">'
+      +(evd?'<i class="evmark" style="background:var(--gold)"></i>':'')
+      +'<b>'+AR(hp.d)+'</b><span class="gd">'+AR(d.getDate())+'/'+AR(d.getMonth()+1)+'</span><span class="dots">'+dots+'</span></button>';
+    gEnd=new Date(d);
+    d.setDate(d.getDate()+1); n++;
+    if(n>40)break;
   }
   grid.innerHTML=h;
-  $$('#calGrid .calcell[data-d]').forEach(c=>{
-    c.addEventListener('click',()=>showCalDay(c.dataset.d,byDay[c.dataset.d]||[]));
+  /* رأس التقويم: اسم الشهر الهجري ونطاقه الميلادي */
+  const gY=start.getFullYear(), gM=start.getMonth();
+  const eY=gEnd.getFullYear(), eM=gEnd.getMonth();
+  const gSpan=(gY===eY&&gM===eM)?(GREG_MN[gM]+' '+AR(gY)+'م'):(GREG_MN[gM]+' '+AR(gY)+'م – '+GREG_MN[eM]+' '+AR(eY)+'م');
+  head.textContent=HIJRI_MN[mh-1]+' '+AR(yh)+'هـ ('+gSpan+')';
+  /* أحداث الشهر المعروض */
+  const mev=$('#calMonthEvents');
+  const monthEvs=ISLAMIC_EVENTS.filter(e=>e.m===mh).sort((a,b)=>(a.d||99)-(b.d||99));
+  if(monthEvs.length){
+    mev.innerHTML='<div class="mh">أحداث '+HIJRI_MN[mh-1]+' عبر التاريخ</div>'
+    +monthEvs.map(e=>'<div class="mev"><b>'+(e.d?AR(e.d):'الشهر')+(e.y?' · '+AR(e.y)+'هـ':'')+'</b><span>'+esc(e.t)+'</span></div>').join('');
+  } else mev.innerHTML='';
+  /* ضغط يوم: تفاصيل أعماله وأحداثه */
+  $$('#calGrid2 .calcell[data-d]').forEach(c=>{
+    c.addEventListener('click',()=>showCalDay(c.dataset.d,byDay[c.dataset.d]||[],+c.dataset.hd,+c.dataset.hm));
   });
 }
-function showCalDay(ds,items){
-  const box=$('#calDayList'); if(!box)return;
-  if(!items.length){ box.innerHTML='<p class="dim center" style="padding:8px">لا نجوم في هذا اليوم — وكل يوم بداية جديدة.</p>'; return; }
-  const dparts=ds.split('-');
-  const MN2=['يناير','فبراير','مارس','أبريل','مايو','يونيو','يوليو','أغسطس','سبتمبر','أكتوبر','نوفمبر','ديسمبر'];
-  const dNice=AR(parseInt(dparts[2],10))+' '+MN2[parseInt(dparts[1],10)-1]+' '+dparts[0];
-  let h='<p class="hint center" style="margin:2px 0 6px">سماء يوم '+dNice+' — '+AR(items.length)+' نجمة</p>';
+function showCalDay(ds,items,hd,hm){
+  const box=$('#calDayList2'); if(!box)return;
+  const parts=ds.split('-');
+  const dNice=AR(parseInt(parts[2],10))+' '+GREG_MN[parseInt(parts[1],10)-1]+' '+AR(parseInt(parts[0],10));
+  let h='';
+  const evs=(hd&&hm)?eventsOf(hm,hd).filter(e=>e.d>0||hm!==undefined):[];
+  const evl=evs.filter(e=>e.d>0);
+  if(evl.length)h+=evl.map(e=>evRow(e,true)).join('');
+  if(!items.length&&!evl.length){ box.innerHTML='<p class="dim center" style="padding:8px">يوم '+dNice+' — لا نجومٍ فيه بعد، وكل يومٍ بداية جديدة.</p>'; return; }
+  if(items.length)h+='<p class="hint center" style="margin:2px 0 6px">سماء يوم '+dNice+' — '+AR(items.length)+' نجمة</p>';
   items.slice().reverse().slice(0,14).forEach(s=>{
     const m=starMeta(s.k);
     h+='<div class="srow2"><span class="cdt" style="background:'+m.c+'"></span><span>'+esc(s.l)+'</span><span class="dt">'+s.d+'</span></div>';
@@ -2659,27 +2901,26 @@ const TOOLBUILD={
    $('#chStart').addEventListener('click',chStart);
    $('#chOther').addEventListener('click',()=>{ chIdx=Math.floor(Math.random()*CHALLENGES.length); openTool('challenge'); });
  }},
- /* ٣. سماء الخير */
+ /* ٣. سماء الخير — للعرض والتقرير فقط (v2.2.0) */
  sky:{h(){
    return '<div class="ttitle">سماء الخير</div>'
-   +'<p class="hint center">كل عمل صالح توثّقه يضيء نجمةً صغيرة بلون عمله — وكلما أطعت زاد نورها</p>'
+   +'<p class="hint center">لوحة عرضٍ وإحصاء: كل عملٍ صالح تُوثّقه من العزيمة والمهمات والتحديات يضيء هنا نجمةً صغيرة بلون عمله</p>'
    +'<div class="skywrap"><svg class="moon" viewBox="0 0 24 24" aria-hidden="true"><path d="M19.6 14.6A8.2 8.2 0 0 1 9.4 4.4a8.2 8.2 0 1 0 10.2 10.2z" fill="currentColor"/></svg><svg id="skySvg" viewBox="0 0 320 182" preserveAspectRatio="xMidYMid meet"></svg></div>'
    +'<div class="skylegend">'+STARS_T.map(m=>'<span class="lg"><i style="background:'+m.c+'"></i>'+m.t+'</span>').join('')+'</div>'
    +'<p class="center" style="margin-top:9px;font-size:.86rem">نورك حتى الآن: <b style="color:var(--gold2)" id="skyCnt">٠</b> نجمة</p>'
    +'<div class="skyquote">املأ حياتك بأعمال الخير ولا تفتخر بها؛ فهذا فضل الله عليك، وتذكر أنك تعيش برحمة الله. وكلما أضاءت سماؤك زاد إحسانك — فاجتهد ولا تعجز.</div>'
-   +'<div class="duobtns"><button type="button" id="goTasks" class="btn gold">مهماتي اليومية</button><button type="button" id="goCal" class="btn">تقويم الخير</button></div>'
-   +'<div class="tblock"><p class="tq" style="font-size:.8rem;color:var(--muted)">أو أضف نجمة الآن بضغطة:</p><div class="chipsrow" id="starAdd" style="margin-top:8px"></div></div>'
-   +'<p class="hint center" style="margin-top:10px">تُضاء نجومٌ تلقائيًا عند إتمام جولة التسبيح، وتحدي الدقيقة، والمحاسبة الطيبة، وإنجاز المهمات.</p>';
+   +'<div class="tblock"><div class="tq" style="font-weight:800;margin-bottom:6px;color:var(--gold2)">تقرير سمائك</div>'
+   +'<div class="skyseg" id="skySeg"><button type="button" data-p="day" class="on">اليوم</button><button type="button" data-p="week">أسبوع</button><button type="button" data-p="month">شهر</button><button type="button" data-p="all">من البداية</button></div>'
+   +'<div class="statgrid" id="skyStats"></div>'
+   +'<div class="catbars" id="skyBars"></div></div>'
+   +'<p class="hint center" style="margin-top:12px">تُضاء نجومك تلقائيًا من: إنجاز المهمات في «عزيمة اليوم»، وجولة التسبيح، وتحدي الدقيقة، والمحاسبة الطيبة، و«فعلت» في بنك الخيرات — وكل تفصيل يومي تجده في «التقويم والتاريخ» بالصفحة الرئيسية.</p>';
  },b(){
    renderSky();
-   const c=$('#starAdd');
-   STARS_T.forEach(m=>{
-     const b=document.createElement('button'); b.type='button'; b.className='chip'; b.innerHTML='<i class="cdt" style="background:'+m.c+'"></i>'+m.t;
-     b.addEventListener('click',()=>{ addStar(m.k,m.t+' — عمل صالح'); tapS(); vib(20); toast('أضاءت نجمة في سمائك'); });
-     c.appendChild(b);
-   });
-   $('#goTasks').addEventListener('click',()=>openTool('tasks'));
-   $('#goCal').addEventListener('click',()=>openTool('cal'));
+   buildSkyStats('day');
+   $$('#skySeg button').forEach(b=>b.addEventListener('click',()=>{
+     $$('#skySeg button').forEach(x=>x.classList.remove('on')); b.classList.add('on');
+     buildSkyStats(b.dataset.p);
+   }));
  }},
 
  anger:{h(){
@@ -2933,7 +3174,7 @@ const TOOLBUILD={
    +'<div class="addrow"><select id="taskK" class="inp">'+STARS_T.map(m=>'<option value="'+m.k+'">'+m.t+'</option>').join('')+'</select><input id="taskT" class="inp" maxlength="90" placeholder="اسم المهمة: مثل ورد قرآن الصباح"/><button type="button" id="taskAdd" class="btn gold">أضف</button></div>'
    +'<div id="taskList" style="margin-top:4px"></div>'
    +'<div class="note center" id="taskSum" hidden></div>'
-   +'<p class="hint center" style="margin-top:8px">ما أنجزته في أمسِ ظاهر في «تقويم الخير» — والمهمات تظل محفوظة يومًا بعد يوم.</p>';
+   +'<p class="hint center" style="margin-top:8px">كل إنجاز يضيء نجمةً في سمائك، وكل يومٍ بأعماله ظاهرٌ في «التقويم والتاريخ» بالصفحة الرئيسية.</p>';
  },b(){
    const L=$('#taskList');
    const render=()=>{
@@ -2958,60 +3199,79 @@ const TOOLBUILD={
      const t=$('#taskT').value.trim();
      if(!t){ toast('اكتب اسم المهمة أولًا'); return; }
      if(tasks.length>=20){ toast('الحد الأقصى ٢٠ مهمة — احذف ما انتهيت منه'); return; }
-     tasks.push({id:Date.now(),k:$('#taskK').value,t:t}); saveTasks(); $('#taskT').value=''; render(); toast('أُضيفت المهمة — عند إنجازها اضغط المربع');
+     tasks.push({id:Date.now(),k:$('#taskK').value,t:t}); saveTasks(); $('#taskT').value='';
+     render(); renderAzTasks(); renderHomeIntent(); toast('أُضيفت المهمة — عند إنجازها اضغط المربع');
    });
    render();
- }},
- /* ١٦. تقويم الخير */
- cal:{h(){
-   return '<div class="ttitle">تقويم الخير</div>'
-   +'<p class="hint center">تنظيم شهري لسمائك: كل يومٍ تُضاء فيه نجوم تظهر نقاطه الملونة — اضغط اليوم لعرض ما وثّقته فيه</p>'
-   +'<div class="calhead"><button type="button" id="calPrev" class="btn">الشهر السابق</button><b id="calHead"></b><button type="button" id="calNext" class="btn">الشهر التالي</button></div>'
-   +'<div class="calgrid" id="calGrid"></div>'
-   +'<div class="caldaylist" id="calDayList"></div>';
- },b(){
-   buildCal();
-   $('#calPrev').addEventListener('click',()=>{ calOff++; buildCal(); });
-   $('#calNext').addEventListener('click',()=>{ if(calOff>0){ calOff--; buildCal(); } });
  }}
 };
 
-/* --- شاشة نور اليوم --- */
+/* --- شاشة نور اليوم: بطاقة عزيمة اليوم (v2.2.0) --- */
 function renderDay(){
-  const it=intentOfToday();
-  const chips=$('#intentChips'), done=$('#intentDone'), addRow=$('#intentAddRow');
-  if(it){
-    chips.hidden=true; done.hidden=false; if(addRow)addRow.hidden=true;
-    $('#intentQ').textContent='نيتك ثابتة، والباقي توفيق:';
-    $('#intentTxt').textContent=it.t+(it.custom?'':' — '+it.n);
-    if(it.custom)$('#intentProof').textContent=it.motiv+' — نيةٌ خاصة كلمتَها بكلماتك، وصدقُها مع الله كافٍ.';
-    else $('#intentProof').textContent=it.p+' — '+it.s;
-  }else{
-    chips.hidden=false; done.hidden=true;
-    $('#intentQ').textContent='ما نيّتك اليوم؟';
-    chips.innerHTML='';
-    INTENTS.forEach((x,i)=>{
-      const b=document.createElement('button'); b.type='button'; b.className='chip'; b.textContent=x.t;
-      b.addEventListener('click',()=>{ intent={d:todayStr(),id:i}; if(!store.set('intent',intent))warnStorage(); renderDay(); renderHomeIntent(); toast('ثبّتك الله قلبك: '+x.t); });
-      chips.appendChild(b);
+  const a=azimaToday();
+  const chips=$('#azimaChips'), list=$('#azimaList'), addRow=$('#azimaAddRow');
+  /* شرائح النوايا: تُضغط للاختيار وتُضغط مجددًا للإزالة */
+  chips.innerHTML='';
+  AZIMA_T.forEach((x,i)=>{
+    const sel=a&&(a.ids||[]).indexOf(i)>=0;
+    const b=document.createElement('button'); b.type='button'; b.className='chip'+(sel?' on':''); b.textContent=x.t;
+    b.addEventListener('click',()=>{
+      azima=azimaToday()||{d:todayStr(),ids:[],customs:[]};
+      if(!azima.ids)azima.ids=[]; if(!azima.customs)azima.customs=[];
+      const ix=azima.ids.indexOf(i);
+      if(ix<0){ azima.ids.push(i); toast('ثبّتك الله قلبك: '+x.t); }
+      else azima.ids.splice(ix,1);
+      if(!azima.ids.length&&!azima.customs.length)azima=null;
+      azimaSave(); renderDay(); renderHomeIntent();
     });
+    chips.appendChild(b);
+  });
+  /* قائمة العزائم المختارة مع التحفيزية والمعزز */
+  if(a&&azimaCount()){
+    list.hidden=false; if(addRow)addRow.hidden=true;
+    let h='';
+    (a.ids||[]).forEach(i=>{
+      const x=AZIMA_T[i]; if(!x)return;
+      h+='<div class="azitem"><div class="azn">ثبّتَ اللهُ قلبك: '+esc(x.t)+'</div>'
+      +'<div class="azmotiv">'+motivFor(x.t)+'</div>'
+      +'<div class="azproof">'+esc(x.p)+' — '+esc(x.s)+'</div></div>';
+    });
+    (a.customs||[]).forEach(c=>{
+      h+='<div class="azitem"><div class="azn">ثبّتَ اللهُ قلبك على: '+esc(c)+'</div>'
+      +'<div class="azmotiv">'+motivFor(c)+'</div>'
+      +'<div class="azproof">نيتٌ كلمتَها بكلماتك، وصدقُها مع الله كافٍ ولو لم يُذكر لها معزز.</div></div>';
+    });
+    list.innerHTML=h;
+    $('#azimaQ').textContent='عزائمك ثابتة اليوم — والباقي توفيق، وعدّل ما شئت';
+  }else{
+    list.hidden=true;
+    $('#azimaQ').textContent='ما عزائمك اليوم؟ اختر ما تشاء من النوايا';
   }
+  renderAzTasks();
 }
 function bindDay(){
   $$('.tool').forEach(b=>b.addEventListener('click',()=>{ tapS(); openTool(b.dataset.tool); }));
   $('#toolClose').addEventListener('click',closeTool);
   $('#toolVeil').addEventListener('pointerdown',e=>{ if(e.target.id==='toolVeil')closeTool(); });
   document.addEventListener('keydown',e=>{ if(e.key==='Escape')closeTool(); });
-  $('#intentChange').addEventListener('click',()=>{ intent=null; store.del('intent'); renderDay(); renderHomeIntent(); });
-  const icBtn=$('#intentCustom'), iRow=$('#intentAddRow');
-  if(icBtn)icBtn.addEventListener('click',()=>{ iRow.hidden=!iRow.hidden; if(!iRow.hidden)$('#intentNew').focus(); });
-  if($('#intentAddBtn'))$('#intentAddBtn').addEventListener('click',()=>{
-    const inp=$('#intentNew'), v=inp.value.trim();
+  /* عزيمة اليوم: نيتي بكلماتي */
+  const cBtn=$('#azimaCustom'), aRow=$('#azimaAddRow');
+  cBtn.addEventListener('click',()=>{ aRow.hidden=!aRow.hidden; if(!aRow.hidden)$('#azimaNew').focus(); });
+  $('#azimaAddBtn').addEventListener('click',()=>{
+    const inp=$('#azimaNew'), v=inp.value.trim();
     if(!v){ toast('اكتب نيتك أولًا ولو بكلمات قليلة'); return; }
-    intent={d:todayStr(),custom:v}; if(!store.set('intent',intent))warnStorage();
-    inp.value=''; if(iRow)iRow.hidden=true;
+    azima=azimaToday()||{d:todayStr(),ids:[],customs:[]};
+    if(!azima.customs)azima.customs=[];
+    azima.customs.push(v); azimaSave();
+    inp.value=''; aRow.hidden=true;
     renderDay(); renderHomeIntent(); toast('ثبّتك الله قلبك — انطلق بنيّتك');
   });
+  /* مهمات اليوم داخل العزيمة */
+  $('#azOpenTasks').addEventListener('click',()=>{ tapS(); openTool('tasks'); });
+  /* التقويم والتاريخ بالرئيسية */
+  const pv=$('#calPrev2'), nx=$('#calNext2');
+  if(pv)pv.addEventListener('click',()=>{ calHOff++; renderCal2(); });
+  if(nx)nx.addEventListener('click',()=>{ if(calHOff>0){ calHOff--; renderCal2(); } });
 }
 
 /* ============ التشغيل ============ */
@@ -3022,7 +3282,9 @@ function init(){
   renderName(false);
   renderChips(); renderTargets(); renderTasbih(false); renderTasbihStats(); renderCustomList(); renderTasbihMode();
   renderHomeStats(); renderDates(); renderHomeIntent();
+  renderDay();
   bindDay();
+  renderCal2();
   $('#badgeNames').textContent=AR(NAMES.length);
   $('#spdTxt').textContent=AR(S.speed);
   bindNav(); bindClock(); bindTasbih(); bindSettings();
