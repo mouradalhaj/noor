@@ -68,6 +68,17 @@
   --line:#d3d8df; --ink:#1c2127; --muted:#5f6b78;
   --gold:#7d6733; --gold2:#645322; --emerald:#3e5c4d; --teal:#4d7262; --danger:#9c4a3a;
 }
+/* لوحة «ليل عميق» (v3.0.0): أسود كامل لشاشات AMOLED — وهجٌ ذهبي صافٍ وبطارية أوفر */
+:root[data-pal="black"]{
+  --bg:#000000; --bg2:#040705; --card:#090c0a; --card2:#0d100e;
+  --line:#24352c; --ink:#f2ecdb; --muted:#8fa99a;
+  --gold:#e8c476; --gold2:#f7e3a8; --emerald:#1e7a5a; --teal:#37b78b; --danger:#e0836b;
+}
+:root[data-theme="light"][data-pal="black"]{
+  --bg:#f4f2ec; --bg2:#ece9df; --card:#fdfcf8; --card2:#f5f3ea;
+  --line:#ddd8c8; --ink:#1c231e; --muted:#63776b;
+  --gold:#8f6d1d; --gold2:#735815; --emerald:#177356; --teal:#1e8a68; --danger:#b8543c;
+}
 html[data-bgpat="arabesque"] body::before{
   background:
     radial-gradient(900px 480px at 50% -8%, rgba(217,182,97,.10), transparent 60%),
@@ -103,11 +114,25 @@ body{
 }
 body::before{
   content:''; position:fixed; inset:0; pointer-events:none; z-index:0;
+  transition:opacity 1.4s ease;
   background:
     radial-gradient(900px 480px at 50% -8%, rgba(47,174,134,.13), transparent 60%),
     radial-gradient(640px 420px at 100% 100%, rgba(217,182,97,.08), transparent 55%),
     url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='56' height='56' viewBox='0 0 56 56'%3E%3Cpath d='M28 10l6.5 12-6.5 12-6.5-12z' fill='none' stroke='%23d9b661' stroke-opacity='.06'/%3E%3C/svg%3E");
 }
+/* سماء اليوم (v3.0.0): تدرّج جمالي يتبع أوقات النهار من الفجر إلى الليل — تقريب جمالي لا يُعتمد عليه في المواقيت */
+body::after{
+  content:''; position:fixed; inset:0; pointer-events:none; z-index:0;
+  opacity:0; transition:opacity 1.6s ease, background 1.6s ease;
+}
+html[data-sky="fajr"] body::after{opacity:1;background:linear-gradient(180deg,rgba(105,132,184,.16),rgba(105,132,184,.03) 52%,transparent 78%)}
+html[data-sky="duha"] body::after{opacity:1;background:linear-gradient(180deg,rgba(217,182,97,.11),transparent 55%)}
+html[data-sky="duhr"] body::after{opacity:1;background:linear-gradient(180deg,rgba(240,234,205,.09),transparent 50%)}
+html[data-sky="asr"] body::after{opacity:1;background:linear-gradient(180deg,rgba(226,150,88,.11),transparent 55%)}
+html[data-sky="maghrib"] body::after{opacity:1;background:linear-gradient(180deg,rgba(202,108,78,.17),rgba(217,182,97,.07) 45%,transparent 72%)}
+html[data-sky="isha"] body::after{opacity:1;background:linear-gradient(180deg,rgba(66,96,158,.13),transparent 60%)}
+html[data-sky="night"] body::after{opacity:1;background:linear-gradient(180deg,rgba(18,32,58,.22),transparent 65%)}
+html[data-sky="night"] body::before{opacity:.72}
 /* إزاحة المحتوى تحت شريط حالة الآيفون (البطارية والشبكة) كي لا يتداخل معه أي عنصر */
 #app{max-width:520px;margin:0 auto;padding:calc(14px + env(safe-area-inset-top,0px)) 16px calc(108px + env(safe-area-inset-bottom,0px));position:relative;z-index:1}
 button{font-family:inherit;color:inherit}
@@ -115,8 +140,8 @@ button{font-family:inherit;color:inherit}
 
 /* ====== شاشات ====== */
 .screen{display:none}
-.screen.active{display:block;animation:fadeUp .4s ease}
-@keyframes fadeUp{from{opacity:0;transform:translateY(14px)}to{opacity:1;transform:none}}
+.screen.active{display:block;animation:screenIn .38s cubic-bezier(.2,.8,.3,1)}
+@keyframes screenIn{from{opacity:0;transform:translateY(11px) scale(.996)}to{opacity:1;transform:none}}
 @keyframes pop{from{transform:scale(.25);opacity:0}}
 
 /* ====== عناصر عامة ====== */
@@ -188,6 +213,13 @@ button{font-family:inherit;color:inherit}
 @keyframes ringBeat{0%{transform:translate(-50%,-50%) scale(.6);opacity:.6}55%{opacity:.12}100%{transform:translate(-50%,-50%) scale(1.5);opacity:0}}
 .clock-center::after{content:'';position:absolute;left:50%;top:50%;width:37%;aspect-ratio:1;border-radius:50%;border:1.2px solid var(--gold);opacity:0;pointer-events:none;z-index:-1;transform:translate(-50%,-50%);animation:ringBeat 3s ease-out infinite}
 .clockwrap.beat .clock-center::after{animation:ringBeat .72s ease-out 1}
+/* نبضة النور (v3.0.0): هالة ذهبية حول إطار الساعة وتوهّج تحت الاسم الحاضر عند كل انتقال */
+#haloC{opacity:0;pointer-events:none}
+.clockwrap.beat #haloC{animation:haloBeat .85s ease-out 1}
+@keyframes haloBeat{0%{opacity:.5;stroke-width:2.4}100%{opacity:0;stroke-width:10}}
+#nameHalo{pointer-events:none}
+.clockwrap.beat #nameHalo{animation:haloFade .85s ease-out 1}
+@keyframes haloFade{0%{opacity:.55}100%{opacity:0}}
 @keyframes nnamePop{from{transform:scale(.86);opacity:.35}}
 .clockwrap.beat .nname{animation:nnamePop .55s cubic-bezier(.2,.9,.3,1.2)}
 html[data-namefont="kufi"] .nname{font-family:'Reem Kufi','Amiri',serif}
@@ -259,6 +291,9 @@ html[data-namefont="ruqaa"] .nc-name{font-family:'Aref Ruqaa','Amiri',serif}
 .beads-center::after{content:'';position:absolute;left:50%;top:50%;width:44%;aspect-ratio:1;border-radius:50%;border:1.2px solid var(--gold);opacity:0;pointer-events:none;z-index:-1;transform:translate(-50%,-50%);animation:ringBeat 2.7s ease-out infinite}
 @keyframes cntPop{from{transform:scale(1.16)}}
 #cnt.pop{animation:cntPop .32s cubic-bezier(.2,.9,.3,1.4)}
+/* عدّاد متدحرج (v3.0.0): الرقم ينزلق من الأسفل عند كل تسبيحة */
+@keyframes cntRoll{from{transform:translateY(46%);opacity:0}}
+#cnt.roll{animation:cntRoll .3s cubic-bezier(.2,.9,.3,1.25)}
 .b-dh{font-size:.92rem;color:var(--gold2);font-weight:700;max-width:60%;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
 #cnt{font-family:var(--f-read);font-size:clamp(2.2rem,10vw,3rem);font-weight:700;line-height:1.15}
 .b-tgt{font-size:.78rem;color:var(--muted)}
@@ -314,6 +349,8 @@ details.doc[open] summary::after{content:'−'}
 details.doc .body{font-size:.8rem;color:var(--muted);line-height:1.95;padding-top:8px}
 details.doc .body ol{padding-right:18px;display:grid;gap:6px;margin-top:4px}
 details.doc .body b{color:var(--gold2)}
+/* أداء الرسم (v3.0.0): الأقسام الطويلة لا تُرسم حتى تقترب من مجال النظر */
+.set,.toolgrid,.intentcard,.quote{content-visibility:auto;contain-intrinsic-size:auto 300px}
 
 @media (max-width:370px){
   #app{padding-left:11px;padding-right:11px}
@@ -371,6 +408,9 @@ details.doc .body b{color:var(--gold2)}
 #skySvg{display:block;width:100%;height:auto}
 .sky-star{opacity:.9;animation:tw 2.6s ease-in-out infinite alternate;transform-box:fill-box;transform-origin:center}
 @keyframes tw{from{opacity:.22;transform:scale(.72)}to{opacity:1;transform:scale(1.12)}}
+/* نجمة مستجدّة (v3.0.0): تُولد وتنبض ثم تستقر بين نجومها */
+.sky-star.sky-new{animation:tw 2.6s ease-in-out infinite alternate,starPop 1s cubic-bezier(.2,1.3,.4,1) 1}
+@keyframes starPop{0%{opacity:0;transform:scale(.1)}55%{opacity:1;transform:scale(1.7)}100%{opacity:.9;transform:scale(1)}}
 .srow2{display:flex;align-items:center;gap:9px;padding:10px 12px;border:1px solid var(--line);border-radius:12px;background:var(--bg2);font-size:.8rem;line-height:1.8}
 .srow2 .dt{margin-inline-start:auto;font-size:.64rem;color:var(--muted);flex:none}
 .cdt{width:8px;height:8px;border-radius:50%;display:inline-block;flex:none}
@@ -495,6 +535,38 @@ details.doc .body b{color:var(--gold2)}
 .secretdone{text-align:center;padding:22px 12px}
 .secretdone .lock{display:grid;place-items:center}
 
+/* ====== إضافات v3.0.0 «بهاء النور» ====== */
+/* ورد اليوم في المسبحة */
+.wird{margin-top:14px;padding:13px 15px}
+.wirdhead{display:flex;justify-content:space-between;align-items:center;margin-bottom:8px}
+.wirdhead b{font-size:.92rem;color:var(--gold2)}
+.wirdhead span{font-size:.78rem;color:var(--muted);font-weight:700}
+.wirdbar{height:9px;border-radius:99px;background:var(--bg2);border:1px solid var(--line);overflow:hidden}
+#wirdFill{display:block;height:100%;width:0;border-radius:99px;background:linear-gradient(90deg,var(--emerald),var(--teal));transition:width .5s ease}
+.wird .chipsrow{margin-top:10px}
+.wird .hint{margin-top:8px;line-height:1.9}
+/* عدّاد كل ذكر داخل شريحة الاختيار */
+.chip .ccount{font-style:normal;font-size:.68rem;color:var(--gold2);opacity:.85;margin-inline-start:5px}
+.chip.on .ccount{color:#fff;opacity:.9}
+/* بحث الأسماء والمفضلة */
+.searchrow{display:flex;gap:8px;margin-top:10px}
+.searchrow .inp{flex:1;min-width:0;padding:10px 13px;font-size:.88rem}
+.searchrow .btn{padding:10px 14px;font-size:.82rem;white-space:nowrap}
+.nameResults{display:grid;gap:6px;margin-top:8px}
+.nres{display:flex;align-items:center;gap:10px;padding:9px 13px;border:1px solid var(--line);border-radius:12px;background:var(--bg2);cursor:pointer;text-align:right;font-size:.9rem;transition:transform .15s}
+.nres:active{transform:scale(.97)}
+.nres b{font-family:var(--f-disp);color:var(--gold2);font-weight:700}
+.nres span{color:var(--muted);font-size:.72rem;margin-inline-start:auto;direction:ltr}
+.nres .nfav{width:13px;height:13px;color:var(--gold);flex:none}
+.tagbu.ghost{background:none;border:1px solid var(--line);color:var(--muted);box-shadow:none}
+.tagbu.onfav{background:none;border-color:var(--gold);color:var(--gold2);box-shadow:none}
+.tagbu svg{width:13px;height:13px;vertical-align:-2px;margin-inline-end:3px}
+/* قوس العمر ومحاسبته الأسبوعية */
+.lifearc{margin:12px auto 0;max-width:250px;text-align:center}
+.lifearc svg{width:100%;height:auto;display:block}
+.acctchart{border:1px solid var(--line);border-radius:14px;background:var(--bg2);padding:8px 6px 4px;margin-top:6px}
+.acctchart svg{width:100%;height:auto;display:block}
+
 /* ====== شريط الذكر والتذكير (v2.5.1 — محرّك حركة جافاسكربتي يعمل على الآيفون) ======
    علاج تجمّد الشريط على iOS: حُذف قناع -webkit-mask الذي يُجمّد تحديث الطبقة في WebKit
    واستُبدل بتدرّجات طرفية بلا قناع، وأصبحت الحركة جافاسكربتية (requestAnimationFrame)
@@ -510,17 +582,19 @@ details.doc .body b{color:var(--gold2)}
 .tickitem{display:inline-flex;align-items:center;flex:none;font-size:.8rem;color:var(--muted);padding:0 6px}
 .tickitem b{color:var(--gold2);font-weight:700}
 .tickitem .tsep{display:inline-block;width:5px;height:5px;border-radius:50%;background:var(--gold);opacity:.55;margin:0 13px;flex:none}
+/* لمعان الشريط (v3.0.0): شعاع ذهبي يمسح النص بين الحين والآخر — محركه الحلقة الموحدة لا CSS */
+.tickshine{position:absolute;top:0;bottom:0;left:0;width:36px;z-index:1;pointer-events:none;opacity:0;background:linear-gradient(90deg,transparent,rgba(242,217,146,.16),transparent)}
 
 /* ====== الشريط السفلي ====== */
 #nav{position:fixed;bottom:0;left:0;right:0;z-index:60;display:flex;justify-content:center;padding:8px 14px calc(10px + env(safe-area-inset-bottom));background:linear-gradient(to top,var(--bg) 32%,transparent);pointer-events:none}
-#nav .bar{pointer-events:auto;display:flex;gap:2px;width:100%;max-width:430px;background:rgba(13,38,29,.88);background:color-mix(in srgb,var(--card) 88%,transparent);border:1px solid var(--line);border-radius:26px;padding:6px;backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px);box-shadow:0 14px 40px rgba(0,0,0,.35)}
+#nav .bar{pointer-events:auto;display:flex;gap:2px;width:100%;max-width:430px;background:rgba(13,38,29,.88);background:color-mix(in srgb,var(--card) 88%,transparent);border:1px solid var(--line);border-radius:26px;padding:6px;backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);box-shadow:0 14px 40px rgba(0,0,0,.35)}
 :root[data-theme="light"] #nav .bar{background:rgba(253,250,241,.9)}
 .nav-b{flex:1;display:flex;flex-direction:column;align-items:center;gap:3px;padding:9px 2px;border:none;background:none;color:var(--muted);border-radius:20px;font-size:.66rem;font-weight:700;cursor:pointer;transition:.25s}
 .nav-b svg{width:22px;height:22px}
 .nav-b.on{color:var(--gold2);background:rgba(217,182,97,.12)}
 
 /* ====== الاحتفال والتنبيه ====== */
-#celebrate{position:fixed;inset:0;background:rgba(4,12,9,.74);backdrop-filter:blur(6px);-webkit-backdrop-filter:blur(6px);display:none;align-items:center;justify-content:center;z-index:80;padding:24px}
+#celebrate{position:fixed;inset:0;background:rgba(4,12,9,.74);backdrop-filter:blur(4px);-webkit-backdrop-filter:blur(4px);display:none;align-items:center;justify-content:center;z-index:80;padding:24px}
 #celebrate.show{display:flex}
 .cele{position:relative;text-align:center;padding:28px 30px;border-radius:26px;max-width:340px;width:100%;background:linear-gradient(160deg,var(--card),var(--card2));border:1px solid var(--gold);animation:pop .45s cubic-bezier(.2,1.4,.4,1)}
 .ok{width:84px;height:84px;border-radius:50%;background:linear-gradient(135deg,var(--gold),#b98d2f);display:grid;place-items:center;margin:0 auto 14px;box-shadow:0 12px 30px rgba(217,182,97,.4)}
@@ -543,6 +617,7 @@ details.doc .body b{color:var(--gold2)}
 <radialGradient id="pearlg" cx="35%" cy="30%" r="95%"><stop offset="0" stop-color="#ffffff"/><stop offset=".5" stop-color="#e9eef4"/><stop offset=".82" stop-color="#c7d2de"/><stop offset="1" stop-color="#9fb0c2"/></radialGradient>
 <radialGradient id="onyxg" cx="35%" cy="30%" r="95%"><stop offset="0" stop-color="#5a6270"/><stop offset=".45" stop-color="#23282f"/><stop offset="1" stop-color="#07090c"/></radialGradient>
 <linearGradient id="silverg" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#f0f5f7"/><stop offset=".5" stop-color="#b9c9d1"/><stop offset="1" stop-color="#6e8794"/></linearGradient>
+<radialGradient id="goldRadial"><stop offset="0" stop-color="#f2d992" stop-opacity=".85"/><stop offset="1" stop-color="#f2d992" stop-opacity="0"/></radialGradient>
 </defs></svg>
 <div id="app">
 <!-- ====== الرئيسية ====== -->
@@ -556,7 +631,7 @@ details.doc .body b{color:var(--gold2)}
   <!-- شريط الذكر والتذكير (v2.5.0): فوق الأسماء والمسبحة — ذكرٌ وتذكيرٌ ومهماتك المسجلة تدور بلا توقف -->
   <div class="ticker" id="homeTicker" aria-label="شريط الذكر والتذكير">
     <span class="tickico" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M4 9.6v4.8h3.4l4.9 3.9V5.7L7.4 9.6z"/><path d="M15.4 9.3a3.9 3.9 0 0 1 0 5.4M17.9 6.9a7.2 7.2 0 0 1 0 10.2"/></svg></span>
-    <div class="tickwin"><div class="ticktrack" id="tickTrack"></div></div>
+    <div class="tickwin"><div class="ticktrack" id="tickTrack"></div><i class="tickshine" aria-hidden="true"></i></div>
   </div>
   <div class="grid2">
     <button type="button" class="feat" data-go="names">
@@ -659,15 +734,20 @@ details.doc .body b{color:var(--gold2)}
 <!-- ====== ساعة الأسماء الحسنى ====== -->
 <section id="screen-names" class="screen">
   <header class="sh"><h1>ساعة الأسماء الحسنى</h1><span class="badge" id="badgeNames">١٠٠</span></header>
+  <!-- بحث الأسماء والمفضلة (v3.0.0) -->
+  <div class="searchrow"><input id="nameSearch" class="inp" maxlength="40" placeholder="ابحث باسمٍ أو معناه… مثل الرحيم أو Mercy" aria-label="البحث في الأسماء الحسنى"/><button type="button" id="nameFavBtn" class="btn" aria-label="عرض المفضلة">مفضلتي</button></div>
+  <div id="nameResults" class="nameResults" hidden></div>
   <div class="clockwrap" id="clockwrap">
     <svg viewBox="0 0 320 320" aria-hidden="true">
       <circle id="rimC" cx="160" cy="160" r="156" fill="var(--card2)" stroke="var(--line)" stroke-width="1"/>
+      <circle id="haloC" cx="160" cy="160" r="156" fill="none" stroke="url(#ggrad)" stroke-width="2"/>
       <circle id="innerC" cx="160" cy="160" r="112" fill="var(--bg2)" stroke="var(--line)" stroke-width="1"/>
       <g id="ornG">
         <circle cx="160" cy="160" r="104" fill="none" stroke="var(--gold)" stroke-width=".7" stroke-dasharray="1 4.5" opacity=".55"/>
         <g id="ornD" fill="var(--gold2)" opacity=".8"></g>
       </g>
       <g id="dialnames"></g>
+      <ellipse id="nameHalo" cx="160" cy="30" rx="27" ry="11" fill="url(#goldRadial)" opacity="0"/>
       <circle id="prog" cx="160" cy="160" r="158" fill="none" stroke="url(#ggrad)" stroke-width="2.5" stroke-linecap="round" transform="rotate(-90 160 160)"/>
       <g id="secHand" class="sech"><line x1="160" y1="160" x2="160" y2="72"/><circle cx="160" cy="72" r="1.8"/></g>
       <g id="needle" class="needle">
@@ -684,7 +764,7 @@ details.doc .body b{color:var(--gold2)}
     </div>
   </div>
   <div class="namecard card" id="explock">
-    <div class="rowl"><span class="tag">الشرح</span><button type="button" id="btnCard" class="tagbu">بطاقة النور</button></div>
+    <div class="rowl"><span class="tag">الشرح</span><span style="display:flex;gap:6px"><button type="button" id="btnFav" class="tagbu ghost"><svg viewBox="0 0 24 24"><path d="M12 3.6l2.5 5.2 5.7.8-4.1 4 1 5.7-5.1-2.7-5.1 2.7 1-5.7-4.1-4 5.7-.8z" fill="currentColor"/></svg>مفضلة</button><button type="button" id="btnCard" class="tagbu">بطاقة النور</button></span></div>
     <b id="nc-en" class="nc-en"></b>
     <p id="n-desc" class="exp"></p>
   </div>
@@ -696,7 +776,7 @@ details.doc .body b{color:var(--gold2)}
     </button>
     <button type="button" id="btnNext" class="rbtn" aria-label="الاسم التالي"><svg viewBox="0 0 24 24"><path d="M15 6l-6 6 6 6" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
   </div>
-  <p class="hint center subhint">انقر <b>وسط الساعة</b> لبطاقة النور · أو <b>اسمًا على الدرج</b> لفتح بطاقته · يمين/يسار للتنقل · يدور تلقائيًا كل <b id="spdTxt">٦</b> ثوانٍ (المدة من الإعدادات)</p>
+  <p class="hint center subhint">ابحث عن اسمٍ من الحقل أعلاه أو افتح <b>مفضلتي</b> · انقر <b>وسط الساعة</b> لبطاقة النور · أو <b>اسمًا على الدرج</b> لفتح بطاقته · يمين/يسار للتنقل · يدور تلقائيًا كل <b id="spdTxt">٦</b> ثوانٍ (المدة من الإعدادات)</p>
 </section>
 <!-- ====== المسبحة ====== -->
 <section id="screen-tasbih" class="screen">
@@ -739,6 +819,14 @@ details.doc .body b{color:var(--gold2)}
     <span class="tstat">اليوم: <b id="dayC">٠</b></span>
     <span class="tstat">هذا الذكر: <b id="totC">٠</b></span>
   </div>
+  <!-- ورد اليوم (v3.0.0): هدف يومي بحلقة تقدّم -->
+  <div class="wird card" id="wirdCard">
+    <div class="wirdhead"><b>ورد اليوم</b><span id="wirdPct">٠٪</span></div>
+    <div class="wirdbar"><i id="wirdFill"></i></div>
+    <div class="chipsrow" id="wirdChips"></div>
+    <p class="hint" id="wirdHint">اختر هدفًا لوردك اليومي — وكل تسبيحة في يومك تدفعك نحوه</p>
+    <p class="hint" style="margin-top:4px;color:var(--gold)">في الحديث: «مَن قال سُبْحانَ اللهِ وبحَمْدِهِ في يومٍ مائةَ مَرَّةٍ حُطَّت خطاياه وإن كانت مِثلَ زَبَدِ البحر» — متفق عليه (البخاري ٦٤٠٥ ومسلم ٢٦٩١)</p>
+  </div>
   <details class="addcard card">
     <summary>إضافة ذكر مخصص</summary>
     <div class="addr"><input id="newDhikr" class="inp" maxlength="40" placeholder="اكتب الذكر هنا"/><button type="button" id="addBtn" class="btn gold">إضافة</button></div>
@@ -760,6 +848,7 @@ details.doc .body b{color:var(--gold2)}
   <div class="set card">
     <h3>ساعة الأسماء</h3>
     <div class="srow"><span class="lbl2">دوران تلقائي</span><button type="button" id="tgAuto" class="tgl" aria-label="الدوران التلقائي"></button></div>
+    <div class="srow"><span class="lbl2">استعراض هادئ للقراءة</span><button type="button" id="tgBrowse" class="tgl" aria-label="الاستعراض الهادئ"></button></div>
     <div class="srow"><span class="lbl2">مدة كل اسم (ث)</span><div class="rngwrap"><input id="rngSpeed" type="range" min="1" max="10" step="1" aria-label="مدة كل اسم بالثواني"/><b id="spdVal">٦</b></div></div>
     <div class="srow"><span class="lbl2">لغة درج الأسماء</span><div class="seg" id="segDialLang"><button type="button">عربي</button><button type="button">English</button></div></div>
     <div class="srow"><span class="lbl2">شكل الساعة</span><div class="seg" id="segClockStyle"><button type="button">كلاسيكي</button><button type="button">مزخرف</button><button type="button">بسيط</button></div></div>
@@ -768,11 +857,18 @@ details.doc .body b{color:var(--gold2)}
   </div>
   <div class="set card">
     <h3>المظهر</h3>
-    <div class="srow"><span class="lbl2">الوضع</span><div class="seg" id="segTheme"><button type="button">ليلي</button><button type="button">نهاري</button></div></div>
+    <div class="srow"><span class="lbl2">الوضع</span><div class="seg" id="segTheme"><button type="button">تلقائي</button><button type="button">ليلي</button><button type="button">نهاري</button></div></div>
     <div class="srow col"><span class="lbl2">الألوان</span><div class="swatches" id="palSw"></div></div>
     <div class="srow"><span class="lbl2">خلفية الصفحة</span><div class="seg" id="segBg"><button type="button">زخرفة</button><button type="button">أرابيسك</button><button type="button">نقاط</button><button type="button">سادة</button></div></div>
     <div class="srow"><span class="lbl2">حجم الخط</span><div class="seg" id="segFont"><button type="button">صغير</button><button type="button">متوسط</button><button type="button">كبير</button></div></div>
-    <p class="small">خمس لوحات ألوان: الزمردية الأصلية، النيلية الهادئة، الرملية الدافئة، الوردية الناعمة، والدُّرّية المحايدة — مع أربعة أنماط للخلفية؛ وكل ما تختاره يُحفظ تلقائيًا على جهازك.</p>
+    <p class="small">ستّ لوحات ألوان: الزمردية الأصلية، النيلية الهادئة، الرملية الدافئة، الوردية الناعمة، الدُّرّية المحايدة، و«ليل عميق» السوداء الكاملة لشاشات AMOLED — مع أربعة أنماط للخلفية، ووضعٌ تلقائيٌّ يصير نهاريًّا في النهار وليليًّا في الليل، وتتبع خلفيةُ الصفحة أوقاتَ النهار تدرّجًا جماليًّا (من الفجر إلى الليل — تقريبٌ للمزاج لا يُعتمد عليه في المواقيت). وكل ما تختاره يُحفظ تلقائيًا على جهازك.</p>
+  </div>
+  <div class="set card">
+    <h3>شريط الذكر والتذكير</h3>
+    <div class="srow"><span class="lbl2">إظهار الشريط في الرئيسية</span><button type="button" id="tgTicker" class="tgl" aria-label="شريط الذكر"></button></div>
+    <div class="srow"><span class="lbl2">سرعة الدوران</span><div class="seg" id="segTickSpd"><button type="button">هادئ</button><button type="button">متوازن</button><button type="button">سريع</button></div></div>
+    <div class="srow"><span class="lbl2">أذكارك المخصصة تدور في الشريط</span><button type="button" id="tgTickCustom" class="tgl" aria-label="الأذكار المخصصة في الشريط"></button></div>
+    <p class="small">الشريط يجري فوق الأسماء والمسبحة بالذكر والتذكير ومهماتك المسجلة، ولمسةٌ عليه توقفه ورفعُ الإصبع يستأنفه. سرعته ثلاث درجات، وأذكارك المخصصة (من صفحة المسبحة) تُدرَج فيه إن شئت.</p>
   </div>
   <div class="set card">
     <h3>أذكاري المخصصة</h3>
@@ -795,7 +891,7 @@ details.doc .body b{color:var(--gold2)}
     <h3>التوثيق</h3>
     <details class="doc">
       <summary>عن تطبيق نور</summary>
-      <div class="body">نور رفيق ذكرٍ بسيط يعمل من دون إنترنت: ساعةٌ تفاعلية تعرض أسماء الله الحسنى بالعربية والإنجليزية مع بطاقات نورٍ موثقة، ومسبحة إلكترونية بصوت الخرز وعداداتٍ محفوظة، وشاشة «نور اليوم» بأدوات يومية، ومهماتٌ تحت رقابتك ومتابعتك، وتقويمٌ بأحداث الإسلام، وسماءُ خيرٍ تُحصي أعمالك. صُمم للهاتف أولًا، ويعمل من متصفحك مباشرةً بلا حسابات ولا تثبيت.
+      <div class="body">نور رفيق ذكرٍ بسيط يعمل من دون إنترنت: ساعةٌ تفاعلية تعرض أسماء الله الحسنى بالعربية والإنجليزية مع بطاقات نورٍ موثقة، ومسبحة إلكترونية بصوت الخرز ووردٍ يومي بعدّادٍ محفوظ، وشاشة «نور اليوم» بأدوات يومية ومحاسبةٍ برسمٍ أسبوعي، ومهماتٌ بتكرارها وأرشيفها، وتقويمٌ بأحداث الإسلام، وسماءُ خيرٍ تُحصي أعمالك، وبحثٌ ومفضلةٌ في الأسماء، وسماءٌ تتبع أوقات النهار بلونها. صُمم للهاتف أولًا، ويعمل من متصفحك مباشرةً بلا حسابات ولا تثبيت.
       <br/><b>نور «إحسان»:</b> فلا تصلح حياةُ الإنسان المؤمن بلا إحسان؛ فراقِب يومك، وحاسِب نفسك، واستعِن بالله ولا تعجز — تفز بإذن الله وبرحمته.
       <br/><b>ملاحظة:</b> الحديث الشريف ذكر أن للأسماء «تسعة وتسعين» اسمًا، وفي الساعة مئة خانة لأننا أضفنا الاسم الأعظم «الله» إلى القائمة كما في اللوحات المشهورة، فتكتمل المئة.</div>
     </details>
@@ -810,7 +906,7 @@ details.doc .body b{color:var(--gold2)}
     </details>
     <details class="doc">
       <summary>سجل الإصدار</summary>
-      <div class="body"><b>v2.5.1</b> — علاجُ شريط الذكر والتذكير على الآيفون: صار دوره بمحرّكٍ جافاسكربتي بخطوات requestAnimationFrame لا يُجمّده WebKit، وحُذف قناع الشفافية الذي يوقف الحركة داخل العناصر المقنّعة، وأصبح اللمسُ يوقفه ورفعُ الإصبع يستأنفه بدل :hover الذي يلتصق باللمس — فيجري الذكرُ والتذكير ومهماتُك على كل جهازٍ بلا توقف.<br/><br/><b>v2.5.0</b> — «حالتي الآن وشريط النور»: صار «أنا غاضب» شاشة «حالتي الآن» بتبويبين — غاضبٌ بخطواته نفسها، وسعيدٌ بآداب الفرح من السنة (ابن ماجه، وأبو داود، والترمذي) — وأُضيف شريط تذكير متحرك فوق الأسماء والمسبحة يجري فيه الذكر والتذكير ومهماتك المسجلة بلا توقف، وصار حساب العمر من تاريخ ميلادك: عمرك تلقائيًا، وفروضُ صلواتك ونوافلُها المتبقية، ونومُك تقديرًا بالسنين والشهور والأيام، وصار «النشر والإستخدام» نبذةً خالصة بلا خطوات نشر.<br/><br/><b>v2.4.0</b> — «هوية الإحسان»: أُضيفت رسالة نور «إحسان» إلى «عن تطبيق نور» — فلا تصلح حياةُ الإنسان المؤمن بلا إحسان؛ فراقب يومك وحاسب نفسك واستعن بالله ولا تعجز — وصار القسم «النشر والإستخدام» برسالة المصمم المتواضعة ودعائه لأحبابه، ويُعرض سجل الإصدار مختصرًا: إصدارٌ وسطران لكل تحديث.<br/><br/><b>v2.3.1</b> — إصلاح جذري لخلل التقويم: اختفى «غير معرف» وعادت الأيام إلى أماكنها بإعادة بناء محرك التاريخ الهجري بسلسلة بدائل متعددة وتحقق صارم من كل نتيجة.<br/><br/><b>v2.3.0</b> — طُوي «التقويم والتاريخ» في الرئيسية بشاشة مستقلة تفتح وتُغلق حتى لا تمتلئ الشاشة، وأُضيفت بطاقة «المهمات» فوق «نور اليوم» بعدّاد إنجاز وشاشة خيارات كاملة.<br/><br/><b>v2.2.0</b> — «عزيمة اليوم»: نوايا متعددة ونيتك بكلماتك ومهمات إنجاز تضيء النجوم، و«سماء الخير» للعرض والإحصاء خالصة، وانتقل التقويم بأحداث الإسلام الموثقة إلى الرئيسية.<br/><br/><b>v2.1.0</b> — نجوم سماء الخير تلوّنها أنواع الأعمال بمفتاح ألوان، وتقويم الخير الشهري، ومهماتي اليومية، وتوسعة «القرآن وحالتي» و«محاسبتي» و«بنك الخيرات»، وأيقونات مونو كرور بدل الإيموجي.<br/><br/><b>v2.0.0</b> — شاشة «نور اليوم» الجديدة بأربع عشرة أداة يومية: من نية اليوم وتحدي الدقيقة وسجل الدعوات إلى محاسبتي قبل النوم وكن سببًا في الخير، مع إزاحة أمانة لشريط حالة الآيفون.<br/><br/><b>v1.6.0</b> — علاج نهائي لانعكاس الأسماء على درج الساعة برسم داخلي، وتقليص بطاقات النور إلى ثلاثة أقسام: المعنى، والدليل بمصدره، والدعاء بمصدره — حذفًا لقسمَي «عبرة لقلبك» و«سؤال تدبر».<br/><br/><b>v1.5.0</b> — تشكيل الأسماء المئة وضبط اتجاهها على الدرج، وإعادة صياغة البطاقات المئة توثيقًا من التويجري و«المختصر»، ومسبحات خمس وأحجام وأشكال للخرزة.<br/><br/><b>v1.4.0</b> — اكتمال بطاقات النور المئة موثقة من «مختصر فقه الأسماء الحسنى» للبدر و«التوحيد» للتويجري، وقسم المظهر: خمس لوحات ألوان وأربعة أنماط خلفية.<br/><br/><b>v1.3.0</b> — لغة درج الأسماء عربي أو English من الإعدادات، ونبض قلب حي في الساعة والمسبحة، وشاهد كل ذكر من القرآن والسنة في صفحة المسبحة.<br/><br/><b>v1.2.0</b> — أصوات الساعة (تِك توك، جرس، خشبي) وصوت المسبحة، وشكل الساعة وشكل المسبحة، وخط الأسماء، والتسبيح التلقائي وعقرب الثواني.<br/><br/><b>v1.1.0</b> — تحسين كامل لمقاسات الجوال، الأسماء على قرص الساعة بدل الدقائق والثواني، وسرعة من ١ إلى ١٠ ثوانٍ بمؤشر انزلاقي، ومسبحة خشبية واقعية بصوت خرز محسّن.<br/><br/><b>v1.0.0</b> — الإطلاق الأول: ساعة الأسماء الحسنى (١٠٠ اسم مع الشرح)، والمسبحة بصوت الخرز والاحتفال، والأذكار المخصصة، والإعدادات، والحفظ المحلي على الجهاز.</div>
+      <div class="body"><b>v3.0.0</b> — «بهاء النور» إصدارُ الاحتفاء الكبير: حلقةُ حركةٍ موحّدة (requestAnimationFrame واحدة) تُدير الساعة والشريط ولمعانه بأداءٍ أنعم وبطاريةٍ أهدأ، وحفظٌ مؤجّل للعدادات، وسماءٌ تتلوّن بأوقات اليوم من الفجر إلى الليل، ونبضةُ نورٍ حول الساعة عند كل اسم، ولمعانٌ ذهبي يجري في الشريط، ونجمةٌ تولد بنبضةٍ في سماء الخير، وعدادُ تسبيحٍ يتدحرج، ولوحةُ «ليل عميق» السوداء لشاشات AMOLED، ووضعٌ تلقائي نهاريّ/ليليّ، ووردٌ يوميّ للمسبحة بحلقة تقدّم وأهداف (١٠٠/٣٣٣/٥٠٠/١٠٠٠) وعدّادٍ لكل ذكر ونبضٍ اهتزازيّ كل ٣٣، وبحثٌ فوريّ في الأسماء ومفضلةٌ محفوظة واستعراضٌ هادئ للقرص، وأرشيفُ مهماتٍ وتكرارٌ يوميّ وأسبوعيّ، وحاسبةُ عمرٍ بقوسٍ يُظهر موقعك من العمر المتوقع وبأشهر وأسابيع وركعات فريضةٍ ورواتب متبقية، ورسمٌ أسبوعيّ لمحاسبتك، وخياراتُ جديدة للشريط (إظهار وسرعة وأذكارك المخصصة) — بلا أن تنكسر صلةٌ ولا تضيع بيانات.<br/><br/><b>v2.5.1</b> — علاجُ شريط الذكر والتذكير على الآيفون: صار دوره بمحرّكٍ جافاسكربتي بخطوات requestAnimationFrame لا يُجمّده WebKit، وحُذف قناع الشفافية الذي يوقف الحركة داخل العناصر المقنّعة، وأصبح اللمسُ يوقفه ورفعُ الإصبع يستأنفه بدل :hover الذي يلتصق باللمس — فيجري الذكرُ والتذكير ومهماتُك على كل جهازٍ بلا توقف.<br/><br/><b>v2.5.0</b> — «حالتي الآن وشريط النور»: صار «أنا غاضب» شاشة «حالتي الآن» بتبويبين — غاضبٌ بخطواته نفسها، وسعيدٌ بآداب الفرح من السنة (ابن ماجه، وأبو داود، والترمذي) — وأُضيف شريط تذكير متحرك فوق الأسماء والمسبحة يجري فيه الذكر والتذكير ومهماتك المسجلة بلا توقف، وصار حساب العمر من تاريخ ميلادك: عمرك تلقائيًا، وفروضُ صلواتك ونوافلُها المتبقية، ونومُك تقديرًا بالسنين والشهور والأيام، وصار «النشر والإستخدام» نبذةً خالصة بلا خطوات نشر.<br/><br/><b>v2.4.0</b> — «هوية الإحسان»: أُضيفت رسالة نور «إحسان» إلى «عن تطبيق نور» — فلا تصلح حياةُ الإنسان المؤمن بلا إحسان؛ فراقب يومك وحاسب نفسك واستعن بالله ولا تعجز — وصار القسم «النشر والإستخدام» برسالة المصمم المتواضعة ودعائه لأحبابه، ويُعرض سجل الإصدار مختصرًا: إصدارٌ وسطران لكل تحديث.<br/><br/><b>v2.3.1</b> — إصلاح جذري لخلل التقويم: اختفى «غير معرف» وعادت الأيام إلى أماكنها بإعادة بناء محرك التاريخ الهجري بسلسلة بدائل متعددة وتحقق صارم من كل نتيجة.<br/><br/><b>v2.3.0</b> — طُوي «التقويم والتاريخ» في الرئيسية بشاشة مستقلة تفتح وتُغلق حتى لا تمتلئ الشاشة، وأُضيفت بطاقة «المهمات» فوق «نور اليوم» بعدّاد إنجاز وشاشة خيارات كاملة.<br/><br/><b>v2.2.0</b> — «عزيمة اليوم»: نوايا متعددة ونيتك بكلماتك ومهمات إنجاز تضيء النجوم، و«سماء الخير» للعرض والإحصاء خالصة، وانتقل التقويم بأحداث الإسلام الموثقة إلى الرئيسية.<br/><br/><b>v2.1.0</b> — نجوم سماء الخير تلوّنها أنواع الأعمال بمفتاح ألوان، وتقويم الخير الشهري، ومهماتي اليومية، وتوسعة «القرآن وحالتي» و«محاسبتي» و«بنك الخيرات»، وأيقونات مونو كرور بدل الإيموجي.<br/><br/><b>v2.0.0</b> — شاشة «نور اليوم» الجديدة بأربع عشرة أداة يومية: من نية اليوم وتحدي الدقيقة وسجل الدعوات إلى محاسبتي قبل النوم وكن سببًا في الخير، مع إزاحة أمانة لشريط حالة الآيفون.<br/><br/><b>v1.6.0</b> — علاج نهائي لانعكاس الأسماء على درج الساعة برسم داخلي، وتقليص بطاقات النور إلى ثلاثة أقسام: المعنى، والدليل بمصدره، والدعاء بمصدره — حذفًا لقسمَي «عبرة لقلبك» و«سؤال تدبر».<br/><br/><b>v1.5.0</b> — تشكيل الأسماء المئة وضبط اتجاهها على الدرج، وإعادة صياغة البطاقات المئة توثيقًا من التويجري و«المختصر»، ومسبحات خمس وأحجام وأشكال للخرزة.<br/><br/><b>v1.4.0</b> — اكتمال بطاقات النور المئة موثقة من «مختصر فقه الأسماء الحسنى» للبدر و«التوحيد» للتويجري، وقسم المظهر: خمس لوحات ألوان وأربعة أنماط خلفية.<br/><br/><b>v1.3.0</b> — لغة درج الأسماء عربي أو English من الإعدادات، ونبض قلب حي في الساعة والمسبحة، وشاهد كل ذكر من القرآن والسنة في صفحة المسبحة.<br/><br/><b>v1.2.0</b> — أصوات الساعة (تِك توك، جرس، خشبي) وصوت المسبحة، وشكل الساعة وشكل المسبحة، وخط الأسماء، والتسبيح التلقائي وعقرب الثواني.<br/><br/><b>v1.1.0</b> — تحسين كامل لمقاسات الجوال، الأسماء على قرص الساعة بدل الدقائق والثواني، وسرعة من ١ إلى ١٠ ثوانٍ بمؤشر انزلاقي، ومسبحة خشبية واقعية بصوت خرز محسّن.<br/><br/><b>v1.0.0</b> — الإطلاق الأول: ساعة الأسماء الحسنى (١٠٠ اسم مع الشرح)، والمسبحة بصوت الخرز والاحتفال، والأذكار المخصصة، والإعدادات، والحفظ المحلي على الجهاز.</div>
     </details>
   </div>
 </section>
@@ -897,11 +993,35 @@ const store={
 };
 let storageWarned=false;
 function warnStorage(){ if(storageWarned)return; storageWarned=true; toast('تنبيه: التخزين غير متاح في هذا المتصفح، لن تُحفظ البيانات بعد الإغلاق'); }
+/* حفظ مؤجّل (v3.0.0): المفاتيح عالية التكرار (عدادات التسبيح) تُكتب دفعةً واحدة كل ٩٠٠ms
+   بدل كل نقرة — وتُفرَغ فورًا عند الخفاء أو مغادرة الصفحة فلا تُفقد بيانات */
+const _lazy={}; let lazyT=null;
+function lazyFlush(){ if(lazyT){clearTimeout(lazyT);lazyT=null;} let ok=true;
+  Object.keys(_lazy).forEach(k=>{ if(!store.set(k,_lazy[k]))ok=false; delete _lazy[k]; });
+  if(!ok)warnStorage(); }
+function lazySchedule(){ if(!lazyT)lazyT=setTimeout(lazyFlush,900); }
+store.lazy=function(k,v){ _lazy[k]=v; lazySchedule(); };
+document.addEventListener('visibilitychange',()=>{ if(document.hidden)lazyFlush(); });
+window.addEventListener('pagehide',lazyFlush);
+window.addEventListener('beforeunload',lazyFlush);
 let toastT=null;
 function toast(msg){ const t=$('#toast'); if(!t)return; t.textContent=msg; t.classList.add('show'); clearTimeout(toastT); toastT=setTimeout(()=>t.classList.remove('show'),2600); }
 
+/* ============ محرك الحركة الموحد (v3.0.0) ============
+   حلقة requestAnimationFrame واحدة تُدير عقربَ الثواني والشريطَ ولمعانه — بدل ثلاث حلقات
+   منفصلة: بدءٌ وإيقافٌ منضبط، بطاريةٌ أهدأ، وتنسُّقٌ زمنيٌّ واحد. كل مهمة دالة تُرجع false
+   عندما لا تحتاج العمل فتُسحَب من الحلقة تلقائيًا. */
+const CORE_JOBS=[]; let CORE_RAF=0, CORE_TS=0;
+function coreFrame(ts){ CORE_RAF=0;
+  for(let i=CORE_JOBS.length-1;i>=0;i--){ if(!CORE_JOBS[i](ts))CORE_JOBS.splice(i,1); }
+  if(CORE_JOBS.length)CORE_RAF=requestAnimationFrame(coreFrame); else CORE_TS=0; }
+function coreAdd(fn){ if(CORE_JOBS.indexOf(fn)<0)CORE_JOBS.push(fn);
+  if(!CORE_RAF){ CORE_TS=0; CORE_RAF=requestAnimationFrame(coreFrame); } }
+function coreDel(fn){ const i=CORE_JOBS.indexOf(fn); if(i>=0)CORE_JOBS.splice(i,1);
+  if(!CORE_JOBS.length&&CORE_RAF){ cancelAnimationFrame(CORE_RAF); CORE_RAF=0; CORE_TS=0; } }
+
 /* ============ الحالة والإعدادات ============ */
-let S=Object.assign({sound:true,vibrate:true,tickSound:true,autoPlay:true,speed:6,clockSound:'tick',beadSound:'classic',clockStyle:'classic',nameFont:'kufi',dialLang:'ar',tasbihStyle:'wood',beadSize:'m',beadShape:'round',tasbihMode:'manual',tasbihAuto:2,theme:'dark',fontScale:'m',palette:'emerald',bgpat:'stars'},store.get('settings',{}));
+let S=Object.assign({sound:true,vibrate:true,tickSound:true,autoPlay:true,speed:6,clockSound:'tick',beadSound:'classic',clockStyle:'classic',nameFont:'kufi',dialLang:'ar',tasbihStyle:'wood',beadSize:'m',beadShape:'round',tasbihMode:'manual',tasbihAuto:2,theme:'dark',fontScale:'m',palette:'emerald',bgpat:'stars',ticker:true,tickSpd:'mid',tickCustom:true,browse:false},store.get('settings',{}));
 if(!(S.speed>=1&&S.speed<=10))S.speed=6;
 if(['tick','bell','wood'].indexOf(S.clockSound)<0)S.clockSound='tick';
 if(['classic','glass','wood','soft'].indexOf(S.beadSound)<0)S.beadSound='classic';
@@ -913,8 +1033,10 @@ if(['s','m','l'].indexOf(S.beadSize)<0)S.beadSize='m';
 if(['round','oval','facet'].indexOf(S.beadShape)<0)S.beadShape='round';
 if(S.tasbihMode!=='auto')S.tasbihMode='manual';
 if([1,2,3,5].indexOf(S.tasbihAuto)<0)S.tasbihAuto=2;
-if(['emerald','indigo','sand','rose','slate'].indexOf(S.palette)<0)S.palette='emerald';
+if(['emerald','indigo','sand','rose','slate','black'].indexOf(S.palette)<0)S.palette='emerald';
 if(['stars','arabesque','dots','plain'].indexOf(S.bgpat)<0)S.bgpat='stars';
+if(['auto','dark','light'].indexOf(S.theme)<0)S.theme='dark';
+if(['slow','mid','fast'].indexOf(S.tickSpd)<0)S.tickSpd='mid';
 delete S.hideExp;
 function saveS(){ if(!store.set('settings',S)) warnStorage(); }
 
@@ -1796,7 +1918,7 @@ function go(id){
   SCREENS.forEach(s=>{ const el=$('#screen-'+s); if(el) el.classList.toggle('active',s===id); });
   $$('#nav .nav-b').forEach(b=>b.classList.toggle('on',b.dataset.go===id));
   if(!store.set('screen',id)) warnStorage();
-  if(id==='names'){ if(S.autoPlay) startClock(true); renderName(false); } else stopClock();
+  if(id==='names'){ if(S.autoPlay) startClock(true); renderName(false); browseStart(); } else { stopClock(); browseStop(); }
   if(id!=='tasbih') stopAuto();
   if(id==='tasbih') renderTasbihStats();
   if(id==='day') renderDay();
@@ -1884,6 +2006,7 @@ function renderName(anim){
   $('#n-desc').textContent=n.d;
   if(!dialEls)dialEls=$$('#dialnames .tn');
   if(dialEls.length===NAMES.length){ if(dialPrev>=0)dialEls[dialPrev].setAttribute('href',dialEls[dialPrev].dataset.n); dialEls[ni].setAttribute('href',dialEls[ni].dataset.g); dialPrev=ni; }
+  paintFavBtn();
   const nd=$('#needle');
   if(anim===false){ nd.style.transition='none'; }
   nd.style.transform='rotate('+acc+'deg)';
@@ -1898,6 +2021,64 @@ function afterNav(){
   if(playing) restartClockTimer();
 }
 function beatClock(){ const c=$('#clockwrap'); if(!c)return; c.classList.remove('beat'); void c.offsetWidth; c.classList.add('beat'); setTimeout(()=>c.classList.remove('beat'),780); }
+
+/* --- الاستعراض الهادئ (v3.0.0): القرص يلفّ وحده كل تسع ثوانٍ أثناء القراءة، بلا صوتٍ ولا نبض --- */
+let browseT=null;
+function browseStop(){ if(browseT){ clearInterval(browseT); browseT=null; } }
+function browseStart(){ browseStop(); if(!S.browse)return;
+  browseT=setInterval(()=>{
+    if(playing||document.hidden)return;
+    const sc=$('#screen-names'); if(!sc||!sc.classList.contains('active'))return;
+    ni=(ni+1)%NAMES.length; acc+=STEP;
+    store.lazy('ni',ni); renderName();
+  },9000); }
+
+/* --- البحث في الأسماء والمفضلة (v3.0.0) --- */
+let nameFav=store.get('nameFav',[]);
+let nameFavMode=false;
+function saveNameFav(){ if(!store.set('nameFav',nameFav))warnStorage(); }
+function paintFavBtn(){ const b=$('#btnFav'); if(!b)return;
+  const on=nameFav.indexOf(ni)>=0;
+  b.classList.toggle('ghost',!on); b.classList.toggle('onfav',on);
+  b.setAttribute('aria-label',on?'إزالة '+NAMES[ni].a+' من المفضلة':'إضافة '+NAMES[ni].a+' إلى المفضلة'); }
+function bindNameSearch(){
+  const inp=$('#nameSearch'), res=$('#nameResults'), favBtn=$('#nameFavBtn');
+  if(!inp||!res||!favBtn)return;
+  const STAR='<svg class="nfav" viewBox="0 0 24 24"><path d="M12 3.6l2.5 5.2 5.7.8-4.1 4 1 5.7-5.1-2.7-5.1 2.7 1-5.7-4.1-4 5.7-.8z" fill="currentColor"/></svg>';
+  const run=()=>{
+    const q=inp.value.trim();
+    if(!q&&!nameFavMode){ res.hidden=true; res.innerHTML=''; return; }
+    let list;
+    if(nameFavMode){ list=nameFav.slice(); }
+    else{
+      const qs=stripTash(q).toLowerCase(); list=[];
+      NAMES.forEach((n,i)=>{ if(stripTash(n.a).indexOf(qs)>=0||n.t.toLowerCase().indexOf(qs)>=0||n.m.toLowerCase().indexOf(qs)>=0)list.push(i); });
+      list.sort((a,b)=>a-b); list=list.slice(0,8);
+    }
+    res.hidden=false;
+    res.innerHTML='';
+    if(!list.length){ res.innerHTML='<p class="dim center" style="padding:8px">'+(nameFavMode?'لم تختر أسماء مفضلة بعد — افتح اسمًا واضغط «مفضلة»':'لا نتائج مطابقة — جرّب جزءًا من الاسم أو معناه')+'</p>'; return; }
+    list.forEach(i=>{
+      const n=NAMES[i], r=document.createElement('button'); r.type='button'; r.className='nres';
+      r.innerHTML='<b>'+esc(n.a)+'</b>'+(nameFav.indexOf(i)>=0?STAR:'')+'<span>'+esc(n.t)+'</span>';
+      r.addEventListener('click',()=>{ goName(i,true); });
+      res.appendChild(r);
+    });
+  };
+  inp.addEventListener('input',run);
+  favBtn.addEventListener('click',()=>{ nameFavMode=!nameFavMode;
+    favBtn.classList.toggle('on',nameFavMode);
+    if(nameFavMode)inp.value='';
+    run(); });
+  $('#btnFav').addEventListener('click',()=>{
+    const ix=nameFav.indexOf(ni);
+    if(ix>=0){ nameFav.splice(ix,1); toast('أُزيل من المفضلة'); }
+    else{ nameFav.push(ni); toast('أُضيف '+NAMES[ni].a+' إلى مفضلتك'); }
+    saveNameFav(); paintFavBtn();
+    if(nameFavMode)run();
+  });
+  paintFavBtn();
+}
 
 /* ============ بطاقة النور (v1.6.0) ============ */
 let ci=-1, wasPlaying=false;
@@ -1936,20 +2117,21 @@ function bindCard(){
   document.addEventListener('keydown',e=>{ if(e.key==='Escape')closeCard(); });
 }
 function stopClockTimer(){ if(ckTimer){clearInterval(ckTimer);ckTimer=null;} }
-let rafId=null, t0=0, lastFrac=0;
-function motionFrame(){
-  if(!playing){rafId=null;return;}
-  const now=performance.now();
-  let frac=(now-t0)/(S.speed*1000);
-  if(frac>=1){ t0=now; frac=0; }
+let t0=0, lastFrac=0, clockInCore=false;
+/* عقرب الثواني يعمل الآن كمهمة داخل الحلقة الموحدة (v3.0.0) بدل حلقةٍ مستقلة */
+function motionJob(ts){
+  if(!playing)return false;
+  if(document.hidden)return true;
+  let frac=(ts-t0)/(S.speed*1000);
+  if(frac>=1){ t0=ts; frac=0; }
   lastFrac=frac;
   const sh=$('#secHand'); if(sh)sh.style.transform='rotate('+(frac*360).toFixed(2)+'deg)';
   const p=$('#prog'); p.style.strokeDashoffset=String(CIRC*Math.max(0,1-(ni+frac)/NAMES.length));
   $('#clockwrap').classList.toggle('pulsing',(1-frac)*S.speed<=Math.min(1.1,S.speed*.4));
-  rafId=requestAnimationFrame(motionFrame);
+  return true;
 }
-function startMotion(){ if(!rafId){ t0=performance.now()-lastFrac*S.speed*1000; rafId=requestAnimationFrame(motionFrame); } }
-function stopMotion(){ if(rafId){cancelAnimationFrame(rafId);rafId=null;} const cw=$('#clockwrap'); if(cw)cw.classList.remove('pulsing'); }
+function startMotion(){ if(!clockInCore){ t0=performance.now()-lastFrac*S.speed*1000; clockInCore=true; coreAdd(motionJob); } }
+function stopMotion(){ if(clockInCore){ clockInCore=false; coreDel(motionJob); } const cw=$('#clockwrap'); if(cw)cw.classList.remove('pulsing'); }
 function restartClockTimer(){ stopClockTimer(); if(playing){ ckTimer=setInterval(nextName,S.speed*1000); t0=performance.now(); lastFrac=0; startMotion(); } }
 function stopClock(){ playing=false; stopClockTimer(); stopMotion(); syncPlayBtn(); }
 function startClock(force){ if(!force&&playing)return; playing=true; stopClockTimer(); ckTimer=setInterval(nextName,S.speed*1000); t0=performance.now(); lastFrac=0; startMotion(); syncPlayBtn(); }
@@ -2001,10 +2183,9 @@ function saveRound(){ let ok=true;
   /* سجل التسبيح اليومي (v2.2.0): لتقرير سماء الخير — كم سبحت في أسبوع/شهر/من البداية */
   let hist=store.get('tsbHist',{}); if(!hist||typeof hist!=='object')hist={};
   if(day&&day.c>0)hist[day.d]=day.c; pruneMap(hist,500);
-  ok=store.set('tsbHist',hist)&&ok;
-  ok=store.set('round',cnt)&&ok; ok=store.set('day',day)&&ok; ok=store.set('totals',totals)&&ok;
-  ok=store.set('dh',dh)&&ok; ok=store.set('target',target)&&ok;
-  if(!ok)warnStorage();
+  /* v3.0.0: مفاتيح عالية التكرار تُحفظ مؤجّلًا في كتابةٍ واحدة */
+  store.lazy('tsbHist',hist); store.lazy('round',cnt); store.lazy('day',day);
+  store.lazy('totals',totals); store.lazy('dh',dh); store.lazy('target',target);
 }
 function buildBeads(){
   const g=$('#beads'); if(!g)return;
@@ -2042,8 +2223,10 @@ function renderChips(){
   const c=$('#dhikrChips'); c.innerHTML='';
   allDhikr().forEach(d=>{
     const b=document.createElement('button'); b.type='button';
-    b.className='chip'+(d===dh?' on':''); b.textContent=d;
-    b.addEventListener('click',()=>{ if(dh===d)return; dh=d; cnt=0; accB=0; saveRound(); renderChips(); renderTasbih(false); toast('الذكر الحالي: '+d); });
+    b.className='chip'+(d===dh?' on':'');
+    /* v3.0.0: عدّاد كل ذكر داخل شريحته */
+    b.innerHTML=esc(d)+' <i class="ccount">'+AR(totals[d]||0)+'</i>';
+    b.addEventListener('click',()=>{ if(dh===d)return; dh=d; cnt=0; accB=0; saveRound(); renderChips(); renderTasbih(false); renderTasbihStats(); toast('الذكر الحالي: '+d); });
     c.appendChild(b);
   });
 }
@@ -2066,7 +2249,7 @@ function renderTasbih(anim){
   $('#b-dh').textContent=dh;
   const ev=EVID[dh], ec=$('#evidCard');
   if(ec){ if(ev){ ec.classList.add('show'); $('#evidTxt').textContent=ev.t; $('#evidSrc').textContent='— '+ev.s; } else ec.classList.remove('show'); }
-  if(anim!==false){ const c=$('#cnt'); c.classList.remove('pop'); void c.offsetWidth; c.classList.add('pop'); }
+  if(anim!==false){ const c=$('#cnt'); c.classList.remove('roll'); void c.offsetWidth; c.classList.add('roll'); }
   const ring=$('#ring');
   if(anim===false) ring.style.transition='none';
   ring.style.transform='rotate('+accB+'deg)';
@@ -2078,6 +2261,29 @@ function renderTasbihStats(){
   $('#dayC').textContent=AR(day.c);
   $('#totC').textContent=AR(totals[dh]||0);
   $('#sumAll').textContent=AR(Object.values(totals).reduce((a,b)=>a+b,0));
+  renderWird();
+}
+/* --- ورد اليوم (v3.0.0): هدف يومي بحلقة تقدّم — تسبيحاتُ يومك كلها تدفعك نحو الهدف --- */
+let wirdG=store.get('wird',100);
+const WIRD_G=[100,333,500,1000];
+function renderWird(){
+  const fill=$('#wirdFill'); if(!fill)return;
+  if(WIRD_G.indexOf(wirdG)<0)wirdG=100;
+  const chips=$('#wirdChips'); chips.innerHTML='';
+  WIRD_G.forEach(g=>{
+    const b=document.createElement('button'); b.type='button';
+    b.className='chip'+(g===wirdG?' on':''); b.textContent=AR(g);
+    b.addEventListener('click',()=>{ wirdG=g; if(!store.set('wird',wirdG))warnStorage(); renderWird(); toast('هدف ورد اليوم: '+AR(g)+' تسبيحة'); });
+    chips.appendChild(b);
+  });
+  const c=(day&&day.d===todayStr())?day.c:0;
+  const p=Math.min(100,Math.round(c/wirdG*100));
+  fill.style.width=p+'%';
+  $('#wirdPct').textContent=AR(p)+'٪';
+  const left=Math.max(0,wirdG-c);
+  $('#wirdHint').textContent=(p>=100)
+    ?'أتممت ورد اليوم — اللهم تقبّله، واجعلنا من أهل الذكر القانتين'
+    :(AR(left)+' تسبيحة تفصلك عن إتمام ورد اليوم — واصِل بالتوفيق');
 }
 function spawnRipple(e){
   const z=$('#tapzone'), r=z.getBoundingClientRect(), d=document.createElement('span');
@@ -2102,6 +2308,9 @@ function tapBead(e){
   if(cnt>=target){ showCelebrate(); return; }
   cnt++; day.c++; totals[dh]=(totals[dh]||0)+1; accB+=360/33;
   renderTasbih(); saveRound(); tapS(); vib(12); spawnRipple(e);
+  /* نبضة اهتزاز كل ثلاثٍ وثلاثين (v3.0.0) — كتسبيحات ما بعد الصلاة المسنونة */
+  if(cnt%33===0&&cnt<target)vib([45,45,45]);
+  renderTasbihStats();
   if(cnt>=target){
     day.r++; saveRound(); renderTasbihStats(); chime(); vib([60,70,60]);
     addStar('dhikr','جولة تسبيح: '+dh);
@@ -2178,14 +2387,26 @@ const PALETTES={
   indigo:{n:'نيلية',dark:'#0a1120',light:'#eef2f8',ac:'#c9a24d'},
   sand:{n:'رملية',dark:'#191006',light:'#f6efe0',ac:'#d4a44c'},
   rose:{n:'وردية',dark:'#1c0e12',light:'#f8eff1',ac:'#d49a7e'},
-  slate:{n:'دُرّية',dark:'#0f1114',light:'#f2f3f5',ac:'#b9a06a'}
+  slate:{n:'دُرّية',dark:'#0f1114',light:'#f2f3f5',ac:'#b9a06a'},
+  black:{n:'ليل عميق',dark:'#000000',light:'#f4f2ec',ac:'#e8c476'}
 };
+/* الوضع التلقائي (v3.0.0): نهاري من السادسة صباحًا حتى السادسة مساءً وليليًا ما سوى ذلك */
+function effTheme(){ if(S.theme!=='auto')return S.theme;
+  const h=new Date().getHours(); return (h>=6&&h<18)?'light':'dark'; }
+/* سماء اليوم (v3.0.0): تدرّج جمالي بأوقات النهار — تقريب للمزاج لا مواقيت صلاة */
+function skyPhase(){ const d=new Date(), h=d.getHours()+d.getMinutes()/60;
+  if(h<4.8)return 'night'; if(h<6.4)return 'fajr'; if(h<11.5)return 'duha';
+  if(h<14.4)return 'duhr'; if(h<16.6)return 'asr'; if(h<18.2)return 'maghrib';
+  if(h<19.8)return 'isha'; return 'night'; }
+function applySky(){ const p=skyPhase(), el=document.documentElement;
+  if(el.dataset.sky!==p)el.dataset.sky=p; }
 function applyLook(){
-  document.documentElement.dataset.theme=S.theme;
+  const T=effTheme();
+  document.documentElement.dataset.theme=T;
   document.documentElement.dataset.pal=S.palette;
   document.documentElement.dataset.bgpat=S.bgpat;
   const m=document.querySelector('meta[name=theme-color]');
-  if(m)m.content=(S.theme==='light'?PALETTES[S.palette].light:PALETTES[S.palette].dark);
+  if(m)m.content=(T==='light'?PALETTES[S.palette].light:PALETTES[S.palette].dark);
   $$('#palSw .swatch').forEach(b=>b.classList.toggle('on',b.dataset.pal===S.palette));
   if($('#dialnames')&&$('#dialnames').childNodes.length){ buildDial(); if($('#screen-names').classList.contains('active'))renderName(false); }
 }
@@ -2244,6 +2465,7 @@ function bindSettings(){
   bindSeg('#segBeadSize',['s','m','l'],'beadSize',applyTasbihStyle);
   bindSeg('#segBeadShape',['round','oval','facet'],'beadShape',applyTasbihStyle);
   bindToggle('#tgAuto','autoPlay',()=>{ if($('#screen-names').classList.contains('active')){ if(S.autoPlay)startClock(); else stopClock(); } });
+  bindToggle('#tgBrowse','browse',()=>{ if(S.browse)browseStart(); else browseStop(); });
   const rng=$('#rngSpeed');
   rng.value=S.speed; $('#spdVal').textContent=AR(S.speed);
   rng.addEventListener('input',()=>{
@@ -2251,9 +2473,13 @@ function bindSettings(){
     $('#spdVal').textContent=AR(S.speed); $('#spdTxt').textContent=AR(S.speed);
     saveS(); if(playing)restartClockTimer();
   });
-  bindSeg('#segTheme',['dark','light'],'theme',applyLook);
+  bindSeg('#segTheme',['auto','dark','light'],'theme',applyLook);
   bindSeg('#segBg',['stars','arabesque','dots','plain'],'bgpat',applyLook);
   bindSeg('#segFont',['s','m','l'],'fontScale',applyFont);
+  /* شريط الذكر والتذكير (v3.0.0): إظهار وسرعة وأذكار مخصصة */
+  bindToggle('#tgTicker','ticker',applyTickerVisibility);
+  bindSeg('#segTickSpd',['slow','mid','fast'],'tickSpd');
+  bindToggle('#tgTickCustom','tickCustom',()=>{ buildTicker(); });
   $('#resetCounts').addEventListener('click',()=>{
     if(!confirm('إعادة ضبط جميع عدادات التسبيح؟'))return;
     totals={}; day={d:todayStr(),c:0,r:0}; cnt=0; accB=0; saveRound();
@@ -2261,7 +2487,7 @@ function bindSettings(){
   });
   $('#resetAll').addEventListener('click',()=>{
     if(!confirm('سيُحذف كل شيء: العدادات والإعدادات والأذكار المخصصة وبيانات نور اليوم. هل أنت متأكد؟'))return;
-    ['settings','ni','totals','day','round','dh','target','custom','screen','intent','azima','tsbHist','acct','stars','duas','secret','life','tasks','tasksDone','ideasShown'].forEach(k=>store.del(k));
+    ['settings','ni','totals','day','round','dh','target','custom','screen','intent','azima','tsbHist','acct','acctHist','stars','duas','secret','life','tasks','tasksDone','ideasShown','nameFav','wird'].forEach(k=>store.del(k));
     location.reload();
   });
 }
@@ -2323,11 +2549,12 @@ function renderHomeIntent(){
   const names=[];
   (a.ids||[]).forEach(i=>{ if(AZIMA_T[i])names.push(AZIMA_T[i].t); });
   (a.customs||[]).forEach(()=>names.push('نيتك الخاصة'));
-  const doneN=tasks&&tasks.length?tasks.filter(t=>(tasksDone[todayStr()]||[]).indexOf(t.id)>=0).length:0;
-  const tn=tasks&&tasks.length?(tasks.length===1?' مهمة':(tasks.length===2?' مهمتين':' مهمات')):'';
+  const vis=visibleTasks();
+  const doneN=vis.length?vis.filter(t=>(tasksDone[todayStr()]||[]).indexOf(t.id)>=0).length:0;
+  const tn=vis.length?(vis.length===1?' مهمة':(vis.length===2?' مهمتين':' مهمات')):'';
   el.hidden=false;
   el.innerHTML='عزيمة اليوم: <b>'+names.slice(0,2).join(' · ')+'</b>'+(names.length>2?' و'+AR(names.length-2)+' أخرى':'')
-  +(tasks&&tasks.length?' — أنجزت '+AR(doneN)+' من '+AR(tasks.length)+tn:'');
+  +(vis.length?' — أنجزت '+AR(doneN)+' من '+AR(vis.length)+tn:'');
 }
 /* --- خريطة الخير (سماء النجوم) --- */
 /* ألوان النجوم في سماء الخير: لون لكل نوع عمل */
@@ -2359,7 +2586,9 @@ function renderSky(){
     const m=starMeta(s.k);
     const x=16+((i*97.3+31)%288), y=15+((i*53.7+13)%152);
     const r=1.9+((i*7)%10)/5.2, dl=(((i*37)%24)/10).toFixed(1);
-    h+='<path class="sky-star" d="'+starPath(x,y,r)+'" style="fill:'+m.c+';animation-delay:'+dl+'s"/>';
+    /* النجمة المستجدّة (v3.0.0) تُولد بنبضةٍ ثم تستقر */
+    const isNew=(Date.now()-(s.ts||0)<4000);
+    h+='<path class="sky-star'+(isNew?' sky-new':'')+'" d="'+starPath(x,y,r)+'" style="fill:'+m.c+';animation-delay:'+dl+'s"/>';
   });
   sv.innerHTML=h;
   const cnt=$('#skyCnt'); if(cnt)cnt.textContent=AR(sky.length);
@@ -2606,7 +2835,17 @@ const ACCT=[
 ];
 let acct=store.get('acct',null);
 function acctToday(){ const base=(acct&&acct.d===todayStr())?acct.a:[]; const a=[]; for(let i=0;i<ACCT.length;i++)a.push(base[i]===undefined?null:base[i]); return a; }
-function acctSave(){ acct={d:todayStr(),a:acctToday()}; if(!store.set('acct',acct))warnStorage(); }
+function acctSave(){
+  acct={d:todayStr(),a:acctToday()};
+  if(!store.set('acct',acct))warnStorage();
+  /* سجل المحاسبة الأسبوعي (v3.0.0): لرسم السبعة أيام في لوحة الأداة */
+  if(acct.a.some(x=>x!==null)){
+    const hist=store.get('acctHist',{})||{};
+    hist[todayStr()]=acct.a.filter(x=>x===true).length;
+    pruneMap(hist,400);
+    if(!store.set('acctHist',hist))warnStorage();
+  }
+}
 
 /* --- القرآن حسب الحالة --- */
 const STATES=[
@@ -2687,6 +2926,15 @@ let tasksDone=store.get('tasksDone',{});
 
 function saveTasks(){ pruneMap(tasksDone,120); if(!store.set('tasks',tasks))warnStorage(); if(!store.set('tasksDone',tasksDone))warnStorage(); buildTicker(); }
 function tasksOfToday(){ const d=tasksDone[todayStr()]; return d?d:[]; }
+/* ظهور المهمة اليوم (v3.0.0): التكرار اليومي يظهر كل يوم، والأسبوعي يوم إنشائه من الأسبوع فقط،
+   والمرة الواحدة تختفي من القائمة بعد إنجازها (وتُحفظ في الأرشيف) */
+const WEEKDAYS=['الأحد','الاثنين','الثلاثاء','الأربعاء','الخميس','الجمعة','السبت'];
+function taskShowsToday(t){
+  if(t.rep==='weekly')return new Date().getDay()===(t.wd==null?new Date(t.id).getDay():t.wd);
+  if(t.rep==='once')return !t.doneOnce;
+  return true;
+}
+function visibleTasks(){ return tasks.filter(taskShowsToday); }
 function removeTaskStar(lbl){
   const d=todayStr();
   for(let i=sky.length-1;i>=0;i--){ if(sky[i].d===d&&sky[i].l===lbl){ sky.splice(i,1); break; } }
@@ -2697,8 +2945,14 @@ function toggleTask(id){
   const t=tasks.find(x=>x.id===id); if(!t)return;
   const d=todayStr(); if(!tasksDone[d])tasksDone[d]=[];
   const arr=tasksDone[d], idx=arr.indexOf(id), lbl='مهمة: '+t.t;
-  if(idx<0){ arr.push(id); addStar(t.k,lbl); tapS(); vib(25); toast('أُنجزت المهمة — أضاءت نجمة في سمائك'); }
-  else{ arr.splice(idx,1); removeTaskStar(lbl); toast('أُلغيت العلامة — أتمّها بصدق لتضيء'); }
+  if(idx<0){
+    arr.push(id); addStar(t.k,lbl); tapS(); vib(25); toast('أُنجزت المهمة — أضاءت نجمة في سمائك');
+    if(t.rep==='once'){ t.doneOnce=true; }
+  }
+  else{
+    arr.splice(idx,1); removeTaskStar(lbl); toast('أُلغيت العلامة — أتمّها بصدق لتضيء');
+    if(t.rep==='once')t.doneOnce=false;
+  }
   saveTasks();
   renderAzTasks();
   renderHomeIntent();
@@ -2715,12 +2969,13 @@ function delTask(id){
 function renderAzTasks(){
   const box=$('#azTasks'); if(!box)return;
   const done=tasksOfToday();
+  const vis=visibleTasks();
   /* عدّاد المهمات على بطاقة الرئيسية (v2.3.0) */
   const hl=$('#homeTasksLine');
-  if(hl)hl.textContent=tasks.length?('اليوم: أنجزت '+AR(done.length)+' من '+AR(tasks.length)+(done.length===tasks.length?' — الحمد لله':'')+' · اضغط للمتابعة'):'مهماتك تحت رقابتك: أضفها وتابع إنجازها كل يوم';
+  if(hl)hl.textContent=vis.length?('اليوم: أنجزت '+AR(done.filter(id=>vis.some(t=>t.id===id)).length)+' من '+AR(vis.length)+(done.length===vis.length?' — الحمد لله':'')+' · اضغط للمتابعة'):'مهماتك تحت رقابتك: أضفها وتابع إنجازها كل يوم';
   box.innerHTML='';
-  if(!tasks.length){ box.innerHTML='<p class="azempty">لا مهمات بعد — اضغط «فتح المهمات» وأضف: قراءة كتاب، حفظ آية، مراجعة تفسير…</p>'; return; }
-  tasks.forEach(t=>{
+  if(!vis.length){ box.innerHTML='<p class="azempty">لا مهمات ظاهرة اليوم — اضغط «فتح المهمات» وأضف: قراءة كتاب، حفظ آية، مراجعة تفسير…</p>'; return; }
+  vis.forEach(t=>{
     const isDone=done.indexOf(t.id)>=0, m=starMeta(t.k);
     const r=document.createElement('div'); r.className='aztaskrow'+(isDone?' done':'');
     r.innerHTML='<button type="button" class="taskbox" aria-label="إنجاز المهمة"><svg viewBox="0 0 24 24"><path d="M5 12.5l4.5 4.5L19 7.5" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/></svg></button>'
@@ -2729,45 +2984,67 @@ function renderAzTasks(){
     r.querySelector('.taskbox').addEventListener('click',()=>toggleTask(t.id));
     box.appendChild(r);
   });
-  const doneN=tasks.filter(t=>done.indexOf(t.id)>=0).length;
+  const doneN=vis.filter(t=>done.indexOf(t.id)>=0).length;
   const hint=$('#azTaskHint');
-  if(hint)hint.textContent='أنجزت '+AR(doneN)+' من '+AR(tasks.length)+' — كل إنجاز نجمةٌ في سمائك';
+  if(hint)hint.textContent='أنجزت '+AR(doneN)+' من '+AR(vis.length)+' — كل إنجاز نجمةٌ في سمائك';
 }
 /* --- شريط الذكر والتذكير في الرئيسية (v2.5.0 + محرّك v2.5.1): ذكرٌ وتذكيرٌ ومهماتك المسجلة تجري دورانًا مستمرًا فوق الأسماء والمسبحة --- */
 const TICK_DH=['سبحان الله وبحمده','لا إله إلا الله','الحمد لله','الله أكبر','أستغفر الله وأتوب إليه','لا حول ولا قوة إلا بالله','سبحان الله العظيم','اللهم صلِّ وسلم على نبينا محمد'];
 const TICK_RM=['أذكار الصباح — لا تفوتك اليوم','وردك من القرآن في انتظارك','أذكار المساء قبل أن تنام','الصلاة في وقتها — أغلى مواعيدك','اتصل بوالديك: كلمةٌ تُسعد قلبيهما','صدقةٌ خفية اليوم — يراها الله','تبسمك في وجه أخيك — صدقة','كلمة طيبة أو صمت','دعوةٌ بينك وبين الله — لا تؤجلها','حاسب نفسك قبل أن تُحاسب','وقتك أغلى رأس مال — أَحسِن استثماره','﴿وَذَكِّرْ فَإِنَّ الذِّكْرَىٰ تَنفَعُ الْمُؤْمِنِينَ﴾ (الذاريات: ٥٥)'];
 function tickItem(x,bold){ return '<span class="tickitem">'+(bold?'<b>«'+esc(x)+'»</b>':'<span>'+esc(x)+'</span>')+'<i class="tsep"></i></span>'; }
-/* --- محرّك دوران الشريط (v2.5.1): حركة جافاسكربتية بخطوات requestAnimationFrame —
-   مضمونة على الآيفون حيث يُجمّد WebKit أنيميشن CSS داخل العناصر المقنّعة، ويلتصق :hover
-   باللمس — إيقافٌ بلمسةٍ على الشريط واستئنافٌ عند رفع الإصبع أو العودة إلى التطبيق --- */
-let tickHalfW=0,tickPos=0,tickRAF=0,tickLast=0,tickHold=false;
-function tickSpd(){ try{ return matchMedia('(prefers-reduced-motion: reduce)').matches?17:34; }catch(e){ return 34; } } /* بكسل/ثانية */
-function tickStop(){ if(tickRAF){ cancelAnimationFrame(tickRAF); tickRAF=0; } tickLast=0; }
-function tickStep(ts){
-  tickRAF=0;
+/* --- محرك دوران الشريط (v3.0.0): مهمةٌ داخل الحلقة الموحدة coreAdd — سرعتها من الإعدادات
+   (هادئ ٢١ / متوازن ٣٤ / سريع ٥٢ بكسل في الثانية)، وتنصّف مع إعداد «تقليل الحركة»،
+   ولمسةٌ توقفه ورفعُ الإصبع يستأنفه، ولمعانٌ ذهبيّ يجري في النص دوريًّا --- */
+let tickHalfW=0,tickPos=0,tickLast=0,tickHold=false,tickInCore=false;
+function tickSpd(){ let v=S.tickSpd==='slow'?21:(S.tickSpd==='fast'?52:34);
+  try{ if(matchMedia('(prefers-reduced-motion: reduce)').matches)v=Math.round(v*.5); }catch(e){}
+  return v; }
+function tickStop(){ if(tickInCore){ tickInCore=false; coreDel(tickJob); } tickLast=0; }
+function tickJob(ts){
   const tr=$('#tickTrack'); const win=tr?tr.parentElement:null;
-  if(!tr||!win||document.hidden||tickHold||tickHalfW<=0||win.clientWidth<10){ tickLast=0; return; }
+  if(!tr||!win||document.hidden||tickHold||tickHalfW<=0||win.clientWidth<10){ tickLast=0; return false; }
   if(!tickLast)tickLast=ts;
   const dt=Math.min(80,ts-tickLast); tickLast=ts;
   tickPos+=tickSpd()*dt/1000;
   if(tickPos>=tickHalfW)tickPos-=tickHalfW;
   tr.style.transform='translate3d('+(tickPos-tickHalfW).toFixed(2)+'px,0,0)';
-  tickRAF=requestAnimationFrame(tickStep);
+  return true;
 }
 function tickPlay(){
-  if(tickRAF)return;
+  if(tickInCore)return;
   const tr=$('#tickTrack'); const win=tr?tr.parentElement:null;
   if(!tr||!win||document.hidden||tickHold||tickHalfW<=0||win.clientWidth<10)return;
-  tickRAF=requestAnimationFrame(tickStep);
+  tickInCore=true; coreAdd(tickJob);
+}
+/* لمعان الشريط: شعاعٌ يمسح النص كل بضع ثوانٍ — مهمةٌ في الحلقة الموحدة */
+let shineNext=5200, shineRun=-1;
+function shineJob(ts){
+  const w=$('#tickwin'); if(!w)return false;
+  const el=w.querySelector('.tickshine'); if(!el)return false;
+  if(document.hidden||!S.ticker||!$('#screen-home').classList.contains('active')){ el.style.opacity=0; shineRun=-1; return true; }
+  if(shineRun<0&&ts>=shineNext)shineRun=ts;
+  if(shineRun>=0){
+    const p=(ts-shineRun)/1700;
+    if(p>=1){ shineRun=-1; shineNext=ts+7500+Math.random()*3500; el.style.opacity=0; }
+    else{
+      el.style.opacity=(p<.15?p/.15:(p>.85?(1-p)/.15:1)).toFixed(2);
+      el.style.transform='translateX('+((w.clientWidth+44)*p-22).toFixed(1)+'px)';
+    }
+  }
+  return true;
 }
 function buildTicker(){
   const tr=$('#tickTrack'); const win=tr?tr.parentElement:null; if(!tr||!win)return;
+  if(!S.ticker)return;
   tickStop();
   const done=tasksOfToday();
-  const pend=tasks.filter(t=>done.indexOf(t.id)<0).map(t=>'مهمة تنتظرك: '+t.t);
-  const fin=tasks.filter(t=>done.indexOf(t.id)>=0).map(t=>'أنجزت اليوم: '+t.t+' — الحمد لله');
+  const visTasks=tasks.filter(taskShowsToday);
+  const pend=visTasks.filter(t=>done.indexOf(t.id)<0).map(t=>'مهمة تنتظرك: '+t.t);
+  const fin=visTasks.filter(t=>done.indexOf(t.id)>=0).map(t=>'أنجزت اليوم: '+t.t+' — الحمد لله');
   let seq='';
   TICK_DH.forEach((d,i)=>{ seq+=tickItem(d,true)+tickItem(TICK_RM[i],false); });
+  /* أذكارك المخصصة تدور في الشريط (v3.0.0) */
+  if(S.tickCustom)custom.forEach(d=>{ seq+=tickItem(d,true); });
   for(let i=TICK_DH.length;i<TICK_RM.length;i++)seq+=tickItem(TICK_RM[i],false);
   pend.forEach(t=>seq+=tickItem(t,false));
   fin.forEach(t=>seq+=tickItem(t,false));
@@ -2784,8 +3061,15 @@ function buildTicker(){
   tickLast=0;
   tickPlay();
 }
+function applyTickerVisibility(){
+  const el=$('#homeTicker'); if(!el)return;
+  el.hidden=!S.ticker;
+  if(S.ticker){ if($('#screen-home').classList.contains('active'))buildTicker(); }
+  else tickStop();
+}
 function bindTicker(){
   const tk=$('#homeTicker'); if(!tk)return;
+  coreAdd(shineJob);
   /* لمسةٌ على الشريط توقفه ورفعُ الإصبع يستأنفه — بديل :hover الذي يلتصق على الآيفون */
   tk.addEventListener('touchstart',()=>{ tickHold=true; },{passive:true});
   const rel=()=>{ if(tickHold){ tickHold=false; tickLast=0; tickPlay(); } };
@@ -3261,7 +3545,7 @@ const TOOLBUILD={
    });
    render();
  }},
- /* ٩. كم بقي من عمري؟ (v2.5.0: من تاريخ الميلاد + الفروض والنوافل + تقدير النوم) */
+ /* ٩. كم بقي من عمري؟ (v3.0.0: قوس بصري لموقعك من العمر + أشهر وأسابيع + ركعات الفريضة والرواتب) */
  life:{h(){
    return '<div class="ttitle">كم بقي من عمري؟</div>'
    +'<p class="hint center">ليست للتخويف بل للتذكير — ﴿وَمَا تَدْرِي نَفْسٌ بِأَيِّ أَرْضٍ تَمُوتُ﴾ (لقمان: ٣٤)</p>'
@@ -3269,9 +3553,10 @@ const TOOLBUILD={
    +'<div class="srow" style="border:none"><span class="lbl2">عمرك الآن</span><b id="lifeAgeNow" style="font-size:.95rem;color:var(--gold2)">—</b></div>'
    +'<div class="srow" style="border:none"><span class="lbl2">عمرٌ تتوقع أن تبلغه</span><input id="lifeExp" class="inp" style="max-width:120px" type="number" min="10" max="140" inputmode="numeric"/></div>'
    +'<p class="hint">اكتب تاريخ ميلادك فيحسب نور عمرك تلقائيًا ويعمل به خوارزمية الحساب. والافتراضي ٧٠ سنة توكيدًا لحديث: «أعمار أمتي ما بين الستين والسبعين وقليلهم من أجناسهم يتجاوزون ذلك» — رواه أحمد والترمذي. عدّله كما تشاء.</p>'
-   +'<div class="lifebox" id="lifeOut"></div>'
-   +'<div class="lifebox" id="lifePray" style="margin-top:8px"></div>'
-   +'<p class="hint">النوافل محسوبة بالسنن الرواتب: ست نوافل كل يوم (اثنتا عشرة ركعة: ركعتان قبل الفجر، وأربع قبل الظهر، وركعتان بعده، وركعتان بعد المغرب، وركعتان بعد العشاء) — «مَن صلّى اثنتي عشرة ركعة في يوم وليلة بُني له بيتٌ في الجنة» (متفق عليه).</p>'
+   +'<div class="lifearc" id="lifeArc"></div>'
+   +'<div class="lifebox" id="lifeOut" style="grid-template-columns:repeat(2,1fr)"></div>'
+   +'<div class="lifebox" id="lifePray" style="margin-top:8px;grid-template-columns:repeat(2,1fr)"></div>'
+   +'<p class="hint">الركعات محسوبة: الفريضة خمسُ صلوات كل يوم (١٧ ركعة: اثنتان الفجر وأربع الظهر وأربع العصر وثلاث المغرب وأربع العشاء)، والنوافل بالسنن الرواتب اثنتا عشرة ركعة يوميًا — «مَن صلّى اثنتي عشرة ركعة في يوم وليلة بُني له بيتٌ في الجنة» (متفق عليه).</p>'
    +'<div id="lifeSleep" style="margin-top:2px"></div>'
    +'<div class="note center"><b>ابدأ اليوم.</b> كل أسبوع في الحساب أعلاه جُمعةٌ تُنقضي ورمضانٌ يقترب — «احْرِصْ عَلَى مَا يَنْفَعُكَ» (رواه مسلم ٢٦٦٤).</div>';
  },b(){
@@ -3318,8 +3603,18 @@ const TOOLBUILD={
        pray.innerHTML=''; slp.innerHTML=''; return;
      }
      const days=Math.round(ry*365.25), wk=Math.round(days/7);
-     out.innerHTML='<div><b>'+AR(wk)+'</b><span>أسبوع تقريبًا</span></div><div><b>'+AR(ry)+'</b><span>رمضان متوقع</span></div><div><b>'+AR(wk)+'</b><span>جُمعة متبقية</span></div>';
-     pray.innerHTML='<div><b>'+AR(days*5)+'</b><span>صلاة فريضة متوقفة عليك</span></div><div><b>'+AR(days*6)+'</b><span>نافلة محببة (الرواتب)</span></div><div><b>'+AR(days)+'</b><span>يوم حتى المتوقع</span></div>';
+     /* قوس العمر (v3.0.0): نصف دائرة تُظهر موقعك من المسار المتوقع */
+     const pctP=Math.min(100,Math.max(0,Math.round(ap.y/e*100)));
+     const R2=66, CX=90, CY=92, LEN=Math.PI*R2;
+     const arc=$('#lifeArc');
+     if(arc)arc.innerHTML='<svg viewBox="0 0 180 108" role="img" aria-label="موقعك من العمر المتوقع">'
+       +'<path d="M'+(CX-R2)+' '+CY+' A '+R2+' '+R2+' 0 0 1 '+(CX+R2)+' '+CY+'" fill="none" stroke="var(--line)" stroke-width="11" stroke-linecap="round"/>'
+       +'<path d="M'+(CX-R2)+' '+CY+' A '+R2+' '+R2+' 0 0 1 '+(CX+R2)+' '+CY+'" fill="none" stroke="url(#ggrad)" stroke-width="11" stroke-linecap="round" stroke-dasharray="'+LEN.toFixed(1)+'" stroke-dashoffset="'+(LEN*(1-pctP/100)).toFixed(1)+'"/>'
+       +'<text x="90" y="78" text-anchor="middle" font-size="24" font-weight="700" fill="var(--gold2)">'+AR(pctP)+'٪</text>'
+       +'<text x="90" y="98" text-anchor="middle" font-size="9" fill="var(--muted)">قطعتَه من عمرك المتوقع — والباقي فرصة</text>'
+       +'</svg>';
+     out.innerHTML='<div><b>'+AR(ry)+'</b><span>سنة متبقية تقريبًا</span></div><div><b>'+AR(ry*12)+'</b><span>شهرًا متبقيًا</span></div><div><b>'+AR(wk)+'</b><span>أسبوعًا متبقيًا</span></div><div><b>'+AR(days)+'</b><span>يومًا حتى المتوقع</span></div>';
+     pray.innerHTML='<div><b>'+AR(days*5)+'</b><span>صلاة فريضة متوقفة عليك</span></div><div><b>'+AR(days*17)+'</b><span>ركعة فريضة متبقية</span></div><div><b>'+AR(days*12)+'</b><span>ركعة نافلة (الرواتب)</span></div><div><b>'+AR(days)+'</b><span>يوم حتى المتوقع</span></div>';
      slp.innerHTML='<h3 style="font-size:.78rem;color:var(--gold);margin:8px 0 5px">وكم ستنام؟ (تقدير بنوم ست أو سبع ساعات يوميًا)</h3>'
      +'<p class="hint" style="margin:0">ستقضي من المتبقي نومًا: بنوم <b style="color:var(--gold2)">'+AR(6)+' ساعات</b> ≈ <b style="color:var(--gold2)">'+YMD(Math.round(days/4))+'</b>، وبنوم <b style="color:var(--gold2)">'+AR(7)+' ساعات</b> ≈ <b style="color:var(--gold2)">'+YMD(Math.round(days*7/24))+'</b> — ثلث العمر تقريبًا يمرّ ونحن نائمون، فاجعل لنومك نية: راحةً لجسدك لتقوم لعبادة ربك.</p>';
    };
@@ -3351,11 +3646,29 @@ const TOOLBUILD={
  account:{h(){
    return '<div class="ttitle">محاسبتي قبل النوم</div>'
    +'<p class="hint center">دقيقة صدقٍ مع نفسك تُطهّر يومك — ﴿قَدْ أَفْلَحَ مَنْ زَكَّاهَا﴾ (الشمس: ٩)</p>'
+   +'<div class="tblock" style="margin-top:10px"><div class="tq" style="font-weight:800;color:var(--gold2);margin-bottom:6px">محاسبتك في سبعة أيام</div><div class="acctchart" id="acctChart"></div><p class="hint" style="margin-top:5px">كل عمود يومٌ من أيام أسبوعك — عمود اليوم يتحرك مع كل إجابة</p></div>'
    +'<div id="accRows" style="margin-top:8px"></div>'
    +'<div class="note" id="accSum" hidden></div>'
    +'<div class="center" style="margin-top:12px"><button type="button" id="accDone" class="btn gold">خُتم المحاسبة</button></div>';
  },b(){
    const rows=$('#accRows'); const a=acctToday();
+   /* الرسم الأسبوعي (v3.0.0): سبعة أعمدة لنتائج محاسبتك آخر سبعة أيام */
+   const chart=()=>{
+     const box=$('#acctChart'); if(!box)return;
+     const hist=store.get('acctHist',{})||{}, today=todayStr();
+     const tC=acctToday().filter(x=>x===true).length;
+     const W=292,H=112,BW=26,GAP=(W-7*BW)/6;
+     let bars='';
+     for(let i=6;i>=0;i--){
+       const d=new Date(); d.setDate(d.getDate()-i); const ds=dateStrOf(d);
+       const v=(ds===today)?tC:(hist[ds]||0);
+       const x=6+(6-i)*(BW+GAP), hh=Math.max(4,Math.round(v/8*(H-36)));
+       bars+='<rect x="'+x.toFixed(1)+'" y="'+(H-26-hh)+'" width="'+BW+'" height="'+hh+'" rx="5" fill="'+(i===0?'url(#ggrad)':'rgba(47,174,134,.42)')+'"/>'
+         +'<text x="'+(x+BW/2).toFixed(1)+'" y="'+(H-32-hh)+'" text-anchor="middle" font-size="9" fill="var(--muted)">'+AR(v)+'</text>'
+         +'<text x="'+(x+BW/2).toFixed(1)+'" y="'+(H-10)+'" text-anchor="middle" font-size="9" fill="var(--muted)">'+WEEKDAYS[d.getDay()]+'</text>';
+     }
+     box.innerHTML='<svg viewBox="0 0 '+W+' '+H+'">'+bars+'</svg>';
+   };
    ACCT.forEach((q,i)=>{
      const r=document.createElement('div'); r.className='accline';
      r.innerHTML='<span>'+q.q+'<div class="tsrc">'+q.p+'</div></span>';
@@ -3363,11 +3676,12 @@ const TOOLBUILD={
      const bY=document.createElement('button'); bY.type='button'; bY.className='chip'; bY.textContent='نعم';
      const bN=document.createElement('button'); bN.type='button'; bN.className='chip'; bN.textContent='لا';
      const paint=()=>{ bY.classList.toggle('on',a[i]===true); bN.classList.toggle('on',a[i]===false); };
-     bY.addEventListener('click',()=>{ a[i]=true; acctSave(); paint(); });
-     bN.addEventListener('click',()=>{ a[i]=false; acctSave(); paint(); });
+     bY.addEventListener('click',()=>{ a[i]=true; acctSave(); paint(); chart(); });
+     bN.addEventListener('click',()=>{ a[i]=false; acctSave(); paint(); chart(); });
      paint();
      ch.appendChild(bY); ch.appendChild(bN); r.appendChild(ch); rows.appendChild(r);
    });
+   chart();
    $('#accDone').addEventListener('click',()=>{
      const s=$('#accSum'); s.hidden=false;
      let h='<b>الحمد لله على ما أنجزت، واستغفر الله مما قصرت.</b><br/><br/>';
@@ -3435,12 +3749,14 @@ const TOOLBUILD={
  /* ١٥. مهماتي اليومية */
  tasks:{h(){
    return '<div class="ttitle">مهماتي اليومية</div>'
-   +'<p class="hint center">وثّق أي عمل (صلاة، قرآن، ذكر، صدقة…) واضغط المربع عند إنجازه — يضيء نجمة بلون عمله، وتتجدد العلامة كل صباح.</p>'
-   +'<div class="addrow"><select id="taskK" class="inp">'+STARS_T.map(m=>'<option value="'+m.k+'">'+m.t+'</option>').join('')+'</select><input id="taskT" class="inp" maxlength="90" placeholder="اسم المهمة: مثل ورد قرآن الصباح"/><button type="button" id="taskAdd" class="btn gold">أضف</button></div>'
+   +'<p class="hint center">وثّق أي عمل (صلاة، قرآن، ذكر، صدقة…) واضغط المربع عند إنجازه — يضيء نجمة بلون عمله. اختر التكرار: يوميًا تجدد علامتها كل صباح، وأسبوعيًا تعود يومها من كل أسبوع، ومرة واحدة تُحفظ في الأرشيف بعد إنجازها.</p>'
+   +'<div class="addrow" style="flex-wrap:wrap"><select id="taskK" class="inp">'+STARS_T.map(m=>'<option value="'+m.k+'">'+m.t+'</option>').join('')+'</select><select id="taskR" class="inp" style="max-width:118px"><option value="daily">يوميًا</option><option value="weekly">أسبوعيًا</option><option value="once">مرة واحدة</option></select></div>'
+   +'<div class="addrow"><input id="taskT" class="inp" maxlength="90" placeholder="اسم المهمة: مثل ورد قرآن الصباح"/><button type="button" id="taskAdd" class="btn gold">أضف</button></div>'
    +'<p class="hint" style="margin-top:10px">خيارات سريعة — انقر الخيار فيتجهز اسمها وفئتها ثم اضغط «أضف»:</p>'
    +'<div class="chipsrow" id="taskQuick">'+QUICK_TASKS.map(q=>'<button type="button" class="chip" data-t="'+esc(q.t)+'" data-k="'+q.k+'">'+esc(q.t)+'</button>').join('')+'</div>'
    +'<div id="taskList" style="margin-top:4px"></div>'
    +'<div class="note center" id="taskSum" hidden></div>'
+   +'<details class="addcard card" style="margin-top:12px"><summary>أرشيف المهمات المنجزة</summary><div id="taskArch" style="margin-top:10px"></div></details>'
    +'<p class="hint center" style="margin-top:8px">كل إنجاز يضيء نجمةً في سمائك، وكل يومٍ بأعماله ظاهرٌ في «التقويم والتاريخ» بالصفحة الرئيسية.</p>';
  },b(){
    const L=$('#taskList');
@@ -3450,32 +3766,50 @@ const TOOLBUILD={
      if(inp){ inp.value=ch.dataset.t; inp.focus(); }
      toast('اخترنا لك المهمة وفئتها — اضغط «أضف» لتثبيتها');
    }));
+   const repTag=t=>t.rep==='weekly'?' · أسبوعيًا ('+WEEKDAYS[t.wd==null?new Date(t.id).getDay():t.wd]+')':(t.rep==='once'?' · مرة واحدة':'');
    const render=()=>{
-     const done=tasksOfToday(); L.innerHTML='';
-     if(!tasks.length){ L.innerHTML='<p class="dim center" style="padding:10px">لا مهمات بعد — أضف أول مهمة: ورد قرآن، ذكرٌ ثابت، صدقة يومية…</p>'; }
-     tasks.forEach(t=>{
+     const done=tasksOfToday(); const vis=visibleTasks(); L.innerHTML='';
+     if(!vis.length){ L.innerHTML='<p class="dim center" style="padding:10px">لا مهمات ظاهرة اليوم — أضف أول مهمة: ورد قرآن، ذكرٌ ثابت، صدقة يومية…</p>'; }
+     vis.forEach(t=>{
        const isDone=done.indexOf(t.id)>=0, m=starMeta(t.k);
        const r=document.createElement('div'); r.className='taskrow'+(isDone?' done':'');
        r.innerHTML='<button type="button" class="taskbox" aria-label="إنجاز المهمة"><svg viewBox="0 0 24 24"><path d="M5 12.5l4.5 4.5L19 7.5" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/></svg></button>'
-       +'<div style="flex:1;min-width:0"><div class="tlabel">'+esc(t.t)+'</div><div class="tmeta"><i style="background:'+m.c+'"></i>'+m.t+'</div></div>'
+       +'<div style="flex:1;min-width:0"><div class="tlabel">'+esc(t.t)+'</div><div class="tmeta"><i style="background:'+m.c+'"></i>'+m.t+repTag(t)+'</div></div>'
        +'<button type="button" class="mini-del">حذف</button>';
        r.querySelector('.taskbox').addEventListener('click',()=>toggleTask(t.id));
        r.querySelector('.mini-del').addEventListener('click',()=>{ delTask(t.id); openTool('tasks'); });
        L.appendChild(r);
      });
-     const doneN=tasks.filter(t=>done.indexOf(t.id)>=0).length;
+     const doneN=vis.filter(t=>done.indexOf(t.id)>=0).length;
      const sum=$('#taskSum');
-     if(tasks.length){ sum.hidden=false; sum.innerHTML='اليوم: أنجزت <b>'+AR(doneN)+'</b> من <b>'+AR(tasks.length)+'</b> مهمة'+(doneN===tasks.length?' — الحمد لله الذي بنعمته تتم الصالحات':''); }
+     if(vis.length){ sum.hidden=false; sum.innerHTML='اليوم: أنجزت <b>'+AR(doneN)+'</b> من <b>'+AR(vis.length)+'</b> مهمة'+(doneN===vis.length?' — الحمد لله الذي بنعمته تتم الصالحات':''); }
      else sum.hidden=true;
+   };
+   /* الأرشيف (v3.0.0): آخر عشرة أيام مُنجزة من خريطة الإنجاز اليومية */
+   const renderArch=()=>{
+     const box=$('#taskArch'); if(!box)return;
+     const dates=Object.keys(tasksDone).sort().reverse().slice(0,10);
+     let h=''; let any=false;
+     dates.forEach(dt=>{
+       const rows=(tasksDone[dt]||[]).map(id=>{ const t=tasks.find(x=>x.id===id); if(!t)return '';
+         const m=starMeta(t.k);
+         return '<div class="taskrow done" style="margin-top:6px"><div class="tlabel">'+esc(t.t)+'</div><div class="tmeta"><i style="background:'+m.c+'"></i>'+m.t+'</div></div>'; }).join('');
+       if(rows){ any=true;
+         const wd=WEEKDAYS[new Date(dt+'T00:00:00').getDay()];
+         h+='<div style="margin-top:8px"><div class="tsrc" style="font-weight:800;color:var(--gold2)">'+wd+' · '+AR(parseInt(dt.slice(8,10),10))+' '+GREG_MN[parseInt(dt.slice(5,7),10)-1]+' '+AR(parseInt(dt.slice(0,4),10))+' م</div>'+rows+'</div>'; }
+     });
+     box.innerHTML=any?h:'<p class="dim center" style="padding:8px">لا أرشيف بعد — أنجز أول مهمة وستظهر هنا</p>';
    };
    $('#taskAdd').addEventListener('click',()=>{
      const t=$('#taskT').value.trim();
      if(!t){ toast('اكتب اسم المهمة أولًا'); return; }
      if(tasks.length>=20){ toast('الحد الأقصى ٢٠ مهمة — احذف ما انتهيت منه'); return; }
-     tasks.push({id:Date.now(),k:$('#taskK').value,t:t}); saveTasks(); $('#taskT').value='';
+     const rep=$('#taskR').value;
+     tasks.push({id:Date.now(),k:$('#taskK').value,t:t,rep:rep,wd:new Date().getDay()});
+     saveTasks(); $('#taskT').value='';
      render(); renderAzTasks(); renderHomeIntent(); toast('أُضيفت المهمة — عند إنجازها اضغط المربع');
    });
-   render();
+   render(); renderArch();
  }}
 };
 
@@ -3566,7 +3900,11 @@ function init(){
   renderCal2();
   $('#badgeNames').textContent=AR(NAMES.length);
   $('#spdTxt').textContent=AR(S.speed);
-  bindNav(); bindTicker(); bindClock(); bindTasbih(); bindSettings();
+  bindNav(); bindTicker(); bindClock(); bindTasbih(); bindSettings(); bindNameSearch();
+  applyTickerVisibility(); applySky();
+  /* نبض الدقيقة (v3.0.0): تحديث الوضع التلقائي والسماء دوريًا وأول العودة من الخلفية */
+  setInterval(()=>{ if(S.theme==='auto')applyLook(); applySky(); },60000);
+  document.addEventListener('visibilitychange',()=>{ if(!document.hidden){ applySky(); if(S.theme==='auto')applyLook(); } });
   go(store.get('screen','home')||'home');
   const unlock=()=>{ ac(); };
   document.addEventListener('touchstart',unlock,{once:true,passive:true});
