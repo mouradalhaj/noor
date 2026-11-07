@@ -495,18 +495,21 @@ details.doc .body b{color:var(--gold2)}
 .secretdone{text-align:center;padding:22px 12px}
 .secretdone .lock{display:grid;place-items:center}
 
-/* ====== شريط الذكر والتذكير (v2.5.0) ====== */
+/* ====== شريط الذكر والتذكير (v2.5.1 — محرّك حركة جافاسكربتي يعمل على الآيفون) ======
+   علاج تجمّد الشريط على iOS: حُذف قناع -webkit-mask الذي يُجمّد تحديث الطبقة في WebKit
+   واستُبدل بتدرّجات طرفية بلا قناع، وأصبحت الحركة جافاسكربتية (requestAnimationFrame)
+   لا تتأثر بإعداد «تقليل الحركة» ولا التصاق :hover باللمس — تُوقف بلمسةٍ وتستأنف عند رفعها. */
 .ticker{display:flex;align-items:center;gap:9px;margin:12px 0 0;padding:0 2px}
 .tickico{flex:none;width:36px;height:36px;border-radius:12px;border:1px solid var(--gold);color:var(--gold);display:grid;place-items:center;background:rgba(217,182,97,.08)}
 .tickico svg{width:20px;height:20px}
-.tickwin{flex:1;min-width:0;overflow:hidden;direction:ltr;border:1px solid var(--line);border-radius:999px;background:var(--card);padding:7px 0;-webkit-mask-image:linear-gradient(90deg,transparent,#000 5%,#000 95%,transparent);mask-image:linear-gradient(90deg,transparent,#000 5%,#000 95%,transparent)}
-.ticktrack{display:inline-flex;align-items:center;white-space:nowrap;will-change:transform;animation:tickmove 46s linear infinite;direction:ltr;min-width:max-content}
-.ticker:hover .ticktrack{animation-play-state:paused}
+.tickwin{position:relative;flex:1;min-width:0;overflow:hidden;direction:ltr;border:1px solid var(--line);border-radius:999px;background:var(--card);padding:7px 0}
+.tickwin::before,.tickwin::after{content:'';position:absolute;top:0;bottom:0;width:16px;z-index:2;pointer-events:none}
+.tickwin::before{right:0;background:linear-gradient(to left,var(--card),transparent)}
+.tickwin::after{left:0;background:linear-gradient(to right,var(--card),transparent)}
+.ticktrack{display:inline-flex;align-items:center;white-space:nowrap;direction:ltr;min-width:max-content;will-change:transform;transform:translate3d(0,0,0);backface-visibility:hidden;-webkit-backface-visibility:hidden}
 .tickitem{display:inline-flex;align-items:center;flex:none;font-size:.8rem;color:var(--muted);padding:0 6px}
 .tickitem b{color:var(--gold2);font-weight:700}
 .tickitem .tsep{display:inline-block;width:5px;height:5px;border-radius:50%;background:var(--gold);opacity:.55;margin:0 13px;flex:none}
-@keyframes tickmove{from{transform:translateX(-50%)}to{transform:translateX(0)}}
-@media (prefers-reduced-motion:reduce){.ticktrack{animation:none;transform:none}}
 
 /* ====== الشريط السفلي ====== */
 #nav{position:fixed;bottom:0;left:0;right:0;z-index:60;display:flex;justify-content:center;padding:8px 14px calc(10px + env(safe-area-inset-bottom));background:linear-gradient(to top,var(--bg) 32%,transparent);pointer-events:none}
@@ -807,7 +810,7 @@ details.doc .body b{color:var(--gold2)}
     </details>
     <details class="doc">
       <summary>سجل الإصدار</summary>
-      <div class="body"><b>v2.5.0</b> — «حالتي الآن وشريط النور»: صار «أنا غاضب» شاشة «حالتي الآن» بتبويبين — غاضبٌ بخطواته نفسها، وسعيدٌ بآداب الفرح من السنة (ابن ماجه، وأبو داود، والترمذي) — وأُضيف شريط تذكير متحرك فوق الأسماء والمسبحة يجري فيه الذكر والتذكير ومهماتك المسجلة بلا توقف، وصار حساب العمر من تاريخ ميلادك: عمرك تلقائيًا، وفروضُ صلواتك ونوافلُها المتبقية، ونومُك تقديرًا بالسنين والشهور والأيام، وصار «النشر والإستخدام» نبذةً خالصة بلا خطوات نشر.<br/><br/><b>v2.4.0</b> — «هوية الإحسان»: أُضيفت رسالة نور «إحسان» إلى «عن تطبيق نور» — فلا تصلح حياةُ الإنسان المؤمن بلا إحسان؛ فراقب يومك وحاسب نفسك واستعن بالله ولا تعجز — وصار القسم «النشر والإستخدام» برسالة المصمم المتواضعة ودعائه لأحبابه، ويُعرض سجل الإصدار مختصرًا: إصدارٌ وسطران لكل تحديث.<br/><br/><b>v2.3.1</b> — إصلاح جذري لخلل التقويم: اختفى «غير معرف» وعادت الأيام إلى أماكنها بإعادة بناء محرك التاريخ الهجري بسلسلة بدائل متعددة وتحقق صارم من كل نتيجة.<br/><br/><b>v2.3.0</b> — طُوي «التقويم والتاريخ» في الرئيسية بشاشة مستقلة تفتح وتُغلق حتى لا تمتلئ الشاشة، وأُضيفت بطاقة «المهمات» فوق «نور اليوم» بعدّاد إنجاز وشاشة خيارات كاملة.<br/><br/><b>v2.2.0</b> — «عزيمة اليوم»: نوايا متعددة ونيتك بكلماتك ومهمات إنجاز تضيء النجوم، و«سماء الخير» للعرض والإحصاء خالصة، وانتقل التقويم بأحداث الإسلام الموثقة إلى الرئيسية.<br/><br/><b>v2.1.0</b> — نجوم سماء الخير تلوّنها أنواع الأعمال بمفتاح ألوان، وتقويم الخير الشهري، ومهماتي اليومية، وتوسعة «القرآن وحالتي» و«محاسبتي» و«بنك الخيرات»، وأيقونات مونو كرور بدل الإيموجي.<br/><br/><b>v2.0.0</b> — شاشة «نور اليوم» الجديدة بأربع عشرة أداة يومية: من نية اليوم وتحدي الدقيقة وسجل الدعوات إلى محاسبتي قبل النوم وكن سببًا في الخير، مع إزاحة أمانة لشريط حالة الآيفون.<br/><br/><b>v1.6.0</b> — علاج نهائي لانعكاس الأسماء على درج الساعة برسم داخلي، وتقليص بطاقات النور إلى ثلاثة أقسام: المعنى، والدليل بمصدره، والدعاء بمصدره — حذفًا لقسمَي «عبرة لقلبك» و«سؤال تدبر».<br/><br/><b>v1.5.0</b> — تشكيل الأسماء المئة وضبط اتجاهها على الدرج، وإعادة صياغة البطاقات المئة توثيقًا من التويجري و«المختصر»، ومسبحات خمس وأحجام وأشكال للخرزة.<br/><br/><b>v1.4.0</b> — اكتمال بطاقات النور المئة موثقة من «مختصر فقه الأسماء الحسنى» للبدر و«التوحيد» للتويجري، وقسم المظهر: خمس لوحات ألوان وأربعة أنماط خلفية.<br/><br/><b>v1.3.0</b> — لغة درج الأسماء عربي أو English من الإعدادات، ونبض قلب حي في الساعة والمسبحة، وشاهد كل ذكر من القرآن والسنة في صفحة المسبحة.<br/><br/><b>v1.2.0</b> — أصوات الساعة (تِك توك، جرس، خشبي) وصوت المسبحة، وشكل الساعة وشكل المسبحة، وخط الأسماء، والتسبيح التلقائي وعقرب الثواني.<br/><br/><b>v1.1.0</b> — تحسين كامل لمقاسات الجوال، الأسماء على قرص الساعة بدل الدقائق والثواني، وسرعة من ١ إلى ١٠ ثوانٍ بمؤشر انزلاقي، ومسبحة خشبية واقعية بصوت خرز محسّن.<br/><br/><b>v1.0.0</b> — الإطلاق الأول: ساعة الأسماء الحسنى (١٠٠ اسم مع الشرح)، والمسبحة بصوت الخرز والاحتفال، والأذكار المخصصة، والإعدادات، والحفظ المحلي على الجهاز.</div>
+      <div class="body"><b>v2.5.1</b> — علاجُ شريط الذكر والتذكير على الآيفون: صار دوره بمحرّكٍ جافاسكربتي بخطوات requestAnimationFrame لا يُجمّده WebKit، وحُذف قناع الشفافية الذي يوقف الحركة داخل العناصر المقنّعة، وأصبح اللمسُ يوقفه ورفعُ الإصبع يستأنفه بدل :hover الذي يلتصق باللمس — فيجري الذكرُ والتذكير ومهماتُك على كل جهازٍ بلا توقف.<br/><br/><b>v2.5.0</b> — «حالتي الآن وشريط النور»: صار «أنا غاضب» شاشة «حالتي الآن» بتبويبين — غاضبٌ بخطواته نفسها، وسعيدٌ بآداب الفرح من السنة (ابن ماجه، وأبو داود، والترمذي) — وأُضيف شريط تذكير متحرك فوق الأسماء والمسبحة يجري فيه الذكر والتذكير ومهماتك المسجلة بلا توقف، وصار حساب العمر من تاريخ ميلادك: عمرك تلقائيًا، وفروضُ صلواتك ونوافلُها المتبقية، ونومُك تقديرًا بالسنين والشهور والأيام، وصار «النشر والإستخدام» نبذةً خالصة بلا خطوات نشر.<br/><br/><b>v2.4.0</b> — «هوية الإحسان»: أُضيفت رسالة نور «إحسان» إلى «عن تطبيق نور» — فلا تصلح حياةُ الإنسان المؤمن بلا إحسان؛ فراقب يومك وحاسب نفسك واستعن بالله ولا تعجز — وصار القسم «النشر والإستخدام» برسالة المصمم المتواضعة ودعائه لأحبابه، ويُعرض سجل الإصدار مختصرًا: إصدارٌ وسطران لكل تحديث.<br/><br/><b>v2.3.1</b> — إصلاح جذري لخلل التقويم: اختفى «غير معرف» وعادت الأيام إلى أماكنها بإعادة بناء محرك التاريخ الهجري بسلسلة بدائل متعددة وتحقق صارم من كل نتيجة.<br/><br/><b>v2.3.0</b> — طُوي «التقويم والتاريخ» في الرئيسية بشاشة مستقلة تفتح وتُغلق حتى لا تمتلئ الشاشة، وأُضيفت بطاقة «المهمات» فوق «نور اليوم» بعدّاد إنجاز وشاشة خيارات كاملة.<br/><br/><b>v2.2.0</b> — «عزيمة اليوم»: نوايا متعددة ونيتك بكلماتك ومهمات إنجاز تضيء النجوم، و«سماء الخير» للعرض والإحصاء خالصة، وانتقل التقويم بأحداث الإسلام الموثقة إلى الرئيسية.<br/><br/><b>v2.1.0</b> — نجوم سماء الخير تلوّنها أنواع الأعمال بمفتاح ألوان، وتقويم الخير الشهري، ومهماتي اليومية، وتوسعة «القرآن وحالتي» و«محاسبتي» و«بنك الخيرات»، وأيقونات مونو كرور بدل الإيموجي.<br/><br/><b>v2.0.0</b> — شاشة «نور اليوم» الجديدة بأربع عشرة أداة يومية: من نية اليوم وتحدي الدقيقة وسجل الدعوات إلى محاسبتي قبل النوم وكن سببًا في الخير، مع إزاحة أمانة لشريط حالة الآيفون.<br/><br/><b>v1.6.0</b> — علاج نهائي لانعكاس الأسماء على درج الساعة برسم داخلي، وتقليص بطاقات النور إلى ثلاثة أقسام: المعنى، والدليل بمصدره، والدعاء بمصدره — حذفًا لقسمَي «عبرة لقلبك» و«سؤال تدبر».<br/><br/><b>v1.5.0</b> — تشكيل الأسماء المئة وضبط اتجاهها على الدرج، وإعادة صياغة البطاقات المئة توثيقًا من التويجري و«المختصر»، ومسبحات خمس وأحجام وأشكال للخرزة.<br/><br/><b>v1.4.0</b> — اكتمال بطاقات النور المئة موثقة من «مختصر فقه الأسماء الحسنى» للبدر و«التوحيد» للتويجري، وقسم المظهر: خمس لوحات ألوان وأربعة أنماط خلفية.<br/><br/><b>v1.3.0</b> — لغة درج الأسماء عربي أو English من الإعدادات، ونبض قلب حي في الساعة والمسبحة، وشاهد كل ذكر من القرآن والسنة في صفحة المسبحة.<br/><br/><b>v1.2.0</b> — أصوات الساعة (تِك توك، جرس، خشبي) وصوت المسبحة، وشكل الساعة وشكل المسبحة، وخط الأسماء، والتسبيح التلقائي وعقرب الثواني.<br/><br/><b>v1.1.0</b> — تحسين كامل لمقاسات الجوال، الأسماء على قرص الساعة بدل الدقائق والثواني، وسرعة من ١ إلى ١٠ ثوانٍ بمؤشر انزلاقي، ومسبحة خشبية واقعية بصوت خرز محسّن.<br/><br/><b>v1.0.0</b> — الإطلاق الأول: ساعة الأسماء الحسنى (١٠٠ اسم مع الشرح)، والمسبحة بصوت الخرز والاحتفال، والأذكار المخصصة، والإعدادات، والحفظ المحلي على الجهاز.</div>
     </details>
   </div>
 </section>
@@ -2730,12 +2733,36 @@ function renderAzTasks(){
   const hint=$('#azTaskHint');
   if(hint)hint.textContent='أنجزت '+AR(doneN)+' من '+AR(tasks.length)+' — كل إنجاز نجمةٌ في سمائك';
 }
-/* --- شريط الذكر والتذكير في الرئيسية (v2.5.0): ذكرٌ وتذكيرٌ ومهماتك المسجلة تجري دورانًا مستمرًا فوق الأسماء والمسبحة --- */
+/* --- شريط الذكر والتذكير في الرئيسية (v2.5.0 + محرّك v2.5.1): ذكرٌ وتذكيرٌ ومهماتك المسجلة تجري دورانًا مستمرًا فوق الأسماء والمسبحة --- */
 const TICK_DH=['سبحان الله وبحمده','لا إله إلا الله','الحمد لله','الله أكبر','أستغفر الله وأتوب إليه','لا حول ولا قوة إلا بالله','سبحان الله العظيم','اللهم صلِّ وسلم على نبينا محمد'];
 const TICK_RM=['أذكار الصباح — لا تفوتك اليوم','وردك من القرآن في انتظارك','أذكار المساء قبل أن تنام','الصلاة في وقتها — أغلى مواعيدك','اتصل بوالديك: كلمةٌ تُسعد قلبيهما','صدقةٌ خفية اليوم — يراها الله','تبسمك في وجه أخيك — صدقة','كلمة طيبة أو صمت','دعوةٌ بينك وبين الله — لا تؤجلها','حاسب نفسك قبل أن تُحاسب','وقتك أغلى رأس مال — أَحسِن استثماره','﴿وَذَكِّرْ فَإِنَّ الذِّكْرَىٰ تَنفَعُ الْمُؤْمِنِينَ﴾ (الذاريات: ٥٥)'];
 function tickItem(x,bold){ return '<span class="tickitem">'+(bold?'<b>«'+esc(x)+'»</b>':'<span>'+esc(x)+'</span>')+'<i class="tsep"></i></span>'; }
+/* --- محرّك دوران الشريط (v2.5.1): حركة جافاسكربتية بخطوات requestAnimationFrame —
+   مضمونة على الآيفون حيث يُجمّد WebKit أنيميشن CSS داخل العناصر المقنّعة، ويلتصق :hover
+   باللمس — إيقافٌ بلمسةٍ على الشريط واستئنافٌ عند رفع الإصبع أو العودة إلى التطبيق --- */
+let tickHalfW=0,tickPos=0,tickRAF=0,tickLast=0,tickHold=false;
+function tickSpd(){ try{ return matchMedia('(prefers-reduced-motion: reduce)').matches?17:34; }catch(e){ return 34; } } /* بكسل/ثانية */
+function tickStop(){ if(tickRAF){ cancelAnimationFrame(tickRAF); tickRAF=0; } tickLast=0; }
+function tickStep(ts){
+  tickRAF=0;
+  const tr=$('#tickTrack'); const win=tr?tr.parentElement:null;
+  if(!tr||!win||document.hidden||tickHold||tickHalfW<=0||win.clientWidth<10){ tickLast=0; return; }
+  if(!tickLast)tickLast=ts;
+  const dt=Math.min(80,ts-tickLast); tickLast=ts;
+  tickPos+=tickSpd()*dt/1000;
+  if(tickPos>=tickHalfW)tickPos-=tickHalfW;
+  tr.style.transform='translate3d('+(tickPos-tickHalfW).toFixed(2)+'px,0,0)';
+  tickRAF=requestAnimationFrame(tickStep);
+}
+function tickPlay(){
+  if(tickRAF)return;
+  const tr=$('#tickTrack'); const win=tr?tr.parentElement:null;
+  if(!tr||!win||document.hidden||tickHold||tickHalfW<=0||win.clientWidth<10)return;
+  tickRAF=requestAnimationFrame(tickStep);
+}
 function buildTicker(){
   const tr=$('#tickTrack'); const win=tr?tr.parentElement:null; if(!tr||!win)return;
+  tickStop();
   const done=tasksOfToday();
   const pend=tasks.filter(t=>done.indexOf(t.id)<0).map(t=>'مهمة تنتظرك: '+t.t);
   const fin=tasks.filter(t=>done.indexOf(t.id)>=0).map(t=>'أنجزت اليوم: '+t.t+' — الحمد لله');
@@ -2744,16 +2771,37 @@ function buildTicker(){
   for(let i=TICK_DH.length;i<TICK_RM.length;i++)seq+=tickItem(TICK_RM[i],false);
   pend.forEach(t=>seq+=tickItem(t,false));
   fin.forEach(t=>seq+=tickItem(t,false));
-  if(!seq)return;
+  if(!seq){ tr.innerHTML=''; tickHalfW=0; return; }
   /* إن كانت الرئيسية مخفية فقياساتها صفر — نملأ المحتوى ونعود للبناء عند العودة إليها */
-  if(win.clientWidth<10){ tr.innerHTML=seq+seq; tr.style.animationDuration='46s'; return; }
+  if(win.clientWidth<10){ tr.innerHTML=seq+seq; tickHalfW=0; return; }
   /* نكرّر الوحدة حتى يتجاوز نصف الشريط عرض النافذة فيدور بلا فراغ، ثم نضاعفه ليكتمل التكرار السلس */
   let half=seq, R=1;
   tr.innerHTML=half+half;
   const w=Math.max(win.clientWidth,320);
   while(tr.scrollWidth/2<w+80&&R<20){ half+=seq; R++; tr.innerHTML=half+half; }
-  const halfW=tr.scrollWidth/2||1;
-  tr.style.animationDuration=Math.max(24,Math.min(130,halfW/34))+'s';
+  tickHalfW=tr.scrollWidth/2||1;
+  if(tickPos>=tickHalfW)tickPos=0;
+  tickLast=0;
+  tickPlay();
+}
+function bindTicker(){
+  const tk=$('#homeTicker'); if(!tk)return;
+  /* لمسةٌ على الشريط توقفه ورفعُ الإصبع يستأنفه — بديل :hover الذي يلتصق على الآيفون */
+  tk.addEventListener('touchstart',()=>{ tickHold=true; },{passive:true});
+  const rel=()=>{ if(tickHold){ tickHold=false; tickLast=0; tickPlay(); } };
+  tk.addEventListener('touchend',rel,{passive:true});
+  tk.addEventListener('touchcancel',rel,{passive:true});
+  /* على ما يقبل التحويم (سطح المكتب) نوقف بمرور المؤشر كما في شرائط الأخبار */
+  let hoverOK=false;
+  try{ hoverOK=matchMedia('(hover: hover)').matches; }catch(e){}
+  if(hoverOK){
+    tk.addEventListener('mouseenter',()=>{ tickHold=true; });
+    tk.addEventListener('mouseleave',()=>{ if(tickHold){ tickHold=false; tickLast=0; tickPlay(); } });
+  }
+  /* عودة التطبيق إلى المقدمة أو تغيّر المقاس: قياسٌ من جديد وتشغيل */
+  document.addEventListener('visibilitychange',()=>{ if(document.hidden)tickStop(); else{ tickLast=0; tickPlay(); } });
+  let rzT=null;
+  window.addEventListener('resize',()=>{ clearTimeout(rzT); rzT=setTimeout(()=>{ tickPos=0; buildTicker(); },180); });
 }
 /* --- التقويم والتاريخ (v2.2.0): تقويم هجري وميلادي + أحداث الإسلام الموثقة في مثل هذا اليوم --- */
 /* التواريخ هنا مشهورة موثقة في كتب السير والتاريخ المعتمدة، وحيثما خُصِم التاريخ ذُكر ذلك
@@ -3518,7 +3566,7 @@ function init(){
   renderCal2();
   $('#badgeNames').textContent=AR(NAMES.length);
   $('#spdTxt').textContent=AR(S.speed);
-  bindNav(); bindClock(); bindTasbih(); bindSettings();
+  bindNav(); bindTicker(); bindClock(); bindTasbih(); bindSettings();
   go(store.get('screen','home')||'home');
   const unlock=()=>{ ac(); };
   document.addEventListener('touchstart',unlock,{once:true,passive:true});
