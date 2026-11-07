@@ -495,6 +495,19 @@ details.doc .body b{color:var(--gold2)}
 .secretdone{text-align:center;padding:22px 12px}
 .secretdone .lock{display:grid;place-items:center}
 
+/* ====== شريط الذكر والتذكير (v2.5.0) ====== */
+.ticker{display:flex;align-items:center;gap:9px;margin:12px 0 0;padding:0 2px}
+.tickico{flex:none;width:36px;height:36px;border-radius:12px;border:1px solid var(--gold);color:var(--gold);display:grid;place-items:center;background:rgba(217,182,97,.08)}
+.tickico svg{width:20px;height:20px}
+.tickwin{flex:1;min-width:0;overflow:hidden;direction:ltr;border:1px solid var(--line);border-radius:999px;background:var(--card);padding:7px 0;-webkit-mask-image:linear-gradient(90deg,transparent,#000 5%,#000 95%,transparent);mask-image:linear-gradient(90deg,transparent,#000 5%,#000 95%,transparent)}
+.ticktrack{display:inline-flex;align-items:center;white-space:nowrap;will-change:transform;animation:tickmove 46s linear infinite;direction:ltr;min-width:max-content}
+.ticker:hover .ticktrack{animation-play-state:paused}
+.tickitem{display:inline-flex;align-items:center;flex:none;font-size:.8rem;color:var(--muted);padding:0 6px}
+.tickitem b{color:var(--gold2);font-weight:700}
+.tickitem .tsep{display:inline-block;width:5px;height:5px;border-radius:50%;background:var(--gold);opacity:.55;margin:0 13px;flex:none}
+@keyframes tickmove{from{transform:translateX(-50%)}to{transform:translateX(0)}}
+@media (prefers-reduced-motion:reduce){.ticktrack{animation:none;transform:none}}
+
 /* ====== الشريط السفلي ====== */
 #nav{position:fixed;bottom:0;left:0;right:0;z-index:60;display:flex;justify-content:center;padding:8px 14px calc(10px + env(safe-area-inset-bottom));background:linear-gradient(to top,var(--bg) 32%,transparent);pointer-events:none}
 #nav .bar{pointer-events:auto;display:flex;gap:2px;width:100%;max-width:430px;background:rgba(13,38,29,.88);background:color-mix(in srgb,var(--card) 88%,transparent);border:1px solid var(--line);border-radius:26px;padding:6px;backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px);box-shadow:0 14px 40px rgba(0,0,0,.35)}
@@ -537,6 +550,11 @@ details.doc .body b{color:var(--gold2)}
     <p class="sub"><span id="greet2"></span> · <span id="hijri"></span> <span id="greg"></span></p>
     <p class="homeintent" id="homeIntent" hidden></p>
   </header>
+  <!-- شريط الذكر والتذكير (v2.5.0): فوق الأسماء والمسبحة — ذكرٌ وتذكيرٌ ومهماتك المسجلة تدور بلا توقف -->
+  <div class="ticker" id="homeTicker" aria-label="شريط الذكر والتذكير">
+    <span class="tickico" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M4 9.6v4.8h3.4l4.9 3.9V5.7L7.4 9.6z"/><path d="M15.4 9.3a3.9 3.9 0 0 1 0 5.4M17.9 6.9a7.2 7.2 0 0 1 0 10.2"/></svg></span>
+    <div class="tickwin"><div class="ticktrack" id="tickTrack"></div></div>
+  </div>
   <div class="grid2">
     <button type="button" class="feat" data-go="names">
       <svg viewBox="0 0 64 64" aria-hidden="true">
@@ -618,11 +636,11 @@ details.doc .body b{color:var(--gold2)}
     <button type="button" class="tool" data-tool="time"><span class="tico"><svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"><circle cx="12" cy="12" r="8.3"/><path d="M12 7.4V12l3.1 1.9"/></svg></span><b>عملٌ لكل وقت</b><span>الوقت الآن وأعماله المحببة من السنة</span></button>
     <button type="button" class="tool" data-tool="challenge"><span class="tico"><svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"><circle cx="12" cy="13.4" r="6.9"/><path d="M12 10.1v3.3l2.4 1.5"/><path d="M9.8 3.4h4.4M12 3.4v3.1M18.4 8.3l1.4 1.4"/></svg></span><b>تحدي الدقيقة</b><span>عملٌ صالح يستغرق دقيقة واحدة</span></button>
     <button type="button" class="tool" data-tool="sky"><span class="tico"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3.2l1.8 5 5 1.8-5 1.8-1.8 5-1.8-5-5-1.8 5-1.8z" fill="currentColor"/><circle cx="18.6" cy="5.4" r="1" fill="currentColor" opacity=".7"/></svg></span><b>سماء الخير</b><span>كل عمل صالح نجمةٌ صغيرة بلون عمله</span></button>
-    <button type="button" class="tool anger" data-tool="anger"><span class="tico"><svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"><path d="M3.6 9.2c2.1 0 2.1 1.7 4.2 1.7s2.1-1.7 4.2-1.7 2.1 1.7 4.2 1.7 2.1-1.7 4.2-1.7"/><path d="M3.6 14.8c2.1 0 2.1 1.7 4.2 1.7s2.1-1.7 4.2-1.7 2.1 1.7 4.2 1.7 2.1-1.7 4.2-1.7"/></svg></span><b>أنا غاضب</b><span>علاج الغضب بالسنة في أربع خطوات</span></button>
+    <button type="button" class="tool anger" data-tool="anger"><span class="tico"><svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M12 20.1C8.9 18.2 4.4 14.6 4.4 10.3c0-2.6 2-4.7 4.6-4.7 1.3 0 2.4.6 3 1.6.6-1 1.7-1.6 3-1.6 2.6 0 4.6 2.1 4.6 4.7 0 4.3-4.5 7.9-7.6 9.8z"/><path d="M9.2 11.9h1.6l.8-1.6 1 2.4.8-1.4h1.6"/></svg></span><b>حالتي الآن</b><span>غاضب أو سعيد — دواك وهدَاك من السنة</span></button>
     <button type="button" class="tool" data-tool="ideas"><span class="tico"><svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><rect x="4.6" y="10.8" width="14.8" height="8.8" rx="1.8"/><path d="M12 10.8v8.8M4.6 14.5h14.8"/><path d="M12 10.8C9 10.8 7.4 9.7 7.4 8.1c0-1.3 1-2.3 2.2-2.3 1.7 0 2.4 2 2.4 5zm0 0c3 0 4.6-1.1 4.6-2.7 0-1.3-1-2.3-2.2-2.3-1.7 0-2.4 2-2.4 5z"/></svg></span><b>بنك الخيرات</b><span>أفكار كثيرة لا تتكرر لك في يومك</span></button>
     <button type="button" class="tool" data-tool="habits"><span class="tico"><svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M5.4 12a6.6 6.6 0 0 1 11.5-4.5M18.6 12a6.6 6.6 0 0 1-11.5 4.5"/><path d="M17.3 4.2v3.5h-3.5M6.7 19.8v-3.5h3.5"/></svg></span><b>عاداتٌ عبادات</b><span>اجعل عملك اليومي عبادة بالنية</span></button>
     <button type="button" class="tool" data-tool="duas"><span class="tico"><svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6.6c0-1.3-1-2.3-2.3-2.3H6.3C5 4.3 4 5.3 4 6.6v7.2c0 1.3 1 2.3 2.3 2.3h2.2v3.6l4.5-3.6h4.7c1.3 0 2.3-1 2.3-2.3z"/><path d="M8.2 9.3h7.6M8.2 12.1h4.6"/></svg></span><b>سجل الدعوات</b><span>دعواتك… وفضل الله حين تستجيب</span></button>
-    <button type="button" class="tool" data-tool="life"><span class="tico"><svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M6.6 3.6h10.8M6.6 20.4h10.8"/><path d="M8.2 3.6v3c0 2.6 3.8 3.1 3.8 5.4s-3.8 2.8-3.8 5.4v3M15.8 3.6v3c0 2.6-3.8 3.1-3.8 5.4s3.8 2.8 3.8 5.4v3"/></svg></span><b>كم بقي من عمري؟</b><span>تذكير رحيم: أسابيع ورمضانات</span></button>
+    <button type="button" class="tool" data-tool="life"><span class="tico"><svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M6.6 3.6h10.8M6.6 20.4h10.8"/><path d="M8.2 3.6v3c0 2.6 3.8 3.1 3.8 5.4s-3.8 2.8-3.8 5.4v3M15.8 3.6v3c0 2.6-3.8 3.1-3.8 5.4s3.8 2.8 3.8 5.4v3"/></svg></span><b>كم بقي من عمري؟</b><span>عمرك من تاريخ ميلادك — صلواتك ونومك المتبقية</span></button>
     <button type="button" class="tool" data-tool="quran"><span class="tico"><svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M12 6.4C10.3 5.1 8 4.7 4.6 4.8v12.8c3.4-.1 5.7.3 7.4 1.6 1.7-1.3 4-1.7 7.4-1.6V4.8c-3.4-.1-5.7.3-7.4 1.6z"/><path d="M12 6.4v12.8"/></svg></span><b>القرآن وحالتي</b><span>آيات تناسب حال قلبك من عشر حالات</span></button>
     <button type="button" class="tool" data-tool="account"><span class="tico"><svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linejoin="round"><path d="M19.6 14.6A8.2 8.2 0 0 1 9.4 4.4a8.2 8.2 0 1 0 10.2 10.2z"/></svg></span><b>محاسبتي قبل النوم</b><span>ثمانية أسئلة تُختم بها يومك</span></button>
     <button type="button" class="tool" data-tool="secret"><span class="tico"><svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"><rect x="5.8" y="10.7" width="12.4" height="8.7" rx="2.2"/><path d="M8.5 10.7V8.3a3.5 3.5 0 0 1 7 0v2.4"/><circle cx="12" cy="15" r="1.2" fill="currentColor" stroke="none"/></svg></span><b>نورٌ بينك وبينه</b><span>عملٌ خفي لا يراه أحد غيره</span></button>
@@ -774,7 +792,7 @@ details.doc .body b{color:var(--gold2)}
     <h3>التوثيق</h3>
     <details class="doc">
       <summary>عن تطبيق نور</summary>
-      <div class="body">نور رفيق ذكرٍ بسيط يعمل من دون إنترنت: ساعةٌ تفاعلية تعرض أسماء الله الحسنى بالعربية والإنجليزية مع بطاقات نورٍ موثقة، ومسبحة إلكترونية بصوت الخرز وعداداتٍ محفوظة، وشاشة «نور اليوم» بأدوات يومية، ومهماتٌ تحت رقابتك ومتابعتك، وتقويمٌ بأحداث الإسلام، وسماءُ خيرٍ تُحصي أعمالك. صُمم للهاتف أولًا ويُستضاف مجانًا عبر GitHub Pages.
+      <div class="body">نور رفيق ذكرٍ بسيط يعمل من دون إنترنت: ساعةٌ تفاعلية تعرض أسماء الله الحسنى بالعربية والإنجليزية مع بطاقات نورٍ موثقة، ومسبحة إلكترونية بصوت الخرز وعداداتٍ محفوظة، وشاشة «نور اليوم» بأدوات يومية، ومهماتٌ تحت رقابتك ومتابعتك، وتقويمٌ بأحداث الإسلام، وسماءُ خيرٍ تُحصي أعمالك. صُمم للهاتف أولًا، ويعمل من متصفحك مباشرةً بلا حسابات ولا تثبيت.
       <br/><b>نور «إحسان»:</b> فلا تصلح حياةُ الإنسان المؤمن بلا إحسان؛ فراقِب يومك، وحاسِب نفسك، واستعِن بالله ولا تعجز — تفز بإذن الله وبرحمته.
       <br/><b>ملاحظة:</b> الحديث الشريف ذكر أن للأسماء «تسعة وتسعين» اسمًا، وفي الساعة مئة خانة لأننا أضفنا الاسم الأعظم «الله» إلى القائمة كما في اللوحات المشهورة، فتكتمل المئة.</div>
     </details>
@@ -785,18 +803,11 @@ details.doc .body b{color:var(--gold2)}
     <details class="doc">
       <summary>النشر والإستخدام</summary>
       <div class="body"><p>نور عملٌ متواضعٌ لوجه الله تعالى؛ مصمِّمه يحبكم بالله ويتمنى أن يلتقي بكم في الجنة مع النبي الحبيب المصطفى ﷺ، ويسأل الله أن يوفقكم باستخدام التطبيق بما يرضي الله، ولا يطمع إلا بدعائكم بظهر الغيب له ولأحبته؛ عسى أن يفوز بدعائكم، ولكم أعظمُ الدعاء وأعظمُ التوسل إلى الله أن ينجيكم ويسعدكم ويحفظكم ويؤويكم ويعطيكم ويسندكم ويجبركم الله في الدنيا والآخرة وجميع أحبابكم، ولا تنسوا في طيّات دعائكم أبي وأمي وجميع آباء وأمهات المسلمين. حفظكم الله.</p>
-      <p class="hint" style="margin-top:8px">ولنشر نور واستخدامه مجانًا عبر GitHub Pages:</p><ol>
-        <li>أنشئ حسابًا على github.com ثم اضغط زر «+» أعلى الصفحة واختر <b>New repository</b>.</li>
-        <li>سمِّه مثلًا <b>noor</b>، اجعله <b>Public</b>، ثم اضغط <b>Create repository</b>.</li>
-        <li>في صفحة المستودع اختر <b>uploading an existing file</b> واسحب ملف <b>index.html</b> ثم <b>Commit changes</b>.</li>
-        <li>افتح <b>Settings ← Pages</b>، واختر Branch: <b>main</b> والمجلد <b>/ (root)</b> ثم <b>Save</b>.</li>
-        <li>بعد دقيقة يصبح الموقع على الرابط: https://اسم-حسابك.github.io/noor/</li>
-        <li>للتحديث لاحقًا: افتح المستودع، اختر index.html ثم أيقونة القلم، عدّل، واضغط Commit — يتحدث الموقع تلقائيًا لكل الزوار.</li>
-      </ol></div>
+      <p style="margin-top:8px"><b>غيرُ مقصدٍ للنشر — وإنما للاستفادة بما يرضي الله عز وجل.</b></p></div>
     </details>
     <details class="doc">
       <summary>سجل الإصدار</summary>
-      <div class="body"><b>v2.4.0</b> — «هوية الإحسان»: أُضيفت رسالة نور «إحسان» إلى «عن تطبيق نور» — فلا تصلح حياةُ الإنسان المؤمن بلا إحسان؛ فراقب يومك وحاسب نفسك واستعن بالله ولا تعجز — وصار القسم «النشر والإستخدام» برسالة المصمم المتواضعة ودعائه لأحبابه، ويُعرض سجل الإصدار مختصرًا: إصدارٌ وسطران لكل تحديث.<br/><br/><b>v2.3.1</b> — إصلاح جذري لخلل التقويم: اختفى «غير معرف» وعادت الأيام إلى أماكنها بإعادة بناء محرك التاريخ الهجري بسلسلة بدائل متعددة وتحقق صارم من كل نتيجة.<br/><br/><b>v2.3.0</b> — طُوي «التقويم والتاريخ» في الرئيسية بشاشة مستقلة تفتح وتُغلق حتى لا تمتلئ الشاشة، وأُضيفت بطاقة «المهمات» فوق «نور اليوم» بعدّاد إنجاز وشاشة خيارات كاملة.<br/><br/><b>v2.2.0</b> — «عزيمة اليوم»: نوايا متعددة ونيتك بكلماتك ومهمات إنجاز تضيء النجوم، و«سماء الخير» للعرض والإحصاء خالصة، وانتقل التقويم بأحداث الإسلام الموثقة إلى الرئيسية.<br/><br/><b>v2.1.0</b> — نجوم سماء الخير تلوّنها أنواع الأعمال بمفتاح ألوان، وتقويم الخير الشهري، ومهماتي اليومية، وتوسعة «القرآن وحالتي» و«محاسبتي» و«بنك الخيرات»، وأيقونات مونو كرور بدل الإيموجي.<br/><br/><b>v2.0.0</b> — شاشة «نور اليوم» الجديدة بأربع عشرة أداة يومية: من نية اليوم وتحدي الدقيقة وسجل الدعوات إلى محاسبتي قبل النوم وكن سببًا في الخير، مع إزاحة أمانة لشريط حالة الآيفون.<br/><br/><b>v1.6.0</b> — علاج نهائي لانعكاس الأسماء على درج الساعة برسم داخلي، وتقليص بطاقات النور إلى ثلاثة أقسام: المعنى، والدليل بمصدره، والدعاء بمصدره — حذفًا لقسمَي «عبرة لقلبك» و«سؤال تدبر».<br/><br/><b>v1.5.0</b> — تشكيل الأسماء المئة وضبط اتجاهها على الدرج، وإعادة صياغة البطاقات المئة توثيقًا من التويجري و«المختصر»، ومسبحات خمس وأحجام وأشكال للخرزة.<br/><br/><b>v1.4.0</b> — اكتمال بطاقات النور المئة موثقة من «مختصر فقه الأسماء الحسنى» للبدر و«التوحيد» للتويجري، وقسم المظهر: خمس لوحات ألوان وأربعة أنماط خلفية.<br/><br/><b>v1.3.0</b> — لغة درج الأسماء عربي أو English من الإعدادات، ونبض قلب حي في الساعة والمسبحة، وشاهد كل ذكر من القرآن والسنة في صفحة المسبحة.<br/><br/><b>v1.2.0</b> — أصوات الساعة (تِك توك، جرس، خشبي) وصوت المسبحة، وشكل الساعة وشكل المسبحة، وخط الأسماء، والتسبيح التلقائي وعقرب الثواني.<br/><br/><b>v1.1.0</b> — تحسين كامل لمقاسات الجوال، الأسماء على قرص الساعة بدل الدقائق والثواني، وسرعة من ١ إلى ١٠ ثوانٍ بمؤشر انزلاقي، ومسبحة خشبية واقعية بصوت خرز محسّن.<br/><br/><b>v1.0.0</b> — الإطلاق الأول: ساعة الأسماء الحسنى (١٠٠ اسم مع الشرح)، والمسبحة بصوت الخرز والاحتفال، والأذكار المخصصة، والإعدادات، والحفظ المحلي على الجهاز.</div>
+      <div class="body"><b>v2.5.0</b> — «حالتي الآن وشريط النور»: صار «أنا غاضب» شاشة «حالتي الآن» بتبويبين — غاضبٌ بخطواته نفسها، وسعيدٌ بآداب الفرح من السنة (ابن ماجه، وأبو داود، والترمذي) — وأُضيف شريط تذكير متحرك فوق الأسماء والمسبحة يجري فيه الذكر والتذكير ومهماتك المسجلة بلا توقف، وصار حساب العمر من تاريخ ميلادك: عمرك تلقائيًا، وفروضُ صلواتك ونوافلُها المتبقية، ونومُك تقديرًا بالسنين والشهور والأيام، وصار «النشر والإستخدام» نبذةً خالصة بلا خطوات نشر.<br/><br/><b>v2.4.0</b> — «هوية الإحسان»: أُضيفت رسالة نور «إحسان» إلى «عن تطبيق نور» — فلا تصلح حياةُ الإنسان المؤمن بلا إحسان؛ فراقب يومك وحاسب نفسك واستعن بالله ولا تعجز — وصار القسم «النشر والإستخدام» برسالة المصمم المتواضعة ودعائه لأحبابه، ويُعرض سجل الإصدار مختصرًا: إصدارٌ وسطران لكل تحديث.<br/><br/><b>v2.3.1</b> — إصلاح جذري لخلل التقويم: اختفى «غير معرف» وعادت الأيام إلى أماكنها بإعادة بناء محرك التاريخ الهجري بسلسلة بدائل متعددة وتحقق صارم من كل نتيجة.<br/><br/><b>v2.3.0</b> — طُوي «التقويم والتاريخ» في الرئيسية بشاشة مستقلة تفتح وتُغلق حتى لا تمتلئ الشاشة، وأُضيفت بطاقة «المهمات» فوق «نور اليوم» بعدّاد إنجاز وشاشة خيارات كاملة.<br/><br/><b>v2.2.0</b> — «عزيمة اليوم»: نوايا متعددة ونيتك بكلماتك ومهمات إنجاز تضيء النجوم، و«سماء الخير» للعرض والإحصاء خالصة، وانتقل التقويم بأحداث الإسلام الموثقة إلى الرئيسية.<br/><br/><b>v2.1.0</b> — نجوم سماء الخير تلوّنها أنواع الأعمال بمفتاح ألوان، وتقويم الخير الشهري، ومهماتي اليومية، وتوسعة «القرآن وحالتي» و«محاسبتي» و«بنك الخيرات»، وأيقونات مونو كرور بدل الإيموجي.<br/><br/><b>v2.0.0</b> — شاشة «نور اليوم» الجديدة بأربع عشرة أداة يومية: من نية اليوم وتحدي الدقيقة وسجل الدعوات إلى محاسبتي قبل النوم وكن سببًا في الخير، مع إزاحة أمانة لشريط حالة الآيفون.<br/><br/><b>v1.6.0</b> — علاج نهائي لانعكاس الأسماء على درج الساعة برسم داخلي، وتقليص بطاقات النور إلى ثلاثة أقسام: المعنى، والدليل بمصدره، والدعاء بمصدره — حذفًا لقسمَي «عبرة لقلبك» و«سؤال تدبر».<br/><br/><b>v1.5.0</b> — تشكيل الأسماء المئة وضبط اتجاهها على الدرج، وإعادة صياغة البطاقات المئة توثيقًا من التويجري و«المختصر»، ومسبحات خمس وأحجام وأشكال للخرزة.<br/><br/><b>v1.4.0</b> — اكتمال بطاقات النور المئة موثقة من «مختصر فقه الأسماء الحسنى» للبدر و«التوحيد» للتويجري، وقسم المظهر: خمس لوحات ألوان وأربعة أنماط خلفية.<br/><br/><b>v1.3.0</b> — لغة درج الأسماء عربي أو English من الإعدادات، ونبض قلب حي في الساعة والمسبحة، وشاهد كل ذكر من القرآن والسنة في صفحة المسبحة.<br/><br/><b>v1.2.0</b> — أصوات الساعة (تِك توك، جرس، خشبي) وصوت المسبحة، وشكل الساعة وشكل المسبحة، وخط الأسماء، والتسبيح التلقائي وعقرب الثواني.<br/><br/><b>v1.1.0</b> — تحسين كامل لمقاسات الجوال، الأسماء على قرص الساعة بدل الدقائق والثواني، وسرعة من ١ إلى ١٠ ثوانٍ بمؤشر انزلاقي، ومسبحة خشبية واقعية بصوت خرز محسّن.<br/><br/><b>v1.0.0</b> — الإطلاق الأول: ساعة الأسماء الحسنى (١٠٠ اسم مع الشرح)، والمسبحة بصوت الخرز والاحتفال، والأذكار المخصصة، والإعدادات، والحفظ المحلي على الجهاز.</div>
     </details>
   </div>
 </section>
@@ -1786,6 +1797,7 @@ function go(id){
   if(id!=='tasbih') stopAuto();
   if(id==='tasbih') renderTasbihStats();
   if(id==='day') renderDay();
+  if(id==='home') buildTicker();
   window.scrollTo({top:0});
 }
 function bindNav(){ $$('[data-go]').forEach(b=>b.addEventListener('click',()=>go(b.dataset.go))); }
@@ -2670,7 +2682,7 @@ function saveDuas(){ if(!store.set('duas',duas))warnStorage(); }
 let tasks=store.get('tasks',[]);
 let tasksDone=store.get('tasksDone',{});
 
-function saveTasks(){ pruneMap(tasksDone,120); if(!store.set('tasks',tasks))warnStorage(); if(!store.set('tasksDone',tasksDone))warnStorage(); }
+function saveTasks(){ pruneMap(tasksDone,120); if(!store.set('tasks',tasks))warnStorage(); if(!store.set('tasksDone',tasksDone))warnStorage(); buildTicker(); }
 function tasksOfToday(){ const d=tasksDone[todayStr()]; return d?d:[]; }
 function removeTaskStar(lbl){
   const d=todayStr();
@@ -2717,6 +2729,31 @@ function renderAzTasks(){
   const doneN=tasks.filter(t=>done.indexOf(t.id)>=0).length;
   const hint=$('#azTaskHint');
   if(hint)hint.textContent='أنجزت '+AR(doneN)+' من '+AR(tasks.length)+' — كل إنجاز نجمةٌ في سمائك';
+}
+/* --- شريط الذكر والتذكير في الرئيسية (v2.5.0): ذكرٌ وتذكيرٌ ومهماتك المسجلة تجري دورانًا مستمرًا فوق الأسماء والمسبحة --- */
+const TICK_DH=['سبحان الله وبحمده','لا إله إلا الله','الحمد لله','الله أكبر','أستغفر الله وأتوب إليه','لا حول ولا قوة إلا بالله','سبحان الله العظيم','اللهم صلِّ وسلم على نبينا محمد'];
+const TICK_RM=['أذكار الصباح — لا تفوتك اليوم','وردك من القرآن في انتظارك','أذكار المساء قبل أن تنام','الصلاة في وقتها — أغلى مواعيدك','اتصل بوالديك: كلمةٌ تُسعد قلبيهما','صدقةٌ خفية اليوم — يراها الله','تبسمك في وجه أخيك — صدقة','كلمة طيبة أو صمت','دعوةٌ بينك وبين الله — لا تؤجلها','حاسب نفسك قبل أن تُحاسب','وقتك أغلى رأس مال — أَحسِن استثماره','﴿وَذَكِّرْ فَإِنَّ الذِّكْرَىٰ تَنفَعُ الْمُؤْمِنِينَ﴾ (الذاريات: ٥٥)'];
+function tickItem(x,bold){ return '<span class="tickitem">'+(bold?'<b>«'+esc(x)+'»</b>':'<span>'+esc(x)+'</span>')+'<i class="tsep"></i></span>'; }
+function buildTicker(){
+  const tr=$('#tickTrack'); const win=tr?tr.parentElement:null; if(!tr||!win)return;
+  const done=tasksOfToday();
+  const pend=tasks.filter(t=>done.indexOf(t.id)<0).map(t=>'مهمة تنتظرك: '+t.t);
+  const fin=tasks.filter(t=>done.indexOf(t.id)>=0).map(t=>'أنجزت اليوم: '+t.t+' — الحمد لله');
+  let seq='';
+  TICK_DH.forEach((d,i)=>{ seq+=tickItem(d,true)+tickItem(TICK_RM[i],false); });
+  for(let i=TICK_DH.length;i<TICK_RM.length;i++)seq+=tickItem(TICK_RM[i],false);
+  pend.forEach(t=>seq+=tickItem(t,false));
+  fin.forEach(t=>seq+=tickItem(t,false));
+  if(!seq)return;
+  /* إن كانت الرئيسية مخفية فقياساتها صفر — نملأ المحتوى ونعود للبناء عند العودة إليها */
+  if(win.clientWidth<10){ tr.innerHTML=seq+seq; tr.style.animationDuration='46s'; return; }
+  /* نكرّر الوحدة حتى يتجاوز نصف الشريط عرض النافذة فيدور بلا فراغ، ثم نضاعفه ليكتمل التكرار السلس */
+  let half=seq, R=1;
+  tr.innerHTML=half+half;
+  const w=Math.max(win.clientWidth,320);
+  while(tr.scrollWidth/2<w+80&&R<20){ half+=seq; R++; tr.innerHTML=half+half; }
+  const halfW=tr.scrollWidth/2||1;
+  tr.style.animationDuration=Math.max(24,Math.min(130,halfW/34))+'s';
 }
 /* --- التقويم والتاريخ (v2.2.0): تقويم هجري وميلادي + أحداث الإسلام الموثقة في مثل هذا اليوم --- */
 /* التواريخ هنا مشهورة موثقة في كتب السير والتاريخ المعتمدة، وحيثما خُصِم التاريخ ذُكر ذلك
@@ -3036,8 +3073,15 @@ const TOOLBUILD={
    }));
  }},
 
+ /* ٤. حالتي الآن (v2.5.0): «أنا غاضب» بخطواتها نفسها + «أنا سعيد» بآداب الفرح من السنة */
  anger:{h(){
-   return '<div class="ttitle">خذ نفسًا… أنت آمن</div>'
+   return '<div class="ttitle">حالتي الآن</div>'
+   +'<p class="hint center">كيف قلبك هذه اللحظة؟ اختر حالتك وستجد دواك وهدَاك من السنة</p>'
+   +'<div class="chipsrow" id="moodTabs" style="margin:8px 0 2px"></div>'
+   +'<div id="moodBody"></div>';
+ },b(){
+   const tabs=$('#moodTabs'), body=$('#moodBody');
+   const ANGER_HTML='<div class="ttitle" style="font-size:1.05rem">خذ نفسًا… أنت آمن</div>'
    +'<div class="breath">تنفّس ببطء</div>'
    +'<div class="tsteps">'
    +'<div class="tstep">قل: <b>أَعُوذُ بِاللهِ مِنَ الشَّيْطَانِ الرَّجِيمِ</b> — كان ﷺ إذا غضب يقولها<div class="tsrc">رواه البخاري (٣٢٨٢)</div></div>'
@@ -3046,6 +3090,27 @@ const TOOLBUILD={
    +'<div class="tstep">لا تتخذ قرارًا الآن؛ أجّل الرد وأصِل على النبي ﷺ حتى يذهب الغضب<div class="tsrc">«ليس الشديد بالصُّرَعة، إنما الشديد الذي يملك نفسه عند الغضب» — متفق عليه</div></div>'
    +'</div>'
    +'<div class="tblock tayat">﴿وَالْكَاظِمِينَ الْغَيْظَ وَالْعَافِينَ عَنِ النَّاسِ ۗ وَاللَّهُ يُحِبُّ الْمُحْسِنِينَ﴾<div class="tsrc">سورة آل عمران: ١٣٤</div></div>';
+   const HAPPY_HTML='<div class="ttitle" style="font-size:1.05rem">فرحةٌ بالله لا تَعبَث</div>'
+   +'<div class="breath" style="color:var(--teal)">الحمدُ لله على كل حال</div>'
+   +'<div class="tsteps">'
+   +'<div class="tstep">قل: <b>«الحمدُ للهِ الذي بنعمتِه تَتِمُّ الصَّالحاتُ»</b> — كان ﷺ إذا رأى ما يحب قالها، وإذا رأى ما يكره قال: «الحمدُ لله على كل حال»<div class="tsrc">رواه ابن ماجه (٣٨٠٢) — حسن</div></div>'
+   +'<div class="tstep">اسجُد شكرًا لله — كان ﷺ إذا جاءه أمرٌ يسرٌ به خرّ ساجدًا شاكرًا لله<div class="tsrc">رواه أبو داود (٢٧٧٤) والترمذي (١٥٧٨)</div></div>'
+   +'<div class="tstep">قسِّم فرحك: تبسمك في وجه أخيك صدقة، وأفشِ السلام بينكم<div class="tsrc">«تبسمُك في وجه أخيك لك صدقة» — رواه الترمذي (١٩٥٦)</div></div>'
+   +'<div class="tstep">احفظ فرحك بالشكر: النعمة بالشكر تبقى وتزيد<div class="tsrc">﴿لَئِن شَكَرْتُمْ لَأَزِيدَنَّكُمْ﴾ — سورة إبراهيم: ٧</div></div>'
+   +'</div>'
+   +'<div class="tblock tayat">﴿قُلْ بِفَضْلِ اللَّهِ وَبِرَحْمَتِهِ فَبِذَٰلِكَ فَلْيَتَفَرَّحُوا هُوَ خَيْرٌ مِّمَّا يَجْمَعُونَ﴾<div class="tsrc">سورة يونس: ٥٨</div></div>';
+   const M=[{k:'g',n:'أنا غاضب',h:ANGER_HTML},{k:'s',n:'أنا سعيد',h:HAPPY_HTML}];
+   let cur='g';
+   const paint=()=>{
+     $$('#moodTabs .chip').forEach((c,i)=>c.classList.toggle('on',M[i].k===cur));
+     body.innerHTML=M.find(x=>x.k===cur).h;
+   };
+   M.forEach(m=>{
+     const b=document.createElement('button'); b.type='button'; b.className='chip'; b.textContent=m.n;
+     b.addEventListener('click',()=>{ cur=m.k; paint(); });
+     tabs.appendChild(b);
+   });
+   paint();
  }},
  /* ٥. بنك الخيرات */
  ideas:{h(){
@@ -3148,30 +3213,69 @@ const TOOLBUILD={
    });
    render();
  }},
- /* ٩. كم بقي من عمري؟ */
+ /* ٩. كم بقي من عمري؟ (v2.5.0: من تاريخ الميلاد + الفروض والنوافل + تقدير النوم) */
  life:{h(){
    return '<div class="ttitle">كم بقي من عمري؟</div>'
    +'<p class="hint center">ليست للتخويف بل للتذكير — ﴿وَمَا تَدْرِي نَفْسٌ بِأَيِّ أَرْضٍ تَمُوتُ﴾ (لقمان: ٣٤)</p>'
-   +'<div class="srow" style="border:none"><span class="lbl2">عمرك الحالي</span><input id="lifeAge" class="inp" style="max-width:120px" type="number" min="1" max="130" inputmode="numeric"/></div>'
+   +'<div class="srow" style="border:none"><span class="lbl2">تاريخ الميلاد</span><input id="lifeBirth" class="inp" style="max-width:180px" type="date"/></div>'
+   +'<div class="srow" style="border:none"><span class="lbl2">عمرك الآن</span><b id="lifeAgeNow" style="font-size:.95rem;color:var(--gold2)">—</b></div>'
    +'<div class="srow" style="border:none"><span class="lbl2">عمرٌ تتوقع أن تبلغه</span><input id="lifeExp" class="inp" style="max-width:120px" type="number" min="10" max="140" inputmode="numeric"/></div>'
-   +'<p class="hint">الافتراضي ٧٠ سنة توكيدًا لحديث: «أعمار أمتي ما بين الستين والسبعين وقليلهم من أجناسهم يتجاوزون ذلك» — رواه أحمد والترمذي. عدّله كما تشاء.</p>'
+   +'<p class="hint">اكتب تاريخ ميلادك فيحسب نور عمرك تلقائيًا ويعمل به خوارزمية الحساب. والافتراضي ٧٠ سنة توكيدًا لحديث: «أعمار أمتي ما بين الستين والسبعين وقليلهم من أجناسهم يتجاوزون ذلك» — رواه أحمد والترمذي. عدّله كما تشاء.</p>'
    +'<div class="lifebox" id="lifeOut"></div>'
+   +'<div class="lifebox" id="lifePray" style="margin-top:8px"></div>'
+   +'<p class="hint">النوافل محسوبة بالسنن الرواتب: ست نوافل كل يوم (اثنتا عشرة ركعة: ركعتان قبل الفجر، وأربع قبل الظهر، وركعتان بعده، وركعتان بعد المغرب، وركعتان بعد العشاء) — «مَن صلّى اثنتي عشرة ركعة في يوم وليلة بُني له بيتٌ في الجنة» (متفق عليه).</p>'
+   +'<div id="lifeSleep" style="margin-top:2px"></div>'
    +'<div class="note center"><b>ابدأ اليوم.</b> كل أسبوع في الحساب أعلاه جُمعةٌ تُنقضي ورمضانٌ يقترب — «احْرِصْ عَلَى مَا يَنْفَعُكَ» (رواه مسلم ٢٦٦٤).</div>';
  },b(){
-   const inpA=$('#lifeAge'), inpE=$('#lifeExp'), out=$('#lifeOut');
-   inpA.value=life.a!=null?life.a:''; inpE.value=life.e||70;
-   const paint=()=>{
-     const a=parseInt(inpA.value,10), e=parseInt(inpE.value,10)||70;
-     life={a:isNaN(a)?null:a,e:e}; store.set('life',life);
-     if(isNaN(a)||!e||e<10){ out.innerHTML='<p class="dim center" style="grid-column:1/-1">اكتب عمرك ليعرض الحساب التقريبي.</p>'; return; }
-     let ry=e-a;
-     if(ry<0){
-       out.innerHTML='<p class="dim center" style="grid-column:1/-1">عِشْتَ فوق المتوسط الذي حددته — كل يومٍ إضافي نورٌ زائد فأحسِن استثماره.</p>'; return;
-     }
-     const wk=Math.round(ry*365.25/7), rd=Math.round(ry);
-     out.innerHTML='<div><b>'+AR(wk)+'</b><span>أسبوع تقريبًا</span></div><div><b>'+AR(rd)+'</b><span>رمضان متوقع</span></div><div><b>'+AR(wk)+'</b><span>جُمعة متبقية</span></div>';
+   const inpB=$('#lifeBirth'), inpE=$('#lifeExp'), out=$('#lifeOut'), pray=$('#lifePray'), slp=$('#lifeSleep'), ageNow=$('#lifeAgeNow');
+   if(life.b)inpB.value=life.b;
+   inpE.value=life.e||70;
+   inpB.max=new Date().toISOString().slice(0,10);
+   /* تحويل عدد أيام إلى (سنة وشهر ويوم) تقريبًا */
+   const YMD=dd=>{
+     const y=Math.floor(dd/365.25); let r=dd-y*365.25;
+     let m=Math.floor(r/30.4375); r-=m*30.4375;
+     let d=Math.round(r);
+     if(d>29){m++;d=0;} if(m>11){y++;m-=12;}
+     const p=[];
+     if(y)p.push(AR(y)+' سنة');
+     if(m)p.push(AR(m)+' شهرًا');
+     if(d||!p.length)p.push(AR(d)+' يومًا');
+     return p.join(' و');
    };
-   inpA.addEventListener('input',paint); inpE.addEventListener('input',paint);
+   /* العمر الكامل (سنة وشهر ويوم) تقويميًا من تاريخ الميلاد */
+   const ageParts=bd=>{
+     const t=new Date(); let y=t.getFullYear()-bd.getFullYear(), m=t.getMonth()-bd.getMonth(), d=t.getDate()-bd.getDate();
+     if(d<0){ m--; d+=new Date(t.getFullYear(),t.getMonth(),0).getDate(); }
+     if(m<0){ y--; m+=12; }
+     return {y:y,m:m,d:d};
+   };
+   const paint=()=>{
+     const e=parseInt(inpE.value,10)||70, bv=inpB.value;
+     life={b:bv||null,e:e}; store.set('life',life);
+     const bad=msg=>{ ageNow.textContent='—'; out.innerHTML='<p class="dim center" style="grid-column:1/-1">'+msg+'</p>'; pray.innerHTML=''; slp.innerHTML=''; };
+     if(!bv){ bad('اكتب تاريخ ميلادك ليعرض الحساب التقريبي.'); return; }
+     const bd=new Date(bv+'T00:00:00');
+     if(isNaN(bd)||bd>new Date()){ bad('تحقّق من تاريخ الميلاد.'); return; }
+     const ap=ageParts(bd);
+     if(ap.y<0||ap.y>150){ bad('تحقّق من تاريخ الميلاد.'); return; }
+     const apP=[];
+     if(ap.y)apP.push(AR(ap.y)+' سنة');
+     if(ap.m)apP.push(AR(ap.m)+' شهرًا');
+     if(ap.d)apP.push(AR(ap.d)+' يومًا');
+     ageNow.textContent=apP.length?apP.join(' و'):(AR(0)+' يومًا');
+     const ry=e-ap.y;
+     if(ry<0){
+       out.innerHTML='<p class="dim center" style="grid-column:1/-1">عِشْتَ فوق المتوسط الذي حددته — كل يومٍ إضافي نورٌ زائد فأحسِن استثماره.</p>';
+       pray.innerHTML=''; slp.innerHTML=''; return;
+     }
+     const days=Math.round(ry*365.25), wk=Math.round(days/7);
+     out.innerHTML='<div><b>'+AR(wk)+'</b><span>أسبوع تقريبًا</span></div><div><b>'+AR(ry)+'</b><span>رمضان متوقع</span></div><div><b>'+AR(wk)+'</b><span>جُمعة متبقية</span></div>';
+     pray.innerHTML='<div><b>'+AR(days*5)+'</b><span>صلاة فريضة متوقفة عليك</span></div><div><b>'+AR(days*6)+'</b><span>نافلة محببة (الرواتب)</span></div><div><b>'+AR(days)+'</b><span>يوم حتى المتوقع</span></div>';
+     slp.innerHTML='<h3 style="font-size:.78rem;color:var(--gold);margin:8px 0 5px">وكم ستنام؟ (تقدير بنوم ست أو سبع ساعات يوميًا)</h3>'
+     +'<p class="hint" style="margin:0">ستقضي من المتبقي نومًا: بنوم <b style="color:var(--gold2)">'+AR(6)+' ساعات</b> ≈ <b style="color:var(--gold2)">'+YMD(Math.round(days/4))+'</b>، وبنوم <b style="color:var(--gold2)">'+AR(7)+' ساعات</b> ≈ <b style="color:var(--gold2)">'+YMD(Math.round(days*7/24))+'</b> — ثلث العمر تقريبًا يمرّ ونحن نائمون، فاجعل لنومك نية: راحةً لجسدك لتقوم لعبادة ربك.</p>';
+   };
+   inpB.addEventListener('input',paint); inpB.addEventListener('change',paint); inpE.addEventListener('input',paint);
    paint();
  }},
  /* ١٠. القرآن حسب الحالة */
@@ -3405,7 +3509,7 @@ function bindDay(){
 function init(){
   applyLook(); buildPalSw(); applyFont(); applyNameFont(); applyClockStyle();
   buildDial(); buildOrn(); applyTasbihStyle();
-  if(document.fonts&&document.fonts.ready)document.fonts.ready.then(()=>{ buildDial(); renderName(false); });
+  if(document.fonts&&document.fonts.ready)document.fonts.ready.then(()=>{ buildDial(); renderName(false); buildTicker(); });
   renderName(false);
   renderChips(); renderTargets(); renderTasbih(false); renderTasbihStats(); renderCustomList(); renderTasbihMode();
   renderHomeStats(); renderDates(); renderHomeIntent();
