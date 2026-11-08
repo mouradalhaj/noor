@@ -242,7 +242,7 @@ html[data-namefont="ruqaa"] .nname{font-family:'Aref Ruqaa','Amiri',serif}
 .subhint b{color:var(--gold2)}
 
 /* ====== بطاقة النور (v1.6.0) ====== */
-.tagbu{background:linear-gradient(135deg,var(--gold),#b98d2f);color:#231a08;border:none;border-radius:999px;font-size:.72rem;font-weight:800;padding:6px 14px;cursor:pointer;font-family:var(--f-ui);letter-spacing:.02em;box-shadow:0 4px 14px rgba(217,182,97,.25);transition:.15s}
+.tagbu{background:linear-gradient(135deg,var(--gold),#b98d2f);color:#231a08;border:none;border-radius:999px;font-size:.72rem;font-weight:800;padding:6px 14px;cursor:pointer;font-family:var(--f-ui);letter-spacing:.02em;box-shadow:0 4px 14px rgba(217,182,97,.25);transition:.15s;white-space:nowrap}
 .tagbu:active{transform:scale(.94)}
 body.cardopen{overflow:hidden}
 .cardveil{position:fixed;inset:0;background:rgba(3,10,7,.64);backdrop-filter:blur(3px);-webkit-backdrop-filter:blur(3px);opacity:0;pointer-events:none;transition:opacity .3s;z-index:70}
@@ -543,7 +543,6 @@ details.doc .body b{color:var(--gold2)}
 .wirdhead span{font-size:.78rem;color:var(--muted);font-weight:700}
 .wirdbar{height:9px;border-radius:99px;background:var(--bg2);border:1px solid var(--line);overflow:hidden}
 #wirdFill{display:block;height:100%;width:0;border-radius:99px;background:linear-gradient(90deg,var(--emerald),var(--teal));transition:width .5s ease}
-.wird .chipsrow{margin-top:10px}
 .wird .hint{margin-top:8px;line-height:1.9}
 /* عدّاد كل ذكر داخل شريحة الاختيار */
 .chip .ccount{font-style:normal;font-size:.68rem;color:var(--gold2);opacity:.85;margin-inline-start:5px}
@@ -561,6 +560,8 @@ details.doc .body b{color:var(--gold2)}
 .tagbu.ghost{background:none;border:1px solid var(--line);color:var(--muted);box-shadow:none}
 .tagbu.onfav{background:none;border-color:var(--gold);color:var(--gold2);box-shadow:none}
 .tagbu svg{width:13px;height:13px;vertical-align:-2px;margin-inline-end:3px}
+/* صفّا «بطاقة النور» و«مشاركة واتساب» (v3.1.0): زران متوازنان بعرض البطاقة */
+.duobtns .tagbu{flex:1;min-width:0;text-align:center;padding:9px 8px}
 /* قوس العمر ومحاسبته الأسبوعية */
 .lifearc{margin:12px auto 0;max-width:250px;text-align:center}
 .lifearc svg{width:100%;height:auto;display:block}
@@ -764,7 +765,8 @@ details.doc .body b{color:var(--gold2)}
     </div>
   </div>
   <div class="namecard card" id="explock">
-    <div class="rowl"><span class="tag">الشرح</span><span style="display:flex;gap:6px"><button type="button" id="btnFav" class="tagbu ghost"><svg viewBox="0 0 24 24"><path d="M12 3.6l2.5 5.2 5.7.8-4.1 4 1 5.7-5.1-2.7-5.1 2.7 1-5.7-4.1-4 5.7-.8z" fill="currentColor"/></svg>مفضلة</button><button type="button" id="btnCard" class="tagbu">بطاقة النور</button></span></div>
+    <div class="rowl"><span class="tag">الشرح</span><button type="button" id="btnFav" class="tagbu ghost"><svg viewBox="0 0 24 24"><path d="M12 3.6l2.5 5.2 5.7.8-4.1 4 1 5.7-5.1-2.7-5.1 2.7 1-5.7-4.1-4 5.7-.8z" fill="currentColor"/></svg>مفضلة</button></div>
+    <div class="duobtns"><button type="button" id="btnCard" class="tagbu">بطاقة النور</button><button type="button" id="btnShare" class="tagbu"><svg viewBox="0 0 24 24"><path d="M12 15.4V4.6m0 0L8.2 8.4M12 4.6l3.8 3.8" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/><path d="M5.2 12.4v5.8a1.7 1.7 0 0 0 1.7 1.7h10.2a1.7 1.7 0 0 0 1.7-1.7v-5.8" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>مشاركة واتساب</button></div>
     <b id="nc-en" class="nc-en"></b>
     <p id="n-desc" class="exp"></p>
   </div>
@@ -809,11 +811,8 @@ details.doc .body b{color:var(--gold2)}
     <button type="button" id="autoPlayBtn" class="btn gold">بدء التحريك</button>
     <div id="autoSpeedChips" class="chipsrow"></div>
   </div>
-  <div class="targets"><span class="lbl">الهدف:</span><div id="targetChips" class="chipsrow"></div></div>
-  <div id="customTarget" class="ct">
-    <input id="ctVal" class="inp" type="number" min="1" max="99999" inputmode="numeric" placeholder="عدد مخصص مثل 50"/>
-    <button type="button" id="ctSet" class="btn gold">تحديد</button>
-  </div>
+  <!-- هدف الجولة (v3.1.0): إدخال يدوي خالص — تكتب العدد بنفسك أو تتركه بلا هدف -->
+  <div class="targets"><span class="lbl">هدف الجولة (يدوي):</span><div class="chipsrow"><input id="tgtIn" class="inp" type="number" min="1" max="99999" inputmode="numeric" placeholder="اكتب العدد" style="width:128px;padding:8px 10px;font-size:.84rem"/><button type="button" id="tgtSet" class="chip">تحديد</button><button type="button" id="tgtNone" class="chip on">بلا هدف</button></div></div>
   <div class="trow">
     <button type="button" id="resetRound" class="btn">تصفير الجولة</button>
     <span class="tstat">اليوم: <b id="dayC">٠</b></span>
@@ -821,17 +820,19 @@ details.doc .body b{color:var(--gold2)}
   </div>
   <!-- ورد اليوم (v3.0.0): هدف يومي بحلقة تقدّم -->
   <div class="wird card" id="wirdCard">
-    <div class="wirdhead"><b>ورد اليوم</b><span id="wirdPct">٠٪</span></div>
-    <div class="wirdbar"><i id="wirdFill"></i></div>
-    <div class="chipsrow" id="wirdChips"></div>
-    <p class="hint" id="wirdHint">اختر هدفًا لوردك اليومي — وكل تسبيحة في يومك تدفعك نحوه</p>
+    <div class="wirdhead"><b>ورد اليوم</b><span id="wirdPct"></span></div>
+    <div class="wirdbar" id="wirdBar"><i id="wirdFill"></i></div>
+    <!-- هدف الورد (v3.1.0): إدخال يدوي خالص — لا أعداد جاهزة، تكتبه بنفسك كيفما شئت -->
+    <div class="addr" style="margin-top:11px"><input id="wirdIn" class="inp" type="number" min="1" max="999999" inputmode="numeric" placeholder="اكتب هدف وردك بنفسك: مثل ٧٠ أو ٣٣٣"/><button type="button" id="wirdSet" class="btn gold">تحديد</button></div>
+    <button type="button" id="wirdNone" class="chip" style="margin-top:9px" hidden>إلغاء الهدف — وردٌ حرّ</button>
+    <p class="hint" id="wirdHint">اكتب هدفًا لوردك يدويًا — وكل تسبيحة في يومك تدفعك نحوه</p>
     <p class="hint" style="margin-top:4px;color:var(--gold)">في الحديث: «مَن قال سُبْحانَ اللهِ وبحَمْدِهِ في يومٍ مائةَ مَرَّةٍ حُطَّت خطاياه وإن كانت مِثلَ زَبَدِ البحر» — متفق عليه (البخاري ٦٤٠٥ ومسلم ٢٦٩١)</p>
   </div>
   <details class="addcard card">
     <summary>إضافة ذكر مخصص</summary>
     <div class="addr"><input id="newDhikr" class="inp" maxlength="40" placeholder="اكتب الذكر هنا"/><button type="button" id="addBtn" class="btn gold">إضافة</button></div>
   </details>
-  <p class="hint center subhint">في النمط اليدوي كل نقرة تسبيحة بصوت الخرز، وفي التلقائي تتحرك المسبحة وحدها بالمدة التي تختارها · عند اكتمال العدد يظهر الاحتفال</p>
+  <p class="hint center subhint">في النمط اليدوي كل نقرة تسبيحة بصوت الخرز، وفي التلقائي تتحرك المسبحة وحدها بالمدة التي تختارها · حددتَ هدفًا فهو حدُّ جولتك، وتركتَه فارغًا فأنت في وردٍ حرٍّ بلا حدّ</p>
 </section>
 
 <!-- ====== الإعدادات ====== -->
@@ -891,7 +892,7 @@ details.doc .body b{color:var(--gold2)}
     <h3>التوثيق</h3>
     <details class="doc">
       <summary>عن تطبيق نور</summary>
-      <div class="body">نور رفيق ذكرٍ بسيط يعمل من دون إنترنت: ساعةٌ تفاعلية تعرض أسماء الله الحسنى بالعربية والإنجليزية مع بطاقات نورٍ موثقة، ومسبحة إلكترونية بصوت الخرز ووردٍ يومي بعدّادٍ محفوظ، وشاشة «نور اليوم» بأدوات يومية ومحاسبةٍ برسمٍ أسبوعي، ومهماتٌ بتكرارها وأرشيفها، وتقويمٌ بأحداث الإسلام، وسماءُ خيرٍ تُحصي أعمالك، وبحثٌ ومفضلةٌ في الأسماء، وسماءٌ تتبع أوقات النهار بلونها. صُمم للهاتف أولًا، ويعمل من متصفحك مباشرةً بلا حسابات ولا تثبيت.
+      <div class="body">نور رفيق ذكرٍ بسيط يعمل من دون إنترنت: ساعةٌ تفاعلية تعرض أسماء الله الحسنى بالعربية والإنجليزية مع بطاقات نورٍ موثقة، ومسبحة إلكترونية بصوت الخرز ووردٍ يومي بعدّادٍ محفوظ، وشاشة «نور اليوم» بأدوات يومية ومحاسبةٍ برسمٍ أسبوعي، ومهماتٌ بتكرارها وأرشيفها، وتقويمٌ بأحداث الإسلام، وسماءُ خيرٍ تُحصي أعمالك، وبحثٌ ومفضلةٌ في الأسماء، وسماءٌ تتبع أوقات النهار بلونها، وبطاقةُ كل اسمٍ تُشارَك صورةً على واتساب. صُمم للهاتف أولًا، ويعمل من متصفحك مباشرةً بلا حسابات ولا تثبيت.
       <br/><b>نور «إحسان»:</b> فلا تصلح حياةُ الإنسان المؤمن بلا إحسان؛ فراقِب يومك، وحاسِب نفسك، واستعِن بالله ولا تعجز — تفز بإذن الله وبرحمته.
       <br/><b>ملاحظة:</b> الحديث الشريف ذكر أن للأسماء «تسعة وتسعين» اسمًا، وفي الساعة مئة خانة لأننا أضفنا الاسم الأعظم «الله» إلى القائمة كما في اللوحات المشهورة، فتكتمل المئة.</div>
     </details>
@@ -906,7 +907,7 @@ details.doc .body b{color:var(--gold2)}
     </details>
     <details class="doc">
       <summary>سجل الإصدار</summary>
-      <div class="body"><b>v3.0.0</b> — «بهاء النور» إصدارُ الاحتفاء الكبير: حلقةُ حركةٍ موحّدة (requestAnimationFrame واحدة) تُدير الساعة والشريط ولمعانه بأداءٍ أنعم وبطاريةٍ أهدأ، وحفظٌ مؤجّل للعدادات، وسماءٌ تتلوّن بأوقات اليوم من الفجر إلى الليل، ونبضةُ نورٍ حول الساعة عند كل اسم، ولمعانٌ ذهبي يجري في الشريط، ونجمةٌ تولد بنبضةٍ في سماء الخير، وعدادُ تسبيحٍ يتدحرج، ولوحةُ «ليل عميق» السوداء لشاشات AMOLED، ووضعٌ تلقائي نهاريّ/ليليّ، ووردٌ يوميّ للمسبحة بحلقة تقدّم وأهداف (١٠٠/٣٣٣/٥٠٠/١٠٠٠) وعدّادٍ لكل ذكر ونبضٍ اهتزازيّ كل ٣٣، وبحثٌ فوريّ في الأسماء ومفضلةٌ محفوظة واستعراضٌ هادئ للقرص، وأرشيفُ مهماتٍ وتكرارٌ يوميّ وأسبوعيّ، وحاسبةُ عمرٍ بقوسٍ يُظهر موقعك من العمر المتوقع وبأشهر وأسابيع وركعات فريضةٍ ورواتب متبقية، ورسمٌ أسبوعيّ لمحاسبتك، وخياراتُ جديدة للشريط (إظهار وسرعة وأذكارك المخصصة) — بلا أن تنكسر صلةٌ ولا تضيع بيانات.<br/><br/><b>v2.5.1</b> — علاجُ شريط الذكر والتذكير على الآيفون: صار دوره بمحرّكٍ جافاسكربتي بخطوات requestAnimationFrame لا يُجمّده WebKit، وحُذف قناع الشفافية الذي يوقف الحركة داخل العناصر المقنّعة، وأصبح اللمسُ يوقفه ورفعُ الإصبع يستأنفه بدل :hover الذي يلتصق باللمس — فيجري الذكرُ والتذكير ومهماتُك على كل جهازٍ بلا توقف.<br/><br/><b>v2.5.0</b> — «حالتي الآن وشريط النور»: صار «أنا غاضب» شاشة «حالتي الآن» بتبويبين — غاضبٌ بخطواته نفسها، وسعيدٌ بآداب الفرح من السنة (ابن ماجه، وأبو داود، والترمذي) — وأُضيف شريط تذكير متحرك فوق الأسماء والمسبحة يجري فيه الذكر والتذكير ومهماتك المسجلة بلا توقف، وصار حساب العمر من تاريخ ميلادك: عمرك تلقائيًا، وفروضُ صلواتك ونوافلُها المتبقية، ونومُك تقديرًا بالسنين والشهور والأيام، وصار «النشر والإستخدام» نبذةً خالصة بلا خطوات نشر.<br/><br/><b>v2.4.0</b> — «هوية الإحسان»: أُضيفت رسالة نور «إحسان» إلى «عن تطبيق نور» — فلا تصلح حياةُ الإنسان المؤمن بلا إحسان؛ فراقب يومك وحاسب نفسك واستعن بالله ولا تعجز — وصار القسم «النشر والإستخدام» برسالة المصمم المتواضعة ودعائه لأحبابه، ويُعرض سجل الإصدار مختصرًا: إصدارٌ وسطران لكل تحديث.<br/><br/><b>v2.3.1</b> — إصلاح جذري لخلل التقويم: اختفى «غير معرف» وعادت الأيام إلى أماكنها بإعادة بناء محرك التاريخ الهجري بسلسلة بدائل متعددة وتحقق صارم من كل نتيجة.<br/><br/><b>v2.3.0</b> — طُوي «التقويم والتاريخ» في الرئيسية بشاشة مستقلة تفتح وتُغلق حتى لا تمتلئ الشاشة، وأُضيفت بطاقة «المهمات» فوق «نور اليوم» بعدّاد إنجاز وشاشة خيارات كاملة.<br/><br/><b>v2.2.0</b> — «عزيمة اليوم»: نوايا متعددة ونيتك بكلماتك ومهمات إنجاز تضيء النجوم، و«سماء الخير» للعرض والإحصاء خالصة، وانتقل التقويم بأحداث الإسلام الموثقة إلى الرئيسية.<br/><br/><b>v2.1.0</b> — نجوم سماء الخير تلوّنها أنواع الأعمال بمفتاح ألوان، وتقويم الخير الشهري، ومهماتي اليومية، وتوسعة «القرآن وحالتي» و«محاسبتي» و«بنك الخيرات»، وأيقونات مونو كرور بدل الإيموجي.<br/><br/><b>v2.0.0</b> — شاشة «نور اليوم» الجديدة بأربع عشرة أداة يومية: من نية اليوم وتحدي الدقيقة وسجل الدعوات إلى محاسبتي قبل النوم وكن سببًا في الخير، مع إزاحة أمانة لشريط حالة الآيفون.<br/><br/><b>v1.6.0</b> — علاج نهائي لانعكاس الأسماء على درج الساعة برسم داخلي، وتقليص بطاقات النور إلى ثلاثة أقسام: المعنى، والدليل بمصدره، والدعاء بمصدره — حذفًا لقسمَي «عبرة لقلبك» و«سؤال تدبر».<br/><br/><b>v1.5.0</b> — تشكيل الأسماء المئة وضبط اتجاهها على الدرج، وإعادة صياغة البطاقات المئة توثيقًا من التويجري و«المختصر»، ومسبحات خمس وأحجام وأشكال للخرزة.<br/><br/><b>v1.4.0</b> — اكتمال بطاقات النور المئة موثقة من «مختصر فقه الأسماء الحسنى» للبدر و«التوحيد» للتويجري، وقسم المظهر: خمس لوحات ألوان وأربعة أنماط خلفية.<br/><br/><b>v1.3.0</b> — لغة درج الأسماء عربي أو English من الإعدادات، ونبض قلب حي في الساعة والمسبحة، وشاهد كل ذكر من القرآن والسنة في صفحة المسبحة.<br/><br/><b>v1.2.0</b> — أصوات الساعة (تِك توك، جرس، خشبي) وصوت المسبحة، وشكل الساعة وشكل المسبحة، وخط الأسماء، والتسبيح التلقائي وعقرب الثواني.<br/><br/><b>v1.1.0</b> — تحسين كامل لمقاسات الجوال، الأسماء على قرص الساعة بدل الدقائق والثواني، وسرعة من ١ إلى ١٠ ثوانٍ بمؤشر انزلاقي، ومسبحة خشبية واقعية بصوت خرز محسّن.<br/><br/><b>v1.0.0</b> — الإطلاق الأول: ساعة الأسماء الحسنى (١٠٠ اسم مع الشرح)، والمسبحة بصوت الخرز والاحتفال، والأذكار المخصصة، والإعدادات، والحفظ المحلي على الجهاز.</div>
+      <div class="body"><b>v3.1.0</b> — «نورٌ يُشارَك»: صار هدفُ تسبيحك وهدفُ وردك يدويَّي الإدخال خالصَين — تكتب العدد بنفسك كيفما أحببت بلا أعدادٍ مفروضة، أو تُلغي الهدفَ فيسبح وردًا حرًّا بلا حدّ؛ وأضيف إلى ساعة الأسماء زرُّ «مشاركة واتساب» يصوغ بطاقة نور في صورةٍ رفيعة تحمل الاسم الحاضر ومعناه وشرحه وتاريخ يومك بهجريه وميلاديه على سماءٍ بلون وقتك، فترسلها إلى واتساب وإلى كل تطبيقات جهازك، موقَّعةً أسفلها بخطٍّ صغيرٍ رقيق: «تم إنشاء هذه الصورة من تطبيق نور - إحسان · https://mouradalhaj.github.io/noor/ (اعذرني لو وُجد خطأ)».<br/><br/><b>v3.0.0</b> — «بهاء النور» إصدارُ الاحتفاء الكبير: حلقةُ حركةٍ موحّدة (requestAnimationFrame واحدة) تُدير الساعة والشريط ولمعانه بأداءٍ أنعم وبطاريةٍ أهدأ، وحفظٌ مؤجّل للعدادات، وسماءٌ تتلوّن بأوقات اليوم من الفجر إلى الليل، ونبضةُ نورٍ حول الساعة عند كل اسم، ولمعانٌ ذهبي يجري في الشريط، ونجمةٌ تولد بنبضةٍ في سماء الخير، وعدادُ تسبيحٍ يتدحرج، ولوحةُ «ليل عميق» السوداء لشاشات AMOLED، ووضعٌ تلقائي نهاريّ/ليليّ، ووردٌ يوميّ للمسبحة بحلقة تقدّم وأهداف (١٠٠/٣٣٣/٥٠٠/١٠٠٠) وعدّادٍ لكل ذكر ونبضٍ اهتزازيّ كل ٣٣، وبحثٌ فوريّ في الأسماء ومفضلةٌ محفوظة واستعراضٌ هادئ للقرص، وأرشيفُ مهماتٍ وتكرارٌ يوميّ وأسبوعيّ، وحاسبةُ عمرٍ بقوسٍ يُظهر موقعك من العمر المتوقع وبأشهر وأسابيع وركعات فريضةٍ ورواتب متبقية، ورسمٌ أسبوعيّ لمحاسبتك، وخياراتُ جديدة للشريط (إظهار وسرعة وأذكارك المخصصة) — بلا أن تنكسر صلةٌ ولا تضيع بيانات.<br/><br/><b>v2.5.1</b> — علاجُ شريط الذكر والتذكير على الآيفون: صار دوره بمحرّكٍ جافاسكربتي بخطوات requestAnimationFrame لا يُجمّده WebKit، وحُذف قناع الشفافية الذي يوقف الحركة داخل العناصر المقنّعة، وأصبح اللمسُ يوقفه ورفعُ الإصبع يستأنفه بدل :hover الذي يلتصق باللمس — فيجري الذكرُ والتذكير ومهماتُك على كل جهازٍ بلا توقف.<br/><br/><b>v2.5.0</b> — «حالتي الآن وشريط النور»: صار «أنا غاضب» شاشة «حالتي الآن» بتبويبين — غاضبٌ بخطواته نفسها، وسعيدٌ بآداب الفرح من السنة (ابن ماجه، وأبو داود، والترمذي) — وأُضيف شريط تذكير متحرك فوق الأسماء والمسبحة يجري فيه الذكر والتذكير ومهماتك المسجلة بلا توقف، وصار حساب العمر من تاريخ ميلادك: عمرك تلقائيًا، وفروضُ صلواتك ونوافلُها المتبقية، ونومُك تقديرًا بالسنين والشهور والأيام، وصار «النشر والإستخدام» نبذةً خالصة بلا خطوات نشر.<br/><br/><b>v2.4.0</b> — «هوية الإحسان»: أُضيفت رسالة نور «إحسان» إلى «عن تطبيق نور» — فلا تصلح حياةُ الإنسان المؤمن بلا إحسان؛ فراقب يومك وحاسب نفسك واستعن بالله ولا تعجز — وصار القسم «النشر والإستخدام» برسالة المصمم المتواضعة ودعائه لأحبابه، ويُعرض سجل الإصدار مختصرًا: إصدارٌ وسطران لكل تحديث.<br/><br/><b>v2.3.1</b> — إصلاح جذري لخلل التقويم: اختفى «غير معرف» وعادت الأيام إلى أماكنها بإعادة بناء محرك التاريخ الهجري بسلسلة بدائل متعددة وتحقق صارم من كل نتيجة.<br/><br/><b>v2.3.0</b> — طُوي «التقويم والتاريخ» في الرئيسية بشاشة مستقلة تفتح وتُغلق حتى لا تمتلئ الشاشة، وأُضيفت بطاقة «المهمات» فوق «نور اليوم» بعدّاد إنجاز وشاشة خيارات كاملة.<br/><br/><b>v2.2.0</b> — «عزيمة اليوم»: نوايا متعددة ونيتك بكلماتك ومهمات إنجاز تضيء النجوم، و«سماء الخير» للعرض والإحصاء خالصة، وانتقل التقويم بأحداث الإسلام الموثقة إلى الرئيسية.<br/><br/><b>v2.1.0</b> — نجوم سماء الخير تلوّنها أنواع الأعمال بمفتاح ألوان، وتقويم الخير الشهري، ومهماتي اليومية، وتوسعة «القرآن وحالتي» و«محاسبتي» و«بنك الخيرات»، وأيقونات مونو كرور بدل الإيموجي.<br/><br/><b>v2.0.0</b> — شاشة «نور اليوم» الجديدة بأربع عشرة أداة يومية: من نية اليوم وتحدي الدقيقة وسجل الدعوات إلى محاسبتي قبل النوم وكن سببًا في الخير، مع إزاحة أمانة لشريط حالة الآيفون.<br/><br/><b>v1.6.0</b> — علاج نهائي لانعكاس الأسماء على درج الساعة برسم داخلي، وتقليص بطاقات النور إلى ثلاثة أقسام: المعنى، والدليل بمصدره، والدعاء بمصدره — حذفًا لقسمَي «عبرة لقلبك» و«سؤال تدبر».<br/><br/><b>v1.5.0</b> — تشكيل الأسماء المئة وضبط اتجاهها على الدرج، وإعادة صياغة البطاقات المئة توثيقًا من التويجري و«المختصر»، ومسبحات خمس وأحجام وأشكال للخرزة.<br/><br/><b>v1.4.0</b> — اكتمال بطاقات النور المئة موثقة من «مختصر فقه الأسماء الحسنى» للبدر و«التوحيد» للتويجري، وقسم المظهر: خمس لوحات ألوان وأربعة أنماط خلفية.<br/><br/><b>v1.3.0</b> — لغة درج الأسماء عربي أو English من الإعدادات، ونبض قلب حي في الساعة والمسبحة، وشاهد كل ذكر من القرآن والسنة في صفحة المسبحة.<br/><br/><b>v1.2.0</b> — أصوات الساعة (تِك توك، جرس، خشبي) وصوت المسبحة، وشكل الساعة وشكل المسبحة، وخط الأسماء، والتسبيح التلقائي وعقرب الثواني.<br/><br/><b>v1.1.0</b> — تحسين كامل لمقاسات الجوال، الأسماء على قرص الساعة بدل الدقائق والثواني، وسرعة من ١ إلى ١٠ ثوانٍ بمؤشر انزلاقي، ومسبحة خشبية واقعية بصوت خرز محسّن.<br/><br/><b>v1.0.0</b> — الإطلاق الأول: ساعة الأسماء الحسنى (١٠٠ اسم مع الشرح)، والمسبحة بصوت الخرز والاحتفال، والأذكار المخصصة، والإعدادات، والحفظ المحلي على الجهاز.</div>
     </details>
   </div>
 </section>
@@ -2114,7 +2115,126 @@ function bindCard(){
   $('#cardClose').addEventListener('click',closeCard);
   $('#cardVeil').addEventListener('pointerdown',e=>{ if(e.target.id==='cardVeil')closeCard(); });
   $('#btnCard').addEventListener('click',()=>openCard(ni));
+  $('#btnShare').addEventListener('click',shareNoorCard);
   document.addEventListener('keydown',e=>{ if(e.key==='Escape')closeCard(); });
+}
+/* ============ بطاقة نور للمشاركة كصورة (v3.1.0) ============
+   تُرسَم البطاقة على canvas بدقةٍ عالية (1080×1350): سماءٌ بلون وقت اليوم، إطارٌ ذهبي،
+   الآية التأسيسية، الاسم الحاضر ومعناه وشرحه الموجز، وتاريخ اليوم هجريًّا وميلاديًّا،
+   ثم توقيع التطبيق الصغير الرقيق أسفلها. وتُشارَك كصورة إلى واتساب وكل تطبيقات
+   الجهاز عبر Web Share API، وإن لم يتوفر نُزِّلت الصورة وفُتح واتساب برسالة الاستعداد. */
+const CARD_NOTE='تم إنشاء هذه الصورة من تطبيق نور - إحسان';
+const CARD_URL='https://mouradalhaj.github.io/noor/';
+const CARD_SORRY='(اعذرني لو وُجد خطأ)';
+function cardSkyCols(){
+  switch(skyPhase()){
+    case 'fajr':return['#0e1a33','#16345e','#1e4a7d'];
+    case 'duha':return['#072419','#0c3a29','#11543a'];
+    case 'duhr':return['#062417','#0b3d2a','#0f5738'];
+    case 'asr':return['#201a0d','#403316','#5f4a1c'];
+    case 'maghrib':return['#261009','#4e1e0f','#733113'];
+    case 'isha':return['#050e1d','#0b1c33','#112a4a'];
+    default:return['#030906','#071711','#0b231a'];
+  }
+}
+async function buildNoorCard(){
+  const n=NAMES[ni], W=1080, H=1350;
+  const cv=document.createElement('canvas'); cv.width=W; cv.height=H;
+  const x=cv.getContext('2d');
+  try{ if(document.fonts&&document.fonts.ready)await document.fonts.ready; }catch(e){}
+  /* السماء الزمنية */
+  const cols=cardSkyCols(), g=x.createLinearGradient(0,0,0,H);
+  g.addColorStop(0,cols[0]); g.addColorStop(.55,cols[1]); g.addColorStop(1,cols[2]);
+  x.fillStyle=g; x.fillRect(0,0,W,H);
+  /* نجوم الليل والفجر */
+  const ph=skyPhase();
+  if(ph==='night'||ph==='isha'||ph==='fajr'){
+    for(let i=0;i<90;i++){
+      x.globalAlpha=(Math.random()*.5+.22)*(ph==='fajr'?.6:1);
+      x.fillStyle='#f4ead0'; x.beginPath();
+      x.arc(Math.random()*W,Math.random()*H*.6,Math.random()*1.8+.5,0,7); x.fill();
+    }
+    x.globalAlpha=1;
+  }
+  /* وهج علوي خفيف */
+  const hg=x.createRadialGradient(W/2,140,40,W/2,140,640);
+  hg.addColorStop(0,'rgba(242,217,146,.16)'); hg.addColorStop(1,'rgba(242,217,146,0)');
+  x.fillStyle=hg; x.fillRect(0,0,W,H);
+  /* الإطار المزدوج ومعينات الزوايا */
+  const F='#d9b661', F2='#f2d992';
+  const dia=(cx,cy)=>{ x.save(); x.translate(cx,cy); x.rotate(Math.PI/4); x.fillStyle=F2; x.fillRect(-7,-7,14,14); x.restore(); };
+  x.strokeStyle=F; x.lineWidth=3; x.strokeRect(38,38,W-76,H-76);
+  x.strokeStyle='rgba(217,182,97,.45)'; x.lineWidth=1.4; x.strokeRect(54,54,W-108,H-108);
+  dia(38,38); dia(W-38,38); dia(38,H-38); dia(W-38,H-38);
+  x.textAlign='center';
+  /* الآية التأسيسية */
+  x.fillStyle=F2; x.font='700 36px Amiri,"Noto Naskh Arabic",serif';
+  x.fillText('﴿ وَلِلَّهِ الْأَسْمَاءُ الْحُسْنَىٰ فَادْعُوهُ بِهَا ﴾',W/2,152);
+  x.fillStyle='rgba(238,233,220,.6)'; x.font='24px Cairo,"Noto Sans Arabic",sans-serif';
+  x.fillText('سورة الأعراف · الآية ١٨٠',W/2,196);
+  /* عنوان الساعة ورقم الاسم */
+  x.fillStyle='rgba(217,182,97,.92)'; x.font='600 30px Cairo,"Noto Sans Arabic",sans-serif';
+  x.fillText('ساعة الأسماء الحسنى — الاسم '+AR(ni+1)+' من '+AR(NAMES.length),W/2,302);
+  /* الاسم بخطٍّ كبير يتقلص ليلائم الأسماء المركبة */
+  const rawLen=String(n.a).replace(/[\u064B-\u0652\u0670\u0640\s]/g,'').length;
+  let fN=rawLen>14?86:(rawLen>9?102:124);
+  const setNF=()=>{ x.font='700 '+fN+'px "Reem Kufi",Amiri,"Noto Naskh Arabic",serif'; };
+  setNF();
+  while(x.measureText(n.a).width>W-220&&fN>58){ fN-=6; setNF(); }
+  x.fillStyle='#f6e7bd'; x.shadowColor='rgba(0,0,0,.42)'; x.shadowBlur=18;
+  x.fillText(n.a,W/2,478); x.shadowBlur=0;
+  /* المعنى الإنجليزي */
+  x.fillStyle='rgba(238,233,220,.85)'; x.font='italic 36px Georgia,serif'; x.direction='ltr';
+  x.fillText(n.t+' — '+n.m,W/2,556); x.direction='rtl';
+  /* فاصل مزخرف */
+  x.strokeStyle='rgba(217,182,97,.7)'; x.lineWidth=2;
+  x.beginPath(); x.moveTo(W/2-150,618); x.lineTo(W/2+150,618); x.stroke();
+  dia(W/2,618);
+  /* الشرح الموجز ملفوفًا أسطرًا */
+  x.fillStyle='rgba(238,233,220,.95)'; x.font='34px Amiri,"Noto Naskh Arabic",serif';
+  const words=String(n.d||'').split(' '); const lines=[]; let cur='';
+  words.forEach(w=>{ const t=cur?cur+' '+w:w;
+    if(x.measureText(t).width>W-270&&cur){ lines.push(cur); cur=w; } else cur=t; });
+  if(cur)lines.push(cur);
+  if(lines.length>6){ lines.length=6; lines[5]+='…'; }
+  /* توسيط كتلة الشرح عموديًا في الفراغ بين الفاصل والتاريخ — توازنٌ مهما طال أو قصر الشرح */
+  const lineH=58, dStart=618+Math.max(44,((H-288-618)-lines.length*lineH)/2);
+  lines.forEach((L,k)=>x.fillText(L,W/2,dStart+k*lineH));
+  /* ختم اليوم: التاريخ الهجري والميلادي */
+  const now=new Date();
+  x.fillStyle='rgba(242,217,146,.92)'; x.font='700 31px Cairo,"Noto Sans Arabic",sans-serif';
+  x.fillText(hijriNice(now)+'  ·  '+gregNice(now),W/2,H-288);
+  /* شعار النور: حلقةٌ ودرّة */
+  x.strokeStyle=F; x.lineWidth=2.6; x.beginPath(); x.arc(W/2,H-212,26,0,7); x.stroke();
+  x.fillStyle=F2; x.beginPath(); x.arc(W/2,H-212,7,0,7); x.fill();
+  /* التوقيع الصغير جدًا أسفل البطاقة */
+  x.fillStyle='rgba(238,233,220,.55)'; x.font='21px Cairo,"Noto Sans Arabic",sans-serif';
+  x.fillText(CARD_NOTE,W/2,H-138);
+  x.direction='ltr'; x.fillText(CARD_URL,W/2,H-105); x.direction='rtl';
+  x.fillText(CARD_SORRY,W/2,H-72);
+  return cv;
+}
+async function shareNoorCard(){
+  const btn=$('#btnShare'); if(btn)btn.disabled=true;
+  try{
+    const cv=await buildNoorCard();
+    const blob=await new Promise(res=>{ try{ cv.toBlob(res,'image/png'); }catch(e){ res(null); } });
+    if(!blob){ toast('تعذّر إنشاء الصورة في هذا المتصفح'); return; }
+    const file=new File([blob],'noor-card.png',{type:'image/png'});
+    const txt='﴿ وَلِلَّهِ الْأَسْمَاءُ الْحُسْنَىٰ فَادْعُوهُ بِهَا ﴾ — بطاقة نور: '+NAMES[ni].a;
+    if(navigator.canShare&&navigator.canShare({files:[file]})){
+      await navigator.share({files:[file],title:'بطاقة نور',text:txt});
+    }else{
+      /* بديل المتصفحات القديمة: تنزيل الصورة ثم فتح واتساب برسالة الاستعداد */
+      const a=document.createElement('a'); a.href=URL.createObjectURL(blob); a.download='noor-card.png';
+      document.body.appendChild(a); a.click(); a.remove();
+      setTimeout(()=>URL.revokeObjectURL(a.href),8000);
+      window.open('https://wa.me/?text='+encodeURIComponent(txt),'_blank','noopener');
+      toast('نُزِّلت صورة البطاقة — أرفِقها في واتساب وشارِكها');
+    }
+  }catch(e){
+    if(!e||e.name!=='AbortError')toast('تعذّرت المشاركة هنا — افتح نور من متصفح جهازك وشارِك');
+  }finally{ if(btn)btn.disabled=false; }
 }
 function stopClockTimer(){ if(ckTimer){clearInterval(ckTimer);ckTimer=null;} }
 let t0=0, lastFrac=0, clockInCore=false;
@@ -2161,8 +2281,10 @@ function bindClock(){
 /* ============ المسبحة ============ */
 const BASE=['سبحان الله','الحمد لله','الله أكبر','أستغفر الله','لا إله إلا الله','سبحان الله وبحمده','لا حول ولا قوة إلا بالله','اللهم صلِّ وسلِّم على محمد'];
 let custom=store.get('custom',[]);
+/* ترحيل v3.1.0 (مرة واحدة): أهداف التسبيح والورد صارت يدويةً خالصة بلا أعدادٍ مفروضة — نصفّرها حتى تحدّدها بيدك */
+if(!store.get('m31',false)){ store.set('target',0); store.set('wird',0); store.set('m31',true); }
 let dh=store.get('dh',BASE[0]);
-let target=store.get('target',33);
+let target=store.get('target',0);
 let cnt=store.get('round',0);
 let totals=store.get('totals',{});
 let day=store.get('day',null);
@@ -2230,22 +2352,17 @@ function renderChips(){
     c.appendChild(b);
   });
 }
-function renderTargets(){
-  const c=$('#targetChips'); c.innerHTML='';
-  [33,99,100].forEach(t=>{
-    const b=document.createElement('button'); b.type='button';
-    b.className='chip'+(t===target?' on':''); b.textContent=AR(t);
-    b.addEventListener('click',()=>{ target=t; if(cnt>target)cnt=target; accB=cnt*(360/33); saveRound(); renderTargets(); renderTasbih(false); });
-    c.appendChild(b);
-  });
-  const b=document.createElement('button'); b.type='button';
-  b.className='chip'+([33,99,100].indexOf(target)<0?' on':''); b.textContent='مخصص';
-  b.addEventListener('click',()=>{ $('#customTarget').classList.toggle('show'); });
-  c.appendChild(b);
+/* هدف الجولة (v3.1.0): إدخالٌ يدويّ خالص — تكتب العدد بنفسك، أو تبقيه بلا هدفٍ ووردًا حرًّا */
+function renderTargetRow(){
+  const noneB=$('#tgtNone'), inV=$('#tgtIn'), setB=$('#tgtSet'); if(!noneB)return;
+  const has=target>0;
+  noneB.classList.toggle('on',!has);
+  setB.classList.toggle('on',has);
+  if(inV&&document.activeElement!==inV)inV.value=has?String(target):'';
 }
 function renderTasbih(anim){
   $('#cnt').textContent=AR(cnt);
-  $('#tgt').textContent='من '+AR(target);
+  $('#tgt').textContent=(target>0)?('من '+AR(target)):'وردٌ حرّ';
   $('#b-dh').textContent=dh;
   const ev=EVID[dh], ec=$('#evidCard');
   if(ec){ if(ev){ ec.classList.add('show'); $('#evidTxt').textContent=ev.t; $('#evidSrc').textContent='— '+ev.s; } else ec.classList.remove('show'); }
@@ -2255,7 +2372,7 @@ function renderTasbih(anim){
   ring.style.transform='rotate('+accB+'deg)';
   if(anim===false){ void ring.getBoundingClientRect(); ring.style.transition=''; }
   const h=(33-cnt%33)%33;
-  $$('#beads .beadG').forEach((b,i)=>b.classList.toggle('hot',i===h&&cnt<target));
+  $$('#beads .beadG').forEach((b,i)=>b.classList.toggle('hot',i===h&&target>0&&cnt<target));
 }
 function renderTasbihStats(){
   $('#dayC').textContent=AR(day.c);
@@ -2263,20 +2380,21 @@ function renderTasbihStats(){
   $('#sumAll').textContent=AR(Object.values(totals).reduce((a,b)=>a+b,0));
   renderWird();
 }
-/* --- ورد اليوم (v3.0.0): هدف يومي بحلقة تقدّم — تسبيحاتُ يومك كلها تدفعك نحو الهدف --- */
-let wirdG=store.get('wird',100);
-const WIRD_G=[100,333,500,1000];
+/* --- ورد اليوم (v3.1.0): الهدف يدويٌّ خالص بتقديرك — تكتبه بنفسك كيفما شئت، أو تتركه وردًا حرًّا بلا عدد --- */
+let wirdG=store.get('wird',0);
 function renderWird(){
   const fill=$('#wirdFill'); if(!fill)return;
-  if(WIRD_G.indexOf(wirdG)<0)wirdG=100;
-  const chips=$('#wirdChips'); chips.innerHTML='';
-  WIRD_G.forEach(g=>{
-    const b=document.createElement('button'); b.type='button';
-    b.className='chip'+(g===wirdG?' on':''); b.textContent=AR(g);
-    b.addEventListener('click',()=>{ wirdG=g; if(!store.set('wird',wirdG))warnStorage(); renderWird(); toast('هدف ورد اليوم: '+AR(g)+' تسبيحة'); });
-    chips.appendChild(b);
-  });
+  if(!(wirdG>0))wirdG=0;
+  const has=wirdG>0, bar=$('#wirdBar'), inV=$('#wirdIn'), noneB=$('#wirdNone');
+  if(bar)bar.hidden=!has;
+  if(noneB)noneB.hidden=!has;
+  if(inV&&document.activeElement!==inV)inV.value=has?String(wirdG):'';
   const c=(day&&day.d===todayStr())?day.c:0;
+  if(!has){
+    $('#wirdPct').textContent='وردٌ حرّ';
+    $('#wirdHint').textContent='وردٌ حرّ بلا عددٍ محدد — سُبِّح كيفما شئت، وكلُّ تسبيحةٍ تُكتَب لك عند الله';
+    return;
+  }
   const p=Math.min(100,Math.round(c/wirdG*100));
   fill.style.width=p+'%';
   $('#wirdPct').textContent=AR(p)+'٪';
@@ -2305,13 +2423,13 @@ function showCelebrate(){
 }
 function tapBead(e){
   if(day.d!==todayStr()){ day={d:todayStr(),c:0,r:0}; }
-  if(cnt>=target){ showCelebrate(); return; }
+  if(target>0&&cnt>=target){ showCelebrate(); return; }
   cnt++; day.c++; totals[dh]=(totals[dh]||0)+1; accB+=360/33;
   renderTasbih(); saveRound(); tapS(); vib(12); spawnRipple(e);
   /* نبضة اهتزاز كل ثلاثٍ وثلاثين (v3.0.0) — كتسبيحات ما بعد الصلاة المسنونة */
-  if(cnt%33===0&&cnt<target)vib([45,45,45]);
+  if(cnt%33===0&&(target===0||cnt<target))vib([45,45,45]);
   renderTasbihStats();
-  if(cnt>=target){
+  if(target>0&&cnt>=target){
     day.r++; saveRound(); renderTasbihStats(); chime(); vib([60,70,60]);
     addStar('dhikr','جولة تسبيح: '+dh);
     setTimeout(showCelebrate,340);
@@ -2337,9 +2455,9 @@ function updateAutoBtn(){ const b=$('#autoPlayBtn'); if(b)b.textContent=autoTime
 function stopAuto(){ if(autoTimer){clearInterval(autoTimer);autoTimer=null;} updateAutoBtn(); }
 function startAuto(){ stopAuto(); if(S.tasbihMode!=='auto')return; autoTimer=setInterval(autoTick,S.tasbihAuto*1000); updateAutoBtn(); }
 function autoTick(){
-  if(cnt>=target){ stopAuto(); showCelebrate(); return; }
+  if(target>0&&cnt>=target){ stopAuto(); showCelebrate(); return; }
   tapBead(null);
-  if(cnt>=target)stopAuto();
+  if(target>0&&cnt>=target)stopAuto();
 }
 function bindTasbih(){
   $('#tapzone').addEventListener('pointerdown',tapBead);
@@ -2348,12 +2466,30 @@ function bindTasbih(){
   $('#autoPlayBtn').addEventListener('click',()=>{ autoTimer?stopAuto():startAuto(); });
   $('#resetRound').addEventListener('click',()=>{ cnt=0; accB=0; saveRound(); renderTasbih(false); toast('تم تصفير الجولة'); });
   $('#cBtn').addEventListener('click',()=>{ cnt=0; accB=0; saveRound(); renderTasbih(false); $('#celebrate').classList.remove('show'); });
-  $('#ctSet').addEventListener('click',()=>{
-    const v=Math.max(1,Math.min(99999,parseInt($('#ctVal').value,10)||0));
-    if(!v){ toast('اكتب عددًا صحيحًا'); return; }
-    target=v; saveRound(); renderTargets(); renderTasbih(false);
-    $('#customTarget').classList.remove('show');
-    toast('تم تحديد الهدف: '+AR(v));
+  /* هدف الجولة اليدوي (v3.1.0): تكتب العدد بنفسك أو تتركه بلا هدف */
+  $('#tgtSet').addEventListener('click',()=>{
+    const v=Math.max(1,Math.min(99999,parseInt($('#tgtIn').value,10)||0));
+    if(!v){ toast('اكتب عددًا صحيحًا لهدف الجولة، أو اختر «بلا هدف»'); return; }
+    target=v; if(cnt>target){ cnt=target; accB=cnt*(360/33); }
+    saveRound(); renderTargetRow(); renderTasbih(false);
+    toast('هدف الجولة: '+AR(v));
+  });
+  $('#tgtIn').addEventListener('keydown',e=>{ if(e.key==='Enter')$('#tgtSet').click(); });
+  $('#tgtNone').addEventListener('click',()=>{
+    target=0; saveRound(); renderTargetRow(); renderTasbih(false);
+    toast('بلا هدف — سُبِّح كيفما شئت ووردٌ حرّ');
+  });
+  /* هدف ورد اليوم اليدوي (v3.1.0) */
+  $('#wirdSet').addEventListener('click',()=>{
+    const v=Math.max(1,Math.min(999999,parseInt($('#wirdIn').value,10)||0));
+    if(!v){ toast('اكتب هدفًا صحيحًا، أو ألغِ الهدف بوردٍ حرّ'); return; }
+    wirdG=v; if(!store.set('wird',wirdG))warnStorage(); renderWird();
+    toast('هدف ورد اليوم: '+AR(v)+' تسبيحة — وفقك الله');
+  });
+  $('#wirdIn').addEventListener('keydown',e=>{ if(e.key==='Enter')$('#wirdSet').click(); });
+  $('#wirdNone').addEventListener('click',()=>{
+    wirdG=0; if(!store.set('wird',0))warnStorage(); renderWird();
+    toast('وردٌ حرّ بلا هدف — كل تسبيحةٍ تُكتَب لك');
   });
   $('#addBtn').addEventListener('click',addCustom);
 }
@@ -3893,7 +4029,7 @@ function init(){
   buildDial(); buildOrn(); applyTasbihStyle();
   if(document.fonts&&document.fonts.ready)document.fonts.ready.then(()=>{ buildDial(); renderName(false); buildTicker(); });
   renderName(false);
-  renderChips(); renderTargets(); renderTasbih(false); renderTasbihStats(); renderCustomList(); renderTasbihMode();
+  renderChips(); renderTargetRow(); renderTasbih(false); renderTasbihStats(); renderCustomList(); renderTasbihMode();
   renderHomeStats(); renderDates(); renderHomeIntent();
   renderDay();
   bindDay();
