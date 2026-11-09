@@ -562,6 +562,14 @@ details.doc .body b{color:var(--gold2)}
 .tagbu svg{width:13px;height:13px;vertical-align:-2px;margin-inline-end:3px}
 /* صفّا «بطاقة النور» و«مشاركة واتساب» (v3.1.0): زران متوازنان بعرض البطاقة */
 .duobtns .tagbu{flex:1;min-width:0;text-align:center;padding:9px 8px}
+/* بطاقتا صباح الخير ومساء الخير (v3.2.0): ورقة معاينة تُرسَل كصورة */
+.greetbox{position:fixed;left:50%;bottom:0;transform:translate(-50%,110%);width:100%;max-width:470px;max-height:min(93vh,820px);z-index:71;display:flex;flex-direction:column;background:linear-gradient(180deg,var(--card2),var(--card));border:1px solid var(--line);border-bottom:none;border-radius:26px 26px 0 0;box-shadow:0 -20px 60px rgba(0,0,0,.5);transition:transform .38s cubic-bezier(.22,1,.36,1);padding:0 14px calc(12px + env(safe-area-inset-bottom))}
+.cardveil.show .greetbox{transform:translate(-50%,0)}
+.greethead{display:flex;align-items:center;justify-content:space-between;gap:8px;margin:10px 2px}
+.greethead .hint{text-align:left}
+.greetscroll{flex:1;min-height:0;overflow:auto;-webkit-overflow-scrolling:touch;border-radius:16px;border:1px solid var(--line);background:var(--bg)}
+.greetscroll img{width:100%;height:auto;display:block}
+.greetbtns{margin-top:12px}
 /* قوس العمر ومحاسبته الأسبوعية */
 .lifearc{margin:12px auto 0;max-width:250px;text-align:center}
 .lifearc svg{width:100%;height:auto;display:block}
@@ -907,7 +915,7 @@ details.doc .body b{color:var(--gold2)}
     </details>
     <details class="doc">
       <summary>سجل الإصدار</summary>
-      <div class="body"><b>v3.1.0</b> — «نورٌ يُشارَك»: صار هدفُ تسبيحك وهدفُ وردك يدويَّي الإدخال خالصَين — تكتب العدد بنفسك كيفما أحببت بلا أعدادٍ مفروضة، أو تُلغي الهدفَ فيسبح وردًا حرًّا بلا حدّ؛ وأضيف إلى ساعة الأسماء زرُّ «مشاركة واتساب» يصوغ بطاقة نور في صورةٍ رفيعة تحمل الاسم الحاضر ومعناه وشرحه وتاريخ يومك بهجريه وميلاديه على سماءٍ بلون وقتك، فترسلها إلى واتساب وإلى كل تطبيقات جهازك، موقَّعةً أسفلها بخطٍّ صغيرٍ رقيق: «تم إنشاء هذه الصورة من تطبيق نور - إحسان · https://mouradalhaj.github.io/noor/ (اعذرني لو وُجد خطأ)».<br/><br/><b>v3.0.0</b> — «بهاء النور» إصدارُ الاحتفاء الكبير: حلقةُ حركةٍ موحّدة (requestAnimationFrame واحدة) تُدير الساعة والشريط ولمعانه بأداءٍ أنعم وبطاريةٍ أهدأ، وحفظٌ مؤجّل للعدادات، وسماءٌ تتلوّن بأوقات اليوم من الفجر إلى الليل، ونبضةُ نورٍ حول الساعة عند كل اسم، ولمعانٌ ذهبي يجري في الشريط، ونجمةٌ تولد بنبضةٍ في سماء الخير، وعدادُ تسبيحٍ يتدحرج، ولوحةُ «ليل عميق» السوداء لشاشات AMOLED، ووضعٌ تلقائي نهاريّ/ليليّ، ووردٌ يوميّ للمسبحة بحلقة تقدّم وأهداف (١٠٠/٣٣٣/٥٠٠/١٠٠٠) وعدّادٍ لكل ذكر ونبضٍ اهتزازيّ كل ٣٣، وبحثٌ فوريّ في الأسماء ومفضلةٌ محفوظة واستعراضٌ هادئ للقرص، وأرشيفُ مهماتٍ وتكرارٌ يوميّ وأسبوعيّ، وحاسبةُ عمرٍ بقوسٍ يُظهر موقعك من العمر المتوقع وبأشهر وأسابيع وركعات فريضةٍ ورواتب متبقية، ورسمٌ أسبوعيّ لمحاسبتك، وخياراتُ جديدة للشريط (إظهار وسرعة وأذكارك المخصصة) — بلا أن تنكسر صلةٌ ولا تضيع بيانات.<br/><br/><b>v2.5.1</b> — علاجُ شريط الذكر والتذكير على الآيفون: صار دوره بمحرّكٍ جافاسكربتي بخطوات requestAnimationFrame لا يُجمّده WebKit، وحُذف قناع الشفافية الذي يوقف الحركة داخل العناصر المقنّعة، وأصبح اللمسُ يوقفه ورفعُ الإصبع يستأنفه بدل :hover الذي يلتصق باللمس — فيجري الذكرُ والتذكير ومهماتُك على كل جهازٍ بلا توقف.<br/><br/><b>v2.5.0</b> — «حالتي الآن وشريط النور»: صار «أنا غاضب» شاشة «حالتي الآن» بتبويبين — غاضبٌ بخطواته نفسها، وسعيدٌ بآداب الفرح من السنة (ابن ماجه، وأبو داود، والترمذي) — وأُضيف شريط تذكير متحرك فوق الأسماء والمسبحة يجري فيه الذكر والتذكير ومهماتك المسجلة بلا توقف، وصار حساب العمر من تاريخ ميلادك: عمرك تلقائيًا، وفروضُ صلواتك ونوافلُها المتبقية، ونومُك تقديرًا بالسنين والشهور والأيام، وصار «النشر والإستخدام» نبذةً خالصة بلا خطوات نشر.<br/><br/><b>v2.4.0</b> — «هوية الإحسان»: أُضيفت رسالة نور «إحسان» إلى «عن تطبيق نور» — فلا تصلح حياةُ الإنسان المؤمن بلا إحسان؛ فراقب يومك وحاسب نفسك واستعن بالله ولا تعجز — وصار القسم «النشر والإستخدام» برسالة المصمم المتواضعة ودعائه لأحبابه، ويُعرض سجل الإصدار مختصرًا: إصدارٌ وسطران لكل تحديث.<br/><br/><b>v2.3.1</b> — إصلاح جذري لخلل التقويم: اختفى «غير معرف» وعادت الأيام إلى أماكنها بإعادة بناء محرك التاريخ الهجري بسلسلة بدائل متعددة وتحقق صارم من كل نتيجة.<br/><br/><b>v2.3.0</b> — طُوي «التقويم والتاريخ» في الرئيسية بشاشة مستقلة تفتح وتُغلق حتى لا تمتلئ الشاشة، وأُضيفت بطاقة «المهمات» فوق «نور اليوم» بعدّاد إنجاز وشاشة خيارات كاملة.<br/><br/><b>v2.2.0</b> — «عزيمة اليوم»: نوايا متعددة ونيتك بكلماتك ومهمات إنجاز تضيء النجوم، و«سماء الخير» للعرض والإحصاء خالصة، وانتقل التقويم بأحداث الإسلام الموثقة إلى الرئيسية.<br/><br/><b>v2.1.0</b> — نجوم سماء الخير تلوّنها أنواع الأعمال بمفتاح ألوان، وتقويم الخير الشهري، ومهماتي اليومية، وتوسعة «القرآن وحالتي» و«محاسبتي» و«بنك الخيرات»، وأيقونات مونو كرور بدل الإيموجي.<br/><br/><b>v2.0.0</b> — شاشة «نور اليوم» الجديدة بأربع عشرة أداة يومية: من نية اليوم وتحدي الدقيقة وسجل الدعوات إلى محاسبتي قبل النوم وكن سببًا في الخير، مع إزاحة أمانة لشريط حالة الآيفون.<br/><br/><b>v1.6.0</b> — علاج نهائي لانعكاس الأسماء على درج الساعة برسم داخلي، وتقليص بطاقات النور إلى ثلاثة أقسام: المعنى، والدليل بمصدره، والدعاء بمصدره — حذفًا لقسمَي «عبرة لقلبك» و«سؤال تدبر».<br/><br/><b>v1.5.0</b> — تشكيل الأسماء المئة وضبط اتجاهها على الدرج، وإعادة صياغة البطاقات المئة توثيقًا من التويجري و«المختصر»، ومسبحات خمس وأحجام وأشكال للخرزة.<br/><br/><b>v1.4.0</b> — اكتمال بطاقات النور المئة موثقة من «مختصر فقه الأسماء الحسنى» للبدر و«التوحيد» للتويجري، وقسم المظهر: خمس لوحات ألوان وأربعة أنماط خلفية.<br/><br/><b>v1.3.0</b> — لغة درج الأسماء عربي أو English من الإعدادات، ونبض قلب حي في الساعة والمسبحة، وشاهد كل ذكر من القرآن والسنة في صفحة المسبحة.<br/><br/><b>v1.2.0</b> — أصوات الساعة (تِك توك، جرس، خشبي) وصوت المسبحة، وشكل الساعة وشكل المسبحة، وخط الأسماء، والتسبيح التلقائي وعقرب الثواني.<br/><br/><b>v1.1.0</b> — تحسين كامل لمقاسات الجوال، الأسماء على قرص الساعة بدل الدقائق والثواني، وسرعة من ١ إلى ١٠ ثوانٍ بمؤشر انزلاقي، ومسبحة خشبية واقعية بصوت خرز محسّن.<br/><br/><b>v1.0.0</b> — الإطلاق الأول: ساعة الأسماء الحسنى (١٠٠ اسم مع الشرح)، والمسبحة بصوت الخرز والاحتفال، والأذكار المخصصة، والإعدادات، والحفظ المحلي على الجهاز.</div>
+      <div class="body"><b>v3.2.0</b> — «صباح النور ومساؤه»: أُهديت زاوية «كن سببًا في الخير» بطاقتَي تهنئة مصوَّرتين — «صباح الخير» على شفقٍ فجرّي مُشرِق، و«مساء الخير» على غروبٍ يعقبه ليلٌ يزينه النجوم — تختار بطاقتك بحسب وقتك، وتعاينها في ورقةٍ ثم ترسلها كصورةٍ واضحة إلى واتساب وتطبيقات جهازك أو تحفظها؛ في صدر كل بطاقة التهنئةُ الكبيرة وآيةُ نور، وفي قلبها ذكرٌ أو دعاءٌ أو آية موثقة المصدر من صحيح البخاري ومسلم والترمذي وأبي داود وابن ماجه تتجدد كل يوم، وإذا أحببت غيرها بدّلتها بلمسة، وتُختم البطاقة بخطٍّ رقيق جميل: «حفظكم الرحمن ورعاكم ونفعكم ونفع بكم» و«يوم جميل»؛ وعاد توقيعُ كل البطاقات إلى نصك الحرفي: «تم انشاء هذه الصورة من تطبيق نور-احسان … (اعذرني لو وجد خطاء)».<br/><br/><b>v3.1.0</b> — «نورٌ يُشارَك»: صار هدفُ تسبيحك وهدفُ وردك يدويَّي الإدخال خالصَين — تكتب العدد بنفسك كيفما أحببت بلا أعدادٍ مفروضة، أو تُلغي الهدفَ فيسبح وردًا حرًّا بلا حدّ؛ وأضيف إلى ساعة الأسماء زرُّ «مشاركة واتساب» يصوغ بطاقة نور في صورةٍ رفيعة تحمل الاسم الحاضر ومعناه وشرحه وتاريخ يومك بهجريه وميلاديه على سماءٍ بلون وقتك، فترسلها إلى واتساب وإلى كل تطبيقات جهازك، موقَّعةً أسفلها بخطٍّ صغيرٍ رقيق: «تم انشاء هذه الصورة من تطبيق نور-احسان · https://mouradalhaj.github.io/noor/ (اعذرني لو وجد خطاء)».<br/><br/><b>v3.0.0</b> — «بهاء النور» إصدارُ الاحتفاء الكبير: حلقةُ حركةٍ موحّدة (requestAnimationFrame واحدة) تُدير الساعة والشريط ولمعانه بأداءٍ أنعم وبطاريةٍ أهدأ، وحفظٌ مؤجّل للعدادات، وسماءٌ تتلوّن بأوقات اليوم من الفجر إلى الليل، ونبضةُ نورٍ حول الساعة عند كل اسم، ولمعانٌ ذهبي يجري في الشريط، ونجمةٌ تولد بنبضةٍ في سماء الخير، وعدادُ تسبيحٍ يتدحرج، ولوحةُ «ليل عميق» السوداء لشاشات AMOLED، ووضعٌ تلقائي نهاريّ/ليليّ، ووردٌ يوميّ للمسبحة بحلقة تقدّم وأهداف (١٠٠/٣٣٣/٥٠٠/١٠٠٠) وعدّادٍ لكل ذكر ونبضٍ اهتزازيّ كل ٣٣، وبحثٌ فوريّ في الأسماء ومفضلةٌ محفوظة واستعراضٌ هادئ للقرص، وأرشيفُ مهماتٍ وتكرارٌ يوميّ وأسبوعيّ، وحاسبةُ عمرٍ بقوسٍ يُظهر موقعك من العمر المتوقع وبأشهر وأسابيع وركعات فريضةٍ ورواتب متبقية، ورسمٌ أسبوعيّ لمحاسبتك، وخياراتُ جديدة للشريط (إظهار وسرعة وأذكارك المخصصة) — بلا أن تنكسر صلةٌ ولا تضيع بيانات.<br/><br/><b>v2.5.1</b> — علاجُ شريط الذكر والتذكير على الآيفون: صار دوره بمحرّكٍ جافاسكربتي بخطوات requestAnimationFrame لا يُجمّده WebKit، وحُذف قناع الشفافية الذي يوقف الحركة داخل العناصر المقنّعة، وأصبح اللمسُ يوقفه ورفعُ الإصبع يستأنفه بدل :hover الذي يلتصق باللمس — فيجري الذكرُ والتذكير ومهماتُك على كل جهازٍ بلا توقف.<br/><br/><b>v2.5.0</b> — «حالتي الآن وشريط النور»: صار «أنا غاضب» شاشة «حالتي الآن» بتبويبين — غاضبٌ بخطواته نفسها، وسعيدٌ بآداب الفرح من السنة (ابن ماجه، وأبو داود، والترمذي) — وأُضيف شريط تذكير متحرك فوق الأسماء والمسبحة يجري فيه الذكر والتذكير ومهماتك المسجلة بلا توقف، وصار حساب العمر من تاريخ ميلادك: عمرك تلقائيًا، وفروضُ صلواتك ونوافلُها المتبقية، ونومُك تقديرًا بالسنين والشهور والأيام، وصار «النشر والإستخدام» نبذةً خالصة بلا خطوات نشر.<br/><br/><b>v2.4.0</b> — «هوية الإحسان»: أُضيفت رسالة نور «إحسان» إلى «عن تطبيق نور» — فلا تصلح حياةُ الإنسان المؤمن بلا إحسان؛ فراقب يومك وحاسب نفسك واستعن بالله ولا تعجز — وصار القسم «النشر والإستخدام» برسالة المصمم المتواضعة ودعائه لأحبابه، ويُعرض سجل الإصدار مختصرًا: إصدارٌ وسطران لكل تحديث.<br/><br/><b>v2.3.1</b> — إصلاح جذري لخلل التقويم: اختفى «غير معرف» وعادت الأيام إلى أماكنها بإعادة بناء محرك التاريخ الهجري بسلسلة بدائل متعددة وتحقق صارم من كل نتيجة.<br/><br/><b>v2.3.0</b> — طُوي «التقويم والتاريخ» في الرئيسية بشاشة مستقلة تفتح وتُغلق حتى لا تمتلئ الشاشة، وأُضيفت بطاقة «المهمات» فوق «نور اليوم» بعدّاد إنجاز وشاشة خيارات كاملة.<br/><br/><b>v2.2.0</b> — «عزيمة اليوم»: نوايا متعددة ونيتك بكلماتك ومهمات إنجاز تضيء النجوم، و«سماء الخير» للعرض والإحصاء خالصة، وانتقل التقويم بأحداث الإسلام الموثقة إلى الرئيسية.<br/><br/><b>v2.1.0</b> — نجوم سماء الخير تلوّنها أنواع الأعمال بمفتاح ألوان، وتقويم الخير الشهري، ومهماتي اليومية، وتوسعة «القرآن وحالتي» و«محاسبتي» و«بنك الخيرات»، وأيقونات مونو كرور بدل الإيموجي.<br/><br/><b>v2.0.0</b> — شاشة «نور اليوم» الجديدة بأربع عشرة أداة يومية: من نية اليوم وتحدي الدقيقة وسجل الدعوات إلى محاسبتي قبل النوم وكن سببًا في الخير، مع إزاحة أمانة لشريط حالة الآيفون.<br/><br/><b>v1.6.0</b> — علاج نهائي لانعكاس الأسماء على درج الساعة برسم داخلي، وتقليص بطاقات النور إلى ثلاثة أقسام: المعنى، والدليل بمصدره، والدعاء بمصدره — حذفًا لقسمَي «عبرة لقلبك» و«سؤال تدبر».<br/><br/><b>v1.5.0</b> — تشكيل الأسماء المئة وضبط اتجاهها على الدرج، وإعادة صياغة البطاقات المئة توثيقًا من التويجري و«المختصر»، ومسبحات خمس وأحجام وأشكال للخرزة.<br/><br/><b>v1.4.0</b> — اكتمال بطاقات النور المئة موثقة من «مختصر فقه الأسماء الحسنى» للبدر و«التوحيد» للتويجري، وقسم المظهر: خمس لوحات ألوان وأربعة أنماط خلفية.<br/><br/><b>v1.3.0</b> — لغة درج الأسماء عربي أو English من الإعدادات، ونبض قلب حي في الساعة والمسبحة، وشاهد كل ذكر من القرآن والسنة في صفحة المسبحة.<br/><br/><b>v1.2.0</b> — أصوات الساعة (تِك توك، جرس، خشبي) وصوت المسبحة، وشكل الساعة وشكل المسبحة، وخط الأسماء، والتسبيح التلقائي وعقرب الثواني.<br/><br/><b>v1.1.0</b> — تحسين كامل لمقاسات الجوال، الأسماء على قرص الساعة بدل الدقائق والثواني، وسرعة من ١ إلى ١٠ ثوانٍ بمؤشر انزلاقي، ومسبحة خشبية واقعية بصوت خرز محسّن.<br/><br/><b>v1.0.0</b> — الإطلاق الأول: ساعة الأسماء الحسنى (١٠٠ اسم مع الشرح)، والمسبحة بصوت الخرز والاحتفال، والأذكار المخصصة، والإعدادات، والحفظ المحلي على الجهاز.</div>
     </details>
   </div>
 </section>
@@ -978,6 +986,17 @@ details.doc .body b{color:var(--gold2)}
       <div class="calmonthev" id="calMonthEvents"></div>
       <p class="hint center" style="margin-top:8px">النقاط الملونة أسفل اليوم أعماله الموثقة من سماء الخير — اضغط اليوم لتقرأ تفاصيله وأحداثه · تُغلق هذه الشاشة بزر الإغلاق أو بلمسةٍ خارجها</p>
     </div>
+  </div>
+</div>
+<!-- ====== بطاقتا صباح الخير ومساء الخير (v3.2.0) ====== -->
+<div id="greetVeil" class="cardveil" aria-hidden="true">
+  <div class="greetbox" role="dialog" aria-modal="true" aria-label="بطاقة نور للتهنئة">
+    <div class="noorgrab" aria-hidden="true"></div>
+    <button type="button" id="greetClose" class="card-x" aria-label="إغلاق البطاقة"><svg viewBox="0 0 24 24"><path d="M6 6l12 12M18 6L6 18" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" fill="none"/></svg></button>
+    <header class="greethead"><span class="tag" id="greetTag">بطاقة نور</span><span class="hint" id="greetHint"></span></header>
+    <div class="greetscroll"><img id="greetImg" alt="معاينة بطاقة نور للتهنئة"/></div>
+    <div class="duobtns greetbtns"><button type="button" id="greetShare" class="tagbu"><svg viewBox="0 0 24 24"><path d="M12 15.4V4.6m0 0L8.2 8.4M12 4.6l3.8 3.8" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/><path d="M5.2 12.4v5.8a1.7 1.7 0 0 0 1.7 1.7h10.2a1.7 1.7 0 0 0 1.7-1.7v-5.8" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>مشاركة واتساب</button><button type="button" id="greetSave" class="tagbu ghost">حفظ الصورة</button><button type="button" id="greetSwap" class="tagbu ghost">فائدة أخرى</button></div>
+    <p class="hint center" style="margin:8px 4px 2px">تُرسَل كصورةٍ واضحة إلى واتساب وتطبيقات جهازك — معاينةٌ حقيقية قبل الإرسال</p>
   </div>
 </div>
 <div id="toast" role="status"></div>
@@ -2123,9 +2142,9 @@ function bindCard(){
    الآية التأسيسية، الاسم الحاضر ومعناه وشرحه الموجز، وتاريخ اليوم هجريًّا وميلاديًّا،
    ثم توقيع التطبيق الصغير الرقيق أسفلها. وتُشارَك كصورة إلى واتساب وكل تطبيقات
    الجهاز عبر Web Share API، وإن لم يتوفر نُزِّلت الصورة وفُتح واتساب برسالة الاستعداد. */
-const CARD_NOTE='تم إنشاء هذه الصورة من تطبيق نور - إحسان';
+const CARD_NOTE='تم انشاء هذه الصورة من تطبيق نور-احسان';
 const CARD_URL='https://mouradalhaj.github.io/noor/';
-const CARD_SORRY='(اعذرني لو وُجد خطأ)';
+const CARD_SORRY='(اعذرني لو وجد خطاء)';
 function cardSkyCols(){
   switch(skyPhase()){
     case 'fajr':return['#0e1a33','#16345e','#1e4a7d'];
@@ -2235,6 +2254,186 @@ async function shareNoorCard(){
   }catch(e){
     if(!e||e.name!=='AbortError')toast('تعذّرت المشاركة هنا — افتح نور من متصفح جهازك وشارِك');
   }finally{ if(btn)btn.disabled=false; }
+}
+/* ============ بطاقتا صباح الخير ومساء الخير (v3.2.0) ============
+   في زاوية «كن سببًا في الخير»: بطاقةُ تهنئة مصوَّرة (1080×1350) تُرسَم على canvas —
+   صباح الخير على شفقٍ فجرّي مُشرِق، ومساء الخير على غروبٍ يعقبه ليلٌ يزينه النجوم —
+   في صدرها التهنئة الكبيرة وآيةُ نور، وفي قلبها ذكرٌ أو دعاءٌ أو آية موثقة المصدر
+   من صحيح البخاري ومسلم والسنن المعتبرة، تتجدد كل يوم، وتُختم بخطٍّ رقيق جميل:
+   «حفظكم الرحمن ورعاكم ونفعكم ونفع بكم — يوم جميل»، وتوقيع التطبيق الصغير.
+   تُعاين في ورقةٍ ثم تُشارَك كصورةٍ إلى واتساب وتطبيقات الجهاز أو تُحفَظ. */
+const GREET_BANK={
+ sabah:[
+  {ty:'ذكر الصباح',t:'أَصْبَحْنَا وَأَصْبَحَ الْمُلْكُ لِلَّهِ، وَالْحَمْدُ لِلَّهِ، لَا إِلَٰهَ إِلَّا اللَّهُ وَحْدَهُ لَا شَرِيكَ لَهُ، لَهُ الْمُلْكُ وَلَهُ الْحَمْدُ وَهُوَ عَلَىٰ كُلِّ شَيْءٍ قَدِيرٌ',s:'رواه مسلم (٢٧٢٣)'},
+  {ty:'دعاء الصباح',t:'اللَّهُمَّ بِكَ أَصْبَحْنَا، وَبِكَ أَمْسَيْنَا، وَبِكَ نَحْيَا، وَبِكَ نَمُوتُ، وَإِلَيْكَ النُّشُورُ',s:'رواه الترمذي (٣٣٩١) وأبو داود (٥٠٧١) — صحيح'},
+  {ty:'دعاء',t:'اللَّهُمَّ إِنِّي أَسْأَلُكَ عِلْمًا نَافِعًا، وَرِزْقًا طَيِّبًا، وَعَمَلًا مُتَقَبَّلًا',s:'رواه ابن ماجه (٩٢٥) — صحيح'},
+  {ty:'آية',t:'﴿فَاذْكُرُونِي أَذْكُرْكُمْ وَاشْكُرُوا لِي وَلَا تَكْفُرُونِ﴾',s:'سورة البقرة: ١٥٢'},
+  {ty:'موعظة',t:'«أَحَبُّ الأَعْمَالِ إِلَى اللَّهِ أَدْوَمُهَا وَإِنْ قَلَّ»',s:'رواه مسلم (٧٨٢)'}
+ ],
+ masa:[
+  {ty:'ذكر المساء',t:'أَمْسَيْنَا وَأَمْسَى الْمُلْكُ لِلَّهِ، وَالْحَمْدُ لِلَّهِ، لَا إِلَٰهَ إِلَّا اللَّهُ وَحْدَهُ لَا شَرِيكَ لَهُ، لَهُ الْمُلْكُ وَلَهُ الْحَمْدُ وَهُوَ عَلَىٰ كُلِّ شَيْءٍ قَدِيرٌ',s:'رواه مسلم (٢٧٢٣)'},
+  {ty:'دعاء المساء',t:'اللَّهُمَّ بِكَ أَمْسَيْنَا، وَبِكَ أَصْبَحْنَا، وَبِكَ نَحْيَا، وَبِكَ نَمُوتُ، وَإِلَيْكَ الْمَصِيرُ',s:'رواه الترمذي (٣٣٩١) وأبو داود (٥٠٧١) — صحيح'},
+  {ty:'آية',t:'﴿إِنَّ فِي خَلْقِ السَّمَاوَاتِ وَالْأَرْضِ وَاخْتِلَافِ اللَّيْلِ وَالنَّهَارِ لَآيَاتٍ لِأُولِي الْأَلْبَابِ﴾',s:'سورة آل عمران: ١٩٠'},
+  {ty:'دعاء النوم',t:'اللَّهُمَّ أَسْلَمْتُ نَفْسِي إِلَيْكَ، وَوَجَّهْتُ وَجْهِي إِلَيْكَ، وَفَوَّضْتُ أَمْرِي إِلَيْكَ، وَأَلْجَأْتُ ظَهْرِي إِلَيْكَ، رَغْبَةً وَرَهْبَةً إِلَيْكَ',s:'رواه البخاري (٦٣١٣) ومسلم (٢٧١٠)'},
+  {ty:'آية',t:'﴿اللَّهُ نُورُ السَّمَاوَاتِ وَالْأَرْضِ﴾',s:'سورة النور: ٣٥'}
+ ]};
+const GREET_HEAD={
+ sabah:{ay:'﴿ أَلَا بِذِكْرِ اللَّهِ تَطْمَئِنُّ الْقُلُوبُ ﴾',ays:'سورة الرعد: ٢٨',big:'صباح الخير',sub:'يومٌ جديدٌ يفتحه الله عليك باليُسر والبركة'},
+ masa:{ay:'﴿ وَذَكِّرْ فَإِنَّ الذِّكْرَىٰ تَنفَعُ الْمُؤْمِنِينَ ﴾',ays:'سورة الذاريات: ٥٥',big:'مساء الخير',sub:'ليلةُ سكينةٍ وراحةٍ يأويها الله بعينه'}
+};
+function greetMode(){ const h=new Date().getHours(); return h<12?'sabah':'masa'; }
+function greetItem(mode,off){ const b=GREET_BANK[mode]; return b[(dayOfYear()+off)%b.length]; }
+async function buildGreetCard(mode,off){
+  const W=1080,H=1350,item=greetItem(mode,off),hd=GREET_HEAD[mode];
+  const cv=document.createElement('canvas'); cv.width=W; cv.height=H;
+  const x=cv.getContext('2d');
+  try{ if(document.fonts&&document.fonts.ready)await document.fonts.ready; }catch(e){}
+  /* السماء: صباحٌ يتناهى من ليلٍ كحلي إلى أفقٍ ذهبي — مساءٌ يغرب إلى ليلٍ بالنجوم */
+  const cols=mode==='sabah'?['#0e1e46','#2c5488','#cf9c52']:['#080f2c','#274067','#8c4c1e'];
+  const g=x.createLinearGradient(0,0,0,H);
+  g.addColorStop(0,cols[0]); g.addColorStop(.58,cols[1]); g.addColorStop(1,cols[2]);
+  x.fillStyle=g; x.fillRect(0,0,W,H);
+  /* نجوم: في المساء تزين أعلى البطاقة، وفي الصباح باقيةٌ خافتة تودّع الليل */
+  for(let i=0;i<(mode==='masa'?110:46);i++){
+    x.globalAlpha=(Math.random()*.5+.2)*(mode==='sabah'?.55:1);
+    x.fillStyle='#f4ead0'; x.beginPath();
+    x.arc(Math.random()*W,Math.random()*H*.62,Math.random()*1.9+.5,0,7); x.fill();
+  }
+  x.globalAlpha=1;
+  /* شمسُ الصباح المشرقة — وجمرُ الغروب في المساء */
+  const sun=x.createRadialGradient(W/2,H*0.97,30,W/2,H*0.97,560);
+  sun.addColorStop(0,mode==='sabah'?'rgba(255,214,140,.5)':'rgba(255,150,70,.4)');
+  sun.addColorStop(1,'rgba(255,180,90,0)');
+  x.fillStyle=sun; x.fillRect(0,0,W,H);
+  /* وهج علوي خفيف */
+  const hg=x.createRadialGradient(W/2,140,40,W/2,140,640);
+  hg.addColorStop(0,'rgba(242,217,146,.14)'); hg.addColorStop(1,'rgba(242,217,146,0)');
+  x.fillStyle=hg; x.fillRect(0,0,W,H);
+  /* الإطار المزدوج ومعينات الزوايا — بخطّ تصميم نور */
+  const F='#d9b661',F2='#f2d992';
+  const dia=(cx,cy)=>{ x.save(); x.translate(cx,cy); x.rotate(Math.PI/4); x.fillStyle=F2; x.fillRect(-7,-7,14,14); x.restore(); };
+  x.strokeStyle=F; x.lineWidth=3; x.strokeRect(38,38,W-76,H-76);
+  x.strokeStyle='rgba(217,182,97,.45)'; x.lineWidth=1.4; x.strokeRect(54,54,W-108,H-108);
+  dia(38,38); dia(W-38,38); dia(38,H-38); dia(W-38,H-38);
+  x.textAlign='center';
+  /* آية الصدر ومصدرها */
+  x.fillStyle=F2; x.font='700 38px Amiri,"Noto Naskh Arabic",serif';
+  x.fillText(hd.ay,W/2,150);
+  x.fillStyle='rgba(238,233,220,.6)'; x.font='24px Cairo,"Noto Sans Arabic",sans-serif';
+  x.fillText(hd.ays,W/2,194);
+  /* شعار النور الصغير: حلقةٌ ودرّة */
+  x.strokeStyle=F; x.lineWidth=2.2; x.beginPath(); x.arc(W/2,262,16,0,7); x.stroke();
+  x.fillStyle=F2; x.beginPath(); x.arc(W/2,262,4.5,0,7); x.fill();
+  /* التهنئة الكبيرة */
+  x.fillStyle='#f6e7bd'; x.font='700 128px "Reem Kufi",Amiri,"Noto Naskh Arabic",serif';
+  x.shadowColor='rgba(0,0,0,.42)'; x.shadowBlur=18;
+  x.fillText(hd.big,W/2,404); x.shadowBlur=0;
+  /* سطر التهنئة الثانوي */
+  x.fillStyle='rgba(238,233,220,.88)'; x.font='34px Amiri,"Noto Naskh Arabic",serif';
+  x.fillText(hd.sub,W/2,468);
+  /* فاصل مزخرف */
+  x.strokeStyle='rgba(217,182,97,.7)'; x.lineWidth=2;
+  x.beginPath(); x.moveTo(W/2-150,530); x.lineTo(W/2+150,530); x.stroke();
+  dia(W/2,530);
+  /* نوع الفائدة */
+  x.fillStyle='rgba(242,217,146,.95)'; x.font='700 32px Cairo,"Noto Sans Arabic",sans-serif';
+  x.fillText(item.ty,W/2,600);
+  /* نص الفائدة ملفوفًا أسطرًا وموسَّطًا في فراغه */
+  x.fillStyle='rgba(238,233,220,.97)'; x.font='38px Amiri,"Noto Naskh Arabic",serif';
+  const words=String(item.t).split(' '); const lines=[]; let cur='';
+  words.forEach(w=>{ const t=cur?cur+' '+w:w;
+    if(x.measureText(t).width>W-240&&cur){ lines.push(cur); cur=w; } else cur=t; });
+  if(cur)lines.push(cur);
+  if(lines.length>5){ lines.length=5; lines[4]+='…'; }
+  const lineH=64, zoneTop=645, zoneH=290;
+  const tStart=zoneTop+Math.max(0,(zoneH-lines.length*lineH)/2)+lineH*0.72;
+  lines.forEach((L,k)=>x.fillText(L,W/2,tStart+k*lineH));
+  /* مصدر الفائدة */
+  x.fillStyle='rgba(242,217,146,.75)'; x.font='27px Cairo,"Noto Sans Arabic",sans-serif';
+  x.fillText('— '+item.s,W/2,982);
+  /* ختم اليوم: التاريخ الهجري والميلادي */
+  const now=new Date();
+  x.fillStyle='rgba(242,217,146,.92)'; x.font='700 31px Cairo,"Noto Sans Arabic",sans-serif';
+  x.fillText(hijriNice(now)+'  ·  '+gregNice(now),W/2,1048);
+  /* توقيع المصمم بخطٍّ رقيق جميل */
+  x.fillStyle='rgba(242,217,146,.88)'; x.font='400 37px Amiri,"Noto Naskh Arabic",serif';
+  x.fillText('حفظكم الرحمن ورعاكم ونفعكم ونفع بكم',W/2,1110);
+  x.fillStyle='rgba(238,233,220,.62)'; x.font='27px Cairo,"Noto Sans Arabic",sans-serif';
+  x.fillText('يوم جميل',W/2,1152);
+  /* ملاحظة التطبيق الصغيرة جدًا أسفل البطاقة */
+  x.fillStyle='rgba(238,233,220,.55)'; x.font='21px Cairo,"Noto Sans Arabic",sans-serif';
+  x.fillText(CARD_NOTE,W/2,1210);
+  x.direction='ltr'; x.fillText(CARD_URL,W/2,1242); x.direction='rtl';
+  x.fillText(CARD_SORRY,W/2,1272);
+  return cv;
+}
+let greetCur={mode:'sabah',off:0},greetBlob=null,greetUrl=null,greetBusy=false;
+function greetText(){
+  const it=greetItem(greetCur.mode,greetCur.off),hd=GREET_HEAD[greetCur.mode];
+  return hd.big+' — بطاقة نور\n\n'+it.t+'\n— '+it.s+'\n\nحفظكم الرحمن ورعاكم ونفعكم ونفع بكم\n(يوم جميل)';
+}
+async function renderGreet(){
+  if(greetBusy)return; greetBusy=true;
+  const img=$('#greetImg'),sp=$('#greetShare'),sv=$('#greetSave'),tag=$('#greetTag'),hint=$('#greetHint');
+  if(sp)sp.disabled=true; if(sv)sv.disabled=true;
+  if(img)img.style.opacity='.4';
+  try{
+    const mode=greetCur.mode,off=greetCur.off;
+    const cv=await buildGreetCard(mode,off);
+    const nb=await new Promise(res=>{ try{ cv.toBlob(res,'image/png'); }catch(e){ res(null); } });
+    if(nb){
+      greetBlob=nb;
+      if(greetUrl)URL.revokeObjectURL(greetUrl);
+      greetUrl=URL.createObjectURL(nb);
+      if(img){ img.src=greetUrl; img.style.opacity='1'; }
+      if(tag)tag.textContent='بطاقة '+(mode==='sabah'?'صباح الخير':'مساء الخير');
+      if(hint)hint.textContent=greetItem(mode,off).ty+' — تتجدد الفائدة كل يوم';
+    }else toast('تعذّر إنشاء الصورة في هذا المتصفح');
+  }catch(e){ toast('تعذّر تجهيز البطاقة هنا — افتح نور من متصفح جهازك'); }
+  finally{ greetBusy=false; if(sp)sp.disabled=false; if(sv)sv.disabled=false; }
+}
+async function shareGreetImg(){
+  if(!greetBlob){ toast('لحظة — البطاقة تحت التجهيز'); return; }
+  const btn=$('#greetShare'); if(btn)btn.disabled=true;
+  try{
+    const file=new File([greetBlob],'noor-greeting.png',{type:'image/png'});
+    if(navigator.canShare&&navigator.canShare({files:[file]})){
+      await navigator.share({files:[file],title:'بطاقة نور',text:greetText()});
+    }else{
+      /* بديل المتصفحات القديمة: فتح واتساب بالنص، وتُرفَق الصورة من زر الحفظ */
+      window.open('https://wa.me/?text='+encodeURIComponent(greetText()),'_blank','noopener');
+      toast('اضغط «حفظ الصورة» ثم أرفِقها في محادثة واتساب');
+    }
+  }catch(e){
+    if(!e||e.name!=='AbortError')toast('تعذّرت المشاركة — جرّب زر «حفظ الصورة»');
+  }finally{ if(btn)btn.disabled=false; }
+}
+function saveGreetImg(){
+  if(!greetBlob){ toast('لحظة — البطاقة تحت التجهيز'); return; }
+  const a=document.createElement('a'); a.href=URL.createObjectURL(greetBlob); a.download='noor-greeting.png';
+  document.body.appendChild(a); a.click(); a.remove();
+  setTimeout(()=>URL.revokeObjectURL(a.href),8000);
+  toast('حُفظت البطاقة في صورك — شارِكها لمن تحب');
+}
+function openGreet(mode){
+  greetCur={mode:mode,off:0};
+  const v=$('#greetVeil'); if(!v)return;
+  v.classList.add('show'); v.setAttribute('aria-hidden','false');
+  document.body.classList.add('cardopen');
+  renderGreet();
+}
+function closeGreet(){
+  const v=$('#greetVeil'); if(!v||!v.classList.contains('show'))return;
+  v.classList.remove('show'); v.setAttribute('aria-hidden','true');
+  if(!($('#toolVeil')&&$('#toolVeil').classList.contains('show')))document.body.classList.remove('cardopen');
+}
+function bindGreet(){
+  $('#greetClose').addEventListener('click',closeGreet);
+  $('#greetVeil').addEventListener('pointerdown',e=>{ if(e.target.id==='greetVeil')closeGreet(); });
+  $('#greetShare').addEventListener('click',shareGreetImg);
+  $('#greetSave').addEventListener('click',saveGreetImg);
+  $('#greetSwap').addEventListener('click',()=>{ greetCur.off++; renderGreet(); });
+  document.addEventListener('keydown',e=>{ if(e.key==='Escape')closeGreet(); });
 }
 function stopClockTimer(){ if(ckTimer){clearInterval(ckTimer);ckTimer=null;} }
 let t0=0, lastFrac=0, clockInCore=false;
@@ -3865,8 +4064,15 @@ const TOOLBUILD={
  /* ١٤. كن سببًا في الخير */
  share:{h(){
    const doy=dayOfYear(); const it=SHARE_BANK[(doy+shareOff)%SHARE_BANK.length];
+   const nowM=greetMode();
    return '<div class="ttitle">كن سببًا في الخير</div>'
    +'<p class="hint center">شارِك على واتساب آيةً أو حديثًا بشرحه، أو قصةً ملهمة قصيرة</p>'
+   +'<div class="tblock card" style="padding:15px"><b style="font-family:var(--f-disp);color:var(--gold2)">بطاقتا صباح الخير ومساء الخير</b>'
+   +'<p class="hint" style="margin-top:6px">بطاقة نور مصوَّرة تجدد فائدتها كل يوم: في صدرها التهنئة وآية نور، وفي قلبها ذكرٌ أو دعاءٌ أو آية موثقة المصدر، وموقَّعة بخطٍّ رقيق جميل: «حفظكم الرحمن ورعاكم ونفعكم ونفع بكم — يوم جميل».</p>'
+   +'<div class="duobtns" style="margin-top:10px">'
+   +'<button type="button" id="grSabah" class="'+(nowM==='sabah'?'tagbu':'tagbu ghost')+'"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><circle cx="12" cy="12" r="4"/><path d="M12 3.2v1.8M12 19v1.8M3.2 12H5M19 12h1.8M5.8 5.8l1.3 1.3M16.9 16.9l1.3 1.3M18.2 5.8l-1.3 1.3M7.1 16.9l-1.3 1.3"/></svg>صباح الخير</button>'
+   +'<button type="button" id="grMasa" class="'+(nowM==='masa'?'tagbu':'tagbu ghost')+'"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"><path d="M20 14.5A8.5 8.5 0 0 1 9.5 4a8.5 8.5 0 1 0 10.5 10.5Z"/></svg>مساء الخير</button></div>'
+   +'<p class="hint center" style="margin-top:8px">وقتك الآن يوافق بطاقة '+(nowM==='sabah'?'«صباح الخير»':'«مساء الخير»')+' — اضغطها لتراها ثم أرسلها، ويمكنك إرسال الأخرى في أي وقت.</p></div>'
    +'<div class="tblock card" style="padding:16px 15px"><span class="tag">'+it.ty+'</span>'
    +'<p class="'+(it.ty==='آية'?'tayat':'tq')+'" style="font-weight:700;margin-top:9px;line-height:2.1">'+it.t+'</p>'
    +'<div class="tblock" style="margin-top:9px"><p class="tq" style="color:var(--muted)">'+it.x+'</p><p class="tsrc" style="margin-top:6px">— '+it.s+'</p></div></div>'
@@ -3881,6 +4087,8 @@ const TOOLBUILD={
    $('#shWa').addEventListener('click',()=>{ try{ window.open('https://wa.me/?text='+encodeURIComponent(txt),'_blank'); }catch(e){ toast('افتح الصفحة في المتصفح للمشاركة على واتساب'); } });
    $('#shCopy').addEventListener('click',()=>copyText(txt));
    $('#shOther').addEventListener('click',()=>{ shareOff++; openTool('share'); });
+   $('#grSabah').addEventListener('click',()=>openGreet('sabah'));
+   $('#grMasa').addEventListener('click',()=>openGreet('masa'));
  }},
  /* ١٥. مهماتي اليومية */
  tasks:{h(){
@@ -4036,7 +4244,7 @@ function init(){
   renderCal2();
   $('#badgeNames').textContent=AR(NAMES.length);
   $('#spdTxt').textContent=AR(S.speed);
-  bindNav(); bindTicker(); bindClock(); bindTasbih(); bindSettings(); bindNameSearch();
+  bindNav(); bindTicker(); bindClock(); bindTasbih(); bindSettings(); bindNameSearch(); bindGreet();
   applyTickerVisibility(); applySky();
   /* نبض الدقيقة (v3.0.0): تحديث الوضع التلقائي والسماء دوريًا وأول العودة من الخلفية */
   setInterval(()=>{ if(S.theme==='auto')applyLook(); applySky(); },60000);
