@@ -175,7 +175,7 @@ button{font-family:inherit;color:inherit}
 .feat span{font-size:.72rem;color:var(--muted);line-height:1.7}
 .feat svg{width:46px;height:46px;margin-bottom:2px}
 .feat::after{content:'';position:absolute;top:-30px;left:-30px;width:110px;height:110px;border-radius:50%;background:radial-gradient(circle,rgba(217,182,97,.15),transparent 70%)}
-.stats{display:grid;grid-template-columns:repeat(3,1fr);gap:6px;margin-top:12px;padding:14px 8px}
+.stats{display:grid;grid-template-columns:repeat(4,1fr);gap:6px;margin-top:12px;padding:14px 8px}
 .stats>div{text-align:center;display:flex;flex-direction:column;gap:2px}
 .stats b{font-size:1.28rem;color:var(--gold2)}
 .stats span{font-size:.68rem;color:var(--muted)}
@@ -594,6 +594,63 @@ details.doc .body b{color:var(--gold2)}
 /* لمعان الشريط (v3.0.0): شعاع ذهبي يمسح النص بين الحين والآخر — محركه الحلقة الموحدة لا CSS */
 .tickshine{position:absolute;top:0;bottom:0;left:0;width:36px;z-index:1;pointer-events:none;opacity:0;background:linear-gradient(90deg,transparent,rgba(242,217,146,.16),transparent)}
 
+/* ====== إضافات v3.3.0 «نُفحات الرحمن» ====== */
+/* بطاقتا نُفحة القرآن وجوهرة السنة في الرئيسية */
+.dailycard .dailytag{display:inline-block;font-size:.66rem;font-weight:800;color:var(--gold2);border:1px solid var(--line);background:var(--bg2);border-radius:999px;padding:3px 11px;margin-bottom:9px}
+.dailymeans{font-size:.74rem;color:var(--muted);margin-top:7px;line-height:1.9}
+.dailybtns{display:flex;gap:14px;justify-content:center;margin-top:9px}
+.miniact{border:none;background:none;color:var(--gold);font-family:var(--f-ui);font-size:.74rem;font-weight:800;cursor:pointer;padding:4px 6px;border-bottom:1px dashed rgba(217,182,97,.4)}
+.miniact:active{opacity:.55}
+/* خلية سلسلة الأيام في بطاقة الإحصاء — تتوهج حين تعيش السلسلة */
+#stStreak.hot{animation:streakGlow 2.6s ease-in-out infinite}
+@keyframes streakGlow{0%,100%{text-shadow:0 0 0 rgba(242,217,146,0)}50%{text-shadow:0 0 14px rgba(242,217,146,.55)}}
+@media (max-width:352px){.stats{grid-template-columns:repeat(2,1fr);row-gap:12px}}
+/* ختمة الأسماء في شاشة الساعة */
+.khatma{margin-top:10px;padding:11px 14px;border:1px solid var(--line);border-radius:16px;background:var(--card)}
+.khead{display:flex;justify-content:space-between;align-items:center;gap:8px}
+.khead b{font-size:.76rem;color:var(--gold2);font-weight:800}
+.khead span{font-size:.72rem;color:var(--muted);font-weight:700}
+.kbar{height:7px;border-radius:99px;background:var(--bg2);border:1px solid var(--line);overflow:hidden;margin-top:7px}
+#khatmaFill{display:block;height:100%;width:0;border-radius:99px;background:linear-gradient(90deg,var(--emerald),var(--teal));transition:width .6s ease}
+/* زر جلسة الخشوع في المسبحة */
+.khushubtn{display:flex;align-items:center;gap:12px;width:100%;margin-top:12px;padding:13px 15px;border-radius:18px;border:1px solid var(--gold);background:linear-gradient(135deg,rgba(217,182,97,.14),rgba(217,182,97,.04));color:var(--ink);cursor:pointer;text-align:right}
+.khushubtn svg{width:26px;height:26px;color:var(--gold);flex:none}
+.khushubtn b{display:block;font-size:.92rem}
+.khushubtn span{display:block;font-size:.7rem;color:var(--muted);margin-top:3px;line-height:1.7}
+.khushubtn:active{transform:scale(.98)}
+/* جلسة الخشوع بملء الشاشة: دائرة تنفّس وعدّاد ومؤقت */
+.khushuveil{position:fixed;inset:0;z-index:80;display:flex;flex-direction:column;opacity:0;pointer-events:none;transition:opacity .35s;background:linear-gradient(180deg,var(--bg) 0%,var(--bg2) 58%,var(--bg) 100%);padding:14px 16px calc(16px + env(safe-area-inset-bottom))}
+.khushuveil.show{opacity:1;pointer-events:auto}
+.khu-top{display:flex;align-items:center;justify-content:space-between;gap:8px}
+/* زر الإغلاق هنا ساكنٌ في الصف (لا مطلق) كي لا يتغطى على شرائح المؤقت عند التفافها */
+#khuClose{position:static;flex:none;width:38px;height:38px}
+.khu-timers{display:flex;gap:6px;flex-wrap:wrap;justify-content:center;flex:1}
+.khu-timers .chip{padding:5px 10px;font-size:.72rem}
+.khu-mid{flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;gap:14px}
+.khu-dhikr{font-family:var(--f-read);font-size:clamp(1.35rem,6.4vw,1.9rem);color:var(--gold2);line-height:1.9;max-width:88vw}
+.khu-ringwrap{width:min(56vw,225px);aspect-ratio:1}
+.khu-ringwrap svg{width:100%;height:100%;display:block;overflow:visible}
+.khu-ring{fill:none;stroke:var(--gold);stroke-width:2;opacity:.55;transform-box:view-box;transform-origin:100px 100px;animation:khuBreathe 9s ease-in-out infinite}
+.khu-orbit{transform-box:view-box;transform-origin:100px 100px;animation:khuOrbit 9s linear infinite}
+@keyframes khuBreathe{0%,100%{transform:scale(.88);opacity:.4}45%{transform:scale(1.07);opacity:.9}}
+@keyframes khuOrbit{to{transform:rotate(360deg)}}
+.khu-cnt{font-size:2.6rem;color:var(--ink);font-weight:800;line-height:1}
+.khu-hint{font-size:.72rem;color:var(--muted)}
+.khu-timer{font-size:.8rem;color:var(--gold2);font-weight:800}
+.khu-foot{font-size:.72rem;color:var(--muted);text-align:center;line-height:1.9}
+@media (prefers-reduced-motion:reduce){.khu-ring,.khu-orbit{animation:none}}
+/* شهاب الخير يعبُر سماء أعمالك عند كل نجمة */
+.skywrap.meteorhost{position:relative;overflow:hidden}
+.meteor{position:absolute;top:14%;right:58%;width:112px;height:2.4px;border-radius:99px;pointer-events:none;background:linear-gradient(270deg,rgba(242,217,146,.95),rgba(242,217,146,0));filter:drop-shadow(0 0 7px rgba(242,217,146,.85));animation:meteorFly 1.25s cubic-bezier(.25,.55,.45,1) forwards}
+@keyframes meteorFly{0%{transform:translate3d(0,0,0) rotate(26deg);opacity:0}12%{opacity:1}100%{transform:translate3d(-240px,118px,0) rotate(26deg);opacity:0}}
+@media (prefers-reduced-motion:reduce){.meteor{display:none}}
+/* بوصلة القبلة */
+.qiwrap{margin-top:12px;display:grid;place-items:center;padding:18px 12px;border:1px solid var(--line);border-radius:20px;background:var(--bg2)}
+.qiwrap svg{width:min(64vw,250px);height:auto;display:block}
+.qi-deg{font-size:1.4rem;color:var(--gold2);font-weight:800;text-align:center;margin-top:10px}
+.qi-sub{font-size:.74rem;color:var(--muted);text-align:center;margin-top:5px;line-height:1.9;max-width:88vw}
+.qi-needle{transform-box:view-box;transform-origin:110px 110px;transition:transform .8s cubic-bezier(.22,1,.36,1)}
+
 /* ====== الشريط السفلي ====== */
 #nav{position:fixed;bottom:0;left:0;right:0;z-index:60;display:flex;justify-content:center;padding:8px 14px calc(10px + env(safe-area-inset-bottom));background:linear-gradient(to top,var(--bg) 32%,transparent);pointer-events:none}
 #nav .bar{pointer-events:auto;display:flex;gap:2px;width:100%;max-width:430px;background:rgba(13,38,29,.88);background:color-mix(in srgb,var(--card) 88%,transparent);border:1px solid var(--line);border-radius:26px;padding:6px;backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);box-shadow:0 14px 40px rgba(0,0,0,.35)}
@@ -683,6 +740,7 @@ details.doc .body b{color:var(--gold2)}
     <div><b id="stDay">٠</b><span>تسبيح اليوم</span></div>
     <div><b id="stAll">٠</b><span>الإجمالي المحفوظ</span></div>
     <div><b id="stRounds">٠</b><span>جولات اليوم</span></div>
+    <div><b id="stStreak">٠</b><span>سلسلة الأيام</span></div>
   </div>
   <!-- ====== التقويم والتاريخ (v2.3.0): مطوي في الرئيسية — يفتح شاشة مستقلة عند النقر حتى لا تمتلئ الرئيسية ====== -->
   <button type="button" class="card calfold" id="calFold">
@@ -697,6 +755,21 @@ details.doc .body b{color:var(--gold2)}
   <div class="quote card">
     <p class="aya">«إنَّ للهِ تسعةً وتسعينَ اسمًا، مائةً إلا واحدًا، مَن أحصاها دخل الجنةَ»</p>
     <p class="src">رواه البخاري ومسلم</p>
+  </div>
+  <!-- نُفحة قرآنية وجوهرة سنة لكل يوم (v3.3.0) — موثقة المصدر، تتجدد كل يوم، وتُشارَكان وبتُنسَخان -->
+  <div class="quote card dailycard">
+    <p class="dailytag">نُفحة قرآنية لليوم</p>
+    <p class="aya" id="qDayA">—</p>
+    <p class="src" id="qDayS"></p>
+    <p class="dailymeans" id="qDayM"></p>
+    <div class="dailybtns"><button type="button" id="qDayShare" class="miniact">مشاركة</button><button type="button" id="qDayCopy" class="miniact">نسخ</button></div>
+  </div>
+  <div class="quote card dailycard">
+    <p class="dailytag">جوهرة من السنة لليوم</p>
+    <p class="aya" id="hDayT">—</p>
+    <p class="src" id="hDayS"></p>
+    <p class="dailymeans" id="hDayM"></p>
+    <div class="dailybtns"><button type="button" id="hDayShare" class="miniact">مشاركة</button><button type="button" id="hDayCopy" class="miniact">نسخ</button></div>
   </div>
 </section>
 
@@ -731,6 +804,8 @@ details.doc .body b{color:var(--gold2)}
     <button type="button" class="tool" data-tool="quran"><span class="tico"><svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M12 6.4C10.3 5.1 8 4.7 4.6 4.8v12.8c3.4-.1 5.7.3 7.4 1.6 1.7-1.3 4-1.7 7.4-1.6V4.8c-3.4-.1-5.7.3-7.4 1.6z"/><path d="M12 6.4v12.8"/></svg></span><b>القرآن وحالتي</b><span>آيات تناسب حال قلبك من عشر حالات</span></button>
     <button type="button" class="tool" data-tool="account"><span class="tico"><svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linejoin="round"><path d="M19.6 14.6A8.2 8.2 0 0 1 9.4 4.4a8.2 8.2 0 1 0 10.2 10.2z"/></svg></span><b>محاسبتي قبل النوم</b><span>ثمانية أسئلة تُختم بها يومك</span></button>
     <button type="button" class="tool" data-tool="secret"><span class="tico"><svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"><rect x="5.8" y="10.7" width="12.4" height="8.7" rx="2.2"/><path d="M8.5 10.7V8.3a3.5 3.5 0 0 1 7 0v2.4"/><circle cx="12" cy="15" r="1.2" fill="currentColor" stroke="none"/></svg></span><b>نورٌ بينك وبينه</b><span>عملٌ خفي لا يراه أحد غيره</span></button>
+    <!-- بوصلة القبلة (v3.3.0): حساب هندسي بلا إنترنت + بوصلة حيّة -->
+    <button type="button" class="tool" data-tool="qibla"><span class="tico"><svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"><circle cx="12" cy="12" r="8.3"/><path d="M12 3.7v2M12 18.3v2M3.7 12h2M18.3 12h2"/><path d="M14.7 9.3l-1.6 3.8-3.8 1.6 1.6-3.8z" fill="currentColor" stroke="none"/></svg></span><b>اتجاه القبلة</b><span>بوصلة تُرشدك للكعبة من موضعك بلا إنترنت</span></button>
     <button type="button" class="tool wide" data-tool="wasiya"><span class="tico"><svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><rect x="6.2" y="3.8" width="11.6" height="16.4" rx="2"/><path d="M9.4 8.4h5.2M9.4 11.6h5.2M9.4 14.8h3.2"/></svg></span><b>وصية اليوم</b><span>وصية واحدة من القرآن والسنة والسلف — تتجدد كل يوم</span></button>
     <button type="button" class="tool wide" data-tool="share"><span class="tico"><svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"><circle cx="6.4" cy="12" r="2.1"/><circle cx="17.2" cy="6.2" r="2.1"/><circle cx="17.2" cy="17.8" r="2.1"/><path d="M8.3 11l6.9-3.8M8.3 13l6.9 3.8"/></svg></span><b>كن سببًا في الخير</b><span>شارك على واتساب آية أو حديثًا بشرحه أو قصةً ملهمة</span></button>
   </div>
@@ -746,6 +821,11 @@ details.doc .body b{color:var(--gold2)}
   <!-- بحث الأسماء والمفضلة (v3.0.0) -->
   <div class="searchrow"><input id="nameSearch" class="inp" maxlength="40" placeholder="ابحث باسمٍ أو معناه… مثل الرحيم أو Mercy" aria-label="البحث في الأسماء الحسنى"/><button type="button" id="nameFavBtn" class="btn" aria-label="عرض المفضلة">مفضلتي</button></div>
   <div id="nameResults" class="nameResults" hidden></div>
+  <!-- ختمة الأسماء (v3.3.0): تُحصى بطاقات النور التي قرأتها — «من أحصاها دخل الجنة» -->
+  <div class="khatma" id="khatmaRow" aria-label="ختمة الأسماء">
+    <div class="khead"><b>ختمةُ الأسماء «مَن أحصاها دخل الجنة»</b><span id="khatmaTxt">٠ من ١٠٠</span></div>
+    <div class="kbar"><i id="khatmaFill"></i></div>
+  </div>
   <div class="clockwrap" id="clockwrap">
     <svg viewBox="0 0 320 320" aria-hidden="true">
       <circle id="rimC" cx="160" cy="160" r="156" fill="var(--card2)" stroke="var(--line)" stroke-width="1"/>
@@ -786,7 +866,7 @@ details.doc .body b{color:var(--gold2)}
     </button>
     <button type="button" id="btnNext" class="rbtn" aria-label="الاسم التالي"><svg viewBox="0 0 24 24"><path d="M15 6l-6 6 6 6" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
   </div>
-  <p class="hint center subhint">ابحث عن اسمٍ من الحقل أعلاه أو افتح <b>مفضلتي</b> · انقر <b>وسط الساعة</b> لبطاقة النور · أو <b>اسمًا على الدرج</b> لفتح بطاقته · يمين/يسار للتنقل · يدور تلقائيًا كل <b id="spdTxt">٦</b> ثوانٍ (المدة من الإعدادات)</p>
+  <p class="hint center subhint">ابحث عن اسمٍ من الحقل أعلاه أو افتح <b>مفضلتي</b> · انقر <b>وسط الساعة</b> لبطاقة النور · أو <b>اسمًا على الدرج</b> لفتح بطاقته · يمين/يسار للتنقل · يدور تلقائيًا كل <b id="spdTxt">٦</b> ثوانٍ (المدة من الإعدادات) · وكل <b>بطاقة نور</b> تفتحها تُحصى لك في <b>ختمة الأسماء</b></p>
 </section>
 <!-- ====== المسبحة ====== -->
 <section id="screen-tasbih" class="screen">
@@ -808,6 +888,11 @@ details.doc .body b{color:var(--gold2)}
       </g>
     </svg>
     <div class="beads-center"><span id="b-dh" class="b-dh"></span><b id="cnt">٠</b><span id="tgt" class="b-tgt"></span></div>
+  </button>
+  <!-- جلسة الخشوع (v3.3.0): ذكرٌ بملء الشاشة بدائرة تنفّس ومؤقت وعدّاد يُسجّل في مسبحتك -->
+  <button type="button" id="khushuBtn" class="khushubtn">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" aria-hidden="true"><circle cx="12" cy="12" r="7.6"/><circle cx="12" cy="12" r="2.6" fill="currentColor" stroke="none"/><path d="M3.4 12c.8 1.9.8 4.1 0 6M20.6 12c-.8 1.9-.8 4.1 0 6"/></svg>
+    <span><b>جلسة الخشوع بملء الشاشة</b><span>ذكرٌ يظهر قبلك ودائرة تتنفّس معك — انقر أي موضعٍ لتسبّح، ومؤقتٌ لثلاث أو خمس أو عشر دقائق</span></span>
   </button>
   <div id="evidCard" class="evidcard card">
     <div class="rowl"><span class="tag">الشاهد</span><span class="hint">أدلة الأذكار من القرآن والسنة</span></div>
@@ -890,6 +975,12 @@ details.doc .body b{color:var(--gold2)}
     <div class="srow"><span class="lbl2">شكل الخرزة</span><div class="seg" id="segBeadShape"><button type="button">مستدير</button><button type="button">بيضوي</button><button type="button">مضلّع</button></div></div>
     <p class="small">خمس مسبحات: الخشبية الأصلية، الزمردية، الحجرية، اللؤلؤية الناصعة، والسوداء الأنيقة — مع ثلاثة أحجام للخرزة وثلاثة أشكال لها، ويظل الخيط والشاهدان والقطبة متوائمة مع كل اختيار. ويمكنك أيضًا تغيير صوت الخرز من قسم الصوت.</p>
   </div>
+  <!-- تذكير وردك (v3.3.0) -->
+  <div class="set card">
+    <h3>تذكير وردك</h3>
+    <div class="srow"><span class="lbl2">لحظة ذكر بين الحين والآخر</span><div class="seg" id="segRemind"><button type="button">إيقاف</button><button type="button">كل ٣٠ د</button><button type="button">كل ساعة</button><button type="button">كل ساعتين</button></div></div>
+    <p class="small">ينبهك نور بلطفٍ (صوتٌ ورسالة) إلى لحظة ذكرٍ في الوقت الذي تحدده، وما دام نور مفتوحًا في متصفحك — لتسبيحةٍ هنا وهناك تملأ يومك. وعند تحويل نور إلى تطبيق هاتفٍ سيرسل لك تذكيرًا حقيقيًا حتى وهو مغلق.</p>
+  </div>
   <div class="set card">
     <h3>البيانات</h3>
     <div class="srow"><span class="lbl2">عدادات التسبيح</span><button type="button" id="resetCounts" class="btn danger">ضبط</button></div>
@@ -915,7 +1006,7 @@ details.doc .body b{color:var(--gold2)}
     </details>
     <details class="doc">
       <summary>سجل الإصدار</summary>
-      <div class="body"><b>v3.2.0</b> — «صباح النور ومساؤه»: أُهديت زاوية «كن سببًا في الخير» بطاقتَي تهنئة مصوَّرتين — «صباح الخير» على شفقٍ فجرّي مُشرِق، و«مساء الخير» على غروبٍ يعقبه ليلٌ يزينه النجوم — تختار بطاقتك بحسب وقتك، وتعاينها في ورقةٍ ثم ترسلها كصورةٍ واضحة إلى واتساب وتطبيقات جهازك أو تحفظها؛ في صدر كل بطاقة التهنئةُ الكبيرة وآيةُ نور، وفي قلبها ذكرٌ أو دعاءٌ أو آية موثقة المصدر من صحيح البخاري ومسلم والترمذي وأبي داود وابن ماجه تتجدد كل يوم، وإذا أحببت غيرها بدّلتها بلمسة، وتُختم البطاقة بخطٍّ رقيق جميل: «حفظكم الرحمن ورعاكم ونفعكم ونفع بكم» و«يوم جميل»؛ وعاد توقيعُ كل البطاقات إلى نصك الحرفي: «تم انشاء هذه الصورة من تطبيق نور-احسان … (اعذرني لو وجد خطاء)».<br/><br/><b>v3.1.0</b> — «نورٌ يُشارَك»: صار هدفُ تسبيحك وهدفُ وردك يدويَّي الإدخال خالصَين — تكتب العدد بنفسك كيفما أحببت بلا أعدادٍ مفروضة، أو تُلغي الهدفَ فيسبح وردًا حرًّا بلا حدّ؛ وأضيف إلى ساعة الأسماء زرُّ «مشاركة واتساب» يصوغ بطاقة نور في صورةٍ رفيعة تحمل الاسم الحاضر ومعناه وشرحه وتاريخ يومك بهجريه وميلاديه على سماءٍ بلون وقتك، فترسلها إلى واتساب وإلى كل تطبيقات جهازك، موقَّعةً أسفلها بخطٍّ صغيرٍ رقيق: «تم انشاء هذه الصورة من تطبيق نور-احسان · https://mouradalhaj.github.io/noor/ (اعذرني لو وجد خطاء)».<br/><br/><b>v3.0.0</b> — «بهاء النور» إصدارُ الاحتفاء الكبير: حلقةُ حركةٍ موحّدة (requestAnimationFrame واحدة) تُدير الساعة والشريط ولمعانه بأداءٍ أنعم وبطاريةٍ أهدأ، وحفظٌ مؤجّل للعدادات، وسماءٌ تتلوّن بأوقات اليوم من الفجر إلى الليل، ونبضةُ نورٍ حول الساعة عند كل اسم، ولمعانٌ ذهبي يجري في الشريط، ونجمةٌ تولد بنبضةٍ في سماء الخير، وعدادُ تسبيحٍ يتدحرج، ولوحةُ «ليل عميق» السوداء لشاشات AMOLED، ووضعٌ تلقائي نهاريّ/ليليّ، ووردٌ يوميّ للمسبحة بحلقة تقدّم وأهداف (١٠٠/٣٣٣/٥٠٠/١٠٠٠) وعدّادٍ لكل ذكر ونبضٍ اهتزازيّ كل ٣٣، وبحثٌ فوريّ في الأسماء ومفضلةٌ محفوظة واستعراضٌ هادئ للقرص، وأرشيفُ مهماتٍ وتكرارٌ يوميّ وأسبوعيّ، وحاسبةُ عمرٍ بقوسٍ يُظهر موقعك من العمر المتوقع وبأشهر وأسابيع وركعات فريضةٍ ورواتب متبقية، ورسمٌ أسبوعيّ لمحاسبتك، وخياراتُ جديدة للشريط (إظهار وسرعة وأذكارك المخصصة) — بلا أن تنكسر صلةٌ ولا تضيع بيانات.<br/><br/><b>v2.5.1</b> — علاجُ شريط الذكر والتذكير على الآيفون: صار دوره بمحرّكٍ جافاسكربتي بخطوات requestAnimationFrame لا يُجمّده WebKit، وحُذف قناع الشفافية الذي يوقف الحركة داخل العناصر المقنّعة، وأصبح اللمسُ يوقفه ورفعُ الإصبع يستأنفه بدل :hover الذي يلتصق باللمس — فيجري الذكرُ والتذكير ومهماتُك على كل جهازٍ بلا توقف.<br/><br/><b>v2.5.0</b> — «حالتي الآن وشريط النور»: صار «أنا غاضب» شاشة «حالتي الآن» بتبويبين — غاضبٌ بخطواته نفسها، وسعيدٌ بآداب الفرح من السنة (ابن ماجه، وأبو داود، والترمذي) — وأُضيف شريط تذكير متحرك فوق الأسماء والمسبحة يجري فيه الذكر والتذكير ومهماتك المسجلة بلا توقف، وصار حساب العمر من تاريخ ميلادك: عمرك تلقائيًا، وفروضُ صلواتك ونوافلُها المتبقية، ونومُك تقديرًا بالسنين والشهور والأيام، وصار «النشر والإستخدام» نبذةً خالصة بلا خطوات نشر.<br/><br/><b>v2.4.0</b> — «هوية الإحسان»: أُضيفت رسالة نور «إحسان» إلى «عن تطبيق نور» — فلا تصلح حياةُ الإنسان المؤمن بلا إحسان؛ فراقب يومك وحاسب نفسك واستعن بالله ولا تعجز — وصار القسم «النشر والإستخدام» برسالة المصمم المتواضعة ودعائه لأحبابه، ويُعرض سجل الإصدار مختصرًا: إصدارٌ وسطران لكل تحديث.<br/><br/><b>v2.3.1</b> — إصلاح جذري لخلل التقويم: اختفى «غير معرف» وعادت الأيام إلى أماكنها بإعادة بناء محرك التاريخ الهجري بسلسلة بدائل متعددة وتحقق صارم من كل نتيجة.<br/><br/><b>v2.3.0</b> — طُوي «التقويم والتاريخ» في الرئيسية بشاشة مستقلة تفتح وتُغلق حتى لا تمتلئ الشاشة، وأُضيفت بطاقة «المهمات» فوق «نور اليوم» بعدّاد إنجاز وشاشة خيارات كاملة.<br/><br/><b>v2.2.0</b> — «عزيمة اليوم»: نوايا متعددة ونيتك بكلماتك ومهمات إنجاز تضيء النجوم، و«سماء الخير» للعرض والإحصاء خالصة، وانتقل التقويم بأحداث الإسلام الموثقة إلى الرئيسية.<br/><br/><b>v2.1.0</b> — نجوم سماء الخير تلوّنها أنواع الأعمال بمفتاح ألوان، وتقويم الخير الشهري، ومهماتي اليومية، وتوسعة «القرآن وحالتي» و«محاسبتي» و«بنك الخيرات»، وأيقونات مونو كرور بدل الإيموجي.<br/><br/><b>v2.0.0</b> — شاشة «نور اليوم» الجديدة بأربع عشرة أداة يومية: من نية اليوم وتحدي الدقيقة وسجل الدعوات إلى محاسبتي قبل النوم وكن سببًا في الخير، مع إزاحة أمانة لشريط حالة الآيفون.<br/><br/><b>v1.6.0</b> — علاج نهائي لانعكاس الأسماء على درج الساعة برسم داخلي، وتقليص بطاقات النور إلى ثلاثة أقسام: المعنى، والدليل بمصدره، والدعاء بمصدره — حذفًا لقسمَي «عبرة لقلبك» و«سؤال تدبر».<br/><br/><b>v1.5.0</b> — تشكيل الأسماء المئة وضبط اتجاهها على الدرج، وإعادة صياغة البطاقات المئة توثيقًا من التويجري و«المختصر»، ومسبحات خمس وأحجام وأشكال للخرزة.<br/><br/><b>v1.4.0</b> — اكتمال بطاقات النور المئة موثقة من «مختصر فقه الأسماء الحسنى» للبدر و«التوحيد» للتويجري، وقسم المظهر: خمس لوحات ألوان وأربعة أنماط خلفية.<br/><br/><b>v1.3.0</b> — لغة درج الأسماء عربي أو English من الإعدادات، ونبض قلب حي في الساعة والمسبحة، وشاهد كل ذكر من القرآن والسنة في صفحة المسبحة.<br/><br/><b>v1.2.0</b> — أصوات الساعة (تِك توك، جرس، خشبي) وصوت المسبحة، وشكل الساعة وشكل المسبحة، وخط الأسماء، والتسبيح التلقائي وعقرب الثواني.<br/><br/><b>v1.1.0</b> — تحسين كامل لمقاسات الجوال، الأسماء على قرص الساعة بدل الدقائق والثواني، وسرعة من ١ إلى ١٠ ثوانٍ بمؤشر انزلاقي، ومسبحة خشبية واقعية بصوت خرز محسّن.<br/><br/><b>v1.0.0</b> — الإطلاق الأول: ساعة الأسماء الحسنى (١٠٠ اسم مع الشرح)، والمسبحة بصوت الخرز والاحتفال، والأذكار المخصصة، والإعدادات، والحفظ المحلي على الجهاز.</div>
+      <div class="body"><b>v3.3.0</b> — «نُفحات الرحمن» ثماني هدايا جديدة تُيسر العبادة: جلسةُ الخشوع بملء الشاشة في المسبحة — دائرةُ ذكرٍ تتنفّس أمامك ومؤقّتٌ (٣/٥/١٠ دقائق) وعدّادٌ يُسجَّل في مسبحتك بنقرةٍ على أي موضع، ويقفز الذكرُ تلقائيًا كل ثلاثٍ وثلاثين؛ ونُفحةٌ قرآنية وجوهرةُ سنةٍ لكل يومٍ على الرئيسية موثقة المصدر من الصحيحين والسنن المعتبرة تتجددان كل يوم وتُشارَكان وبتُنسَخان؛ وسلسلةُ النور تُوقدُ لك أيامَ اتصالك بالذكر المتتابعة في بطاقة الإحصاء وتحتفل بمناسباتها (٣/٧/١٤/٢١/٤٠/١٠٠ يومًا)؛ وشهابُ الخير يعبُر سماءَ أعمالك كلما أضاءت نجمة؛ وبوصلةُ القبلة في نور اليوم — الأداة الخامسة عشرة — تحسب اتجاه الكعبة من موضعك بمسار الدوائر الكبرى بلا إنترنت وتُري المسافة إلى مكة وتستجيب لحركة جهازك في «البوصلة الحيّة»؛ وتذكيرُ وردك بلحظةِ ذكرٍ كل ٣٠ أو ٦٠ أو ١٢٠ دقيقةً ما دام نور مفتوحًا (من الإعدادات)؛ وختمةُ الأسماء على الساعة تُحصي بطاقات النور التي قرأتها وتشجعك نحو «مَن أحصاها دخل الجنة» بمناسباتها من ١٠ إلى ١٠٠ — وكلها تعمل من دون إنترنت وبنفس خفّة اللمس على الآيفون والأندرويد.<br/><br/><b>v3.2.0</b> — «صباح النور ومساؤه»: أُهديت زاوية «كن سببًا في الخير» بطاقتَي تهنئة مصوَّرتين — «صباح الخير» على شفقٍ فجرّي مُشرِق، و«مساء الخير» على غروبٍ يعقبه ليلٌ يزينه النجوم — تختار بطاقتك بحسب وقتك، وتعاينها في ورقةٍ ثم ترسلها كصورةٍ واضحة إلى واتساب وتطبيقات جهازك أو تحفظها؛ في صدر كل بطاقة التهنئةُ الكبيرة وآيةُ نور، وفي قلبها ذكرٌ أو دعاءٌ أو آية موثقة المصدر من صحيح البخاري ومسلم والترمذي وأبي داود وابن ماجه تتجدد كل يوم، وإذا أحببت غيرها بدّلتها بلمسة، وتُختم البطاقة بخطٍّ رقيق جميل: «حفظكم الرحمن ورعاكم ونفعكم ونفع بكم» و«يوم جميل»؛ وعاد توقيعُ كل البطاقات إلى نصك الحرفي: «تم انشاء هذه الصورة من تطبيق نور-احسان … (اعذرني لو وجد خطاء)».<br/><br/><b>v3.1.0</b> — «نورٌ يُشارَك»: صار هدفُ تسبيحك وهدفُ وردك يدويَّي الإدخال خالصَين — تكتب العدد بنفسك كيفما أحببت بلا أعدادٍ مفروضة، أو تُلغي الهدفَ فيسبح وردًا حرًّا بلا حدّ؛ وأضيف إلى ساعة الأسماء زرُّ «مشاركة واتساب» يصوغ بطاقة نور في صورةٍ رفيعة تحمل الاسم الحاضر ومعناه وشرحه وتاريخ يومك بهجريه وميلاديه على سماءٍ بلون وقتك، فترسلها إلى واتساب وإلى كل تطبيقات جهازك، موقَّعةً أسفلها بخطٍّ صغيرٍ رقيق: «تم انشاء هذه الصورة من تطبيق نور-احسان · https://mouradalhaj.github.io/noor/ (اعذرني لو وجد خطاء)».<br/><br/><b>v3.0.0</b> — «بهاء النور» إصدارُ الاحتفاء الكبير: حلقةُ حركةٍ موحّدة (requestAnimationFrame واحدة) تُدير الساعة والشريط ولمعانه بأداءٍ أنعم وبطاريةٍ أهدأ، وحفظٌ مؤجّل للعدادات، وسماءٌ تتلوّن بأوقات اليوم من الفجر إلى الليل، ونبضةُ نورٍ حول الساعة عند كل اسم، ولمعانٌ ذهبي يجري في الشريط، ونجمةٌ تولد بنبضةٍ في سماء الخير، وعدادُ تسبيحٍ يتدحرج، ولوحةُ «ليل عميق» السوداء لشاشات AMOLED، ووضعٌ تلقائي نهاريّ/ليليّ، ووردٌ يوميّ للمسبحة بحلقة تقدّم وأهداف (١٠٠/٣٣٣/٥٠٠/١٠٠٠) وعدّادٍ لكل ذكر ونبضٍ اهتزازيّ كل ٣٣، وبحثٌ فوريّ في الأسماء ومفضلةٌ محفوظة واستعراضٌ هادئ للقرص، وأرشيفُ مهماتٍ وتكرارٌ يوميّ وأسبوعيّ، وحاسبةُ عمرٍ بقوسٍ يُظهر موقعك من العمر المتوقع وبأشهر وأسابيع وركعات فريضةٍ ورواتب متبقية، ورسمٌ أسبوعيّ لمحاسبتك، وخياراتُ جديدة للشريط (إظهار وسرعة وأذكارك المخصصة) — بلا أن تنكسر صلةٌ ولا تضيع بيانات.<br/><br/><b>v2.5.1</b> — علاجُ شريط الذكر والتذكير على الآيفون: صار دوره بمحرّكٍ جافاسكربتي بخطوات requestAnimationFrame لا يُجمّده WebKit، وحُذف قناع الشفافية الذي يوقف الحركة داخل العناصر المقنّعة، وأصبح اللمسُ يوقفه ورفعُ الإصبع يستأنفه بدل :hover الذي يلتصق باللمس — فيجري الذكرُ والتذكير ومهماتُك على كل جهازٍ بلا توقف.<br/><br/><b>v2.5.0</b> — «حالتي الآن وشريط النور»: صار «أنا غاضب» شاشة «حالتي الآن» بتبويبين — غاضبٌ بخطواته نفسها، وسعيدٌ بآداب الفرح من السنة (ابن ماجه، وأبو داود، والترمذي) — وأُضيف شريط تذكير متحرك فوق الأسماء والمسبحة يجري فيه الذكر والتذكير ومهماتك المسجلة بلا توقف، وصار حساب العمر من تاريخ ميلادك: عمرك تلقائيًا، وفروضُ صلواتك ونوافلُها المتبقية، ونومُك تقديرًا بالسنين والشهور والأيام، وصار «النشر والإستخدام» نبذةً خالصة بلا خطوات نشر.<br/><br/><b>v2.4.0</b> — «هوية الإحسان»: أُضيفت رسالة نور «إحسان» إلى «عن تطبيق نور» — فلا تصلح حياةُ الإنسان المؤمن بلا إحسان؛ فراقب يومك وحاسب نفسك واستعن بالله ولا تعجز — وصار القسم «النشر والإستخدام» برسالة المصمم المتواضعة ودعائه لأحبابه، ويُعرض سجل الإصدار مختصرًا: إصدارٌ وسطران لكل تحديث.<br/><br/><b>v2.3.1</b> — إصلاح جذري لخلل التقويم: اختفى «غير معرف» وعادت الأيام إلى أماكنها بإعادة بناء محرك التاريخ الهجري بسلسلة بدائل متعددة وتحقق صارم من كل نتيجة.<br/><br/><b>v2.3.0</b> — طُوي «التقويم والتاريخ» في الرئيسية بشاشة مستقلة تفتح وتُغلق حتى لا تمتلئ الشاشة، وأُضيفت بطاقة «المهمات» فوق «نور اليوم» بعدّاد إنجاز وشاشة خيارات كاملة.<br/><br/><b>v2.2.0</b> — «عزيمة اليوم»: نوايا متعددة ونيتك بكلماتك ومهمات إنجاز تضيء النجوم، و«سماء الخير» للعرض والإحصاء خالصة، وانتقل التقويم بأحداث الإسلام الموثقة إلى الرئيسية.<br/><br/><b>v2.1.0</b> — نجوم سماء الخير تلوّنها أنواع الأعمال بمفتاح ألوان، وتقويم الخير الشهري، ومهماتي اليومية، وتوسعة «القرآن وحالتي» و«محاسبتي» و«بنك الخيرات»، وأيقونات مونو كرور بدل الإيموجي.<br/><br/><b>v2.0.0</b> — شاشة «نور اليوم» الجديدة بأربع عشرة أداة يومية: من نية اليوم وتحدي الدقيقة وسجل الدعوات إلى محاسبتي قبل النوم وكن سببًا في الخير، مع إزاحة أمانة لشريط حالة الآيفون.<br/><br/><b>v1.6.0</b> — علاج نهائي لانعكاس الأسماء على درج الساعة برسم داخلي، وتقليص بطاقات النور إلى ثلاثة أقسام: المعنى، والدليل بمصدره، والدعاء بمصدره — حذفًا لقسمَي «عبرة لقلبك» و«سؤال تدبر».<br/><br/><b>v1.5.0</b> — تشكيل الأسماء المئة وضبط اتجاهها على الدرج، وإعادة صياغة البطاقات المئة توثيقًا من التويجري و«المختصر»، ومسبحات خمس وأحجام وأشكال للخرزة.<br/><br/><b>v1.4.0</b> — اكتمال بطاقات النور المئة موثقة من «مختصر فقه الأسماء الحسنى» للبدر و«التوحيد» للتويجري، وقسم المظهر: خمس لوحات ألوان وأربعة أنماط خلفية.<br/><br/><b>v1.3.0</b> — لغة درج الأسماء عربي أو English من الإعدادات، ونبض قلب حي في الساعة والمسبحة، وشاهد كل ذكر من القرآن والسنة في صفحة المسبحة.<br/><br/><b>v1.2.0</b> — أصوات الساعة (تِك توك، جرس، خشبي) وصوت المسبحة، وشكل الساعة وشكل المسبحة، وخط الأسماء، والتسبيح التلقائي وعقرب الثواني.<br/><br/><b>v1.1.0</b> — تحسين كامل لمقاسات الجوال، الأسماء على قرص الساعة بدل الدقائق والثواني، وسرعة من ١ إلى ١٠ ثوانٍ بمؤشر انزلاقي، ومسبحة خشبية واقعية بصوت خرز محسّن.<br/><br/><b>v1.0.0</b> — الإطلاق الأول: ساعة الأسماء الحسنى (١٠٠ اسم مع الشرح)، والمسبحة بصوت الخرز والاحتفال، والأذكار المخصصة، والإعدادات، والحفظ المحلي على الجهاز.</div>
     </details>
   </div>
 </section>
@@ -999,6 +1090,27 @@ details.doc .body b{color:var(--gold2)}
     <p class="hint center" style="margin:8px 4px 2px">تُرسَل كصورةٍ واضحة إلى واتساب وتطبيقات جهازك — معاينةٌ حقيقية قبل الإرسال</p>
   </div>
 </div>
+<!-- ====== جلسة الخشوع بملء الشاشة (v3.3.0) ====== -->
+<div id="khushuVeil" class="khushuveil" role="dialog" aria-modal="true" aria-label="جلسة الخشوع" aria-hidden="true">
+  <div class="khu-top">
+    <span class="tag">جلسة الخشوع</span>
+    <div class="khu-timers" id="khuTimers">
+      <button type="button" data-m="0" class="chip on">بلا مؤقت</button>
+      <button type="button" data-m="3" class="chip">٣ د</button>
+      <button type="button" data-m="5" class="chip">٥ د</button>
+      <button type="button" data-m="10" class="chip">١٠ د</button>
+    </div>
+    <button type="button" id="khuClose" class="card-x" aria-label="إنهاء الجلسة"><svg viewBox="0 0 24 24"><path d="M6 6l12 12M18 6L6 18" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" fill="none"/></svg></button>
+  </div>
+  <div class="khu-mid">
+    <b id="khuDhikr" class="khu-dhikr">سبحان الله وبحمده</b>
+    <div class="khu-ringwrap"><svg viewBox="0 0 200 200" aria-hidden="true"><circle class="khu-ring" cx="100" cy="100" r="78"/><g class="khu-orbit"><circle cx="100" cy="22" r="3.6" fill="var(--gold2)"/></g></svg></div>
+    <b id="khuCnt" class="khu-cnt">٠</b>
+    <p class="khu-hint">انقر في أي موضع للتسبيح — وكل ٣٣ ينتقل الذكرُ تلقائيًا</p>
+    <p class="khu-timer" id="khuTimerTxt" hidden></p>
+  </div>
+  <p class="khu-foot">﴿الَّذِينَ آمَنُوا وَتَطْمَئِنُّ قُلُوبُهُم بِذِكْرِ اللَّهِ أَلَا بِذِكْرِ اللَّهِ تَطْمَئِنُّ الْقُلُوبُ﴾ — الرعد: ٢٨</p>
+</div>
 <div id="toast" role="status"></div>
 <script>
 "use strict";
@@ -1041,7 +1153,7 @@ function coreDel(fn){ const i=CORE_JOBS.indexOf(fn); if(i>=0)CORE_JOBS.splice(i,
   if(!CORE_JOBS.length&&CORE_RAF){ cancelAnimationFrame(CORE_RAF); CORE_RAF=0; CORE_TS=0; } }
 
 /* ============ الحالة والإعدادات ============ */
-let S=Object.assign({sound:true,vibrate:true,tickSound:true,autoPlay:true,speed:6,clockSound:'tick',beadSound:'classic',clockStyle:'classic',nameFont:'kufi',dialLang:'ar',tasbihStyle:'wood',beadSize:'m',beadShape:'round',tasbihMode:'manual',tasbihAuto:2,theme:'dark',fontScale:'m',palette:'emerald',bgpat:'stars',ticker:true,tickSpd:'mid',tickCustom:true,browse:false},store.get('settings',{}));
+let S=Object.assign({sound:true,vibrate:true,tickSound:true,autoPlay:true,speed:6,clockSound:'tick',beadSound:'classic',clockStyle:'classic',nameFont:'kufi',dialLang:'ar',tasbihStyle:'wood',beadSize:'m',beadShape:'round',tasbihMode:'manual',tasbihAuto:2,theme:'dark',fontScale:'m',palette:'emerald',bgpat:'stars',ticker:true,tickSpd:'mid',tickCustom:true,browse:false,remind:'off'},store.get('settings',{}));
 if(!(S.speed>=1&&S.speed<=10))S.speed=6;
 if(['tick','bell','wood'].indexOf(S.clockSound)<0)S.clockSound='tick';
 if(['classic','glass','wood','soft'].indexOf(S.beadSound)<0)S.beadSound='classic';
@@ -2104,6 +2216,7 @@ function bindNameSearch(){
 let ci=-1, wasPlaying=false;
 function openCard(i){
   ci=i; const n=NAMES[i], c=CARDS[i]||{};
+  markCardSeen(i);
   $('#nc-num').textContent='الاسم '+AR(i+1)+' من '+AR(NAMES.length);
   $('#nc-name').textContent=n.a;
   $('#nc-trans').textContent=n.t+' · '+n.m;
@@ -2625,6 +2738,7 @@ function tapBead(e){
   if(target>0&&cnt>=target){ showCelebrate(); return; }
   cnt++; day.c++; totals[dh]=(totals[dh]||0)+1; accB+=360/33;
   renderTasbih(); saveRound(); tapS(); vib(12); spawnRipple(e);
+  touchStreak();
   /* نبضة اهتزاز كل ثلاثٍ وثلاثين (v3.0.0) — كتسبيحات ما بعد الصلاة المسنونة */
   if(cnt%33===0&&(target===0||cnt<target))vib([45,45,45]);
   renderTasbihStats();
@@ -2815,6 +2929,8 @@ function bindSettings(){
   bindToggle('#tgTicker','ticker',applyTickerVisibility);
   bindSeg('#segTickSpd',['slow','mid','fast'],'tickSpd');
   bindToggle('#tgTickCustom','tickCustom',()=>{ buildTicker(); });
+  /* تذكير وردك (v3.3.0): لحظة ذكر كل ٣٠ أو ٦٠ أو ١٢٠ دقيقةً ما دام نور مفتوحًا */
+  bindSeg('#segRemind',['off','30','60','120'],'remind',()=>{ remindLast=Date.now(); toast(S.remind==='off'?'أُوقف تذكير وردك':'سيأتيك تذكيرُ وردك كل '+AR(parseInt(S.remind,10))+' دقيقةً ما دام نور مفتوحًا'); });
   $('#resetCounts').addEventListener('click',()=>{
     if(!confirm('إعادة ضبط جميع عدادات التسبيح؟'))return;
     totals={}; day={d:todayStr(),c:0,r:0}; cnt=0; accB=0; saveRound();
@@ -2822,7 +2938,7 @@ function bindSettings(){
   });
   $('#resetAll').addEventListener('click',()=>{
     if(!confirm('سيُحذف كل شيء: العدادات والإعدادات والأذكار المخصصة وبيانات نور اليوم. هل أنت متأكد؟'))return;
-    ['settings','ni','totals','day','round','dh','target','custom','screen','intent','azima','tsbHist','acct','acctHist','stars','duas','secret','life','tasks','tasksDone','ideasShown','nameFav','wird'].forEach(k=>store.del(k));
+    ['settings','ni','totals','day','round','dh','target','custom','screen','intent','azima','tsbHist','acct','acctHist','stars','duas','secret','life','tasks','tasksDone','ideasShown','nameFav','wird','streak','cardsSeen'].forEach(k=>store.del(k));
     location.reload();
   });
 }
@@ -2832,6 +2948,7 @@ function renderHomeStats(){
   $('#stDay').textContent=AR(day.c);
   $('#stAll').textContent=AR(Object.values(totals).reduce((a,b)=>a+b,0));
   $('#stRounds').textContent=AR(day.r);
+  renderStreak();
   renderHomeIntent();
 }
 function renderDates(){
@@ -2903,7 +3020,9 @@ function addStar(k,label){
   sky.push({k:k,l:label,d:todayStr(),ts:Date.now()});
   if(sky.length>800)sky=sky.slice(-800);
   if(!store.set('stars',sky))warnStorage();
+  touchStreak();
   if($('#skySvg'))renderSky();
+  spawnMeteor();
 }
 function starMeta(k){ return STARS_T.find(x=>x.k===k)||STARS_T[2]; }
 /* نجمة رباعية صغيرة (شُعّة) برأس خفيف — بلون نوع العمل */
@@ -4231,6 +4350,293 @@ function bindDay(){
   if(nx)nx.addEventListener('click',()=>{ if(calHOff>0){ calHOff--; renderCal2(); } });
 }
 
+/* ================================================================
+   إضافات v3.3.0 «نُفحات الرحمن» — ثماني هدايا جديدة:
+   ١) نُفحة قرآنية لليوم · ٢) جوهرة سنة لليوم · ٣) سلسلة النور ·
+   ٤) شهاب الخير · ٥) جلسة الخشوع · ٦) بوصلة القبلة ·
+   ٧) تذكير وردك · ٨) ختمة الأسماء
+   كلها تعمل بلا إنترنت، وبتحركات transform/opacity الآمنة على الآيفون.
+   ================================================================ */
+
+/* --- ١+٢. نُفحة قرآنية وجوهرة سنة: آيات وأحاديث مشهورة موثقة المصدر تتجدد كل يوم --- */
+const QDAY=[
+ {a:'﴿أَلَا بِذِكْرِ اللَّهِ تَطْمَئِنُّ الْقُلُوبُ﴾',s:'سورة الرعد: ٢٨',m:'حيث تضطرب القلوب، ذكرُ الله هو الدواءُ الأول'},
+ {a:'﴿فَاذْكُرُونِي أَذْكُرْكُمْ وَاشْكُرُوا لِي وَلَا تَكْفُرُونِ﴾',s:'سورة البقرة: ١٥٢',m:'من ذكره لله حسبه، وشفى الله صدره في ضيقه'},
+ {a:'﴿وَمَن يَتَوَكَّلْ عَلَى اللَّهِ فَهُوَ حَسْبُهُ﴾',s:'سورة الطلاق: ٣',m:'كفى بك توكُّلك على من بيده أمورُ الدنيا كلها'},
+ {a:'﴿فَإِنَّ مَعَ الْعُسْرِ يُسْرًا﴾',s:'سورة الشرح: ٥–٦',m:'في ضيقك فرَجٌ يجهّزه الله لك، فاحتسب وواصل عملك'},
+ {a:'﴿إِنَّ اللَّهَ مَعَ الصَّابِرِينَ﴾',s:'سورة البقرة: ١٥٣',m:'معيةُ الله للصابرين غِنىً عن كل سند'},
+ {a:'﴿حَسْبُنَا اللَّهُ وَنِعْمَ الْوَكِيلُ﴾',s:'سورة آل عمران: ١٧٣',m:'قولُ المؤمنين في الشدائد؛ فراجعها كلما وقع ما تخافه'},
+ {a:'﴿وَقَالَ رَبُّكُمُ ادْعُونِي أَسْتَجِبْ لَكُمْ﴾',s:'سورة غافر: ٦٠',m:'بابُ الدعاء مفتوحٌ لا يُغلَق، وربُّك قريبٌ مجيب'},
+ {a:'﴿رَبِّ اشْرَحْ لِي صَدْرِي وَيَسِّرْ لِي أَمْرِي﴾',s:'سورة طه: ٢٥–٢٦',m:'دعوةُ موسى لمن ضاق صدرُه في يومه'},
+ {a:'﴿وَهُوَ مَعَكُمْ أَيْنَ مَا كُنتُمْ﴾',s:'سورة الحديد: ٤',m:'في كل موضعٍ وبكل حال، لست وحدك أبدًا'},
+ {a:'﴿إِنَّ اللَّهَ مَعَ الَّذِينَ اتَّقَوا وَّالَّذِينَ هُم مُّحْسِنُونَ﴾',s:'سورة النحل: ١٢٨',m:'التقوى والإحسان طريقُ معيةِ الله في السر والعلن'},
+ {a:'﴿إِنَّ الْحَسَنَاتِ يُذْهِبْنَ السَّيِّئَاتِ﴾',s:'سورة هود: ١١٤',m:'أخطأتَ؟ اقتفِ الخطيئة بحسنةٍ تمحوها'},
+ {a:'﴿وَاللَّهُ يُحِبُّ الصَّابِرِينَ﴾',s:'سورة آل عمران: ١٤٦',m:'صبرُك المرتقب محبوبٌ عند الله تعالى'},
+ {a:'﴿اللَّهُ نُورُ السَّمَاوَاتِ وَالْأَرْضِ﴾',s:'سورة النور: ٣٥',m:'كل نورٍ رباني، وربُّ النور ينير لك طريقك'},
+ {a:'﴿وَإِذَا سَأَلَكَ عِبَادِي عَنِّي فَإِنِّي قَرِيبٌ﴾',s:'سورة البقرة: ١٨٦',m:'ربُّك أقربُ إليك من حاجبك، فانادِه وأنت واثق'},
+ {a:'﴿يَا أَيَّتُهَا النَّفْسُ الْمُطْمَئِنَّةُ ارْجِعِي إِلَىٰ رَبِّكِ رَاضِيَةً مَّرْضِيَّةً﴾',s:'سورة الفجر: ٢٧–٢٨',m:'سعادةُ الأنفس تتحقق بالسكينة إلى الله'},
+ {a:'﴿وَمَا خَلَقْتُ الْجِنَّ وَالْإِنسَ إِلَّا لِيَعْبُدُونِ﴾',s:'سورة الذاريات: ٥٦',m:'عبادتك غايةُ خلقك، وهي رفعةُ حياتك'},
+ {a:'﴿إِنَّ رَحْمَتَ اللَّهِ قَرِيبٌ مِّنَ الْمُحْسِنِينَ﴾',s:'سورة الأعراف: ٥٦',m:'أحسِن إلى الناس يجعل الله لك من كل ضيقٍ مخرجًا'},
+ {a:'﴿وَإِذَا مَرِضْتُ فَهُوَ يَشْفِينِ﴾',s:'سورة الشعراء: ٨٠',m:'الشافي هو الله، والدواء سببٌ لا يُؤثر بغير إذنه'},
+ {a:'﴿وَمَن يَتَّقِ اللَّهَ يَجْعَل لَّهُ مَخْرَجًا﴾',s:'سورة الطلاق: ٢',m:'من اتقى الله فَرَجَ اللهُ أمره من حيث لا يحتسب'},
+ {a:'﴿وَقُل رَّبِّ زِدْنِي عِلْمًا﴾',s:'سورة طه: ١١٤',m:'دعوةُ طالب العلم، وكل كسبٍ يبدأ بعلمٍ ينفع'},
+ {a:'﴿رَبِّ أَدْخِلْنِي مُدْخَلَ صِدْقٍ وَأَخْرِجْنِي مُخْرَجَ صِدْقٍ﴾',s:'سورة الإسراء: ٨٠',m:'دعوةُ كل بدايةٍ جديدةٍ وخاتمةٍ صالحة'},
+ {a:'﴿إِنَّ الصَّلَاةَ كَانَتْ عَلَى الْمُؤْمِنِينَ كِتَابًا مَّوْقُوتًا﴾',s:'سورة النساء: ١٠٣',m:'لصلاتك مواعيد محفوظة، فحافظ عليها تستقم حياتك'}
+];
+const HDAY=[
+ {t:'«تَبَسُّمُكَ فِي وَجْهِ أَخِيكَ لَكَ صَدَقَةٌ»',s:'رواه الترمذي (١٩٥٦) — حسن',m:'خفيفةٌ على لسانك، مؤثرةٌ في قلب أخيك'},
+ {t:'«الكَلِمَةُ الطَّيِّبَةُ صَدَقَةٌ»',s:'رواه البخاري (٢٩٨٩)',m:'كلمتك الطيبة رزقٌ لمن سمعها، وصدقةٌ تُكتَب لك'},
+ {t:'«لَا تَحْقِرَنَّ مِنَ الْمَعْرُوفِ شَيْئًا، وَلَوْ أَنْ تَلْقَى أَخَاكَ بِوَجْهٍ طَلْقٍ»',s:'رواه مسلم (٢٦٢٦)',m:'أصغر معروفٍ قد يكون أعظمَ أجرٍ بنيةٍ صادقة'},
+ {t:'«مَنْ صَلَّى عَلَيَّ صَلَاةً صَلَّى اللهُ عَلَيْهِ بِهَا عَشْرًا»',s:'رواه مسلم (٤٠٨)',m:'اجعل الصلاةَ على النبي ﷺ قرينَ لسانك صباحًا ومساءً'},
+ {t:'«خَيْرُكُمْ خَيْرُكُمْ لِأَهْلِهِ»',s:'رواه الترمذي (٣٨٩٥) — حسن',m:'خيرُك يبدأ من عتبة بيتك'},
+ {t:'«الْمُسْلِمُ مَنْ سَلِمَ الْمُسْلِمُونَ مِنْ لِسَانِهِ وَيَدِهِ»',s:'متفق عليه · البخاري (١٠) ومسلم (٤٠)',m:'سلامةُ الناس منك علامةُ سلامتك عند الله'},
+ {t:'«لَا يُؤْمِنُ أَحَدُكُمْ حَتَّى يُحِبَّ لِأَخِيهِ مَا يُحِبُّ لِنَفْسِهِ»',s:'متفق عليه · البخاري (١٣) ومسلم (٤٥)',m:'ما تحبُّ لنفسك فعِدْه لأخيك، وستطمئن قلبك'},
+ {t:'«كَلِمَتَانِ خَفِيفَتَانِ عَلَى اللِّسَانِ، ثَقِيلَتَانِ فِي الْمِيزَانِ، حَبِيبَتَانِ إِلَى الرَّحْمَنِ: سُبْحَانَ اللهِ وَبِحَمْدِهِ، سُبْحَانَ اللهِ الْعَظِيمِ»',s:'متفق عليه · البخاري (٦٤٠٧) ومسلم (٢٦٩٤)',m:'كلمتان تقال في لحظات، وتُوزن في الميزان بلا حساب'},
+ {t:'«إِذَا أَرَادَ اللهُ بِعَبْدٍ خَيْرًا فَقَّهَهُ فِي الدِّينِ»',s:'متفق عليه · البخاري (٧١) ومسلم (١٠٣٧)',m:'علمُك الشرعي أقربُ دليلٍ على حسن ظن الله بك'},
+ {t:'«مَنْ قَرَأَ حَرْفًا مِنْ كِتَابِ اللهِ فَلَهُ بِهِ حَسَنَةٌ، وَالْحَسَنَةُ بِعَشْرِ أَمْثَالِهَا»',s:'رواه الترمذي (٢٩١٠) — حسن صحيح',m:'حرفٌ واحد يزن عشر حسنات، فما بالك بصفحة'},
+ {t:'«إِنَّ اللهَ جَمِيلٌ يُحِبُّ الْجَمَالَ»',s:'رواه مسلم (٩١)',m:'جمِّل ما تقدر عليه: قلبك ولسانك وعملك'},
+ {t:'«صَلُّوا كَمَا رَأَيْتُمُونِي أُصَلِّي»',s:'رواه البخاري (٦٣١)',m:'اقتدِ بالنبي ﷺ تكن صلاتك صحيحة'},
+ {t:'«مَنْ بَنَى لِلَّهِ مَسْجِدًا بَنَى اللهُ لَهُ فِي الْجَنَّةِ مِثْلَهُ»',s:'متفق عليه · البخاري (٦٥٠) ومسلم (٥٣٣)',m:'شارِك ولو بالدعاء أو نظافة المسجد، فهو أثرٌ لا ينقطع'},
+ {t:'«الدِّينُ النَّصِيحَةُ»',s:'رواه مسلم (٥٥)',m:'نصحُك لمن تحب أمانةٌ من أمانات الدين'},
+ {t:'«أَحَبُّ الْأَعْمَالِ إِلَى اللهِ: الصَّلَاةُ عَلَى وَقْتِهَا، وَبِرُّ الْوَالِدَيْنِ»',s:'متفق عليه · البخاري (٥٢٧) ومسلم (٨٥)',m:'ابدأ بأول أعمال الميزان: صلاتك في وقتها ثم برُّ أبويك'},
+ {t:'«مَنْ قَالَ سُبْحَانَ اللهِ وَبِحَمْدِهِ فِي يَوْمِهِ مِائَةَ مَرَّةٍ حُطَّتْ خَطَايَاهُ وَلَوْ كَانَتْ مِثْلَ زَبَدِ الْبَحْرِ»',s:'متفق عليه · البخاري (٦٤٠٥) ومسلم (٢٦٩١)',m:'مئةُ ذكرٍ في يومك تمحو الخطايا مهما تكاثرت'},
+ {t:'«مَنْ دَلَّ عَلَى خَيْرٍ فَلَهُ مِثْلُ أَجْرِ فَاعِلِهِ»',s:'رواه مسلم (١٨٩٣)',m:'شارِك ما نفعك؛ أجرك يتضاعف بكل من انتفع بعدك'}
+];
+function renderDaily(){
+  const q=QDAY[dayOfYear()%QDAY.length], h=HDAY[dayOfYear()%HDAY.length];
+  const qa=$('#qDayA'); if(!qa)return;
+  qa.textContent=q.a; $('#qDayS').textContent='— '+q.s; $('#qDayM').textContent=q.m;
+  $('#hDayT').textContent=h.t; $('#hDayS').textContent='— '+h.s; $('#hDayM').textContent=h.m;
+  $('#qDayShare').addEventListener('click',()=>shareText('نُفحة قرآنية من تطبيق نور\n\n'+q.a+'\n— '+q.s+'\n\n'+q.m+'\n\n﴿وَلَقَدْ يَسَّرْنَا الْقُرْآنَ لِلذِّكْرِ فَهَلْ مِن مُّدَّكِرٍ﴾ (القمر: ١٧)'));
+  $('#qDayCopy').addEventListener('click',()=>copyText('نُفحة قرآنية من تطبيق نور\n\n'+q.a+'\n— '+q.s+'\n\n'+q.m));
+  $('#hDayShare').addEventListener('click',()=>shareText('جوهرة من السنة من تطبيق نور\n\n'+h.t+'\n— '+h.s+'\n\n'+h.m+'\n\n﴿وَمَا آتَاكُمُ الرَّسُولُ فَخُذُوهُ وَمَا نَهَاكُمْ عَنْهُ فَانتَهُوا﴾ (الحشر: ٧)'));
+  $('#hDayCopy').addEventListener('click',()=>copyText('جوهرة من السنة من تطبيق نور\n\n'+h.t+'\n— '+h.s+'\n\n'+h.m));
+}
+
+/* --- ٣. سلسلة النور: أيامُ اتصالك بالذكر المتتابعة تُوقد وتُحتفل بمناسباتها --- */
+let streak=store.get('streak',{last:null,n:0,best:0});
+function streakAlive(){
+  if(!streak.last)return false;
+  const t=new Date(), y=new Date(t.getTime()-864e5);
+  return streak.last===dateStrOf(t)||streak.last===dateStrOf(y);
+}
+function touchStreak(){
+  const t=todayStr();
+  if(streak.last===t)return;
+  const y=new Date(); y.setDate(y.getDate()-1);
+  streak.n=(streak.last&&streak.last===dateStrOf(y))?(streak.n+1):1;
+  streak.last=t;
+  if(streak.n>(streak.best||0))streak.best=streak.n;
+  if(!store.set('streak',streak))warnStorage();
+  renderStreak();
+  const ms=[3,7,14,21,40,100];
+  if(ms.indexOf(streak.n)>=0){ chime(); vib([50,60,50]); toast('سلسلةُ النور بلغت '+AR(streak.n)+' أيامٍ متواصلة — ثبّتك الله وبارك في سعيِك'); }
+}
+function renderStreak(){
+  const el=$('#stStreak'); if(!el)return;
+  const show=streakAlive()?streak.n:0;
+  el.textContent=AR(show);
+  el.classList.toggle('hot',show>0);
+}
+
+/* --- ٤. شهاب الخير: يعبُر سماء أعمالك كلما أضاءت نجمة جديدة --- */
+let meteorPending=false;
+function spawnMeteor(){
+  const sv=$('#skySvg');
+  if(!sv){ meteorPending=true; return; }
+  if(window.matchMedia&&matchMedia('(prefers-reduced-motion: reduce)').matches){ meteorPending=false; return; }
+  const host=sv.parentElement; if(!host)return;
+  host.classList.add('meteorhost');
+  const m=document.createElement('i'); m.className='meteor';
+  host.appendChild(m);
+  setTimeout(()=>m.remove(),1500);
+  meteorPending=false;
+}
+
+/* --- ٥. جلسة الخشوع: ذكرٌ بملء الشاشة بدائرة تنفّس ومؤقت — ويُسجَّل في عدادات مسبحتك --- */
+let khuOpen=false,khuT=null,khuEnd=0,khuPool=[],khuIdx=0,khuN=0;
+function khuShow(){ const e=$('#khuDhikr'); if(e&&khuPool.length)e.textContent=khuPool[khuIdx%khuPool.length]; }
+function khuAdvance(){ if(!khuPool.length)return; khuIdx=(khuIdx+1)%khuPool.length; khuShow(); }
+function khuTap(){
+  if(day.d!==todayStr())day={d:todayStr(),c:0,r:0};
+  const cur=khuPool[khuIdx]||dh;
+  cnt++; khuN++; day.c++; totals[cur]=(totals[cur]||0)+1; accB+=360/33;
+  saveRound();
+  touchStreak();
+  const kc=$('#khuCnt'); if(kc)kc.textContent=AR(cnt);
+  tapS(); vib(12);
+  if(cnt%33===0){ vib([45,45,45]); khuAdvance(); }
+}
+function openKhushu(){
+  if(khuOpen)return;
+  khuPool=BASE.concat(custom); if(!khuPool.length)return;
+  khuIdx=(khuPool.indexOf(dh)>=0)?khuPool.indexOf(dh):0; khuShow();
+  khuN=0;
+  const v=$('#khushuVeil'); if(!v)return;
+  v.classList.add('show'); v.setAttribute('aria-hidden','false');
+  document.body.classList.add('cardopen');
+  khuOpen=true;
+  const kc=$('#khuCnt'); if(kc)kc.textContent=AR(cnt);
+  khuSetTimer(0);
+  tapS();
+}
+function closeKhushu(){
+  if(!khuOpen)return; khuOpen=false;
+  if(khuT){clearInterval(khuT);khuT=null;}
+  const v=$('#khushuVeil');
+  if(v){ v.classList.remove('show'); v.setAttribute('aria-hidden','true'); }
+  document.body.classList.remove('cardopen');
+  renderTasbih(false); renderTasbihStats(); renderHomeStats();
+  if(khuN)toast('جلستُك هذه: '+AR(khuN)+' تسبيحة — تقبّل الله منك');
+}
+function khuSetTimer(m){
+  if(khuT){clearInterval(khuT);khuT=null;}
+  const txt=$('#khuTimerTxt');
+  if(txt)txt.hidden=true;
+  $$('#khuTimers .chip').forEach(b=>b.classList.toggle('on',String(m)===b.dataset.m));
+  if(!m){ khuEnd=0; return; }
+  khuEnd=Date.now()+m*60000;
+  const tick=()=>{
+    const left=khuEnd-Date.now(), el=$('#khuTimerTxt');
+    if(left<=0){
+      clearInterval(khuT); khuT=null;
+      if(el){ el.hidden=false; el.textContent='خُتمت مدة جلستك — سُبِّح فيها '+AR(khuN)+' تسبيحة، تقبّل الله منك'; }
+      chime(); vib([80,60,80]); return;
+    }
+    const s=Math.ceil(left/1000), mm=Math.floor(s/60), ss=s%60;
+    if(el){ el.hidden=false; el.textContent='يتبقى على نهاية الجلسة: '+AR(mm)+':'+AR(ss).padStart(2,'٠'); }
+  };
+  tick();
+  khuT=setInterval(tick,1000);
+}
+function bindKhushu(){
+  const b=$('#khushuBtn'); if(b)b.addEventListener('click',()=>{ tapS(); openKhushu(); });
+  const v=$('#khushuVeil'); if(!v)return;
+  $('#khuClose').addEventListener('click',(e)=>{ e.stopPropagation(); tapS(); closeKhushu(); });
+  $$('#khuTimers .chip').forEach(c=>c.addEventListener('click',(e)=>{ e.stopPropagation(); tapS(); khuSetTimer(parseInt(c.dataset.m,10)||0); }));
+  v.addEventListener('pointerdown',(e)=>{ if(!khuOpen)return; if(e.target.closest('#khuTimers,#khuClose'))return; khuTap(); });
+  document.addEventListener('keydown',(e)=>{ if(e.key==='Escape'&&khuOpen)closeKhushu(); });
+}
+
+/* --- ٦. بوصلة القبلة: حساب هندسي بمسار الدوائر الكبرى إلى الكعبة — بلا إنترنت --- */
+const KAABA={lat:21.422487,lon:39.826206};
+function qiblaBearing(lat,lon){
+  const p1=lat*Math.PI/180, p2=KAABA.lat*Math.PI/180, dl=(KAABA.lon-lon)*Math.PI/180;
+  const y=Math.sin(dl)*Math.cos(p2);
+  const x=Math.cos(p1)*Math.sin(p2)-Math.sin(p1)*Math.cos(p2)*Math.cos(dl);
+  return (Math.atan2(y,x)*180/Math.PI+360)%360;
+}
+function haversineKm(lat,lon){
+  const R=6371, r=Math.PI/180;
+  const dLat=(KAABA.lat-lat)*r, dLon=(KAABA.lon-lon)*r;
+  const a=Math.sin(dLat/2)*Math.sin(dLat/2)+Math.cos(lat*r)*Math.cos(KAABA.lat*r)*Math.sin(dLon/2)*Math.sin(dLon/2);
+  return Math.round(2*R*Math.atan2(Math.sqrt(a),Math.sqrt(1-a)));
+}
+TOOLBUILD.qibla={
+ h(){
+  return '<div class="ttitle">اتجاه القبلة</div>'
+  +'<p class="hint center">﴿فَوَلِّ وَجْهَكَ شَطْرَ الْمَسْجِدِ الْحَرَامِ﴾ (البقرة: ١٤٤)</p>'
+  +'<div class="qiwrap"><svg id="qiSvg" viewBox="0 0 220 220" role="img" aria-label="بوصلة القبلة">'
+  +'<circle cx="110" cy="110" r="100" fill="none" stroke="var(--line)" stroke-width="1.6"/>'
+  +'<circle cx="110" cy="110" r="84" fill="none" stroke="var(--line)" stroke-width=".8" stroke-dasharray="2 5"/>'
+  +'<text x="110" y="26" text-anchor="middle" font-size="12" fill="var(--muted)">ش</text>'
+  +'<text x="110" y="206" text-anchor="middle" font-size="12" fill="var(--muted)">ج</text>'
+  +'<text x="22" y="115" text-anchor="middle" font-size="12" fill="var(--muted)">غ</text>'
+  +'<text x="198" y="115" text-anchor="middle" font-size="12" fill="var(--muted)">ق</text>'
+  +'<g id="qiNeedle" class="qi-needle">'
+   +'<path d="M110 34 L122 110 L110 186 L98 110 Z" fill="none" stroke="url(#ggrad)" stroke-width="2.4" stroke-linejoin="round"/>'
+   +'<path d="M110 34 L122 110 L98 110 Z" fill="rgba(217,182,97,.28)"/>'
+   +'<circle cx="110" cy="72" r="7" fill="none" stroke="var(--gold)" stroke-width="2"/>'
+   +'<circle cx="110" cy="72" r="2.6" fill="var(--gold2)"/>'
+   +'<circle cx="110" cy="110" r="4" fill="var(--gold2)"/>'
+  +'</g>'
+  +'</svg><div class="qi-deg" id="qiDeg">حدّد موضعك أولًا</div><div class="qi-sub" id="qiSub">نحسب اتجاه الكعبة من موضعك بمسار الدوائر الكبرى — حسابٌ هندسي بلا إنترنت</div></div>'
+  +'<div class="center" style="display:flex;gap:8px;justify-content:center;margin-top:12px;flex-wrap:wrap">'
+  +'<button type="button" id="qiLoc" class="btn gold">تحديد موضعي واتجاه القبلة</button>'
+  +'<button type="button" id="qiLive" class="btn">بوصلة حيّة</button></div>'
+  +'<p class="hint" style="margin-top:10px">في الوضع الساكن: أدر جهازك حتى يقابل رأسُ السهم حرفَ «ش» (الشمال)، فهذا اتجاه القبلة من موضعك. وفي «البوصلة الحيّة» يدور السهم مع دوران جهازك — سيسألك الآيفون عن إذن الحركة فأجب بـ«سماح». والحساب أدقُّ ما يوفره المتصفح بلا إنترنت، وفي حالات اللبس يُرجَع لمعلم المكان المعتبر.</p>';
+ },
+ b(){
+  let bearing=null, liveOn=false;
+  const deg=$('#qiDeg'), sub=$('#qiSub'), needle=$('#qiNeedle');
+  const paint=()=>{
+    if(bearing==null)return;
+    if(needle)needle.style.transform='rotate('+bearing.toFixed(1)+'deg)';
+    if(deg)deg.textContent='القبلة: '+AR(Math.round(bearing))+'° من الشمال';
+  };
+  $('#qiLoc').addEventListener('click',()=>{
+    if(!navigator.geolocation){ toast('متصفحك لا يدعم تحديد الموضع — استخدم اتجاه مدينتك'); return; }
+    toast('نحدد موضعك الآن…');
+    navigator.geolocation.getCurrentPosition(pos=>{
+      bearing=qiblaBearing(pos.coords.latitude,pos.coords.longitude);
+      const km=haversineKm(pos.coords.latitude,pos.coords.longitude);
+      paint();
+      if(sub)sub.textContent='تبعد عنك الكعبة المشرفة نحو '+AR(km)+' كم — في الوضع الساكن اجعل أعلى جهازك نحو الشمال ثم اتبع السهم';
+      tapS(); toast('تم تحديد اتجاه القبلة — بارك الله في سعيِك');
+    },()=>toast('تعذّر تحديد الموضع — تحقّق من إذن الموقع ثم أعد المحاولة'),{timeout:12000,maximumAge:600000});
+  });
+  $('#qiLive').addEventListener('click',()=>{
+    tapS();
+    if(bearing==null){ toast('حدّد موضعك أولًا'); return; }
+    if(liveOn){ toast('البوصلة الحيّة تعمل بالفعل'); return; }
+    const go=()=>{
+      liveOn=true;
+      window.addEventListener('deviceorientation',(e)=>{
+        let h=null;
+        if(typeof e.webkitCompassHeading==='number')h=e.webkitCompassHeading;
+        else if(typeof e.alpha==='number')h=360-e.alpha;
+        if(h==null)return;
+        const rel=(bearing-h+360)%360;
+        if(needle)needle.style.transform='rotate('+rel.toFixed(1)+'deg)';
+        if(deg){
+          const side=rel<=180?'يمين':'يسار', amt=Math.round(rel<=180?rel:360-rel);
+          deg.textContent='القبلة على '+AR(amt)+'° '+side+' شمالك — أدر جهازك حتى يوازي السهم الأعلى';
+        }
+        if(sub&&sub.dataset.live!=='1'){ sub.dataset.live='1'; sub.textContent='البوصلة الحيّة تعمل — أدر جهازك ببطءٍ في دائرة أفقية لتثبيت الإبرة'; }
+      },true);
+    };
+    if(typeof DeviceOrientationEvent!=='undefined'&&typeof DeviceOrientationEvent.requestPermission==='function'){
+      DeviceOrientationEvent.requestPermission().then(r=>{ if(r==='granted')go(); else toast('لم يُمنَح إذن الحركة — استخدم الوضع الساكن'); }).catch(()=>toast('تعذّر تشغيل البوصلة الحيّة على هذا الجهاز'));
+    }else go();
+  });
+ }
+};
+
+/* --- ٧. تذكير وردك: لحظة ذكرٍ كل ٣٠ أو ٦٠ أو ١٢٠ دقيقةً ما دام نور مفتوحًا --- */
+let remindLast=Date.now();
+function remindLoop(){
+  setInterval(()=>{
+    if(S.remind==='off'||document.hidden)return;
+    const m=parseInt(S.remind,10); if(!m)return;
+    if(Date.now()-remindLast<m*60000)return;
+    remindLast=Date.now();
+    const d=TICK_DH[Math.floor(Math.random()*TICK_DH.length)];
+    chime(); toast('لحظة ذكر: '+d+' — قلها ولو مرةً واحدة');
+  },20000);
+}
+
+/* --- ٨. ختمة الأسماء: تُحصى بطاقات النور التي قرأتها — «مَن أحصاها دخل الجنة» --- */
+let seenCards=store.get('cardsSeen',{});
+function renderKhatma(){
+  const row=$('#khatmaRow'); if(!row)return;
+  const n=Object.keys(seenCards).length;
+  const txt=$('#khatmaTxt'); if(txt)txt.textContent=AR(Math.min(n,100))+' من '+AR(100);
+  const fill=$('#khatmaFill'); if(fill)fill.style.width=Math.min(100,Math.round(n/100*100))+'%';
+}
+function markCardSeen(i){
+  const k=String(i);
+  if(seenCards[k])return;
+  seenCards[k]=1;
+  if(!store.set('cardsSeen',seenCards))warnStorage();
+  const n=Object.keys(seenCards).length;
+  renderKhatma();
+  if(n===10)toast('بدأت ختمةُ الأسماء: '+AR(n)+' بطاقاتٍ مُحصاة — واصل بالتوفيق');
+  else if(n===25)toast('ربعُ الختمة اكتمل: '+AR(n)+' بطاقة — أحسنت');
+  else if(n===50)toast('نصفُ الختمة: '+AR(n)+' بطاقة مُحصاة — اللهم اجعلنا من أهلها');
+  else if(n===100){ chime(); vib([80,60,80]); toast('اكتمالُ ختمة الأسماء: أحصيتَ المئة بطاقة — «مَن أحصاها دخل الجنة» متفق عليه'); }
+  else if(n%10===0)toast(AR(n)+' بطاقةً مُحصاة في ختمة الأسماء — واصل');
+}
+
 /* ============ التشغيل ============ */
 function init(){
   applyLook(); buildPalSw(); applyFont(); applyNameFont(); applyClockStyle();
@@ -4244,8 +4650,9 @@ function init(){
   renderCal2();
   $('#badgeNames').textContent=AR(NAMES.length);
   $('#spdTxt').textContent=AR(S.speed);
-  bindNav(); bindTicker(); bindClock(); bindTasbih(); bindSettings(); bindNameSearch(); bindGreet();
+  bindNav(); bindTicker(); bindClock(); bindTasbih(); bindSettings(); bindNameSearch(); bindGreet(); bindKhushu();
   applyTickerVisibility(); applySky();
+  renderDaily(); renderStreak(); renderKhatma(); remindLoop();
   /* نبض الدقيقة (v3.0.0): تحديث الوضع التلقائي والسماء دوريًا وأول العودة من الخلفية */
   setInterval(()=>{ if(S.theme==='auto')applyLook(); applySky(); },60000);
   document.addEventListener('visibilitychange',()=>{ if(!document.hidden){ applySky(); if(S.theme==='auto')applyLook(); } });
