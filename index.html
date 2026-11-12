@@ -15,7 +15,7 @@
 <meta name="apple-mobile-web-app-title" content="نور"/>
 <link rel="preconnect" href="https://fonts.googleapis.com"/>
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
-<link href="https://fonts.googleapis.com/css2?family=Amiri:wght@400;700&family=Aref+Ruqaa:wght@400;700&family=Cairo:wght@400;600;700;800&family=Reem+Kufi:wght@400;600;700&display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Amiri:wght@400;700&family=Aref+Ruqaa:wght@400;700&family=Cairo:wght@400;700;800&family=Reem+Kufi:wght@400;700&display=swap" rel="stylesheet"/>
 <style>
 *{margin:0;padding:0;box-sizing:border-box;-webkit-tap-highlight-color:transparent}
 :root{
@@ -718,6 +718,159 @@ html[dir="ltr"] .arorig{direction:rtl;text-align:left}
 .gsch{width:46px;height:32px;border-radius:9px;border:2px solid var(--line);cursor:pointer;transition:transform .18s,border-color .18s;padding:0}
 .gsch:active{transform:scale(.94)}
 .gsch.on{border-color:var(--gold2);transform:scale(1.05);box-shadow:0 0 0 2px rgba(217,182,97,.25)}
+/* ================= v3.6.0 «مواقيت النور وفقه العبادات» ================= */
+html[data-font="xl"]{font-size:20px}
+/* P3: إجازة رسم ما تحت مجال الرؤية — تسريعُ الفتحِ على الأجهزةِ القديمة بلا أي أثرٍ بصري */
+.cv{content-visibility:auto;contain-intrinsic-size:auto 200px}
+
+/* M1: بطاقة مواقيت اليوم */
+.praycard{margin-top:14px;padding:15px 15px 12px;overflow:hidden}
+.pray-head{display:flex;align-items:flex-start;justify-content:space-between;gap:8px}
+.pray-next-label{font-size:.72rem;color:var(--muted);margin:0 0 2px;font-weight:700}
+.pray-next{margin:0;font-family:var(--f-disp);font-size:1.28rem;color:var(--gold2);font-weight:700}
+.pray-count{margin:3px 0 0;font-size:.78rem;color:var(--muted);font-variant-numeric:tabular-nums}
+.pray-gear{flex:none;width:38px;height:38px;border-radius:12px;border:1px solid var(--line);background:var(--bg2);color:var(--muted);display:grid;place-items:center;cursor:pointer}
+.pray-gear svg{width:19px;height:19px}
+.pray-row{display:grid;grid-template-columns:repeat(5,1fr);gap:5px;margin-top:11px}
+.pcell{border:1px solid var(--line);background:var(--bg2);border-radius:14px;padding:8px 2px 7px;text-align:center;cursor:pointer;transition:border-color .2s,background .2s,box-shadow .2s}
+.pcell b{display:block;font-size:.68rem;color:var(--muted);font-weight:700}
+.pcell .pt{display:block;font-size:.82rem;font-weight:800;color:var(--ink);margin-top:2px;font-variant-numeric:tabular-nums;white-space:nowrap}
+.pcell .pi{display:block;font-size:.56rem;color:var(--gold);margin-top:3px;opacity:.85;white-space:nowrap}
+.pcell.on{border-color:var(--gold);background:linear-gradient(160deg,rgba(217,182,97,.14),rgba(242,217,146,.05));box-shadow:0 0 14px rgba(217,182,97,.12)}
+.pcell.on b{color:var(--gold2)}
+.pray-loc{margin:9px 0 0;font-size:.68rem;color:var(--muted);text-align:center;cursor:pointer}
+@media (max-width:350px){.pcell .pi{display:none}}
+
+/* زاوية فقه العبادات */
+.fzbtns{display:flex;gap:6px;margin-inline-start:auto}
+.fiqsearch{position:relative;margin-top:12px}
+.fiqsearch input{width:100%;box-sizing:border-box;background:var(--card);border:1px solid var(--line);border-radius:16px;color:var(--ink);padding:11px 42px 11px 14px;font-family:var(--f-ui);font-size:.95rem}
+.fiqsearch input:focus{outline:none;border-color:var(--gold)}
+.fiqsearch svg{position:absolute;top:50%;inset-inline-start:14px;transform:translateY(-50%);width:18px;height:18px;color:var(--muted);pointer-events:none}
+.fiqprog .fprog-top{display:flex;justify-content:space-between;align-items:center;font-weight:800;font-size:.92rem}
+.fprogbar{height:9px;border-radius:99px;background:var(--bg2);border:1px solid var(--line);margin-top:9px;overflow:hidden}
+.fprogbar i{display:block;height:100%;width:0;border-radius:99px;background:linear-gradient(90deg,var(--gold),var(--gold2));transition:width .6s cubic-bezier(.2,.8,.3,1)}
+.fiqprog .hint{margin:7px 0 0;font-size:.72rem}
+/* أبواب الكتاب */
+.fchap{margin-top:10px;padding:0;overflow:hidden}
+.fchap summary{display:flex;align-items:center;gap:10px;padding:13px 13px;cursor:pointer;list-style:none;user-select:none;-webkit-user-select:none}
+.fchap summary::-webkit-details-marker{display:none}
+.fchev{flex:none;width:20px;height:20px;color:var(--muted);transition:transform .25s;margin-inline-start:auto}
+.fchap[open] .fchev{transform:rotate(180deg)}
+.fchap .ftx{min-width:0}
+.fchap .ftx b{display:block;font-family:var(--f-read);font-size:1.02rem;line-height:1.7;color:var(--ink)}
+.fchap .fs{display:block;font-size:.72rem;color:var(--muted);margin-top:3px;line-height:1.7}
+.fch-done .ftx b{color:var(--gold2)}
+.fseal{flex:none;width:30px;height:30px;border-radius:50%;border:1.5px dashed var(--line);color:var(--line);display:grid;place-items:center;cursor:pointer;transition:all .25s;background:transparent}
+.fseal svg{width:16px;height:16px;opacity:0}
+.fseal.on{border:1.5px solid var(--gold);background:linear-gradient(160deg,var(--gold),var(--gold2));color:#231a08;box-shadow:0 0 12px rgba(217,182,97,.35);animation:sealPulse .6s cubic-bezier(.2,.8,.3,1)}
+.fseal.on svg{opacity:1}
+@keyframes sealPulse{0%{transform:scale(.92)}55%{transform:scale(1.14)}100%{transform:scale(1)}}
+.fbody{padding:2px 14px 14px;border-top:1px solid var(--line);animation:cardIn .32s cubic-bezier(.2,.8,.3,1)}
+.fbody .fh{font-family:var(--f-read);font-weight:700;color:var(--gold2);margin:12px 0 4px;font-size:.98rem}
+.fbody .fp{font-size:.88rem;line-height:2;color:var(--ink);margin:7px 0}
+.fbody .fli{font-size:.86rem;line-height:2.05;color:var(--ink);margin:5px 0;padding-inline-start:2px}
+/* بطاقة الدليل القابلة للطي (T5) */
+.fdoc{margin:8px 0;border:1px solid var(--line);border-radius:14px;background:var(--bg2);overflow:hidden}
+.fdoc summary{display:flex;align-items:center;gap:6px;padding:9px 12px;cursor:pointer;list-style:none;color:var(--gold);font-size:.8rem;font-weight:800;user-select:none;-webkit-user-select:none}
+.fdoc summary::-webkit-details-marker{display:none}
+.fdoc summary svg{width:15px;height:15px;margin-inline-start:auto;transition:transform .25s}
+.fdoc[open] summary svg{transform:rotate(180deg)}
+.fdoc .fdt{font-family:var(--f-read);font-size:.95rem;line-height:2.1;color:var(--ink);padding:4px 12px 2px}
+.fdoc .fds{font-size:.72rem;color:var(--muted);padding:2px 12px 11px}
+/* جدول الأوقات (الباب الثاني) */
+.ftab{margin:10px 0;border:1px solid var(--line);border-radius:14px;overflow:hidden}
+.ftr{display:grid;grid-template-columns:1.1fr .8fr 2.6fr;gap:4px;padding:8px 10px;border-top:1px solid var(--line);font-size:.8rem;line-height:1.8;align-items:start}
+.ftr:first-child{border-top:none}
+.ftr.fth{background:var(--bg2);color:var(--gold2);font-weight:800;font-size:.75rem}
+.ftr span:first-child{font-weight:800;color:var(--gold2)}
+/* أخطاء شائعة (الباب العاشر) */
+.ferr{border:1px solid var(--line);border-inline-start:3px solid var(--danger);border-radius:12px;padding:9px 12px;margin:8px 0;background:var(--bg2)}
+.ferr b{display:block;font-size:.84rem;line-height:1.9;color:var(--ink)}
+.ferr span{display:block;font-size:.8rem;line-height:1.9;color:var(--gold2);margin-top:3px}
+.ferr .fers{color:var(--muted);font-size:.72rem}
+/* T2 قبل الصلاة */
+.fcheck{display:flex;gap:10px;align-items:flex-start;padding:9px 0;border-top:1px dashed var(--line)}
+.fcheck:first-child{border-top:none}
+.fcheck button{flex:none;width:26px;height:26px;border-radius:9px;border:1.5px solid var(--line);background:var(--bg2);color:transparent;display:grid;place-items:center;cursor:pointer;margin-top:2px}
+.fcheck button svg{width:15px;height:15px}
+.fcheck.on button{border-color:var(--gold);background:linear-gradient(160deg,var(--gold),var(--gold2));color:#231a08}
+.fcheck div{min-width:0}
+.fcheck b{display:block;font-size:.86rem;line-height:1.9;color:var(--ink);font-weight:700}
+.fcheck span{display:block;font-size:.7rem;color:var(--muted);margin-top:2px}
+/* T3 صلواتي اليوم */
+#fiqTrackChips{display:grid;grid-template-columns:repeat(5,1fr);gap:6px;margin-top:10px}
+.fchip{position:relative;border:1px solid var(--line);background:var(--bg2);border-radius:14px;padding:9px 3px 8px;text-align:center;cursor:pointer;transition:border-color .2s,background .25s,box-shadow .25s;overflow:hidden}
+.fchip b{display:block;font-size:.74rem;color:var(--ink);font-weight:800}
+.fchip .ft{display:block;font-size:.6rem;color:var(--muted);margin-top:3px;line-height:1.6}
+.fchip .fq{display:block;font-size:.58rem;color:var(--gold);margin-top:2px}
+.fchip .fck{position:absolute;top:5px;inset-inline-end:5px;width:16px;height:16px;border-radius:50%;background:var(--gold);color:#231a08;display:grid;place-items:center;opacity:0;transform:scale(.4);transition:opacity .2s,transform .25s cubic-bezier(.2,.8,.3,1)}
+.fchip .fck svg{width:10px;height:10px}
+.fchip.on{border-color:var(--gold);background:linear-gradient(160deg,rgba(217,182,97,.18),rgba(242,217,146,.05))}
+.fchip.on .fck{opacity:1;transform:scale(1)}
+.fchip.big{display:block;width:100%;grid-template-columns:none;padding:11px;font-size:.9rem;color:var(--ink)}
+.fchip.big.done{border-color:var(--gold);background:linear-gradient(160deg,var(--gold),var(--gold2));color:#231a08;font-weight:800}
+.fchip.big.done b,.fchip.big.done .ft{color:#231a08}
+.fweek{margin-top:12px;border-top:1px dashed var(--line);padding-top:9px}
+.fwrow{display:flex;align-items:center;gap:10px;padding:2.5px 0}
+.fwd{flex:none;width:34px;font-size:.68rem;color:var(--muted);font-weight:700}
+.fwdots{display:flex;gap:5px}
+.fwdots i{width:9px;height:9px;border-radius:50%;border:1px solid var(--line);display:inline-block}
+.fwdots i.on{background:var(--gold);border-color:var(--gold);box-shadow:0 0 6px rgba(217,182,97,.4)}
+/* T4 وضع السفر */
+.fswitch{display:inline-flex;align-items:center;gap:9px;border:1px solid var(--line);background:var(--bg2);color:var(--ink);border-radius:99px;padding:9px 16px;cursor:pointer;font-weight:800;font-size:.85rem;transition:border-color .2s,background .25s}
+.fswitch i{width:34px;height:19px;border-radius:99px;background:var(--line);position:relative;transition:background .25s;flex:none}
+.fswitch i::after{content:'';position:absolute;top:2px;inset-inline-start:2px;width:15px;height:15px;border-radius:50%;background:var(--muted);transition:transform .25s,background .25s}
+[dir="ltr"] .fswitch i::after{inset-inline:auto 2px}
+.fswitch.on{border-color:var(--gold)}
+.fswitch.on i{background:rgba(217,182,97,.35)}
+.fswitch.on i::after{transform:translateX(var(--flip,-16px));background:var(--gold2)}
+[dir="ltr"] .fswitch.on i::after{transform:translateX(16px)}
+.ftravstate{display:block;font-size:.76rem;color:var(--muted);margin-top:8px;line-height:1.9}
+/* T6 أذكار السلام */
+.fazkar{padding:9px 0;border-top:1px dashed var(--line)}
+.fazkar:first-child{border-top:none}
+.fazkar b{display:block;font-size:.8rem;color:var(--muted);font-weight:700}
+.fazkar .faz{font-family:var(--f-read);font-size:.98rem;line-height:2.15;color:var(--ink);margin:4px 0}
+.fazkar .fds2{font-size:.68rem;color:var(--muted)}
+.fstg{display:flex;align-items:center;gap:10px;margin-top:11px}
+.fdots{display:flex;gap:6px}
+.fdots i{width:11px;height:11px;border-radius:50%;border:1.5px solid var(--line);display:inline-block;transition:background .2s,border-color .2s}
+.fdots i.on{background:var(--gold);border-color:var(--gold)}
+/* T7 مرشد السهو */
+#fiqSehBtns{display:grid;grid-template-columns:repeat(3,1fr);gap:6px;margin-top:10px}
+#fiqSehBtns .fchip{padding:10px 3px}
+#fiqSehBtns .fchip b{font-size:.78rem}
+#fiqSehBtns .fchip.on{border-color:var(--gold);background:linear-gradient(160deg,var(--gold),var(--gold2))}
+#fiqSehBtns .fchip.on b{color:#231a08}
+#fiqSehResult{margin-top:10px;border:1px solid var(--line);border-radius:14px;background:var(--bg2);padding:11px 13px;animation:cardIn .3s cubic-bezier(.2,.8,.3,1)}
+#fiqSehResult b{display:block;font-size:.88rem;color:var(--gold2);line-height:1.9}
+#fiqSehResult p{font-size:.78rem;color:var(--muted);line-height:1.9;margin:5px 0}
+/* بطاقة إعدادات المواقيت */
+.numrow{display:grid;grid-template-columns:repeat(5,1fr);gap:6px;margin-top:8px}
+.numrow label{font-size:.62rem;color:var(--muted);display:block;text-align:center;margin-bottom:3px;font-weight:700}
+.numrow input{width:100%;box-sizing:border-box;background:var(--bg2);border:1px solid var(--line);border-radius:10px;color:var(--ink);padding:7px 4px;text-align:center;font-size:.85rem;font-variant-numeric:tabular-nums}
+.numrow input:focus{outline:none;border-color:var(--gold)}
+.coordrow{display:grid;grid-template-columns:1fr 1fr auto;gap:6px;margin-top:8px;align-items:center}
+.coordrow input{width:100%;box-sizing:border-box;background:var(--bg2);border:1px solid var(--line);border-radius:10px;color:var(--ink);padding:8px 8px;font-size:.8rem;font-variant-numeric:tabular-nums}
+.coordrow input:focus{outline:none;border-color:var(--gold)}
+#prayLocLbl{font-size:.76rem;color:var(--gold2);font-weight:700;line-height:1.9}
+/* M3: الدخول المتتابع */
+@keyframes cardIn{from{opacity:.01;transform:translateY(10px)}to{opacity:1;transform:none}}
+.stagger{animation:cardIn .5s cubic-bezier(.2,.8,.3,1) both}
+@media (prefers-reduced-motion:reduce){
+ .stagger{animation:none}
+ .fseal.on{animation:none}
+ .fbody{animation:none}
+ #fiqSehResult{animation:none}
+ .fprogbar i{transition:none}
+ .fchip .fck{transition:none}
+}
+button.pray-loc{background:none;border:none;font-family:var(--f-ui)}
+#segPrayMethod,#segPrayAsr{flex-wrap:wrap}
+#segPrayMethod button,#segPrayAsr button{font-size:.66rem}
+.coordrow .btn{padding:8px 12px;font-size:.8rem;white-space:nowrap}
+
 </style>
 </head>
 <body>
@@ -740,12 +893,27 @@ html[dir="ltr"] .arorig{direction:rtl;text-align:left}
     <p class="sub"><span id="greet2"></span> · <span id="hijri"></span> <span id="greg"></span></p>
     <p class="homeintent" id="homeIntent" hidden></p>
   </header>
+
+  <!-- v3.6.0 M1+P1: بطاقة مواقيت اليوم — محركٌ محليٌّ بلا إنترنت -->
+  <div class="card praycard" id="prayCard">
+    <div class="pray-head">
+      <div>
+        <p class="pray-next-label">الصلاة القادمة</p>
+        <p class="pray-next" id="prayNext">—</p>
+        <p class="pray-count" id="prayCount">—</p>
+      </div>
+      <button type="button" class="pray-gear" id="prayGear" aria-label="إعدادات المواقيت"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="3.1"/><path d="M19.2 14.8a1.6 1.6 0 0 0 .32 1.77l.06.06a1.95 1.95 0 1 1-2.76 2.76l-.06-.06a1.6 1.6 0 0 0-1.77-.32 1.6 1.6 0 0 0-.97 1.47v.17a1.95 1.95 0 1 1-3.9 0v-.09a1.6 1.6 0 0 0-1.05-1.47 1.6 1.6 0 0 0-1.77.32l-.06.06a1.95 1.95 0 1 1-2.76-2.76l.06-.06a1.6 1.6 0 0 0 .32-1.77 1.6 1.6 0 0 0-1.47-.97h-.17a1.95 1.95 0 1 1 0-3.9h.09a1.6 1.6 0 0 0 1.47-1.05 1.6 1.6 0 0 0-.32-1.77l-.06-.06a1.95 1.95 0 1 1 2.76-2.76l.06.06a1.6 1.6 0 0 0 1.77.32h.09a1.6 1.6 0 0 0 .97-1.47v-.17a1.95 1.95 0 1 1 3.9 0v.09a1.6 1.6 0 0 0 .97 1.47 1.6 1.6 0 0 0 1.77-.32l.06-.06a1.95 1.95 0 1 1 2.76 2.76l-.06.06a1.6 1.6 0 0 0-.32 1.77v.09a1.6 1.6 0 0 0 1.47.97h.17a1.95 1.95 0 1 1 0 3.9h-.09a1.6 1.6 0 0 0-1.47.97z"/></svg></button>
+    </div>
+    <div class="pray-row" id="prayRow"></div>
+    <button type="button" class="pray-loc" id="prayLocLink">—</button>
+  </div>
+
   <!-- شريط الذكر والتذكير (v2.5.0): فوق الأسماء والمسبحة — ذكرٌ وتذكيرٌ ومهماتك المسجلة تدور بلا توقف -->
   <div class="ticker" id="homeTicker" aria-label="شريط الذكر والتذكير">
     <span class="tickico" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M4 9.6v4.8h3.4l4.9 3.9V5.7L7.4 9.6z"/><path d="M15.4 9.3a3.9 3.9 0 0 1 0 5.4M17.9 6.9a7.2 7.2 0 0 1 0 10.2"/></svg></span>
     <div class="tickwin"><div class="ticktrack" id="tickTrack"></div><i class="tickshine" aria-hidden="true"></i></div>
   </div>
-  <div class="quote card dailycard" id="wasiyaHome" hidden>
+  <div class="quote card dailycard cv" id="wasiyaHome" hidden>
     <p class="dailytag">وصية اليوم</p>
     <p class="aya" id="wasiyaHomeP"></p>
     <p class="src" id="wasiyaHomeS"></p>
@@ -769,6 +937,17 @@ html[dir="ltr"] .arorig{direction:rtl;text-align:left}
         <path d="M32 50v6m0 0l-3 5m3-5l3 5" fill="none" stroke="var(--teal)" stroke-width="2.2" stroke-linecap="round"/>
       </svg>
       <b>المسبحة</b><span>تسبيح بصوت الخرز والعدّ الآلي: ٣٣ أو ١٠٠ أو ما تشاء</span>
+    </button>
+    <button type="button" class="feat wide" data-go="fiqh">
+      <svg viewBox="0 0 64 64" aria-hidden="true">
+        <path d="M14 52V30c0-8 8-12 18-14 10 2 18 6 18 14v22" fill="none" stroke="var(--gold)" stroke-width="2.4" stroke-linejoin="round"/>
+        <path d="M28 52V40a4 4 0 0 1 8 0v12" fill="none" stroke="var(--teal)" stroke-width="2.2" stroke-linecap="round"/>
+        <path d="M32 16v-6" stroke="var(--gold2)" stroke-width="2.2" stroke-linecap="round"/>
+        <path d="M29.2 12.4L32 7.6l2.8 4.8z" fill="var(--gold2)"/>
+        <path d="M10 52h44" stroke="var(--gold)" stroke-width="2.4" stroke-linecap="round"/>
+        <circle cx="50" cy="12" r="2.2" fill="var(--teal)" opacity=".85"/>
+      </svg>
+      <b>فقه العبادات</b><span>بابُ الصلاة: أركانُها وواجباتُها وسننُها وأخطاؤُها — كتابٌ ميسّرٌ مسندٌ بمصادره، مع مواقيتك وصلواتك</span>
     </button>
     <button type="button" class="feat wide" id="homeTasksBtn">
       <svg viewBox="0 0 64 64" aria-hidden="true">
@@ -795,33 +974,33 @@ html[dir="ltr"] .arorig{direction:rtl;text-align:left}
     <div><b id="stStreak">٠</b><span>سلسلة الأيام</span></div>
   </div>
   <!-- ====== التقويم والتاريخ (v2.3.0): مطوي في الرئيسية — يفتح شاشة مستقلة عند النقر حتى لا تمتلئ الرئيسية ====== -->
-  <button type="button" class="card calfold" id="calFold">
+  <button type="button" class="card calfold cv" id="calFold">
     <span class="cficon"><svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><rect x="3.9" y="5.3" width="16.2" height="14.9" rx="2.6"/><path d="M3.9 9.9h16.2M8.3 3.4v3.4M15.7 3.4v3.4"/><path d="M9.6 14.4l1.8 1.8 3.4-3.6" stroke-width="1.6"/></svg><i id="calFoldDot" hidden></i></span>
     <span class="cftexts"><b>التقويم والتاريخ</b><span id="calFoldDates">التاريخ الهجري والميلادي وأحداث هذا اليوم</span></span>
     <span class="cfmeta"><b class="cfbadge" id="calFoldBadge" hidden>في مثل هذا اليوم حدثٌ موثق</b><svg class="cfchev" viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9.5l6 6 6-6"/></svg></span>
   </button>
-  <div class="quote card">
+  <div class="quote card cv">
     <p class="aya">﴿ وَلِلَّهِ الْأَسْمَاءُ الْحُسْنَىٰ فَادْعُوهُ بِهَا ﴾</p>
     <p class="src">سورة الأعراف · الآية ١٨٠</p>
   </div>
-  <div class="quote card">
+  <div class="quote card cv">
     <p class="aya">«إنَّ للهِ تسعةً وتسعينَ اسمًا، مائةً إلا واحدًا، مَن أحصاها دخل الجنةَ»</p>
     <p class="src">رواه البخاري ومسلم</p>
   </div>
   <!-- نُفحة قرآنية وجوهرة سنة لكل يوم (v3.3.0) — موثقة المصدر، تتجدد كل يوم، وتُشارَكان وبتُنسَخان -->
-  <div class="quote card dailycard">
+  <div class="quote card dailycard cv">
     <p class="dailytag">نُفحة قرآنية لليوم</p>
     <p class="aya" id="qDayA">—</p>
     <p class="src" id="qDayS"></p>
     <p class="dailymeans" id="qDayM"></p>
-    <div class="dailybtns"><button type="button" id="qDayShare" class="miniact">مشاركة</button><button type="button" id="qDayCopy" class="miniact">نسخ</button></div>
+    <div class="dailybtns"><button type="button" id="qDayShare" class="miniact">مشاركة</button><button type="button" id="qDayCopy" class="miniact">نسخ</button><button type="button" class="miniact fontminus" aria-label="تصغير الخط">A−</button><button type="button" class="miniact fontplus" aria-label="تكبير الخط">A+</button></div>
   </div>
-  <div class="quote card dailycard">
+  <div class="quote card dailycard cv">
     <p class="dailytag">جوهرة من السنة لليوم</p>
     <p class="aya" id="hDayT">—</p>
     <p class="src" id="hDayS"></p>
     <p class="dailymeans" id="hDayM"></p>
-    <div class="dailybtns"><button type="button" id="hDayShare" class="miniact">مشاركة</button><button type="button" id="hDayCopy" class="miniact">نسخ</button></div>
+    <div class="dailybtns"><button type="button" id="hDayShare" class="miniact">مشاركة</button><button type="button" id="hDayCopy" class="miniact">نسخ</button><button type="button" class="miniact fontminus" aria-label="تصغير الخط">A−</button><button type="button" class="miniact fontplus" aria-label="تكبير الخط">A+</button></div>
   </div>
 </section>
 
@@ -981,6 +1160,69 @@ html[dir="ltr"] .arorig{direction:rtl;text-align:left}
 </section>
 
 <!-- ====== الإعدادات ====== -->
+<!-- ====== فقه العبادات (v3.6.0) — المرحلة الأولى: الصلاة ====== -->
+<section id="screen-fiqh" class="screen">
+  <header class="sh">
+    <h1>فقه العبادات</h1>
+    <span class="badge">بابُ الصلاة</span>
+    <div class="fzbtns"><button type="button" class="miniact fontminus" aria-label="تصغير الخط">A−</button><button type="button" class="miniact fontplus" aria-label="تكبير الخط">A+</button></div>
+  </header>
+  <div class="quote card dailycard">
+    <p class="aya">﴿إِنَّ الصَّلَاةَ كَانَتْ عَلَى الْمُؤْمِنِينَ كِتَابًا مَّوْقُوتًا﴾</p>
+    <p class="src">سورة النساء · الآية ١٠٣</p>
+    <p class="hint" style="text-align:center;margin-top:2px">أولُ أبوابِ زاوية فقه العبادات — تتوالى بعدها بإذن الله: الطهارة، فالصيام، فالزكاة والحج</p>
+  </div>
+  <div class="set card fiqprog">
+    <div class="fprog-top"><span>تقدّمك في كتاب الصلاة</span><b id="fiqProgTxt">٠ / ١٢</b></div>
+    <div class="fprogbar"><i id="fiqProgBar"></i></div>
+    <p class="hint">كل بابٍ تقرؤه وتختمه يضيء نجمةَ علمٍ في سماء الخير — وتُحفظ قراءتك في جهازك حصرًا</p>
+  </div>
+  <div class="fiqsearch">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="6.5"/><path d="M16 16l4.5 4.5"/></svg>
+    <input id="fiqQ" type="search" placeholder="ابحث في أبواب الصلاة…" aria-label="ابحث في أبواب الصلاة">
+  </div>
+  <div id="fiqChapters"></div>
+  <div class="set card">
+    <h3>قبل الصلاة — فحصٌ بثلاثين ثانية</h3>
+    <p class="small">أربعُ نقاطٍ تقابلها بلمسةٍ قبل دخولك الصلاة، كلُّها من فقه الصلاة نفسه — ومَن استعدَّ لفرضه كان أبلغَ في خشوعه.</p>
+    <div id="fiqPreList"></div>
+    <div style="margin-top:10px"><button type="button" id="fiqQiblaBtn" class="btn">افتح بوصلة القبلة</button></div>
+  </div>
+  <div class="set card">
+    <h3>صلواتي اليوم</h3>
+    <p class="small">لمسةٌ واحدةٌ على كلِّ فريضةٍ عند أدائها، وسجلٌّ أسبوعيٌّ يرسم لك أيامك — كلُّه في جهازك حصرًا.</p>
+    <div id="fiqTrackChips"></div>
+    <div class="fweek" id="fiqWeek"></div>
+  </div>
+  <div class="set card">
+    <h3>وضع السفر</h3>
+    <button type="button" class="fswitch" id="fiqTravelBtn" aria-pressed="false"><i></i><span>أنا مسافرٌ اليوم</span></button>
+    <span class="ftravstate" id="fiqTravelState"></span>
+    <p class="small">القصر: تُقصَّر الفوارضُ الأربعةُ (الظهر والعصر والعشاء) إلى ركعتين، ولا يُقصَّر المغربُ ولا الفجر. والجمع: يجتمع الظهرُ بالعصرِ والمغربُ بالعشاءِ وقتًا واحدًا عند الحاجة.</p>
+    <details class="fdoc"><summary>الدليلُ من السنة<svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9.5l6 6 6-6"/></svg></summary><div class="fdt">«الصَّلاةُ في السَّفَرِ قَصرٌ صَدَقَةٌ أَدَاها اللهُ عَلَيْكُمْ، فَأَقْبِلُوا صَدَقَتَهُ»</div><div class="fds">عن أنس بن مالك — أخرجه مسلم (٦٩٥)</div></details>
+    <details class="fdoc"><summary>الدليلُ من السنة<svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9.5l6 6 6-6"/></svg></summary><div class="fdt">«أنَّ النبيَّ صلى الله عليه وسلم أمَّنَ المغربَ والعشاءَ بجمعٍ بلا خوفٍ ولا سفر»</div><div class="fds">عن ابن عمر — أخرجه مسلم (٧٠٤)</div></details>
+  </div>
+  <div class="set card">
+    <h3>أذكار ما بعد السلام</h3>
+    <p class="small">كما في الباب التاسع من كتاب الصلاة — كلٌّ بمصدره، مع عدّادٍ خفيفٍ للاستغفار الثلاثي.</p>
+    <div id="fiqAzkarList"></div>
+  </div>
+  <div class="set card">
+    <h3>مرشد سجود السهو</h3>
+    <p class="small">ثلاثةُ أسئلةٍ تُجيبك فورًا: ماذا فعلتَ في صلاتك؟ والقواعدُ الثلاث من الباب الخامس.</p>
+    <div id="fiqSehBtns">
+      <button type="button" class="fchip" data-seh="forgot"><b>نسيَتُ شيئًا</b></button>
+      <button type="button" class="fchip" data-seh="added"><b>زدتُ شيئًا</b></button>
+      <button type="button" class="fchip" data-seh="doubt"><b>شكّكتُ</b></button>
+    </div>
+    <div id="fiqSehResult" hidden></div>
+  </div>
+  <div class="set card">
+    <h3>منهج الزاوية وأمانتُها</h3>
+    <div id="fiqManhajBody"></div>
+    <p class="small" data-notrans>النصوصُ الفقهيةُ في هذه الزاوية معروضةٌ بصلتها العربيةِ الأصليةِ الطاهرة حفاظًا على الدقة، وما لم يتثبَّت له رقمٌ موثوق لم يُكتب رقمًا ظنًّا.</p>
+  </div>
+</section>
 <section id="screen-settings" class="screen">
   <header class="sh"><h1>الإعدادات</h1></header>
   <div class="set card">
@@ -1006,12 +1248,32 @@ html[dir="ltr"] .arorig{direction:rtl;text-align:left}
     <div class="srow"><span class="lbl2">خط الأسماء</span><div class="seg" id="segNameFont"><button type="button">كوفي</button><button type="button">نسخ</button><button type="button">رقعة</button></div></div>
     <p class="small">اضبط سرعة الساعة من ثانية واحدة إلى عشر ثوانٍ لكل اسم، واختر لغة درج الأسماء (عربي أو English) وشكلها وخط الأسماء وصوت الدقّة. ومع اقتراب انتقال الاسم تدور عقرب الثواني وينبض القرص مع تدرّج التقدم من الداخل.</p>
   </div>
+  <!-- مواقيت الصلاة (v3.6.0 P1): محركٌ محليٌّ بلا إنترنت — الموضع والطريقة والمذهب والإقامة -->
+  <div class="set card" id="praySetCard">
+    <h3>مواقيت الصلاة</h3>
+    <p class="small">تُحسَب المواقيتُ في جهازك محليًا بمواضيع الشمس الفلكية المعيارية، بلا أي إنترنت أو خدمةٍ خارجية، بدقةٍ تقارب الدقيقة — فتأكَّد من موضعك ومذهبك، واعتمد الرصدَ عند الحدود.</p>
+    <span id="prayLocLbl">—</span>
+    <div class="srow"><span class="lbl2">الموضع</span><button type="button" id="prayGeoBtn" class="btn">تحديد موضعي تلقائيًا</button></div>
+    <p class="small">الإحداثيات اليدوية (اختياري): أدخل خطي العرض والطول إن عرفتهما بدقة.</p>
+    <div class="coordrow"><input id="prayLat" type="number" step="0.0001" inputmode="decimal" placeholder="خط العرض" aria-label="خط العرض"><input id="prayLon" type="number" step="0.0001" inputmode="decimal" placeholder="خط الطول" aria-label="خط الطول"><button type="button" id="prayLocApply" class="btn">تطبيق</button></div>
+    <div class="srow"><span class="lbl2">طريقة الحساب</span><div class="seg" id="segPrayMethod"><button type="button">الرابطة الإسلامية</button><button type="button">أم القرى</button><button type="button">الهيئة المصرية</button><button type="button">كراتشي</button><button type="button">أمريكا الشمالية</button></div></div>
+    <div class="srow"><span class="lbl2">مذهب العصر</span><div class="seg" id="segPrayAsr"><button type="button">جمهور (شافعي/مالكي/حنبلي)</button><button type="button">حنفي</button></div></div>
+    <p class="small">الإقامة بعد الأذان (دقائق) — عدّلها على عادة مسجدك:</p>
+    <div class="numrow">
+      <label>الفجر<input id="iq_fajr" type="number" min="0" max="180" inputmode="numeric"></label>
+      <label>الظهر<input id="iq_dhuhr" type="number" min="0" max="180" inputmode="numeric"></label>
+      <label>العصر<input id="iq_asr" type="number" min="0" max="180" inputmode="numeric"></label>
+      <label>المغرب<input id="iq_maghrib" type="number" min="0" max="180" inputmode="numeric"></label>
+      <label>العشاء<input id="iq_isha" type="number" min="0" max="180" inputmode="numeric"></label>
+    </div>
+    <div class="srow"><span class="lbl2">تنسيق الوقت</span><div class="seg" id="segPray24"><button type="button">ص/م</button><button type="button">نظام ٢٤ ساعة</button></div></div>
+  </div>
   <div class="set card">
     <h3>المظهر</h3>
     <div class="srow"><span class="lbl2">الوضع</span><div class="seg" id="segTheme"><button type="button">تلقائي</button><button type="button">ليلي</button><button type="button">نهاري</button></div></div>
     <div class="srow col"><span class="lbl2">الألوان</span><div class="swatches" id="palSw"></div></div>
     <div class="srow"><span class="lbl2">خلفية الصفحة</span><div class="seg" id="segBg"><button type="button">زخرفة</button><button type="button">أرابيسك</button><button type="button">نقاط</button><button type="button">سادة</button></div></div>
-    <div class="srow"><span class="lbl2">حجم الخط</span><div class="seg" id="segFont"><button type="button">صغير</button><button type="button">متوسط</button><button type="button">كبير</button></div></div>
+    <div class="srow"><span class="lbl2">حجم الخط (وضع القراءة A−/A+)</span><div class="seg" id="segFont"><button type="button">صغير</button><button type="button">متوسط</button><button type="button">كبير</button><button type="button">أكبر</button></div></div>
     <p class="small">ستّ لوحات ألوان: الزمردية الأصلية، النيلية الهادئة، الرملية الدافئة، الوردية الناعمة، الدُّرّية المحايدة، و«ليل عميق» السوداء الكاملة لشاشات AMOLED — مع أربعة أنماط للخلفية، ووضعٌ تلقائيٌّ يصير نهاريًّا في النهار وليليًّا في الليل، وتتبع خلفيةُ الصفحة أوقاتَ النهار تدرّجًا جماليًّا (من الفجر إلى الليل — تقريبٌ للمزاج لا يُعتمد عليه في المواقيت). وكل ما تختاره يُحفظ تلقائيًا على جهازك.</p>
   </div>
   <div class="set card">
@@ -1063,7 +1325,8 @@ html[dir="ltr"] .arorig{direction:rtl;text-align:left}
     </details>
     <details class="doc">
       <summary>سجل الإصدار</summary>
-      <div class="body"><b>v3.5.3</b> — «النبضُ يصل»: عولج غيابُ نبضةِ النورِ على أجهزةِ الآيفونِ: كان محرّكُ WebKit يمتنعُ عن رسمِ عنصرٍ تبدأُ حركتُه من الصفرِ المطلقِ وهو علةٌ معروفة، فأعدنا بناءَ النبضةِ بمحرّكِ الحركةِ البرمجيِّ المباشرِ «Web Animations» مع بديلٍ تلقائيٍّ إذا غاب، ولم تعد تبدأُ من العدمِ — وإن بقيتْ غائبةً بعدَ هذا فافحصْ خيارَ «تقليلِ الحركة» في: الإعدادات > إتاحة > الحركة، فإنه يوقفُ مؤثراتِ الجلسةِ عمدًا احترامًا لراحتك.<br/><br/><b>v3.5.2</b> — «سكينةُ الخشوع»: استُكمِلت جلسةُ الذكرِ بملءِ الشاشة: عولجت مساحةُ أعلى الشاشةِ على الآيفونِ فبدأَ المحتوىُ تحتَ النيشِ والساعةِ بمساحةٍ آمنةٍ مرتّبةٍ لا يعلوها شيء، وأُضيفت نبضةُ نورٍ ذهبيةٌ تملأُ الشاشةَ من موضعِ إصبعك عند كلِّ ضغطةٍ فيتنفّسُ الذكرُ معك ويحيي قلبك، مع انتقالٍ ناعمٍ لدخولِ الجلسةِ وعدّادٍ ينبضُ خفوتًا مع كلِّ تسبيحةٍ — جلسةٌ أوصفَ للعينِ وأحضرَ للقلب.<br/><br/><b>v3.5.1</b> — «تصحيحُ البوصلة»: عولج انحرافُ البوصلةِ الحيّةِ على أندرويد فصارت دقيقةً كالآيفون بإذن الله — كان المتصفحُ على أندرويد يمنح زاويةَ دورانٍ نسبيةً تزلّف وتنحرف، وصارت القراءةُ الآن من الحسّاسِ المغناطيسيِّ المطلقِ المرجعيِّ إلى الشمالِ الحقيقيِّ «deviceorientationabsolute» مع إبقاءِ قراءةِ الآيفونِ الأدقَّ كما هي؛ وإن اضطربَ حسّاسُ جهازك تظهر لك رسالةُ معايرةٍ واحدةٌ: أبعدِ الجهازَ عن المعادنِ والغلافِ المغناطيسيِّ وحرّكه في الهواءِ على شكلِ رقمِ ٨ ثم اجعله أفقيًّا — فتصحُّ البوصلةُ.<br/><br/><b>v3.5.0</b> — «نورٌ بلسانين» يَنطقُ التطبيقُ بلغتين: بطاقةُ «اللغة» أولُ بطاقاتِ الإعداداتِ تُبدِّلُ الواجهةَ كلَّها بين العربيةِ وEnglish بلمسةٍ فورية — عناوينُ وأزرارٌ وشروحُ أسماءِ اللهِ الحسنى وبطاقاتُ النورِ المئةُ بأدلَّتِها وأدعيتِها ومصادرِها وكلُّ أدواتِ نورِ اليومِ والتقويمِ والمناسباتِ لها ترجمةٌ إنجليزيةٌ دقيقةٌ محقَّقة، مع حمايةٍ صارمةٍ للأصلِ العربيِّ المقدَّس: الآيةُ والحديثُ والدعاءُ والاسمُ العربيُّ لا يُمسُّ أبدًا وتُعرَضُ الترجمةُ تحته مباشرةً، والأرقامُ والأشهرُ والأيامُ تتبدَّلُ باللغةِ والاتجاهُ ينعكسُ كاملًا ويعودُ كلُّ شيءٍ لعربيَّتِهِ حرفيًّا عند الرجوع؛ وصار بالإمكانِ تخصيصُ بطاقةِ التهنئةِ بشاشةٍ كاملة: زرُ «تخصيص» يفتحُ عشرَ لوحاتِ ألوانٍ (خمسٌ للصباحِ وخمسٌ للمساء) وأربعةَ خطوطٍ (كوفي/نسخ/رقعة/عصري) وخيارَ «بكلماتي» لكتابةِ تهنئتكِ بعدِّادِ أحرفٍ وتحريرَ السطرينِ الختاميينَ ومعاينةً حيَّةً تتحدَّثُ فورًا مع كلِّ لمسةٍ وكلَّها محفوظةٌ على جهازك؛ وصار نور يُثبَّتُ تطبيقًا مجانًا على الأندرويدِ من كرومِ بأيقونةِ نورِ ويعملُ بلا إنترنتٍ بعدَ أولِ فتحةٍ عبرِ ملفَّي التثبيتِ الجديدين، والآيفونُ يضيفُهُ للشاشةِ الرئيسيةِ بأيقونةٍ رسميةٍ جديدةٍ من شعارِ نورِ نفسِه.<br/><br/><b>v3.4.0</b> — «لمعانُ السماء وقُبلةُ القلوب» تحسيناتُ جمالٍ ووضوحٍ طلبتَها بأدقِّ التفاصيل: نجومُ سماءِ الخير صارت نقاطًا حقيقيةً منتشرةً عشوائيًّا مع غبارٍ نجميٍّ خافتٍ للعمق، تلمعُ بالشفافيةِ فقط كالنجومِ فعلًا — بلا صعودٍ ولا هبوط — وكلُّ نجمةٍ تستقرُّ في موضعها الدائم كخريطةِ خيرك؛ وبوصلةُ القبلة صارت بوصلةً حقيقيةً: الاتجاهاتُ الأربعةُ (ش/ق/ج/غ) تدور مع جهازك في البوصلةِ الحيّة فتبقى حقيقيةً لا مغالطةَ فيها، والقبلةُ ثابتةٌ على سهمها لا تتأثر، وعلى رأسِ الإبرةِ مجسَّمُ الكعبةِ المباركةِ بمونو كلورٍ رقيقٍ مكانَ الدائرة، وأسفلَ الدائرةِ حسّاسُ موافاةٍ ككاشفِ الموجاتِ يهدأُ بالبُعدِ ويشتدُّ كلما اقتربتَ من الاتجاهِ الصحيحِ فتنبضُ الأمواجُ وتلمعُ بالذهبِ عند الموافاةِ التامة؛ وجلسةُ الخشوع صارت خالصةً: ذكرٌ ثابتٌ بلا انتقالٍ ولا تكرار، وعدُّها يخصُّ الجلسةَ وحدها لا يُضافُ إلى مسبحتك؛ وصفحةُ «المناسباتِ الإسلامية» أسفلَ التقويم: رأسُ السنةِ الهجريةِ وعاشوراءَ ورمضانَ والعشرَ الأواخرِ وليلةَ القدرِ وعيدَي الفطرِ والأضحى وصيامَ شوالِ الستِّ وأيامَ الحجِّ وعرفةَ والتشريق — ومقابلَ كلِّ مناسبةٍ كم بقي لها من أيامِك؛ ونُقلت وصيةُ اليومِ إلى الرئيسيةِ قبلَ المهماتِ مباشرةً وأُزيلت من أدوات نور اليوم؛ وصار سجلُّ بطاقاتِ النورِ واضحَ العنوانِ مشروحَ اللمسة: «بطاقاتُ النورِ التي قرأتها»؛ وفي «كم بقي من عمري» أُزيلَ تكرارُ «يوم حتى المتوقع» وأُضيفَ مكانه: كم رمضانًا في بقيةِ عمرك — بدقةٍ هجريةٍ يُعادُ حسابُها يوميًّا.<br/><br/><b>v3.3.0</b> — «نُفحات الرحمن» ثماني هدايا جديدة تُيسر العبادة: جلسةُ الخشوع بملء الشاشة في المسبحة — دائرةُ ذكرٍ تتنفّس أمامك ومؤقّتٌ (٣/٥/١٠ دقائق) وعدّادٌ يُسجَّل في مسبحتك بنقرةٍ على أي موضع، ويقفز الذكرُ تلقائيًا كل ثلاثٍ وثلاثين؛ ونُفحةٌ قرآنية وجوهرةُ سنةٍ لكل يومٍ على الرئيسية موثقة المصدر من الصحيحين والسنن المعتبرة تتجددان كل يوم وتُشارَكان وبتُنسَخان؛ وسلسلةُ النور تُوقدُ لك أيامَ اتصالك بالذكر المتتابعة في بطاقة الإحصاء وتحتفل بمناسباتها (٣/٧/١٤/٢١/٤٠/١٠٠ يومًا)؛ وشهابُ الخير يعبُر سماءَ أعمالك كلما أضاءت نجمة؛ وبوصلةُ القبلة في نور اليوم — الأداة الخامسة عشرة — تحسب اتجاه الكعبة من موضعك بمسار الدوائر الكبرى بلا إنترنت وتُري المسافة إلى مكة وتستجيب لحركة جهازك في «البوصلة الحيّة»؛ وتذكيرُ وردك بلحظةِ ذكرٍ كل ٣٠ أو ٦٠ أو ١٢٠ دقيقةً ما دام نور مفتوحًا (من الإعدادات)؛ وختمةُ الأسماء على الساعة تُحصي بطاقات النور التي قرأتها وتشجعك نحو «مَن أحصاها دخل الجنة» بمناسباتها من ١٠ إلى ١٠٠ — وكلها تعمل من دون إنترنت وبنفس خفّة اللمس على الآيفون والأندرويد.<br/><br/><b>v3.2.0</b> — «صباح النور ومساؤه»: أُهديت زاوية «كن سببًا في الخير» بطاقتَي تهنئة مصوَّرتين — «صباح الخير» على شفقٍ فجرّي مُشرِق، و«مساء الخير» على غروبٍ يعقبه ليلٌ يزينه النجوم — تختار بطاقتك بحسب وقتك، وتعاينها في ورقةٍ ثم ترسلها كصورةٍ واضحة إلى واتساب وتطبيقات جهازك أو تحفظها؛ في صدر كل بطاقة التهنئةُ الكبيرة وآيةُ نور، وفي قلبها ذكرٌ أو دعاءٌ أو آية موثقة المصدر من صحيح البخاري ومسلم والترمذي وأبي داود وابن ماجه تتجدد كل يوم، وإذا أحببت غيرها بدّلتها بلمسة، وتُختم البطاقة بخطٍّ رقيق جميل: «حفظكم الرحمن ورعاكم ونفعكم ونفع بكم» و«يوم جميل»؛ وعاد توقيعُ كل البطاقات إلى نصك الحرفي: «تم انشاء هذه الصورة من تطبيق نور-احسان … (اعذرني لو وجد خطاء)».<br/><br/><b>v3.1.0</b> — «نورٌ يُشارَك»: صار هدفُ تسبيحك وهدفُ وردك يدويَّي الإدخال خالصَين — تكتب العدد بنفسك كيفما أحببت بلا أعدادٍ مفروضة، أو تُلغي الهدفَ فيسبح وردًا حرًّا بلا حدّ؛ وأضيف إلى ساعة الأسماء زرُّ «مشاركة واتساب» يصوغ بطاقة نور في صورةٍ رفيعة تحمل الاسم الحاضر ومعناه وشرحه وتاريخ يومك بهجريه وميلاديه على سماءٍ بلون وقتك، فترسلها إلى واتساب وإلى كل تطبيقات جهازك، موقَّعةً أسفلها بخطٍّ صغيرٍ رقيق: «تم انشاء هذه الصورة من تطبيق نور-احسان · https://mouradalhaj.github.io/noor/ (اعذرني لو وجد خطاء)».<br/><br/><b>v3.0.0</b> — «بهاء النور» إصدارُ الاحتفاء الكبير: حلقةُ حركةٍ موحّدة (requestAnimationFrame واحدة) تُدير الساعة والشريط ولمعانه بأداءٍ أنعم وبطاريةٍ أهدأ، وحفظٌ مؤجّل للعدادات، وسماءٌ تتلوّن بأوقات اليوم من الفجر إلى الليل، ونبضةُ نورٍ حول الساعة عند كل اسم، ولمعانٌ ذهبي يجري في الشريط، ونجمةٌ تولد بنبضةٍ في سماء الخير، وعدادُ تسبيحٍ يتدحرج، ولوحةُ «ليل عميق» السوداء لشاشات AMOLED، ووضعٌ تلقائي نهاريّ/ليليّ، ووردٌ يوميّ للمسبحة بحلقة تقدّم وأهداف (١٠٠/٣٣٣/٥٠٠/١٠٠٠) وعدّادٍ لكل ذكر ونبضٍ اهتزازيّ كل ٣٣، وبحثٌ فوريّ في الأسماء ومفضلةٌ محفوظة واستعراضٌ هادئ للقرص، وأرشيفُ مهماتٍ وتكرارٌ يوميّ وأسبوعيّ، وحاسبةُ عمرٍ بقوسٍ يُظهر موقعك من العمر المتوقع وبأشهر وأسابيع وركعات فريضةٍ ورواتب متبقية، ورسمٌ أسبوعيّ لمحاسبتك، وخياراتُ جديدة للشريط (إظهار وسرعة وأذكارك المخصصة) — بلا أن تنكسر صلةٌ ولا تضيع بيانات.<br/><br/><b>v2.5.1</b> — علاجُ شريط الذكر والتذكير على الآيفون: صار دوره بمحرّكٍ جافاسكربتي بخطوات requestAnimationFrame لا يُجمّده WebKit، وحُذف قناع الشفافية الذي يوقف الحركة داخل العناصر المقنّعة، وأصبح اللمسُ يوقفه ورفعُ الإصبع يستأنفه بدل :hover الذي يلتصق باللمس — فيجري الذكرُ والتذكير ومهماتُك على كل جهازٍ بلا توقف.<br/><br/><b>v2.5.0</b> — «حالتي الآن وشريط النور»: صار «أنا غاضب» شاشة «حالتي الآن» بتبويبين — غاضبٌ بخطواته نفسها، وسعيدٌ بآداب الفرح من السنة (ابن ماجه، وأبو داود، والترمذي) — وأُضيف شريط تذكير متحرك فوق الأسماء والمسبحة يجري فيه الذكر والتذكير ومهماتك المسجلة بلا توقف، وصار حساب العمر من تاريخ ميلادك: عمرك تلقائيًا، وفروضُ صلواتك ونوافلُها المتبقية، ونومُك تقديرًا بالسنين والشهور والأيام، وصار «النشر والإستخدام» نبذةً خالصة بلا خطوات نشر.<br/><br/><b>v2.4.0</b> — «هوية الإحسان»: أُضيفت رسالة نور «إحسان» إلى «عن تطبيق نور» — فلا تصلح حياةُ الإنسان المؤمن بلا إحسان؛ فراقب يومك وحاسب نفسك واستعن بالله ولا تعجز — وصار القسم «النشر والإستخدام» برسالة المصمم المتواضعة ودعائه لأحبابه، ويُعرض سجل الإصدار مختصرًا: إصدارٌ وسطران لكل تحديث.<br/><br/><b>v2.3.1</b> — إصلاح جذري لخلل التقويم: اختفى «غير معرف» وعادت الأيام إلى أماكنها بإعادة بناء محرك التاريخ الهجري بسلسلة بدائل متعددة وتحقق صارم من كل نتيجة.<br/><br/><b>v2.3.0</b> — طُوي «التقويم والتاريخ» في الرئيسية بشاشة مستقلة تفتح وتُغلق حتى لا تمتلئ الشاشة، وأُضيفت بطاقة «المهمات» فوق «نور اليوم» بعدّاد إنجاز وشاشة خيارات كاملة.<br/><br/><b>v2.2.0</b> — «عزيمة اليوم»: نوايا متعددة ونيتك بكلماتك ومهمات إنجاز تضيء النجوم، و«سماء الخير» للعرض والإحصاء خالصة، وانتقل التقويم بأحداث الإسلام الموثقة إلى الرئيسية.<br/><br/><b>v2.1.0</b> — نجوم سماء الخير تلوّنها أنواع الأعمال بمفتاح ألوان، وتقويم الخير الشهري، ومهماتي اليومية، وتوسعة «القرآن وحالتي» و«محاسبتي» و«بنك الخيرات»، وأيقونات مونو كرور بدل الإيموجي.<br/><br/><b>v2.0.0</b> — شاشة «نور اليوم» الجديدة بأربع عشرة أداة يومية: من نية اليوم وتحدي الدقيقة وسجل الدعوات إلى محاسبتي قبل النوم وكن سببًا في الخير، مع إزاحة أمانة لشريط حالة الآيفون.<br/><br/><b>v1.6.0</b> — علاج نهائي لانعكاس الأسماء على درج الساعة برسم داخلي، وتقليص بطاقات النور إلى ثلاثة أقسام: المعنى، والدليل بمصدره، والدعاء بمصدره — حذفًا لقسمَي «عبرة لقلبك» و«سؤال تدبر».<br/><br/><b>v1.5.0</b> — تشكيل الأسماء المئة وضبط اتجاهها على الدرج، وإعادة صياغة البطاقات المئة توثيقًا من التويجري و«المختصر»، ومسبحات خمس وأحجام وأشكال للخرزة.<br/><br/><b>v1.4.0</b> — اكتمال بطاقات النور المئة موثقة من «مختصر فقه الأسماء الحسنى» للبدر و«التوحيد» للتويجري، وقسم المظهر: خمس لوحات ألوان وأربعة أنماط خلفية.<br/><br/><b>v1.3.0</b> — لغة درج الأسماء عربي أو English من الإعدادات، ونبض قلب حي في الساعة والمسبحة، وشاهد كل ذكر من القرآن والسنة في صفحة المسبحة.<br/><br/><b>v1.2.0</b> — أصوات الساعة (تِك توك، جرس، خشبي) وصوت المسبحة، وشكل الساعة وشكل المسبحة، وخط الأسماء، والتسبيح التلقائي وعقرب الثواني.<br/><br/><b>v1.1.0</b> — تحسين كامل لمقاسات الجوال، الأسماء على قرص الساعة بدل الدقائق والثواني، وسرعة من ١ إلى ١٠ ثوانٍ بمؤشر انزلاقي، ومسبحة خشبية واقعية بصوت خرز محسّن.<br/><br/><b>v1.0.0</b> — الإطلاق الأول: ساعة الأسماء الحسنى (١٠٠ اسم مع الشرح)، والمسبحة بصوت الخرز والاحتفال، والأذكار المخصصة، والإعدادات، والحفظ المحلي على الجهاز.</div>
+      <div class="body"><b>v3.6.0</b> — «مواقيت النور وفقهُ العبادات» أكبرُ إصدارٍ في رحلة نور، بأربعِ هداياٍ كبرى: <b>(١) مواقيتُ الصلاةِ الخمسِ بلا إنترنت</b> — محركٌ فلكيٌّ محليٌّ يعمل في جهازك بمواضيع الشمس المعيارية بلا أي خدمةٍ خارجيةٍ ولا إرسالٍ لموضعك، تختار طريقةَ الحساب (رابطة العالم الإسلامي، أم القرى، الهيئة المصرية، كراتشي، أمريكا الشمالية) ومذهبَ العصر (جمهور: شافعي/مالكي/حنبلي — أو حنفي)، وتضبط وقتَ الإقامةِ بعد الأذان لكل صلاةٍ على عادة مسجدك، ويدخل موضعُك بلمسةٍ من الإعدادات أو بإحداثياتٍ يدوية؛ وبطاقة «مواقيت اليوم» في صدر الرئيسية تُبرز الصلاةَ القادمةَ بعدّادٍ حيٍّ وخمسِ خاناتٍ بأوقات اليوم وإقامتها. <b>(٢) زاويةُ «فقه العبادات» ببابِ الصلاة</b> — كتابٌ ميسّرٌ مسندٌ من اثني عشرَ بابًا: الفضل، والأوقات، والشروط، والأركانِ الأربعةَ عشرَ، والواجباتِ الثماني وسجود السهو، والسنن، والمكروهات، والمبطلات، ونصُّ التشهد والصلاة الإبراهيمية وأذكار السلام، وأحدَ عشرَ خطأً شائعًا بتصحيحها، وكيف أصلي وفق السنةِ خطوةً خطوة، وأسئلةٌ سريعة — كلُّ دليلٍ بطاقةٌ قابلةٌ للطي بمصدره ورقمه، وبحثٌ سريعٌ في الأبواب، وخاتمُ قراءةٍ ذهبيٌّ لكل بابٍ يضيء نجمةَ علمٍ في سماء الخير ويكمل قرص تقدّمك نحو ختمةِ الكتاب. <b>(٣) أدواتٌ تخدم الفريضة</b> — «قبل الصلاة» فحصٌ بثلاثين ثانية يفتح بوصلةَ القبلة مباشرة، و«صلواتي اليوم» خمسُ خاناتٍ تُضاء بلمسةٍ وسجلٌّ أسبوعيٌّ خاصٌّ بك لا يراه أحد، و«أذكار ما بعد السلام» المسندة بعدّاد الاستغفار الثلاثي، و«مرشد سجود السهو» بأسئلته الثلاثة وأمثلتها العملية، و«وضع السفر» يبسّط القصرَ والجمعَ بدليلهما ويُظهر ركعاتِ القصر في «صلواتي اليوم». <b>(٤) تسهيلاتٌ وجمالٌ</b> — وضعُ القراءة A−/A+ بأربع درجاتٍ في الإعدادات وفي شاشات القراءة والزاوية، ودخولٌ متتابعٌ ناعمٌ للبطاقات يحترم خيار «تقليل الحركة»، وإغلاقُ جلسة الخشوع بالسحب نحو الأسفل من شريطيها العلوِّ والسفلي بلا مساسٍ بالنبضة ولا بالعدّاد، وتسريعُ الفتحِ بإجازة رسم ما دون مجال الرؤية، وتنحيفُ خطوط التحميل إلى الأوزان المستعملة فعلًا فأولُ فتحةٍ أسرع بلا أدنى تأثيرٍ في جودة الخط، وكاشُ التثبيتِ يُسمَّى باسم الإصدار (noor-v3.6.0) فيُنقّى القديم تلقائيًا — وكلُّ ذلك بلا مساسٍ ببياناتك: مهامُك وتسبيحُك ونجومُك وأذكارُك كما هي، وكلُّ الميزاتِ الجديدةِ مفاتيحُها مستقلةٌ في جهازك.
+<br/><br/><b>v3.5.3</b> — «النبضُ يصل»: عولج غيابُ نبضةِ النورِ على أجهزةِ الآيفونِ: كان محرّكُ WebKit يمتنعُ عن رسمِ عنصرٍ تبدأُ حركتُه من الصفرِ المطلقِ وهو علةٌ معروفة، فأعدنا بناءَ النبضةِ بمحرّكِ الحركةِ البرمجيِّ المباشرِ «Web Animations» مع بديلٍ تلقائيٍّ إذا غاب، ولم تعد تبدأُ من العدمِ — وإن بقيتْ غائبةً بعدَ هذا فافحصْ خيارَ «تقليلِ الحركة» في: الإعدادات > إتاحة > الحركة، فإنه يوقفُ مؤثراتِ الجلسةِ عمدًا احترامًا لراحتك.<br/><br/><b>v3.5.2</b> — «سكينةُ الخشوع»: استُكمِلت جلسةُ الذكرِ بملءِ الشاشة: عولجت مساحةُ أعلى الشاشةِ على الآيفونِ فبدأَ المحتوىُ تحتَ النيشِ والساعةِ بمساحةٍ آمنةٍ مرتّبةٍ لا يعلوها شيء، وأُضيفت نبضةُ نورٍ ذهبيةٌ تملأُ الشاشةَ من موضعِ إصبعك عند كلِّ ضغطةٍ فيتنفّسُ الذكرُ معك ويحيي قلبك، مع انتقالٍ ناعمٍ لدخولِ الجلسةِ وعدّادٍ ينبضُ خفوتًا مع كلِّ تسبيحةٍ — جلسةٌ أوصفَ للعينِ وأحضرَ للقلب.<br/><br/><b>v3.5.1</b> — «تصحيحُ البوصلة»: عولج انحرافُ البوصلةِ الحيّةِ على أندرويد فصارت دقيقةً كالآيفون بإذن الله — كان المتصفحُ على أندرويد يمنح زاويةَ دورانٍ نسبيةً تزلّف وتنحرف، وصارت القراءةُ الآن من الحسّاسِ المغناطيسيِّ المطلقِ المرجعيِّ إلى الشمالِ الحقيقيِّ «deviceorientationabsolute» مع إبقاءِ قراءةِ الآيفونِ الأدقَّ كما هي؛ وإن اضطربَ حسّاسُ جهازك تظهر لك رسالةُ معايرةٍ واحدةٌ: أبعدِ الجهازَ عن المعادنِ والغلافِ المغناطيسيِّ وحرّكه في الهواءِ على شكلِ رقمِ ٨ ثم اجعله أفقيًّا — فتصحُّ البوصلةُ.<br/><br/><b>v3.5.0</b> — «نورٌ بلسانين» يَنطقُ التطبيقُ بلغتين: بطاقةُ «اللغة» أولُ بطاقاتِ الإعداداتِ تُبدِّلُ الواجهةَ كلَّها بين العربيةِ وEnglish بلمسةٍ فورية — عناوينُ وأزرارٌ وشروحُ أسماءِ اللهِ الحسنى وبطاقاتُ النورِ المئةُ بأدلَّتِها وأدعيتِها ومصادرِها وكلُّ أدواتِ نورِ اليومِ والتقويمِ والمناسباتِ لها ترجمةٌ إنجليزيةٌ دقيقةٌ محقَّقة، مع حمايةٍ صارمةٍ للأصلِ العربيِّ المقدَّس: الآيةُ والحديثُ والدعاءُ والاسمُ العربيُّ لا يُمسُّ أبدًا وتُعرَضُ الترجمةُ تحته مباشرةً، والأرقامُ والأشهرُ والأيامُ تتبدَّلُ باللغةِ والاتجاهُ ينعكسُ كاملًا ويعودُ كلُّ شيءٍ لعربيَّتِهِ حرفيًّا عند الرجوع؛ وصار بالإمكانِ تخصيصُ بطاقةِ التهنئةِ بشاشةٍ كاملة: زرُ «تخصيص» يفتحُ عشرَ لوحاتِ ألوانٍ (خمسٌ للصباحِ وخمسٌ للمساء) وأربعةَ خطوطٍ (كوفي/نسخ/رقعة/عصري) وخيارَ «بكلماتي» لكتابةِ تهنئتكِ بعدِّادِ أحرفٍ وتحريرَ السطرينِ الختاميينَ ومعاينةً حيَّةً تتحدَّثُ فورًا مع كلِّ لمسةٍ وكلَّها محفوظةٌ على جهازك؛ وصار نور يُثبَّتُ تطبيقًا مجانًا على الأندرويدِ من كرومِ بأيقونةِ نورِ ويعملُ بلا إنترنتٍ بعدَ أولِ فتحةٍ عبرِ ملفَّي التثبيتِ الجديدين، والآيفونُ يضيفُهُ للشاشةِ الرئيسيةِ بأيقونةٍ رسميةٍ جديدةٍ من شعارِ نورِ نفسِه.<br/><br/><b>v3.4.0</b> — «لمعانُ السماء وقُبلةُ القلوب» تحسيناتُ جمالٍ ووضوحٍ طلبتَها بأدقِّ التفاصيل: نجومُ سماءِ الخير صارت نقاطًا حقيقيةً منتشرةً عشوائيًّا مع غبارٍ نجميٍّ خافتٍ للعمق، تلمعُ بالشفافيةِ فقط كالنجومِ فعلًا — بلا صعودٍ ولا هبوط — وكلُّ نجمةٍ تستقرُّ في موضعها الدائم كخريطةِ خيرك؛ وبوصلةُ القبلة صارت بوصلةً حقيقيةً: الاتجاهاتُ الأربعةُ (ش/ق/ج/غ) تدور مع جهازك في البوصلةِ الحيّة فتبقى حقيقيةً لا مغالطةَ فيها، والقبلةُ ثابتةٌ على سهمها لا تتأثر، وعلى رأسِ الإبرةِ مجسَّمُ الكعبةِ المباركةِ بمونو كلورٍ رقيقٍ مكانَ الدائرة، وأسفلَ الدائرةِ حسّاسُ موافاةٍ ككاشفِ الموجاتِ يهدأُ بالبُعدِ ويشتدُّ كلما اقتربتَ من الاتجاهِ الصحيحِ فتنبضُ الأمواجُ وتلمعُ بالذهبِ عند الموافاةِ التامة؛ وجلسةُ الخشوع صارت خالصةً: ذكرٌ ثابتٌ بلا انتقالٍ ولا تكرار، وعدُّها يخصُّ الجلسةَ وحدها لا يُضافُ إلى مسبحتك؛ وصفحةُ «المناسباتِ الإسلامية» أسفلَ التقويم: رأسُ السنةِ الهجريةِ وعاشوراءَ ورمضانَ والعشرَ الأواخرِ وليلةَ القدرِ وعيدَي الفطرِ والأضحى وصيامَ شوالِ الستِّ وأيامَ الحجِّ وعرفةَ والتشريق — ومقابلَ كلِّ مناسبةٍ كم بقي لها من أيامِك؛ ونُقلت وصيةُ اليومِ إلى الرئيسيةِ قبلَ المهماتِ مباشرةً وأُزيلت من أدوات نور اليوم؛ وصار سجلُّ بطاقاتِ النورِ واضحَ العنوانِ مشروحَ اللمسة: «بطاقاتُ النورِ التي قرأتها»؛ وفي «كم بقي من عمري» أُزيلَ تكرارُ «يوم حتى المتوقع» وأُضيفَ مكانه: كم رمضانًا في بقيةِ عمرك — بدقةٍ هجريةٍ يُعادُ حسابُها يوميًّا.<br/><br/><b>v3.3.0</b> — «نُفحات الرحمن» ثماني هدايا جديدة تُيسر العبادة: جلسةُ الخشوع بملء الشاشة في المسبحة — دائرةُ ذكرٍ تتنفّس أمامك ومؤقّتٌ (٣/٥/١٠ دقائق) وعدّادٌ يُسجَّل في مسبحتك بنقرةٍ على أي موضع، ويقفز الذكرُ تلقائيًا كل ثلاثٍ وثلاثين؛ ونُفحةٌ قرآنية وجوهرةُ سنةٍ لكل يومٍ على الرئيسية موثقة المصدر من الصحيحين والسنن المعتبرة تتجددان كل يوم وتُشارَكان وبتُنسَخان؛ وسلسلةُ النور تُوقدُ لك أيامَ اتصالك بالذكر المتتابعة في بطاقة الإحصاء وتحتفل بمناسباتها (٣/٧/١٤/٢١/٤٠/١٠٠ يومًا)؛ وشهابُ الخير يعبُر سماءَ أعمالك كلما أضاءت نجمة؛ وبوصلةُ القبلة في نور اليوم — الأداة الخامسة عشرة — تحسب اتجاه الكعبة من موضعك بمسار الدوائر الكبرى بلا إنترنت وتُري المسافة إلى مكة وتستجيب لحركة جهازك في «البوصلة الحيّة»؛ وتذكيرُ وردك بلحظةِ ذكرٍ كل ٣٠ أو ٦٠ أو ١٢٠ دقيقةً ما دام نور مفتوحًا (من الإعدادات)؛ وختمةُ الأسماء على الساعة تُحصي بطاقات النور التي قرأتها وتشجعك نحو «مَن أحصاها دخل الجنة» بمناسباتها من ١٠ إلى ١٠٠ — وكلها تعمل من دون إنترنت وبنفس خفّة اللمس على الآيفون والأندرويد.<br/><br/><b>v3.2.0</b> — «صباح النور ومساؤه»: أُهديت زاوية «كن سببًا في الخير» بطاقتَي تهنئة مصوَّرتين — «صباح الخير» على شفقٍ فجرّي مُشرِق، و«مساء الخير» على غروبٍ يعقبه ليلٌ يزينه النجوم — تختار بطاقتك بحسب وقتك، وتعاينها في ورقةٍ ثم ترسلها كصورةٍ واضحة إلى واتساب وتطبيقات جهازك أو تحفظها؛ في صدر كل بطاقة التهنئةُ الكبيرة وآيةُ نور، وفي قلبها ذكرٌ أو دعاءٌ أو آية موثقة المصدر من صحيح البخاري ومسلم والترمذي وأبي داود وابن ماجه تتجدد كل يوم، وإذا أحببت غيرها بدّلتها بلمسة، وتُختم البطاقة بخطٍّ رقيق جميل: «حفظكم الرحمن ورعاكم ونفعكم ونفع بكم» و«يوم جميل»؛ وعاد توقيعُ كل البطاقات إلى نصك الحرفي: «تم انشاء هذه الصورة من تطبيق نور-احسان … (اعذرني لو وجد خطاء)».<br/><br/><b>v3.1.0</b> — «نورٌ يُشارَك»: صار هدفُ تسبيحك وهدفُ وردك يدويَّي الإدخال خالصَين — تكتب العدد بنفسك كيفما أحببت بلا أعدادٍ مفروضة، أو تُلغي الهدفَ فيسبح وردًا حرًّا بلا حدّ؛ وأضيف إلى ساعة الأسماء زرُّ «مشاركة واتساب» يصوغ بطاقة نور في صورةٍ رفيعة تحمل الاسم الحاضر ومعناه وشرحه وتاريخ يومك بهجريه وميلاديه على سماءٍ بلون وقتك، فترسلها إلى واتساب وإلى كل تطبيقات جهازك، موقَّعةً أسفلها بخطٍّ صغيرٍ رقيق: «تم انشاء هذه الصورة من تطبيق نور-احسان · https://mouradalhaj.github.io/noor/ (اعذرني لو وجد خطاء)».<br/><br/><b>v3.0.0</b> — «بهاء النور» إصدارُ الاحتفاء الكبير: حلقةُ حركةٍ موحّدة (requestAnimationFrame واحدة) تُدير الساعة والشريط ولمعانه بأداءٍ أنعم وبطاريةٍ أهدأ، وحفظٌ مؤجّل للعدادات، وسماءٌ تتلوّن بأوقات اليوم من الفجر إلى الليل، ونبضةُ نورٍ حول الساعة عند كل اسم، ولمعانٌ ذهبي يجري في الشريط، ونجمةٌ تولد بنبضةٍ في سماء الخير، وعدادُ تسبيحٍ يتدحرج، ولوحةُ «ليل عميق» السوداء لشاشات AMOLED، ووضعٌ تلقائي نهاريّ/ليليّ، ووردٌ يوميّ للمسبحة بحلقة تقدّم وأهداف (١٠٠/٣٣٣/٥٠٠/١٠٠٠) وعدّادٍ لكل ذكر ونبضٍ اهتزازيّ كل ٣٣، وبحثٌ فوريّ في الأسماء ومفضلةٌ محفوظة واستعراضٌ هادئ للقرص، وأرشيفُ مهماتٍ وتكرارٌ يوميّ وأسبوعيّ، وحاسبةُ عمرٍ بقوسٍ يُظهر موقعك من العمر المتوقع وبأشهر وأسابيع وركعات فريضةٍ ورواتب متبقية، ورسمٌ أسبوعيّ لمحاسبتك، وخياراتُ جديدة للشريط (إظهار وسرعة وأذكارك المخصصة) — بلا أن تنكسر صلةٌ ولا تضيع بيانات.<br/><br/><b>v2.5.1</b> — علاجُ شريط الذكر والتذكير على الآيفون: صار دوره بمحرّكٍ جافاسكربتي بخطوات requestAnimationFrame لا يُجمّده WebKit، وحُذف قناع الشفافية الذي يوقف الحركة داخل العناصر المقنّعة، وأصبح اللمسُ يوقفه ورفعُ الإصبع يستأنفه بدل :hover الذي يلتصق باللمس — فيجري الذكرُ والتذكير ومهماتُك على كل جهازٍ بلا توقف.<br/><br/><b>v2.5.0</b> — «حالتي الآن وشريط النور»: صار «أنا غاضب» شاشة «حالتي الآن» بتبويبين — غاضبٌ بخطواته نفسها، وسعيدٌ بآداب الفرح من السنة (ابن ماجه، وأبو داود، والترمذي) — وأُضيف شريط تذكير متحرك فوق الأسماء والمسبحة يجري فيه الذكر والتذكير ومهماتك المسجلة بلا توقف، وصار حساب العمر من تاريخ ميلادك: عمرك تلقائيًا، وفروضُ صلواتك ونوافلُها المتبقية، ونومُك تقديرًا بالسنين والشهور والأيام، وصار «النشر والإستخدام» نبذةً خالصة بلا خطوات نشر.<br/><br/><b>v2.4.0</b> — «هوية الإحسان»: أُضيفت رسالة نور «إحسان» إلى «عن تطبيق نور» — فلا تصلح حياةُ الإنسان المؤمن بلا إحسان؛ فراقب يومك وحاسب نفسك واستعن بالله ولا تعجز — وصار القسم «النشر والإستخدام» برسالة المصمم المتواضعة ودعائه لأحبابه، ويُعرض سجل الإصدار مختصرًا: إصدارٌ وسطران لكل تحديث.<br/><br/><b>v2.3.1</b> — إصلاح جذري لخلل التقويم: اختفى «غير معرف» وعادت الأيام إلى أماكنها بإعادة بناء محرك التاريخ الهجري بسلسلة بدائل متعددة وتحقق صارم من كل نتيجة.<br/><br/><b>v2.3.0</b> — طُوي «التقويم والتاريخ» في الرئيسية بشاشة مستقلة تفتح وتُغلق حتى لا تمتلئ الشاشة، وأُضيفت بطاقة «المهمات» فوق «نور اليوم» بعدّاد إنجاز وشاشة خيارات كاملة.<br/><br/><b>v2.2.0</b> — «عزيمة اليوم»: نوايا متعددة ونيتك بكلماتك ومهمات إنجاز تضيء النجوم، و«سماء الخير» للعرض والإحصاء خالصة، وانتقل التقويم بأحداث الإسلام الموثقة إلى الرئيسية.<br/><br/><b>v2.1.0</b> — نجوم سماء الخير تلوّنها أنواع الأعمال بمفتاح ألوان، وتقويم الخير الشهري، ومهماتي اليومية، وتوسعة «القرآن وحالتي» و«محاسبتي» و«بنك الخيرات»، وأيقونات مونو كرور بدل الإيموجي.<br/><br/><b>v2.0.0</b> — شاشة «نور اليوم» الجديدة بأربع عشرة أداة يومية: من نية اليوم وتحدي الدقيقة وسجل الدعوات إلى محاسبتي قبل النوم وكن سببًا في الخير، مع إزاحة أمانة لشريط حالة الآيفون.<br/><br/><b>v1.6.0</b> — علاج نهائي لانعكاس الأسماء على درج الساعة برسم داخلي، وتقليص بطاقات النور إلى ثلاثة أقسام: المعنى، والدليل بمصدره، والدعاء بمصدره — حذفًا لقسمَي «عبرة لقلبك» و«سؤال تدبر».<br/><br/><b>v1.5.0</b> — تشكيل الأسماء المئة وضبط اتجاهها على الدرج، وإعادة صياغة البطاقات المئة توثيقًا من التويجري و«المختصر»، ومسبحات خمس وأحجام وأشكال للخرزة.<br/><br/><b>v1.4.0</b> — اكتمال بطاقات النور المئة موثقة من «مختصر فقه الأسماء الحسنى» للبدر و«التوحيد» للتويجري، وقسم المظهر: خمس لوحات ألوان وأربعة أنماط خلفية.<br/><br/><b>v1.3.0</b> — لغة درج الأسماء عربي أو English من الإعدادات، ونبض قلب حي في الساعة والمسبحة، وشاهد كل ذكر من القرآن والسنة في صفحة المسبحة.<br/><br/><b>v1.2.0</b> — أصوات الساعة (تِك توك، جرس، خشبي) وصوت المسبحة، وشكل الساعة وشكل المسبحة، وخط الأسماء، والتسبيح التلقائي وعقرب الثواني.<br/><br/><b>v1.1.0</b> — تحسين كامل لمقاسات الجوال، الأسماء على قرص الساعة بدل الدقائق والثواني، وسرعة من ١ إلى ١٠ ثوانٍ بمؤشر انزلاقي، ومسبحة خشبية واقعية بصوت خرز محسّن.<br/><br/><b>v1.0.0</b> — الإطلاق الأول: ساعة الأسماء الحسنى (١٠٠ اسم مع الشرح)، والمسبحة بصوت الخرز والاحتفال، والأذكار المخصصة، والإعدادات، والحفظ المحلي على الجهاز.</div>
     </details>
   </div>
 </section>
@@ -1086,6 +1349,7 @@ html[dir="ltr"] .arorig{direction:rtl;text-align:left}
   <button type="button" class="nav-b" data-go="day"><svg viewBox="0 0 24 24"><path d="M11 3.5l1.5 4.3 4.3 1.5-4.3 1.5L11 15.1 9.5 10.8 5.2 9.3l4.3-1.5z" fill="currentColor"/><path d="M17.3 13.8l.9 2.5 2.5.9-2.5.9-.9 2.5-.9-2.5-2.5-.9 2.5-.9z" fill="currentColor" opacity=".75"/></svg><span>نور اليوم</span></button>
   <button type="button" class="nav-b" data-go="names"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="8.5" fill="none" stroke="currentColor" stroke-width="1.8"/><path d="M12 7.5V12l3 2" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg><span>الساعة</span></button>
   <button type="button" class="nav-b" data-go="tasbih"><svg viewBox="0 0 24 24"><g fill="currentColor"><circle cx="12" cy="4.6" r="1.7"/><circle cx="7" cy="7.6" r="1.7"/><circle cx="17" cy="7.6" r="1.7"/><circle cx="5.4" cy="12.6" r="1.7"/><circle cx="18.6" cy="12.6" r="1.7"/><circle cx="7" cy="17.6" r="1.7"/><circle cx="17" cy="17.6" r="1.7"/></g><circle cx="12" cy="12.6" r="2.4" fill="currentColor"/></svg><span>التسبيح</span></button>
+  <button type="button" class="nav-b" data-go="fiqh"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5.2 19.5v-7.6c0-3.1 3-4.6 6.8-5.4 3.8.8 6.8 2.3 6.8 5.4v7.6" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linejoin="round"/><path d="M10.1 19.5v-4.2a1.9 1.9 0 0 1 3.8 0v4.2" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/><path d="M12 6.5V4" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/><path d="M10.8 4.7L12 2.6l1.2 2.1z" fill="currentColor"/><path d="M3.8 19.5h16.4" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"/></svg><span>العبادات</span></button>
   <button type="button" class="nav-b" data-go="settings"><svg viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><path d="M4 7h9M19 7h1M4 12h3M11 12h9M4 17h9M19 17h1"/><circle cx="16" cy="7" r="2"/><circle cx="8" cy="12" r="2"/><circle cx="16" cy="17" r="2"/></g></svg><span>الإعدادات</span></button>
 </div></nav>
 <!-- ====== بطاقة النور (v1.6.0) ====== -->
@@ -3385,19 +3649,19 @@ function translateTree(root){
     root.querySelectorAll('[placeholder]').forEach(el=>{
       const v=el.getAttribute('placeholder')||'';
       if(/[\u0600-\u06FF]/.test(v)&&!(el.closest('[data-notrans]'))){
-        if(el.__arPh===undefined)el.__arPh=v;
+        el.__arPh=v;
         const t=trn(v.trim()); if(t!==undefined)el.setAttribute('placeholder',t);
       }});
     root.querySelectorAll('[aria-label]').forEach(el=>{
       const v=el.getAttribute('aria-label')||'';
       if(/[\u0600-\u06FF]/.test(v)&&!(el.closest('[data-notrans]'))){
-        if(el.__arAl===undefined)el.__arAl=v;
+        el.__arAl=v;
         const t=trn(v.trim()); if(t!==undefined)el.setAttribute('aria-label',t);
       }});
     root.querySelectorAll('[title]').forEach(el=>{
       const v=el.getAttribute('title')||'';
       if(/[\u0600-\u06FF]/.test(v)){
-        if(el.__arTi===undefined)el.__arTi=v;
+        el.__arTi=v;
         const t=trn(v.trim()); if(t!==undefined)el.setAttribute('title',t);
       }});
   }
@@ -3462,6 +3726,8 @@ function applyLang(lang){
     if(typeof updateAutoBtn==='function')updateAutoBtn();
     if(typeof renderTasbihMode==='function')renderTasbihMode();
     if(typeof renderWasiyaHome==='function')renderWasiyaHome();
+    if(typeof renderFiqh==='function')renderFiqh();
+    if(typeof renderPrayCard==='function')renderPrayCard();
     translateTree(document.body);
     /* تمريرات مؤجّلة: تلتقط أي بناءٍ متأخر (الخطوط، الأدوات المفتوحة لاحقًا) */
     setTimeout(function(){ if(LANG==='en'){ try{ translateTree(document.body); }catch(e){} } },350);
@@ -4428,7 +4694,7 @@ src:"المختصر (ص٩٦) · التويجري"}
 };
 
 /* ============ التوجيه بين الشاشات ============ */
-const SCREENS=['home','day','names','tasbih','settings'];
+const SCREENS=['home','day','names','tasbih','fiqh','settings'];
 function go(id){
   SCREENS.forEach(s=>{ const el=$('#screen-'+s); if(el) el.classList.toggle('active',s===id); });
   $$('#nav .nav-b').forEach(b=>b.classList.toggle('on',b.dataset.go===id));
@@ -4438,6 +4704,8 @@ function go(id){
   if(id==='tasbih') renderTasbihStats();
   if(id==='day') renderDay();
   if(id==='home') buildTicker();
+  if(id==='fiqh'&&typeof renderFiqh==='function')renderFiqh();
+  if(typeof staggerScreen==='function')staggerScreen(id);
   window.scrollTo({top:0});
 }
 function bindNav(){ $$('[data-go]').forEach(b=>b.addEventListener('click',()=>go(b.dataset.go))); }
@@ -5308,7 +5576,7 @@ function bindSettings(){
   });
   bindSeg('#segTheme',['auto','dark','light'],'theme',applyLook);
   bindSeg('#segBg',['stars','arabesque','dots','plain'],'bgpat',applyLook);
-  bindSeg('#segFont',['s','m','l'],'fontScale',applyFont);
+  bindSeg('#segFont',['s','m','l','xl'],'fontScale',applyFont);
   /* شريط الذكر والتذكير (v3.0.0): إظهار وسرعة وأذكار مخصصة */
   bindToggle('#tgTicker','ticker',applyTickerVisibility);
   bindSeg('#segTickSpd',['slow','mid','fast'],'tickSpd');
@@ -7494,6 +7762,746 @@ function init(){
   document.addEventListener('pointerdown',unlock,{once:true});
 }
 init();
+
+</script>
+
+<script>
+/* v360_data.js — محتوى كتاب فقه الصلاة الميسّر المعتمد (نصًّا حرفًا حرفًا) + بيانات الميزات
+   المنهج: ما لم يتثبَّت له رقمٌ موثوق لم يُكتب رقمًا ظنًّا. */
+"use strict";
+
+/* أبواب الكتاب — كل باب: t العنوان، s خلاصةٌ قصيرةٌ للفهرس، body كتل: h عنوان فرعي، p فقرة، li بند، ev [نص الدليل، مصدره] */
+const FIQH_CH=[
+ {id:'ch1',t:'البابُ الأول: فضلُ الصلاة ومكانتُها',
+  s:'قرنتِ الصلاةُ بالصبرِ مرتين في كتاب الله، وجعلتْ نورًا يمنعُ عن الفحشاء، وأولَ عملٍ يُحاسَب به العبد.',
+  body:[
+   {h:'فضلُها في القرآن الكريم'},
+   {p:'قرنتِ الصلاةُ بالصبرِ مرتين في كتاب الله، وجعلتَها نورًا يمنعُ عن الفحشاء، وفُرضتِ كتابًا موقوتًا، ووصيَ بها عيسى عليه السلام ما دام حيًّا:'},
+   {ev:['«وَاسْتَعِينُوا بِالصَّبْرِ وَالصَّلَاةِ ۚ وَإِنَّهَا لَكَبِيرَةٌ إِلَّا عَلَى الْخَاشِعِينَ»','سورة البقرة: ٤٥']},
+   {ev:['«أَتْلُ مَا أُوحِيَ إِلَيْكَ مِنَ الْكِتَابِ وَأَقِمِ الصَّلَاةَ ۖ إِنَّ الصَّلَاةَ تَنْهَىٰ عَنِ الْفَحْشَاءِ وَالْمُنكَرِ»','سورة العنكبوت: ٤٥']},
+   {ev:['«إِنَّ الصَّلَاةَ كَانَتْ عَلَى الْمُؤْمِنِينَ كِتَابًا مَّوْقُوتًا»','سورة النساء: ١٠٣']},
+   {ev:['«وَأَوْصَانِي بِالصَّلَاةِ وَالزَّكَاةِ مَا دُمْتُ حَيًّا»','سورة مريم: ٣١ — وصية عيسى عليه السلام']},
+   {h:'فضلُها في السنة'},
+   {p:'جعلتِ الصلاةُ حاجزًا بين العبد وبين الكفر، وأولَ عملٍ يُحاسب به، وأفضلَ الأعمالِ في وقتها، ونورًا من الطهارة:'},
+   {ev:['«إنَّ بينَ الرجلِ وبينَ الشِّركِ والكُفرِ تَرْكَ الصَّلاةِ»','عن جابر بن عبد الله — أخرجه مسلم في صحيحه (٨٢)']},
+   {ev:['«أولُ ما يُحاسَبُ به العبدُ يومَ القيامةِ من عملِه صلاتُه؛ فإن صلَحت فقد أفلَح وأنجَح، وإن فسَدت فقد خابَ وخسِر»','عن أبي هريرة — أخرجه الترمذي وقال: حديث حسن صحيح']},
+   {ev:['«أفْضَلُ الأعمالِ الصَّلاةُ لوقتِها، ثم برُّ الوالدين، ثم الجهادُ في سبيل الله»','عن عبد الله بن مسعود — أخرجه البخاري (٥٢٧) ومسلم (٨٥)']},
+   {ev:['«الطُّهورُ شَطرُ الإيمانِ، والصَّلاةُ نورٌ، والصَّدَقةُ بُرهانٌ، والصَّبرُ ضياءٌ»','عن أبي مالك الأشعري — أخرجه مسلم (٢٢٣)']}
+  ]},
+ {id:'ch2',t:'البابُ الثاني: عددُ الصلوات وأوقاتُها',
+  s:'الفروضُ الخمسُ ثابتةٌ بالكتاب والسنة والإجماع، وركعاتُها تثبتُ بأداءِ جبريل عليه السلام للنبيِّ ﷺ.',
+  body:[
+   {p:'الفروضُ الخمسُ ثابتةٌ بالكتاب والسنة والإجماع؛ قال صلى الله عليه وسلم: «بُني الإسلامُ على خمسٍ: شهادةِ أن لا إله إلا الله وأن محمدًا رسولُ الله، وإقامِ الصلاة، وإيتاءِ الزكاة، وحجِّ البيت، وصومِ رمضان» — متفقٌ عليه. وعددُ ركعاتِها تثبتُ من أداءِ جبريلَ عليه السلامِ للنبيِّ صلى الله عليه وسلم الصلواتِ الخمسِ بأوقاتِها، وهو حديثٌ ثابتٌ ثقةً في كتابِ المواقيت.'},
+   {tt:{hd:['الصلاة','ركعاتُ الفرض','وقتها الميسَّر'],rows:[
+     ['الفجر','٢','من طلوعِ الفجرِ الصادق إلى طلوعِ الشمس'],
+     ['الظهر','٤','من زوالِ الشمس عن وسط السماء إلى أن يُطال الظلُّ مثله أو يفوتِه'],
+     ['العصر','٤','من نهاية وقت الظهر إلى مغيبِ الشمس، والأفضلُ في أول وقتٍ قبل اصفرارِها'],
+     ['المغرب','٣','من مغيبِ الشمس إلى غيابِ الشفقِ الأحمر'],
+     ['العشاء','٤','من غيابِ الشفق إلى نصف الليل مرجَّحًا، ويجوزُ إلى الفجر']]}},
+   {p:'وفي فضلِ الوقتِ الأولِ حديثٌ متفقٌ عليه: «أحبُّ الأعمالِ إلى اللهِ الصلاةُ على وقتِها» — البخاري (٥٢٧) ومسلم (٨٥). وأوقاتُها المفصلةُ تثبتُ بأداءِ جبريلَ عليه السلام، كما في الحديث الآتي:'},
+   {ev:['«أمَّني جبريلُ عليه السلامُ عند البيتِ مرتين: فصلى الظهرَ في الأولى منهما في آخرِ زوالِها، والعصرَ عند حصولِ الأوفاق، والمغربَ داخلَ الليل، والعشاءَ إذا ذهبَ الشفق، والفجرَ إذا أضحت…»','أخرجه أبو داود (٣٩٣) والترمذي (١٤٩)، وقال الترمذي: حسن صحيح']}
+  ]},
+ {id:'ch3',t:'البابُ الثالث: شروطُ الصلاة',
+  s:'شروطُ الوجوب أربعةٌ، وشروطُ الصحّة ستةٌ لا تصحُّ الصلاةُ بلاها — من الطهارة إلى ترك ما يشغل بها.',
+  body:[
+   {h:'شروطُ وجوبِها (يُسأل عنها صاحبُها)'},
+   {p:'توجب الصلاةُ على من اجتمعَ فيه أربعةٌ: الإسلامُ، والعقلُ، والبلوغُ، ورفعُ دم الحيضِ والنفاس. ودليلُ الإعفاءِ من القولِ والحركةِ حديثُ ثابتٍ في الأصلين وفي السنن:'},
+   {ev:['«رفعَ القلمُ عن ثلاثةٍ: عن النائمِ حتى يستيقظَ، وعن الصبيِّ حتى يُشبَّ، وعن المعتوهِ حتى يفيقَ»','أخرجه أبو داود والترمذي']},
+   {h:'شروطُ صحَّةِها (لا تصح بلاها)'},
+   {li:'١. الطهارةُ من الحدث: «يَا أَيُّهَا الَّذِينَ آمَنُوا إِذَا قُمْتُمْ إِلَى الصَّلَاةِ فَاغْسِلُوا وُجُوهَكُمْ وَأَيْدِيَكُمْ إِلَى الْمَرَافِقِ وَامْسَحُوا بِرُءُوسِكُمْ وَأَرْجُلَكُمْ إِلَى الْكَعْبَيْنِ» — المائدة: ٦، ودلَّ عليها قولُ النبيِّ صلى الله عليه وسلم: «مفتاحُ الصلاةِ الطُّهور» — أبو داود (٦١) والترمذي (٣).'},
+   {li:'٢. الطهارةُ من الخبثِ في البدن والثوب والموضع: «وَثِيَابَكَ فَطَهِّرْ» — المدثر: ٤، وقوله تعالى: «وَخُذُوا زِينَتَكُمْ عِندَ كُلِّ مَسْجِدٍ» — الأعراف: ٣١.'},
+   {li:'٣. سترُ العورة: للرجلِ من السرَّة إلى الرُّكبة، وللمرأةِ كلُّ جسمِها إلا ما ظهرَ وجُوزَه؛ ودلَّ النورُ على ستر الرجل: «قُل لِّلْمُؤْمِنِينَ يَغُضُّوا مِنْ أَبْصَارِهِمْ وَيَحْفَظُوا فُرُوجَهُمْ» — النور: ٣٠.'},
+   {li:'٤. إقبالُ القبلة: «فَوَلِّ وَجْهَكَ شَطْرَ الْمَسْجِدِ الْحَرَامِ ۚ وَحَيْثُ مَا كُنتُمْ فَوَلُّوا وُجُوهَكُمْ شَطْرَهُ» — البقرة: ١٤٤؛ ومن لم يُدرِها اجتهدَ وصَلَتْه صحيحةٌ بإذن الله.'},
+   {li:'٥. دخولُ الوقت: «إِنَّ الصَّلَاةَ كَانَتْ عَلَى الْمُؤْمِنِينَ كِتَابًا مَّوْقُوتًا» — النساء: ١٠٣.'},
+   {li:'٦. تركُ ما ينافيها من الكلام وما يشغَلُ بها: «حَافِظُوا عَلَى الصَّلَوَاتِ وَالصَّلَاةِ الْوُسْطَىٰ وَقُومُوا لِلَّهِ قَانِتِينَ» — البقرة: ٢٣٨؛ وقولُ النبيِّ صلى الله عليه وسلم لمن سلَّم عليه في الصلاة: «إنَّ في الصلاةِ شُغْلًا» — البخاري (١١٩٩) ومسلم (٥٣٨).'}
+  ]},
+ {id:'ch4',t:'البابُ الرابع: أركانُ الصلاة — أربعةَ عشرَ ركنًا',
+  s:'الركنُ ما لا تصحُّ الصلاةُ إلا به؛ لا يسقطُ عمدًا ولا سهوًا — من القيام إلى ترتيب الأركان.',
+  body:[
+   {p:'الركنُ ما لا تصحُّ الصلاةُ إلا به؛ فلا يسقطُ عمدًا ولا سهوًا، ومن تركه بطلت صلاتُه فلا بدَّ من إعادتِها أو إتمامِ ما فاءت منه داخلًا في الوقت. وحصرَها أهلُ العلم؛ وفي أشهرِ عروضٍ لها، وهو نظامُ «دليل الطالب» الحنبليَّ كما عرضه الشيخ ابن عثيمين:'},
+   {li:'١. القُيامُ في الفرض على القادر — ودلُّه قوله تعالى: «وَقُومُوا لِلَّهِ قَانِتِينَ» — البقرة: ٢٣٨.'},
+   {li:'٢. تكبيرةُ الإحرام ولفظُها «اللهُ أكبر» — ودلُّها: «مفتاحُ الصلاةِ الطُّهورُ وتحريمُها التكبيرُ وتحليلُها التسليم» — أبو داود (٦١) والترمذي (٣).'},
+   {li:'٣. قراءةُ الفاتحة في كلِّ ركعةٍ — ودلُّها: «لا صلاةَ لمن لم يقرأْ بفاتحةِ الكتاب» — عبادةُ بن الصامت، البخاري (٧٥٦).'},
+   {li:'٤. الركوعُ — أدناها أن ينحني بحيثُ يمكنه مسُّ ركبتيه بكفيه، وأكملُها أن يُمدَّ ظهرُه مستويًا ويجعل رأسَه حيالَه — ومصدرُ الصفةِ قوله صلى الله عليه وسلم: «صَلُّوا كَمَا رَأَيْتُمُونِي أُصَلِّي» — أخرجه البخاري في كتاب الأذان.'},
+   {li:'٥. الرفعُ من الركوع.'},
+   {li:'٦. الاعتدالُ قائمًا بعد الرفع — وفي رواية وائل بن حجر: إذا رفعَ يديهِ عند الركوعِ رفعَ مثلهما عند الرفع منه، ولم يضعهما حتى استوى قائمًا — أخرجه مسلم (٤٠١).'},
+   {li:'٧. السجودُ على الأعضاءِ السبعة: الجبهةُ والأنفُ، واليدان، والرُّكبتان، وأطرافُ القدمين — ودناها وضعُ جزءٍ من كلِّ عضوٍ منها، وأكملُها تمكينُها كلِّها — ووصفَ وائلُ صلاتَه: «فلما سجدَ سجدَ بينَ كفَّيه» — مسلم (٤٠١).'},
+   {li:'٨. الرفعُ من السجود.'},
+   {li:'٩. الجلوسُ بين السجدتين — وكيف جلسَ كفًى.'},
+   {li:'١٠. الطمأنينةُ في الأركانِ كلِّها: وهي السكونُ فيها زمانًا يُستوي به — ودلُّها عمومُ قوله تعالى: «وَقُومُوا لِلَّهِ قَانِتِينَ»، ووصفُ صلاةِ النبيِّ صلى الله عليه وسلم في رواية وائلٍ بن حجرٍ بن مالك (مسلم: ٤٠١).'},
+   {li:'١١. التشهدُ الأخير.'},
+   {li:'١٢. الجلوسُ للتشهدِ الأخير وللتسليمتين.'},
+   {li:'١٣. التسليمتانِ: أن يقولَ مرتين: «السلامُ عليكم ورحمةُ الله».'},
+   {li:'١٤. ترتيبُ الأركانِ كما مرَّ: فلو سجد قبل ركوعه عمدًا بطلت صلاتُه، وسهوًا لزمه الرجوعُ ليركعَ ثم يسجد.'},
+   {p:'ومن العدُّ من العلماءِ بتفاوتٍ يسيرٍ في الترقيم والضم والفصل؛ فالقاعدةُ المجاميعُ المذكورةُ أعلاه، وما زادَ على العدِّ أو نقصَ منه فرقُ تنظيمٍ لا فرقُ حكمٍ في المضمون المعتمد.'}
+  ]},
+ {id:'ch5',t:'البابُ الخامس: واجباتُ الصلاة وسجودُ السهو',
+  s:'الواجبُ الثماني: تركُه سهوًا يجبرُه سجودُ السهو — وعليه قواعدُ السهو الثلاث العملية.',
+  body:[
+   {p:'الواجبُ ما ليس برُكنٍ لكنَّه مطلوبٌ في الصلاة؛ فمن تركه سهوًا صحَّت صلاتُه وسجَّد للسهو، ومن تركه عمدًا فضَّلَ أكثرُ الفقهاءِ الإعادةَ احتياطًا. والواجباتُ الثماني:'},
+   {li:'١. التكبيرُ لغيرِ الإحرامِ (تكبيراتُ الانتقالِ بين الأركان).'},
+   {li:'٢. قولُه: «سمعَ اللهُ لمن حمِدَه» للإمامِ وللمنفرد — ودلُّها حديثُ أبي قتادةٍ في القيامِ من الركوع: «سمعَ اللهُ لمن حمِدَه…» — أخرجه البخاري ومسلم.'},
+   {li:'٣. قولُه: «ربَّنا ولك الحمد» — ودلُّها حديثُ الرجلِ الذي قال خلفَ النبيِّ صلى الله عليه وسلم: «ربَّنا ولك الحمدُ حمدًا طيبًا مباركًا فيه» فقال له: «شيءٌ ما أبغيتَه؟» — أخرجه البخاري ومسلم.'},
+   {li:'٤. قولُه في الركوع: «سبحانَ ربي العظيم» مرةً — «إذا ركعَ أحدُكم فليقل في ركوعِه: سبحانَ ربي العظيم، وإذا سجدَ فليقل في سجودِه: سبحانَ ربي الأعلى» — أخرجه أبو داود وقال: لا يعارضُهُ في ذلك أحد.'},
+   {li:'٥. قولُه في السجود: «سبحانَ ربي الأعلى» مرة — الدليلُ هو الحديثُ السابق.'},
+   {li:'٦. قولُه بين السجدتين: «ربِّ اغفر لي» — عن وائل بن حجر — أخرجه أبو داود.'},
+   {li:'٧. التشهدُ الأول — ودلُّه أنه جُبر بسجودِ السهو في حديثِ ابن بحينة (البخاري، كتاب السهو).'},
+   {li:'٨. الجلوسُ للتشهدِ الأول — نفسُ الدليل.'},
+   {h:'سجودُ السهو: القواعدُ الثلاث'},
+   {p:'مُلخَّصٌ عمليٌّ يسيرٌ يحفظ:'},
+   {li:'١. إن أضاعَ سهوًا — كتركِ سورةٍ أو تكبيرةٍ — سجدَ سجدتين بعدَ السلام.'},
+   {li:'٢. إن زادَ سهوًا — كالصلواتِ الأربعِ في ركعتين — سجدَ سجدتين قبلَ السلام.'},
+   {li:'٣. إن شكَّ — يتوكلُ على الغالبِ من ظنِّه؛ فإنْ غلبَ ظنُّه أحدًا أتمَّ عليه، وإن لم يغلبْ شيئًا جعلَها الأقلَّ وسجدَ بعدَ السلام.'},
+   {ev:['«صلَّى لنا رسولُ اللهِ صلى الله عليه وسلم ركعتين ثم قامَ فلم يجلس، فقامَ الناسُ معه، فلما قضى صلاتَهُ وانتظرنا التسليمَ كبَّرَ فسجدَ سجدتين وهو جالسٌ ثم سلم»','عن ابن بحينة — أخرجه البخاري في كتاب السهو']},
+   {p:'وملاحظةٌ عمليةٌ للمأموم: يسجدُ مع إمامهِ متبعًا له؛ فإن كان في نهايته فسجودُه بعدَ إمامه، وإن كان مسبوقًا فأتمَّ صلاتَه ثم سجَّد.'}
+  ]},
+ {id:'ch6',t:'البابُ السادس: سننُ الصلاة',
+  s:'السننُ قوليةٌ وفعليةٌ وفي الجلوس؛ لا تبطلُ الصلاةُ بتركِها ولو عمدًا.',
+  body:[
+   {p:'السننُ ما عدا الأركانَ والواجبات؛ فلا تبطلُ الصلاةُ بتركِها ولو عمدًا، وهي ثلاثةٌ أقسام:'},
+   {h:'السننُ القولية'},
+   {li:'• التأمينُ: قال صلى الله عليه وسلم: «إذا أمَّنَ الإمامُ فأمِّنوا؛ فإنَّهُ من وافَقَ تأمينُهُ تأمينَ الملائكةِ غُفِرَ له ما تقدَّمَ من ذنبِه» — متفقٌ عليه.'},
+   {li:'• «أمين» بعد الفاتحة — وهي مدخلُ التأمين.'},
+   {li:'• التسبيحُ ثلاثًا في الركوع والسجود: مرةٌ واجبةٌ كما في الباب الخامس، والزيادةُ على الثلاثِ سنة.'},
+   {li:'• الدعاءُ بين السجدتين بالتوسع، وما بعد «ربِّ اغفر لي».'},
+   {li:'• الصلاةُ الإبراهيميةُ في التشهد الأخير — نصُّها في الباب التاسع (البخاري ومسلم عن كعب بن عجرة).'},
+   {li:'• الدعاءُ بعد التشهد الأخير قبل السلام: «ثم ليختَرْ ما شاءَ من الدعاء» — أخرجه أبو داود والترمذي، وقال الترمذي: حسن صحيح.'},
+   {h:'السننُ الفعلية'},
+   {li:'• رفعُ اليدينِ مع تكبيرةِ الإحرام، وعند الركوع، وعند الرفعِ منه — وفي رواية وائل بن حجر: «فكبَّرَ فرفعَ يديهِ حتى حاذَتا أذنيه… وإذا ركعَ رفعَ يديهِ مثلهما» — مسلم (٤٠١)، وعن ابن عمرٍ أدلةٌ أخرى.'},
+   {li:'• وضعُ اليدينِ في القيام: روايةُ وائل: «ووضعَ يدَهُ اليمنى على يدِهِ اليسرى على صدرِه» — أخرجه أبو داود (٧٥٩)، وقال المباركفوري في شرحه: صحيحٌ قابلٌ للاحتجاج؛ وذهبَ المالكيةُ والحنفيةُ إلى وضعِها على الصدرِ الأعلى عند السرَّةِ على أحاديثٍ أخرى — فالوجهانِ لهما دليلٌ، والمصلّى يتبعُ ما تعرفتَ عليه، فالصلاتان صحيحتان.'},
+   {li:'• التثويةُ: الإهواءُ في الجلوسِ على الرِكبةِ اليمنى قبلَ الجلوسِ بين السجدتين.'},
+   {li:'• قراءةُ سورةٍ بعد الفاتحةِ في الفوارغ.'},
+   {li:'• الجهرُ في الصبحِ والمغربِ والعشاء، والإسراءُ في الظهرِ والعصر — من صفةِ صلاةِ النبيِّ صلى الله عليه وسلم المجمعِ عليها.'},
+   {h:'السننُ في الجلوس'},
+   {li:'• الجلوسُ المفترشُ على الرِجلِ اليسرى وتنصيبُ اليمنى وتوجيهُها نحو القبلة — وصفَ أبي حميدٍ الصاعدي صلاةَ النبيِّ صلى الله عليه وسلم بيده — أخرجه مسلم.'},
+   {li:'• إسباغُ السلامِ عن اليمين واليسارِ مع توجيهِ الوجه.'},
+   {li:'• الاستغفارُ ثلاثًا بعد السلام وما بعده من أذكارِ مُقرَّرةٍ في الباب التاسع.'}
+  ]},
+ {id:'ch7',t:'البابُ السابع: مكروهاتُ الصلاة',
+  s:'المكروهُ ما نقصَ فضيلةَ الصلاةِ ولا أبطلَها: من النظرِ إلى السماء إلى التثاؤبِ واللعب.',
+  body:[
+   {p:'المكروهُ ما نقصَ فضيلةَ الصلاةِ ولا أبطلَها بالأقل؛ ومن أعظمِها:'},
+   {ev:['«لَيَنْتَهِيَنَّ أَقْوَامٌ يَرْفَعُونَ أَبْصَارَهُمْ إِلَى السَّمَاءِ فِي الصَّلَاةِ، أَوْ لَا تَرْجِعُ إِلَيْهِمْ أَبْصَارُهُمْ»','عن جابر بن سمرة — أخرجه مسلم (٤٢٨)']},
+   {ev:['«التثاؤُبُ من الشيطانِ، فإذا تثاءَبَ أحدُكم فليكظِمْ ما استطاعَ»','عن أبي هريرة — أخرجه مسلم (٢٩٩٤)']},
+   {li:'• التلفتُ والنظرُ إلى ما لا حاجةَ له، واللعبُ بالثوبِ والأصابع — وأصلُ النهيِ قولُ النبيِّ صلى الله عليه وسلم لمن سلَّم عليه في الصلاة: «إنَّ في الصلاةِ شُغْلًا» — البخاري (١١٩٩) ومسلم (٥٣٨).'},
+   {li:'• الصلاةُ في ثوبٍ واحدٍ ليس على عاتقَيه منه شيء — عن أبي هريرة — أخرجه مسلم، وقد كرَّرهُ جماعةٌ من أهل العلم.'},
+   {li:'• النظرُ في كتابٍ أو هاتفٍ أو ما يشغلُ عن الصلاة — كرَّرهُ أهلُ العلم؛ فالوجهُ المشروعُ نظرةٌ إلى موضعِ السجود.'},
+   {li:'• إغماضُ العينينِ إغماضًا كاملًا في الصلاة — كرَّرهُ جمهورُ أهلِ العلم.'}
+  ]},
+ {id:'ch8',t:'البابُ الثامن: مبطلاتُ الصلاة',
+  s:'الكلامُ والأكلُ وخرجُ الريحِ والحركاتُ الكثيرةُ وما يعارضُ حكمَ الصلاة — وخلاصةُ القضاء والسنة.',
+  body:[
+   {p:'تبطلُ الصلاةُ بما يعارضُ حكمَها أو يُشبِهُ بها عملًا من غيرِ الصلاة؛ ومن أعظمِ ما يبطلُها، وهذا ملخَّصٌ فقهيٌّ متفقٌ على أصلِه:'},
+   {li:'• الكلامُ قصدًا ولو كلمةً واحدةً؛ والكثيرُ منه عن سهوٍ يبطلُ عند جمهورِ الفقهاء.'},
+   {li:'• الأكلُ والشربُ عمدًا ولو قليلًا.'},
+   {li:'• الشرجتانِ الكبيرتانِ (البولُ والغائطُ) وخرجُ الريحِ بلا مقاصٍ — فهو مُطلِقُ البطلانِ عند الجمهور.'},
+   {li:'• الشرجاتُ الكثيرةُ التي تُشبِهُ الحركةَ الكثيرةَ: تُنقصُ منها القليلةُ، وتبطلُها الكثيرةُ التي تُشبِهُ بها الحركةَ التي ليست صلاةً — وهو قولٌ جمهورٍ.'},
+   {li:'• الحركاتُ الكثيرةُ التي تُشبِهُها حركةَ الانصرافِ أو اللعب.'},
+   {li:'• الفحشُ والكفار في الصلاة.'},
+   {li:'• انكشافُ العورةِ عمدًا بحسبِ الحالة.'},
+   {li:'• التحولُ عن القبلةِ بلا عذرٍ مقبول — والأصلُ من البقرة: ١٤٤.'},
+   {li:'• فقدُ شرطٍ من شروطِ الصحةِ المذكورةِ في الباب الثالث، كأنْ ينتقضَ وضوؤه أثناءَ الصلاة.'},
+   {p:'ومن ثمارِ هذا البابِ العملي: من تحدَّثَ سهوًا فليستغفر، ومن أدركَ أنه بطلت صلاتُه فليعيدَها داخلًا في الوقت، ومن فاءت على بطلانها فليقضِها؛ فالقضاءُ واجبٌ وثابتٌ بحديث:'},
+   {ev:['«مَن نَسِيَ صلاةً فلْيُصَلِّها إذا ذَكَرَها، لا كفارةً لها إلا ذلك»','عن أنس بن مالك — البخاري (٥٩٧) ومسلم (٦٨٤)']}
+  ]},
+ {id:'ch9',t:'البابُ التاسع: الدعاءُ في الصلاة وأذكارُ ما بعد السلام',
+  s:'السجودُ أقربُ الأوقاتِ للدعاء، ونصُّ التشهدِ والصلاةِ الإبراهيمية، وأذكارُ ما بعد السلام الثلاثة.',
+  body:[
+   {h:'الدعاءُ داخل الصلاة'},
+   {ev:['«أقربُ ما يكونُ العبدُ من ربِّهِ وهو ساجدٌ، فأكثِروا الدُّعاءَ»','عن أبي هريرة — أخرجه مسلم']},
+   {p:'والدعاءُ بين السجدتين ب«ربِّ اغفر لي» واجبٌ كما في الباب الخامس، وتوسعُ العبدِ فيه بعدَه سنة. وأما بعدَ التشهد الأخير فقد فتحَ النبيُّ صلى الله عليه وسلم بابَ الدعاءِ قبل السلام:'},
+   {ev:['«إذا قالَ أحدُكم آخرَ تشهُّدِه… ثم ليختَرْ ما شاءَ من الدعاء»','أخرجه أبو داود والترمذي، وقال الترمذي: حسن صحيح']},
+   {h:'نصُّ التشهد الكامل'},
+   {p:'وهو المشهورُ في التشهدِ الأولِ والأخير؛ فإن أُضيفَ في الأخيرِ الصلاةُ الإبراهيمية:'},
+   {ev:['«التَّحِيَّاتُ لِلَّهِ، وَالصَّلَوَاتُ وَالطَّيِّبَاتُ. السَّلَامُ عَلَيْكَ أَيُّهَا النَّبِيُّ وَرَحْمَةُ اللَّهِ وَبَرَكَاتُهُ. السَّلَامُ عَلَيْنَا وَعَلَى عِبَادِ اللَّهِ الصَّالِحِينَ. أَشْهَدُ أَنْ لَا إِلَهَ إِلَّا اللَّهُ وَأَشْهَدُ أَنَّ مُحَمَّدًا عَبْدُهُ وَرَسُولُهُ»','علَّمَهُ النبيُّ صلى الله عليه وسلم ابن مسعود — أخرجه الترمذي (١١٠٣)، وقال: حديث حسن']},
+   {h:'الصلاةُ الإبراهيمية'},
+   {ev:['«اللَّهُمَّ صَلِّ عَلَى مُحَمَّدٍ وَعَلَى آلِ مُحَمَّدٍ، كَمَا صَلَّيْتَ عَلَى إِبْرَاهِيمَ وَعَلَى آلِ إِبْرَاهِيمَ، إِنَّكَ حَمِيدٌ مَجِيدٌ. اللَّهُمَّ بَارِكْ عَلَى مُحَمَّدٍ وَعَلَى آلِ مُحَمَّدٍ، كَمَا بَارَكْتَ عَلَى إِبْرَاهِيمَ وَعَلَى آلِ إِبْرَاهِيمَ، إِنَّكَ حَمِيدٌ مَجِيدٌ»','عن كعب بن عجرة — أخرجه البخاري ومسلم']},
+   {h:'أذكارُ ما بعد السلام'},
+   {li:'١. الاستغفارُ ثلاثًا ثم قال صلى الله عليه وسلم: «اللَّهمَّ أنتَ السلامُ ومنكَ السلامُ، تباركتَ يا ذا الجلالِ والإكرامِ» — عن ثوبان — أخرجه أبو داود.'},
+   {li:'٢. «لا إلهَ إلا اللهُ وحدَهُ لا شريكَ له، له الملكُ وله الحمدُ، وهو على كلِّ شيءٍ قدير؛ اللهمَّ لا مانعَ لما أعطيتَ، ولا مُعطيَ لما منعتَ، ولا ينفعُ ذا الجدِّ منكَ الجدُّ» — عن المغيرة بن شعبة — أخرجه مسلم (٥٩٣).'},
+   {li:'٣. «اللَّهمَّ أعنِّي على ذكرِك وشكرِك وحُسنِ عبادتِك» — وصيةُ النبيِّ صلى الله عليه وسلم لمعاذٍ رضي الله عنه — أخرجه أحمد وأبو داود والنسائي.'}
+  ]},
+ {id:'ch10',t:'البابُ العاشر: أخطاءٌ شائعةٌ وتصحيحُها',
+  s:'أحدَ عشرَ خطأً يقعُ فيها المصلّون، وقابلَ كلَّ خطأٍ الحكمُ الصحيحُ والدليلُ المثبَت.',
+  body:[
+   {p:'جمعتُ أشهرَ الأخطاءِ التي تقعُ فيها النفوسُ في صلاتها، وقابلتُ كلَّ خطأٍ بالحكمِ الصحيحِ والدليلِ المثبَت:'},
+   {err:['صلاةٌ خاطفةٌ بلا طمأنينة','الطمأنينةُ ركنٌ، والركنُ لا يسقط أبدًا','وصفُ صلاةِ النبيِّ صلى الله عليه وسلم (مسلم: ٤٠١)، و«وقُوموا للهِ قانتين»']},
+   {err:['رفعُ البصرِ إلى السماء','منهيٌّ عنه نهيًا شديدًا','مسلم (٤٢٨)']},
+   {err:['الكلامُ واللعبُ بالثوب','يُمنع؛ فالصلاةُ شغلٌ وحسب','البخاري (١١٩٩) ومسلم (٥٣٨)']},
+   {err:['الاستغناءُ عن الفاتحةِ خلف الإمام','تُقرأ سرًّا في الفوارغ؛ فلا صلاةَ إلا بها','البخاري (٧٥٦)']},
+   {err:['عدمُ التأمينِ مع الإمام','يُؤمَّنُ معه؛ وفي الموافقةِ مغفرةٌ لما تقدَّم','متفقٌ عليه']},
+   {err:['تركُ «سمعَ اللهُ لمن حمِدَه» و«ربَّنا ولك الحمد»','واجبانِ يُجبَران بسجودِ السهو','البخاري ومسلم عن أبي قتادة']},
+   {err:['إهمالُ الدعاءِ في السجود','السجودُ أقربُ الأوقاتِ للدعاء؛ فأكثِرْ فيه','أخرجه مسلم']},
+   {err:['عدمُ الاستغفارِ ثلاثًا بعد السلام','من سننِ السلامِ الثابتة','أبو داود عن ثوبان']},
+   {err:['الجلوسُ الأولُ خاطفًا أو تركُه','واجبٌ يُجبَر بسجودِ السهو','البخاري، كتاب السهو']},
+   {err:['التثاؤبُ المزيد','يكظِمُه المصليُّ ما استطاع','مسلم (٢٩٩٤)']},
+   {err:['إهمالُ سجودِ السهوِ مع علمِه بالسهو','يجبُ سجودُه متى ثبتَ السهو','البخاري، كتاب السهو (حديث ابن بحينة)']}
+  ]},
+ {id:'ch11',t:'البابُ الحادي عشر: كيف أصلي وفق السنة؟ خطوةً خطوة',
+  s:'تشريحٌ ميسَّرٌ لصلاةٍ واحدةٍ من النيةِ إلى السلام — أحدَ عشرَ خطوةً يجمعُ ما في الكتاب.',
+  body:[
+   {p:'تشريحٌ ميسَّرٌ لصلاةٍ واحدةٍ يجمعُ ما مضى؛ حفظه فهو كأنَّك حفظتَ الكتابَ في فعلٍ واحد:'},
+   {li:'١. قِف للنية: تنوي الصلاةَ المفروضةَ في قلبك — فالنياتُ أصلُ الأعمال (أولُ صحيح البخاري).'},
+   {li:'٢. كبِّر: «اللهُ أكبر» ورفعَ يديك حتى حاذَتا أذنيك (مسلم: ٤٠١).'},
+   {li:'٣. افتتح بدعاءِ الاستفتاحِ المأثورِ إن أحببت.'},
+   {li:'٤. اقرأ الفاتحة كاملةً، وقل في آخرها «أمين» (متفقٌ عليه).'},
+   {li:'٥. اقرأ سورةً أو آياتٍ في الفوارغ.'},
+   {li:'٦. اركع مطمئنًا حتى تستوي ظهرُك، وقل: «سبحانَ ربي العظيم» ثلاثًا (أبو داود).'},
+   {li:'٧. قُم مُعتدلًا قائلًا: «سمعَ اللهُ لمن حمِدَه، ربَّنا ولك الحمد» (البخاري ومسلم).'},
+   {li:'٨. اسجد على سبعةِ أعضاءٍ مطمئنًا وقل: «سبحانَ ربي الأعلى» ثلاثًا.'},
+   {li:'٩. اجلس بين السجدتين قائلًا: «ربِّ اغفر لي» (أبو داود)، ثم اسجد الثاني.'},
+   {li:'١٠. في الجلوسِ الأخيرِ: تَشهَّد بالتشهدِ الكامل، ثم «اللَّهمَّ صَلِّ على محمدٍ…» (البخاري ومسلم)، ثم ادعُ بما شئت.'},
+   {li:'١١. سَلِّم سلامًا كاملًا: «السلامُ عليكم ورحمةُ الله» عن اليمين واليسار، ثم استغفرْ ثلاثًا وقل: «اللَّهمَّ أنتَ السلامُ ومنكَ السلامُ» (أبو داود).'}
+  ]},
+ {id:'ch12',t:'البابُ الثاني عشر: أسئلةٌ سريعة',
+  s:'ستُّ أسئلةٍ يكثرُ أن يسألَها المصليُّ، وجوابها مختصرٌ مسند.',
+  body:[
+   {p:'ستُّ أسئلةٍ يكثرُ أن يسألَها المصليُّ، وجوابها مختصرٌ مسند:'},
+   {li:'س١: هل تصحُّ صلاتُ من تحدَّثَ سهوًا؟ — نعم تصحُّ؛ فليستغفرْ بعدَ السلام، وإن كان كثيرًا فضلَّ أكثرُ الفقهاءِ إعادتَها احتياطًا.'},
+   {li:'س٢: نسيَتُ صلاةً نائمًا؟ — قل صلاتِها إذا ذكرتَها بلا كفارةٍ عليك — البخاري (٥٩٧) ومسلم (٦٨٤).'},
+   {li:'س٣: خرجتْ شرجةٌ واحدةٌ مني؟ — لا تُبطل؛ والكثيرُ منها الكاشفُ للخطرِ يبطل.'},
+   {li:'س٤: هل الدعاءُ في السجودِ مأثورٌ مخصوص؟ — الأفضلُ الدعاءُ المأثور؛ ويتوسعُ العبدُ فيه دعاءً ما شاء — «أقربُ ما يكونُ العبدُ من ربِّهِ وهو ساجد» (مسلم).'},
+   {li:'س٥: ماذا أُعِدُّ الصلواتِ الفائتةَ القديمة؟ — يجبُ القضاءُ عليها بعددِها قدرًا تعرفَه، ودلُّ القضاءِ حديثُ «من نسيَ صلاةً…» في السؤال الثاني.'},
+   {li:'س٦: لم أعرف اتجاهَ القبلةِ في مكانٍ غريبٍ؟ — اجتهدْ في أقربِ شيءٍ تدلُّه على القبلة (الشمسِ والنجومِ وبوصلةِ نورِ نفسِها)، وصلِّ على اجتهادك فصلاتُك صحيحةٌ بإذن الله.'}
+  ]}
+];
+
+/* منهج الزاوية ومصادرها — من الكتاب المعتمد */
+const FIQH_MANHAJ={
+ p1:'المنهج الذي كُتب عليه: القرآنُ الكريم بنصه المقرأ، ثم أحاديث الصحيحين ومن صحّ منه، ثم كتب الفقه المعتمدة. وكلُّ حديثٍ أورد بلفظه المثبَت ومصدره ورقمه إن كان في متناول التثبُّت؛ وما لم يتثبَّت له رقمٌ موثوق لم يُكتب رقمًا ظنًّا بل قُصر على «أخرجه فلان» — فهذه أمانةٌ نافذةٌ في كل سطر.',
+ p2:'وعدُّ الأركان والواجبات اعتمد النظامَ الحنبليَّ المشهورَ في «دليل الطالب» كما يعرضه الشيخ ابن عثيمين وموقع الإسلام سؤال وجواب (الفتوى رقم 65847): أربعة عشرَ ركنًا وثمانِ واجباتٍ — وهو العدُّ الأكثر انتظامًا وانتشارًا في كتب الفقه الحديثة؛ وإن كان بعضُ العلماء عدُّوا بتفاوتٍ يسيرٍ فالمضمونُ واحدٌ لا اختلافَ عليه.',
+ p3:'المصادرُ الرئيسة: القرآن الكريم، وصحيحا البخاري ومسلم، وسنن أبي داود والترمذي، ومجموع فتاوى الإسلام سؤال وجواب (الفتوى 65847)، وموسوعة الدرر السنية للتخريجات، وفتاوى الشيخ ابن عثيمين في كتاب السهو.',
+ p4:'ثم تتوالى بعد باب الصلاة مراحلُ الزاوية بإذن الله: كتابُ الطهارة، ثم الصيام، ثم الزكاة والحج — بنفس المنهجِ والصبرِ، ولا يُضاف حديثٌ ولا آيةٌ إلا بمصدرٍ مكتوبٍ معروضٍ قبل الإدراج.'
+};
+
+/* T2 — قبل الصلاة: فحصٌ سريعٌ بثلاثين ثانية */
+const FIQH_PRE=[
+ {q:'طهارةٌ من الحدث: وضوءٌ من غسلٍ أو تيمُّمٍ على حالتك؟',s:'«مفتاحُ الصلاةِ الطُّهور» — أبو داود (٦١) والترمذي (٣)'},
+ {q:'سترٌ للعورة وتحيُّنٌ للثوب والمكان؟',s:'«وَثِيَابَكَ فَطَهِّرْ» — المدثر: ٤'},
+ {q:'إقبالٌ على القبلة بلا تلوية؟',s:'«فَوَلِّ وَجْهَكَ شَطْرَ الْمَسْجِدِ الْحَرَامِ» — البقرة: ١٤٤'},
+ {q:'قلبٌ حاضرٌ بلا كلامٍ ولا شاغلٍ عن الصلاة؟',s:'«إنَّ في الصلاةِ شُغْلًا» — البخاري (١١٩٩) ومسلم (٥٣٨)'}
+];
+
+/* T4 — وضع السفر */
+const FIQH_TRAVEL={
+ ev:[
+  ['«الصَّلاةُ في السَّفَرِ قَصرٌ صَدَقَةٌ أَدَاها اللهُ عَلَيْكُمْ، فَأَقْبِلُوا صَدَقَتَهُ»','عن أنس بن مالك — أخرجه مسلم (٦٩٥)'],
+  ['«أنَّ النبيَّ صلى الله عليه وسلم أمَّنَ المغربَ والعشاءَ بجمعٍ بلا خوفٍ ولا سفر»','عن ابن عمر — أخرجه مسلم (٧٠٤)']
+ ],
+ t1:'القصر: تُقصِّرُ الفوارضُ الأربعةَ (الظهرُ والعصرُ والعشاءُ) إلى ركعتين، والمغربُ والفجرُ لا يُقصران — وهو قصرُ صدقةٍ أقبل عليها لا تنقصُ منها شيئًا.',
+ t2:'الجمع: تجمعُ الظهرَ بالعصرِ وقتًا واحدًا (تقديمًا أو تأخيرًا)، والمغربَ بالعشاءِ — لضرورةٍ أو راحةٍ بحسبِ أهل العلم.'
+};
+
+/* T6 — أذكار ما بعد السلام (الباب التاسع) */
+const FIQH_AZKAR=[
+ {t:'الاستغفارُ ثلاثًا — ثم تقول:',z:'اللَّهمَّ أنتَ السلامُ ومنكَ السلامُ، تباركتَ يا ذا الجلالِ والإكرامِ',s:'عن ثوبان — أخرجه أبو داود'},
+ {t:'ثم:',z:'لا إلهَ إلا اللهُ وحدَهُ لا شريكَ له، له الملكُ وله الحمدُ، وهو على كلِّ شيءٍ قدير؛ اللهمَّ لا مانعَ لما أعطيتَ، ولا مُعطيَ لما منعتَ، ولا ينفعُ ذا الجدِّ منكَ الجدُّ',s:'عن المغيرة بن شعبة — أخرجه مسلم (٥٩٣)'},
+ {t:'ثم توصيةُ النبيِّ صلى الله عليه وسلم لمعاذٍ رضي الله عنه:',z:'اللَّهمَّ أعنِّي على ذكرِك وشكرِك وحُسنِ عبادتِك',s:'أخرجه أحمد وأبو داود والنسائي'}
+];
+
+/* T7 — مرشد سجود السهو */
+const FIQH_SEH=[
+ {k:'forgot',b:'نسيَتُ شيئًا',r:'أضاعَ سهوًا — سجّد سجدتين بعدَ السلام',x:'مثال: تركتَ سورةً بعد الفاتحة، أو تركتَ التشهدَ الأولَ ونمتَ عنه.',ev:['«صلَّى لنا رسولُ اللهِ صلى الله عليه وسلم ركعتين ثم قامَ فلم يجلس، فلما قضى صلاتَهُ وانتظرنا التسليمَ كبَّرَ فسجدَ سجدتين وهو جالسٌ ثم سلم»','عن ابن بحينة — أخرجه البخاري في كتاب السهو']},
+ {k:'added',b:'زدتُ شيئًا',r:'زادَ سهوًا — سجّد سجدتين قبلَ السلام',x:'مثال: صلّيتَ أربعًا في ركعتين، أو جلستَ حيثُ لا يُجلس.',ev:['«صلَّى لنا رسولُ اللهِ صلى الله عليه وسلم ركعتين ثم قامَ فلم يجلس، فلما قضى صلاتَهُ وانتظرنا التسليمَ كبَّرَ فسجدَ سجدتين وهو جالسٌ ثم سلم»','عن ابن بحينة — أخرجه البخاري في كتاب السهو']},
+ {k:'doubt',b:'شكّكتُ',r:'توكلْ على الغالبِ من ظنِّك؛ فإن غلبَ ظنُّك أحدًا أتمَّ عليه، وإن لم يغلبْ شيئًا جعلتَها الأقلَّ وسجدتَ بعدَ السلام',x:'مثال: لم تدركْ ركعتَين أم ثلاثًا؟ إن غلبك الظنُّ بثلاثٍ فأكملتَ أربعًا، وإن لم يغلبْ شيئًا فعدَّتها اثنتين وسجدتَ بعدَ السلام.'}
+];
+
+/* v360_module.js — v3.6.0 «مواقيت النور وفقهُ العبادات»
+   P1 محرك مواقيت محلي بلا إنترنت (خوارزميات الزوايا الشمسية الفلكية المعيارية)
+   M1 بطاقة مواقيت اليوم · T1-T7 زاوية فقه العبادات · M2 وضع القراءة · M3 دخول متتابع · M4 سحب الخشوع
+   كل شيء محليٌّ بلا أي خدمةٍ خارجية، وكل بياناتٍ جديدةٍ مفاتيحُ مستقلةٌ لا تمسّ بياناتك القديمة. */
+"use strict";
+
+/* ===== ترجمات واجهة الإصدار الجديد (النصوص الفقهية تبقى بصلتها العربية الأصلية) ===== */
+const TR_FIQH={
+ "فقه العبادات":"Worship Fiqh","بابُ الصلاة":"Chapter: Salah","العبادات":"Worship",
+ "الصلاة القادمة":"Next prayer","يتبقى":"Remaining","حان وقت الصلاة":"It is prayer time",
+ "الإقامة":"Iqamah","دخلت الصلاة":"Prayer has begun","إعدادات المواقيت":"Prayer times settings",
+ "الموضع":"Location","عدّل من الإعدادات":"Adjust in Settings","الفجر":"Fajr","الظهر":"Dhuhr",
+ "العصر":"Asr","المغرب":"Maghrib","العشاء":"Isha","غدًا":"tomorrow",
+ "مواقيت الصلاة":"Prayer Times","تحديد موضعي تلقائيًا":"Auto-detect my location","تطبيق الإحداثيات":"Apply coordinates",
+ "خط العرض":"Latitude","خط الطول":"Longitude","طريقة الحساب":"Calculation method",
+ "رابطة العالم الإسلامي":"Muslim World League","أم القرى":"Umm al-Qura",
+ "الهيئة المصرية العامة للمساحة":"Egyptian General Authority of Survey",
+ "جامعة العلوم الإسلامية بكراتشي":"Islamic University of Karachi",
+ "الجمعية الإسلامية لأمريكا الشمالية":"Islamic Society of North America",
+ "مذهب العصر":"Asr madhhab","جمهور (شافعي/مالكي/حنبلي)":"Jumhur (Shafi'i/Maliki/Hanbali)","حنفي":"Hanafi",
+ "الإقامة بعد الأذان (دقائق)":"Iqamah delay after adhan (minutes)",
+ "تنسيق الوقت":"Time format","نظام ٢٤ ساعة":"24-hour system","ص/م":"AM/PM",
+ "هذه المواقيت تُحسَب محليًا في جهازك بمواضيع الشمس الفلكية المعيارية، بلا أي إنترنت أو خدمةٍ خارجية، وتُقَرَّب بدقيقة تقريبًا — فتأكَّد من موضعك ومذهبك ثم اعتمد الرصد عند الحدود.":"These times are computed locally on your device with standard solar-position astronomy, with no internet or external service, accurate to about a minute — confirm your location and madhhab, and rely on observation at boundary times.",
+ "الإحداثيات اليدوية (اختياري)":"Manual coordinates (optional)","أدخل خطي العرض والطول إن عرفتهما بدقة":"Enter latitude and longitude if you know them precisely",
+ "وضع القراءة":"Reading size","تقدّمك في كتاب الصلاة":"Your progress in the Salah book",
+ "كل بابٍ تقرؤه وتختمه يضيء نجمةَ علمٍ في سماء الخير":"Every chapter you finish lights a star of knowledge in your sky of goodness",
+ "ابحث في أبواب الصلاة…":"Search the chapters of Salah…","لا نتائج في الأبواب — جرّب كلمةً أخرى":"No matching chapters — try another word",
+ "الدليل":"Evidence","قرأتُ هذا الباب":"I have read this chapter","قراءة":"Read",
+ "الخطأ الشائع":"Common mistake","الحكمُ الصحيح":"Correct ruling","وقتها اليوم":"Today's time",
+ "قبل الصلاة — فحصٌ بثلاثين ثانية":"Before prayer — a 30-second check",
+ "أربعُ نقاطٍ تقابلها بلمسةٍ قبل دخولك الصلاة، كلُّها من فقه الصلاة نفسه":"Four quick checks you tap through before entering prayer, all from the fiqh of Salah itself",
+ "افتح بوصلة القبلة":"Open the Qibla compass",
+ "صلواتي اليوم":"My prayers today",
+ "لمسةٌ واحدةٌ على كلِّ فريضةٍ عند أدائها، وسجلٌّ أسبوعيٌّ يرسم لك أيامك — كلُّه في جهازك حصرًا":"One tap marks each prayer when performed, with a weekly record of your days — stored on your device only",
+ "أدّيتُ الفروضَ الخمس":"I performed the five prayers",
+ "تقبّل الله منك — أذكار ما بعد السلام أدناه":"May Allah accept it — the post-salam adhkar are below",
+ "أذكار ما بعد السلام":"Adhkar after salam","أستغفر الله":"Astaghfirullah","تمّت ثلاثٌ — تقبّل الله":"Three done — may Allah accept",
+ "وضع السفر":"Travel mode","أنا مسافرٌ اليوم":"I am travelling today",
+ "القصر والجمع ميسّرًا بدليلهما":"Qasr and Jam' made easy, with their evidence",
+ "مرشد سجود السهو":"Sujud as-Sahw guide","نسيَتُ شيئًا":"I forgot something","زدتُ شيئًا":"I added something","شكّكتُ":"I am in doubt",
+ "منهج الزاوية وأمانتُها":"The method and its trustworthiness",
+ "النصوصُ الفقهيةُ في هذه الزاوية معروضةٌ بصلتها العربيةِ الأصلية حفاظًا على الدقة":"The fiqh texts in this section are shown in their authentic Arabic wording to preserve precision",
+ "استعددتَ قلبك للصلاة قبل الفريضة":"You prepared your heart for prayer before the obligation",
+ "ختمتَ كتابَ فقه الصلاة وفق منهجِه":"You completed the book of Salah fiqh by its method",
+ "فقه الصلاة":"Fiqh of Salah"
+};
+if(typeof TR!=='undefined')Object.assign(TR,TR_FIQH);
+
+/* ===== إعدادات المواقيت ===== */
+const PRAY_KEYS=['fajr','dhuhr','asr','maghrib','isha'];
+const PRAY_MN={fajr:'الفجر',dhuhr:'الظهر',asr:'العصر',maghrib:'المغرب',isha:'العشاء'};
+const PRAY_MN_EN={fajr:'Fajr',dhuhr:'Dhuhr',asr:'Asr',maghrib:'Maghrib',isha:'Isha'};
+const PRAY_METHODS=[
+ {k:'mwl',t:'رابطة العالم الإسلامي',fajr:18,isha:17},
+ {k:'umq',t:'أم القرى',fajr:18.5,ishaM:90},
+ {k:'egypt',t:'الهيئة المصرية العامة للمساحة',fajr:19.5,isha:17.5},
+ {k:'karachi',t:'جامعة العلوم الإسلامية بكراتشي',fajr:18,isha:18},
+ {k:'isna',t:'الجمعية الإسلامية لأمريكا الشمالية',fajr:15,isha:15}
+];
+const IQ_DEF={fajr:20,dhuhr:15,asr:15,maghrib:10,isha:15};
+if(!PRAY_METHODS.find(m=>m.k===S.prayMethod))S.prayMethod='mwl';
+if(S.prayAsr!=='hanafi')S.prayAsr='jamhur';
+if(S.pray24!=='h24')S.pray24='h12';
+if(!S.iqama||typeof S.iqama!=='object')S.iqama=Object.assign({},IQ_DEF);
+PRAY_KEYS.forEach(k=>{ const v=+S.iqama[k]; if(!isFinite(v)||v<0||v>180)S.iqama[k]=IQ_DEF[k]; });
+let PRAY_LOC=store.get('prayLoc',{lat:21.4225,lon:39.8262,label:'مكة المكرمة — افتراضيًا حتى تحدّد موضعك'});
+if(!isFinite(PRAY_LOC.lat)||!isFinite(PRAY_LOC.lon))PRAY_LOC={lat:21.4225,lon:39.8262,label:'مكة المكرمة — افتراضيًا حتى تحدّد موضعك'};
+
+/* ===== المحرك الفلكي (معلار الشمس المعياري: زوال + معادلة الوقت) ===== */
+function prayJD(y,m,d){ if(m<=2){y--;m+=12;} const A=Math.floor(y/100),B=2-A+Math.floor(A/4);
+ return Math.floor(365.25*(y+4716))+Math.floor(30.6001*(m+1))+d+B-1524.5; }
+function praySun(jd){
+ const D=jd-2451545.0,R=Math.PI/180;
+ const g=((357.529+0.98560028*D)%360+360)%360;
+ const q=((280.459+0.98564736*D)%360+360)%360;
+ const L=(((q+1.915*Math.sin(g*R)+0.020*Math.sin(2*g*R))%360)+360)%360;
+ const e=23.439-0.00000036*D;
+ const RA=Math.atan2(Math.cos(e*R)*Math.sin(L*R),Math.cos(L*R))/R/15;
+ const decl=Math.asin(Math.sin(e*R)*Math.sin(L*R))/R;
+ const eq=q/15-((RA%24)+24)%24;
+ return {decl:decl,eq:eq};
+}
+function prayT(h,decl,lat){ /* ساعاتٌ من الزوال حتى بلوغ ارتفاع h */
+ const arg=(Math.sin(h*Math.PI/180)-Math.sin(decl*Math.PI/180)*Math.sin(lat*Math.PI/180))/(Math.cos(decl*Math.PI/180)*Math.cos(lat*Math.PI/180));
+ if(arg<-1||arg>1)return NaN;
+ return Math.acos(arg)/(Math.PI/180)/15;
+}
+function prayTimesFor(date){
+ const meth=PRAY_METHODS.find(m=>m.k===S.prayMethod)||PRAY_METHODS[0];
+ const asrF=S.prayAsr==='hanafi'?2:1;
+ const sp=praySun(prayJD(date.getFullYear(),date.getMonth()+1,date.getDate()));
+ const tz=-date.getTimezoneOffset()/60;
+ /* الزوال: ١٢ − معادلة الوقت + المنطقة الزمنية − خط الطول ساعاتًا (المعيار كما في المراجع) */
+ const dhuhr=12+tz-PRAY_LOC.lon/15-sp.eq;
+ /* زوايا تحت الأفق تُمرَّر سالبة: الفجر والشروق والمغرب والعشاء؛ أما العصر فارتفاعٌ فوق الأفق */
+ const sunrise=dhuhr-prayT(-0.833,sp.decl,PRAY_LOC.lat);
+ const maghrib=dhuhr+prayT(-0.833,sp.decl,PRAY_LOC.lat);
+ let fajr=dhuhr-prayT(-meth.fajr,sp.decl,PRAY_LOC.lat);
+ let isha=(meth.ishaM!=null)?maghrib+meth.ishaM/60:dhuhr+prayT(-meth.isha,sp.decl,PRAY_LOC.lat);
+ /* حمايةُ خطوطِ العرضِ العليا: نصيبُ الليلِ بالزاوية */
+ if(isNaN(fajr)||isNaN(isha)){
+   const night=(24-maghrib)+sunrise;
+   if(isNaN(fajr))fajr=sunrise-night*meth.fajr/60;
+   if(isNaN(isha)&&meth.ishaM==null)isha=maghrib+night*meth.isha/60;
+ }
+ const asrA=Math.atan(1/(asrF+Math.tan(Math.abs(PRAY_LOC.lat-sp.decl)*Math.PI/180)))/(Math.PI/180);
+ let asr=dhuhr+prayT(asrA,sp.decl,PRAY_LOC.lat);
+ const cl=v=>(!isFinite(v)?v:((v%24)+24)%24);
+ return {fajr:cl(fajr),sunrise:cl(sunrise),dhuhr:cl(dhuhr),asr:cl(asr),maghrib:cl(maghrib),isha:cl(isha)};
+}
+function prayCompute(){
+ const d=new Date();
+ PRAY_TODAY={date:todayStr(),t:prayTimesFor(d)};
+}
+let PRAY_TODAY=null;
+
+/* ===== تنسيق الوقت ===== */
+function fmtT(h){
+ if(!isFinite(h))return '—';
+ let m=Math.round(h*60); m=((m%1440)+1440)%1440;
+ const hh=Math.floor(m/60),mm=m%60,Z=(LANG==='en'?'0':'٠');
+ const two=n=>String(n).length<2?Z+n:String(n);
+ if(S.pray24==='h24')return AR(hh).padStart(2,Z)+':'+AR(mm).padStart(2,Z);
+ const ap=hh<12?(LANG==='en'?' AM':' ص'):(LANG==='en'?' PM':' م');
+ return AR(((hh+11)%12)+1).padStart(2,Z)+':'+AR(mm).padStart(2,Z)+ap;
+}
+function fmtCount(sec){
+ if(!(sec>0))return T('حان وقت الصلاة');
+ const s=Math.floor(sec%60),m=Math.floor(sec/60)%60,h=Math.floor(sec/3600),Z=(LANG==='en'?'0':'٠');
+ const two=n=>String(n).length<2?Z+n:String(n);
+ if(h>0)return AR(h)+' '+T('س')+' '+AR(m).padStart(2,Z)+' '+T('د');
+ return (m>0?AR(m)+' '+T('د')+' ':'')+AR(s)+' '+T('ث');
+}
+if(typeof TR!=='undefined')Object.assign(TR,{'س':'h','د':'m','ث':'s'});
+
+/* ===== M1: بطاقة مواقيت اليوم ===== */
+function prayIqamaH(k,adhanH){ return ((adhanH*60+ +S.iqama[k])%1440+1440)%1440/60; }
+function prayBuildCells(){
+ const row=$('#prayRow'); if(!row)return;
+ row.innerHTML=PRAY_KEYS.map(k=>'<button type="button" class="pcell" data-pk="'+k+'"><b>'+T(PRAY_MN[k])+'</b><span class="pt">'+fmtT((PRAY_TODAY&&PRAY_TODAY.t)?PRAY_TODAY.t[k]:NaN)+'</span><span class="pi"></span></button>').join('');
+}
+function renderPrayCard(){
+ if(!PRAY_TODAY||PRAY_TODAY.date!==todayStr())prayCompute();
+ const locEl=$('#prayLocLink'); if(locEl)locEl.textContent=T('الموضع')+': '+PRAY_LOC.label+' — '+T('عدّل من الإعدادات');
+ prayBuildCells(); prayTick(true);
+}
+function prayTick(force){
+ if(document.hidden&&!force)return;
+ if(!PRAY_TODAY||PRAY_TODAY.date!==todayStr())prayCompute();
+ const now=new Date(),cur=now.getHours()+now.getMinutes()/60+now.getSeconds()/3600;
+ const t=PRAY_TODAY.t;
+ let nextK=null,nextH=0,tom=false;
+ for(let i=0;i<PRAY_KEYS.length;i++){ if(cur<t[PRAY_KEYS[i]]){nextK=PRAY_KEYS[i];nextH=t[PRAY_KEYS[i]];break;} }
+ if(!nextK){ const tm=new Date(now); tm.setDate(tm.getDate()+1); const t2=prayTimesFor(tm); nextK='fajr'; nextH=t2.fajr+24; tom=true; }
+ const iqH=prayIqamaH(nextK,t[nextK]);
+ /* عدّاد الصلاة القادمة */
+ const nameEl=$('#prayNext'),cntEl=$('#prayCount');
+ if(nameEl)nameEl.textContent=T(PRAY_MN[nextK])+(tom?' ('+T('غدًا')+')':'');
+ if(cntEl){
+   let line;
+   if(tom){ line=T('يتبقى')+' '+fmtCount((nextH-cur)*3600); }
+   else if(cur>=t[nextK]&&cur<iqH){ line=T('دخلت الصلاة')+' — '+T('الإقامة')+' '+fmtCount((iqH-cur)*3600); }
+   else if(cur>=t[nextK]){ line=T('حان وقت الصلاة')+' — '+T('الإقامة')+' '+fmtT(iqH); }
+   else{ line=T('يتبقى')+' '+fmtCount((nextH-cur)*3600); }
+   cntEl.textContent=line;
+ }
+ /* الخلايا: الوقت + الإقامة + إبراز القادمة */
+ $$('#prayRow .pcell').forEach(el=>{
+   const k=el.dataset.pk, on=k===nextK;
+   el.classList.toggle('on',on);
+   const pt=el.querySelector('.pt'),pi=el.querySelector('.pi');
+   if(pt)pt.textContent=fmtT(t[k]);
+   if(pi)pi.textContent=T('الإقامة')+' '+fmtT(prayIqamaH(k,t[k]));
+ });
+}
+let prayTimer=null;
+function prayStart(){ if(prayTimer)return; prayTimer=setInterval(()=>prayTick(false),1000);
+ document.addEventListener('visibilitychange',()=>{ if(!document.hidden)prayTick(true); }); }
+
+/* ===== نجمةٌ بلا تكرارٍ في اليوم نفسه ===== */
+function starOnce(k,label){
+ const ds=todayStr();
+ if(sky.some(s=>s.l===label&&s.d===ds))return;
+ addStar(k,label);
+}
+
+/* ===== T1: زاوية فقه العبادات — الأبواب ===== */
+let FIQH_READ=store.get('fiqhRead',[]);
+let FIQH_Q='';
+function fiqhEv(text,src,label){
+ return '<details class="fdoc"><summary>'+T(label||'الدليل')+'<svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9.5l6 6 6-6"/></svg></summary><div class="fdt">'+esc(text)+'</div><div class="fds">'+esc(src)+'</div></details>';
+}
+function fiqhTable(tt){
+ let h='<div class="ftab"><div class="ftr fth">'+tt.hd.map(x=>'<span>'+esc(x)+'</span>').join('')+'</div>';
+ tt.rows.forEach(r=>{ h+='<div class="ftr">'+r.map(x=>'<span>'+esc(x)+'</span>').join('')+'</div>'; });
+ return h+'</div>';
+}
+function fiqhChapterHtml(ch){
+ const read=FIQH_READ.indexOf(ch.id)>=0;
+ let h='<details class="fchap card'+(read?' fch-done':'')+'" data-ch="'+ch.id+'">';
+ h+='<summary><span class="fseal'+(read?' on':'')+'" data-seal="'+ch.id+'" role="button" aria-label="'+T('قرأتُ هذا الباب')+'"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7.5" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/></svg></span><span class="ftx"><b>'+esc(ch.t)+'</b><span class="fs">'+esc(ch.s)+'</span></span><svg class="fchev" viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9.5l6 6 6-6"/></svg></summary><div class="fbody">';
+ ch.body.forEach(b=>{
+   if(b.h)h+='<p class="fh">'+esc(b.h)+'</p>';
+   else if(b.p)h+='<p class="fp">'+esc(b.p)+'</p>';
+   else if(b.li)h+='<p class="fli">'+esc(b.li)+'</p>';
+   else if(b.ev)h+=fiqhEv(b.ev[0],b.ev[1]);
+   else if(b.err)h+='<div class="ferr"><b>'+T('الخطأ الشائع')+': '+esc(b.err[0])+'</b><span>'+T('الحكمُ الصحيح')+': '+esc(b.err[1])+'</span><span class="fers">'+T('الدليل')+': '+esc(b.err[2])+'</span></div>';
+   else if(b.tt)h+=fiqhTable(b.tt);
+ });
+ h+='</div></details>';
+ return h;
+}
+function fiqhSearchable(ch){
+ if(!ch._q)ch._q=(ch.t+' '+ch.s+' '+ch.body.map(b=>[b.h,b.p,b.li,b.ev?b.ev[0]+' '+b.ev[1]:'',b.err?b.err.join(' '):''].join(' ')).join(' ')).replace(/[\u064B-\u0652\u0670]/g,'');
+ return ch._q;
+}
+function fiqhRenderList(){
+ const box=$('#fiqChapters'); if(!box)return;
+ const q=FIQH_Q.trim().replace(/[\u064B-\u0652\u0670]/g,'');
+ const list=FIQH_CH.filter(ch=>!q||fiqhSearchable(ch).indexOf(q)>=0);
+ box.innerHTML=list.length?list.map(fiqhChapterHtml).join(''):'<p class="hint center" style="padding:10px">'+T('لا نتائج في الأبواب — جرّب كلمةً أخرى')+'</p>';
+}
+function fiqhRenderProgress(){
+ const n=FIQH_READ.length,t=FIQH_CH.length;
+ const txt=$('#fiqProgTxt'),bar=$('#fiqProgBar');
+ if(txt)txt.textContent=AR(n)+' / '+AR(t);
+ if(bar)bar.style.width=(t?Math.round(n/t*100):0)+'%';
+ if(n>=t)starOnce('ilm','ختمتَ كتابَ فقه الصلاة وفق منهجِه');
+}
+
+/* ===== T3: صلواتي اليوم ===== */
+function isTravel(){ const tr=store.get('travelDay',{date:'',on:0}); return !!(tr.on&&tr.date===todayStr()); }
+function fiqhRenderTrack(){
+ const box=$('#fiqTrackChips'),wk=$('#fiqWeek'); if(!box)return;
+ const log=store.get('salahLog',{}),ds=todayStr(),day=log[ds]||{};
+ const trav=isTravel(),t=(PRAY_TODAY&&PRAY_TODAY.date===ds)?PRAY_TODAY.t:null;
+ box.innerHTML=PRAY_KEYS.map(k=>{
+   const qasr=(trav&&k!=='fajr'&&k!=='maghrib')?'<i class="fq">'+T('ركعتان (قصر)')+'</i>':'';
+   return '<button type="button" class="fchip'+(day[k]?' on':'')+'" data-pray="'+k+'"><b>'+T(PRAY_MN[k])+'</b><span class="ft">'+T('وقتها اليوم')+': '+(t?fmtT(t[k]):'—')+'</span>'+qasr+'<i class="fck"><svg viewBox="0 0 24 24"><path d="M5 12.5l4.5 4.5L19 7.5" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/></svg></i></button>';
+ }).join('');
+ if(wk){
+   let h='';
+   for(let i=6;i>=0;i--){
+     const d=new Date(); d.setDate(d.getDate()-i);
+     const d2=todayStr().split('-'); const dd=new Date(+d2[0],+d2[1]-1,+d2[2]); dd.setDate(dd.getDate()-i);
+     const dds=dd.getFullYear()+'-'+String(dd.getMonth()+1).padStart(2,'0')+'-'+String(dd.getDate()).padStart(2,'0');
+     const day2=log[dds]||{};
+     const dots=PRAY_KEYS.map(k=>'<i class="'+(day2[k]?'on':'')+'"></i>').join('');
+     h+='<div class="fwrow"><span class="fwd">'+esc(String(WEEKDAYS[dd.getDay()]).slice(0,3))+(i===0?' —':'')+'</span><span class="fwdots">'+dots+'</span></div>';
+   }
+   wk.innerHTML=h;
+ }
+}
+function fiqhTapPray(k){
+ const log=store.get('salahLog',{});
+ const ds=todayStr(); if(!log[ds])log[ds]=Object.create(null);
+ log[ds][k]=log[ds][k]?0:1;
+ /* التقويم الأسبوعي يحفظ آخر ١٤ يومًا فقط */
+ const keys=Object.keys(log).sort(); while(keys.length>14){ delete log[keys.shift()]; }
+ store.set('salahLog',log);
+ if(log[ds][k]){ tapS(); vib(20); toast(T('تقبّل الله منك — أذكار ما بعد السلام أدناه'));
+   if(PRAY_KEYS.every(x=>log[ds][x]))starOnce('salah','أدّيتُ الفروضَ الخمس'); }
+ fiqhRenderTrack();
+}
+
+/* ===== T2: قبل الصلاة ===== */
+function fiqhPreState(){ const st=store.get('preSalah',{date:'',c:[]}); if(st.date!==todayStr())return{date:todayStr(),c:[0,0,0,0]}; return st; }
+function fiqhRenderPre(){
+ const box=$('#fiqPreList'); if(!box)return;
+ const st=fiqhPreState();
+ box.innerHTML=FIQH_PRE.map((it,i)=>'<div class="fcheck'+(st.c[i]?' on':'')+'"><button type="button" data-pre="'+i+'" aria-label="تحقق"><svg viewBox="0 0 24 24"><path d="M5 12.5l4.5 4.5L19 7.5" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/></svg></button><div><b>'+esc(it.q)+'</b><span>'+esc(it.s)+'</span></div></div>').join('');
+}
+function fiqhTapPre(i){
+ const st=fiqhPreState(); st.c[i]=st.c[i]?0:1; store.set('preSalah',st);
+ if(st.c.every(x=>x)){ tapS(); vib([30,40,30]); starOnce('salah','استعددتَ قلبك للصلاة قبل الفريضة'); toast(T('قلبٌ مستعدٌّ لفرضك — تقبّل الله')); }
+ else tapS();
+ fiqhRenderPre();
+}
+
+/* ===== T4: وضع السفر ===== */
+function fiqhRenderTravel(){
+ const btn=$('#fiqTravelBtn'),txt=$('#fiqTravelState'); if(!btn)return;
+ const on=isTravel();
+ btn.classList.toggle('on',on); btn.setAttribute('aria-pressed',on?'true':'false');
+ if(txt)txt.textContent=on?T('وضع السفر مفعّل اليوم — فاقتصر على ركعتين في الفوارض الأربعة، واجمع إن احتجت'):T('أنا مسافرٌ اليوم');
+}
+function fiqhToggleTravel(){
+ const tr=store.get('travelDay',{date:'',on:0});
+ const on=isTravel();
+ store.set('travelDay',{date:todayStr(),on:on?0:1});
+ tapS(); vib(25);
+ if(!on)toast(T('وضع السفر مفعّل اليوم — فاقتصر على ركعتين في الفوارض الأربعة، واجمع إن احتجت'));
+ else toast(T('عُدتَ مقيمًا — أتمّ فروضك بركعاتها كاملة'));
+ fiqhRenderTravel(); fiqhRenderTrack();
+}
+
+/* ===== T6: أذكار ما بعد السلام ===== */
+let fiqIsti3far=0;
+function fiqhRenderAzkar(){
+ const box=$('#fiqAzkarList'); if(!box)return;
+ const dots='<span class="fdots">'+[0,1,2].map(i=>'<i class="'+(i<fiqIsti3far?'on':'')+'"></i>').join('')+'</span>';
+ box.innerHTML=FIQH_AZKAR.map(a=>'<div class="fazkar"><b>'+esc(a.t)+'</b><p class="faz">'+esc(a.z)+'</p><span class="fds2">'+esc(a.s)+'</span></div>').join('')
+  +'<div class="fstg"><button type="button" id="fiqIstBtn" class="fchip big'+(fiqIsti3far>=3?' done':'')+'">'+T('أستغفر الله')+'</button>'+dots+'</div>';
+ const b=$('#fiqIstBtn'); if(b)b.addEventListener('click',()=>{
+   if(fiqIsti3far>=3){ fiqIsti3far=0; } else { fiqIsti3far++; tapS(); vib(15); }
+   if(fiqIsti3far===3){ vib([30,40,30]); toast(T('تمّت ثلاثٌ — تقبّل الله')); }
+   fiqhRenderAzkar();
+ });
+}
+
+/* ===== T7: مرشد سجود السهو ===== */
+function fiqhRenderSeh(k){
+ const box=$('#fiqSehResult'); if(!box)return;
+ const g=FIQH_SEH.find(x=>x.k===k);
+ if(!g){ box.innerHTML=''; box.hidden=true; return; }
+ $$('#fiqSehBtns .fchip').forEach(b=>b.classList.toggle('on',b.dataset.seh===k));
+ box.hidden=false;
+ box.innerHTML='<b>'+esc(g.r)+'</b><p>'+esc(g.x)+'</p>'+(g.ev?fiqhEv(g.ev[0],g.ev[1]):'');
+}
+
+/* ===== منهج الزاوية ===== */
+function fiqhRenderManhaj(){
+ const box=$('#fiqManhajBody'); if(!box)return;
+ box.innerHTML='<p class="fp">'+esc(FIQH_MANHAJ.p1)+'</p><p class="fp">'+esc(FIQH_MANHAJ.p2)+'</p><p class="fp">'+esc(FIQH_MANHAJ.p3)+'</p><p class="fp">'+esc(FIQH_MANHAJ.p4)+'</p>';
+}
+
+/* ===== البناء والربط (مرةً واحدة) ===== */
+let fiqhShellBuilt=false;
+function buildFiqhShell(){
+ if(fiqhShellBuilt)return; fiqhShellBuilt=true;
+ fiqhRenderManhaj();
+ const q=$('#fiqQ');
+ if(q)q.addEventListener('input',()=>{ FIQH_Q=q.value; fiqhRenderList(); });
+ /* تفويضُ أحداثٍ موحَّد (P4 — قالبٌ تدريجيٌّ يبدأ من هذه الزاوية) */
+ const sc=$('#screen-fiqh');
+ if(sc)sc.addEventListener('click',e=>{
+   const seal=e.target.closest('[data-seal]');
+   if(seal){ e.preventDefault(); e.stopPropagation(); fiqhToggleSeal(seal.dataset.seal); return; }
+   const pray=e.target.closest('[data-pray]');
+   if(pray){ fiqhTapPray(pray.dataset.pray); return; }
+   const pre=e.target.closest('[data-pre]');
+   if(pre){ fiqhTapPre(+pre.dataset.pre); return; }
+   const trb=e.target.closest('#fiqTravelBtn');
+   if(trb){ fiqhToggleTravel(); return; }
+   const qib=e.target.closest('#fiqQiblaBtn');
+   if(qib){ openTool('qibla'); return; }
+   const seh=e.target.closest('[data-seh]');
+   if(seh){ fiqhRenderSeh(seh.dataset.seh); return; }
+ });
+}
+function fiqhToggleSeal(id){
+ const ch=FIQH_CH.find(x=>x.id===id); if(!ch)return;
+ const i=FIQH_READ.indexOf(id);
+ if(i>=0){ FIQH_READ.splice(i,1); }
+ else{
+   FIQH_READ.push(id);
+   const nm=String(ch.t).includes(': ')?ch.t.split(': ').slice(1).join(': '):ch.t;
+   addStar('ilm',T('فقه الصلاة')+': '+nm.slice(0,40));
+   tapS(); vib(25); toast(T('قرأتُ هذا الباب')+' — '+T('أضاءت نجمةُ علمٍ في سمائك'));
+ }
+ store.set('fiqhRead',FIQH_READ);
+ fiqhRenderProgress(); fiqhRenderList();
+}
+/* renderFiqh — تُستدعى من go() وعند تبديل اللغة */
+function renderFiqh(){
+ if(!$('#screen-fiqh'))return;
+ buildFiqhShell();
+ fiqhRenderProgress(); fiqhRenderList();
+ fiqhRenderTrack(); fiqhRenderPre(); fiqhRenderTravel(); fiqhRenderAzkar();
+ fiqhRenderSeh(null);
+}
+
+/* ===== M2: وضع القراءة A− / A+ (أربع درجات: صغير/متوسط/كبير/أكبر) ===== */
+const FONT_SEQ=['s','m','l','xl'];
+function fontStep(dir){
+ const i=FONT_SEQ.indexOf(S.fontScale),n=Math.min(FONT_SEQ.length-1,Math.max(0,(i<0?1:i)+dir));
+ S.fontScale=FONT_SEQ[n]; saveS();
+ if(typeof applyFont==='function')applyFont();
+ $$('#segFont button').forEach((b,j)=>b.classList.toggle('on',j===n));
+ tapS();
+}
+document.addEventListener('click',e=>{
+ if(e.target.closest('.fontplus')){ fontStep(1); }
+ else if(e.target.closest('.fontminus')){ fontStep(-1); }
+ else if(e.target.closest('#prayGear')){ go('settings'); setTimeout(()=>{ const c=$('#praySetCard'); if(c&&c.scrollIntoView)c.scrollIntoView({block:'start'}); },120); }
+ else if(e.target.closest('#prayLocLink')){ go('settings'); }
+});
+
+/* ===== M3: دخولٌ متتابعٌ ناعمٌ للبطاقات (بدايةٌ غير صفرية مراعاةً لعلة WebKit) ===== */
+function staggerScreen(id){
+ try{
+  if(window.matchMedia&&matchMedia('(prefers-reduced-motion: reduce)').matches)return;
+  const sc=$('#screen-'+id); if(!sc)return;
+  const els=sc.querySelectorAll(':scope > *');
+  let n=0;
+  els.forEach(el=>{
+    if(n>=13)return;
+    if(!el.classList.contains('card')&&!el.classList.contains('feat')&&!el.classList.contains('grid2')&&!el.classList.contains('ticker')&&!el.classList.contains('greet')&&!el.classList.contains('sh')&&!el.classList.contains('praycard')&&!el.classList.contains('quote')&&!el.classList.contains('stats')&&!el.classList.contains('calfold')&&!el.classList.contains('dayhead')&&!el.classList.contains('fiqsearch')&&el.id!=='fiqChapters')return;
+    el.classList.remove('stagger'); void el.offsetWidth;
+    el.style.animationDelay=(n*40)+'ms';
+    el.classList.add('stagger'); n++;
+    el.addEventListener('animationend',()=>{ el.classList.remove('stagger'); el.style.animationDelay=''; },{once:true});
+  });
+ }catch(e){}
+}
+
+/* ===== M4: إغلاق جلسة الخشوع بالسحب (على الشريطين، بلا مساسٍ بالعدّاد ولا بالنبضة) ===== */
+function khuSwipeInit(){
+ if(document.body.dataset.khuSwipe)return; document.body.dataset.khuSwipe='1';
+ ['#khushuVeil .khu-top','#khushuVeil .khu-foot'].forEach(sel=>{
+  const bar=document.querySelector(sel); if(!bar)return;
+  bar.style.touchAction='none';
+  let sy=0,dy=0,drag=false;
+  bar.addEventListener('pointerdown',e=>{ if(e.target.closest('button'))return; drag=true; sy=e.clientY; dy=0; });
+  bar.addEventListener('pointermove',e=>{ if(!drag)return; dy=e.clientY-sy;
+    if(dy>0){ const targets=document.querySelectorAll('#khushuVeil .khu-mid,#khushuVeil .khu-foot');
+      targets.forEach(el=>{ el.style.transition='none'; el.style.transform='translateY('+(dy*.5).toFixed(1)+'px)'; }); } });
+  const end=()=>{ if(!drag)return; drag=false;
+    document.querySelectorAll('#khushuVeil .khu-mid,#khushuVeil .khu-foot').forEach(el=>{ el.style.transition=''; el.style.transform=''; });
+    if(dy>110){ try{ closeKhushu(); }catch(err){} } dy=0; };
+  bar.addEventListener('pointerup',end); bar.addEventListener('pointercancel',end);
+ });
+}
+
+/* ===== إعدادات المواقيت في الإعدادات ===== */
+function bindPraySettings(){
+ const geo=$('#prayGeoBtn');
+ if(geo)geo.addEventListener('click',()=>{
+   if(!navigator.geolocation){ toast(T('متصفحك لا يدعم تحديد الموضع')); return; }
+   toast(T('نحدد موضعك الآن…'));
+   navigator.geolocation.getCurrentPosition(pos=>{
+     PRAY_LOC={lat:+pos.coords.latitude.toFixed(4),lon:+pos.coords.longitude.toFixed(4),label:T('موضعك الحالي (مُحدَّد تلقائيًا)')};
+     store.set('prayLoc',PRAY_LOC); saveS();
+     prayCompute(); renderPrayCard(); prayPaintInputs();
+     tapS(); toast(T('حُفظ موضعك في جهازك وحده — تُحسب المواقيت منه محليًا'));
+   },()=>toast(T('تعذّر تحديد الموضع — تحقّق من إذن الموقع ثم أعد المحاولة')),{timeout:12000,maximumAge:600000});
+ });
+ const ap=$('#prayLocApply');
+ if(ap)ap.addEventListener('click',()=>{
+   const la=+($('#prayLat')||{}).value,lo=+($('#prayLon')||{}).value;
+   if(!isFinite(la)||!isFinite(lo)||la<-90||la>90||lo<-180||lo>180){ toast(T('أدخل إحداثياتٍ صحيحة: خط عرضٍ من -90 إلى 90 وخط طولٍ من -180 إلى 180')); return; }
+   PRAY_LOC={lat:la,lon:lo,label:T('إحداثياتك المُدخلة يدويًا')};
+   store.set('prayLoc',PRAY_LOC);
+   prayCompute(); renderPrayCard(); tapS(); toast(T('حُفظت الإحداثيات — تُحسب المواقيت منها محليًا'));
+ });
+ if(typeof bindSeg==='function'){
+   bindSeg('#segPrayMethod',PRAY_METHODS.map(m=>m.k),'prayMethod',()=>{ prayCompute(); renderPrayCard(); });
+   bindSeg('#segPrayAsr',['jamhur','hanafi'],'prayAsr',()=>{ prayCompute(); renderPrayCard(); });
+   bindSeg('#segPray24',['h12','h24'],'pray24',()=>{ renderPrayCard(); });
+ }
+ PRAY_KEYS.forEach(k=>{
+   const inp=$('#iq_'+k); if(!inp)return;
+   inp.value=S.iqama[k];
+   inp.addEventListener('change',()=>{
+     let v=+inp.value; if(!isFinite(v))v=IQ_DEF[k]; v=Math.min(180,Math.max(0,Math.round(v)));
+     inp.value=v; S.iqama[k]=v; saveS(); renderPrayCard();
+   });
+ });
+ prayPaintInputs();
+}
+function prayPaintInputs(){
+ const la=$('#prayLat'),lo=$('#prayLon'),lbl=$('#prayLocLbl');
+ if(la)la.value=PRAY_LOC.lat; if(lo)lo.value=PRAY_LOC.lon;
+ if(lbl)lbl.textContent=T('الموضع')+': '+PRAY_LOC.label;
+}
+
+/* ===== إقلاع الوحدة ===== */
+if(typeof TR!=='undefined')Object.assign(TR,{
+ "ركعتان (قصر)":"Two rak'ahs (qasr)",
+ "وضع السفر مفعّل اليوم — فاقتصر على ركعتين في الفوارض الأربعة، واجمع إن احتجت":"Travel mode is on today — shorten the four-rak'ah prayers to two, and join if needed",
+ "عُدتَ مقيمًا — أتمّ فروضك بركعاتها كاملة":"You are resident again — complete your prayers in full",
+ "قلبٌ مستعدٌّ لفرضك — تقبّل الله":"A heart prepared for the obligation — may Allah accept",
+ "أضاءت نجمةُ علمٍ في سمائك":"a star of knowledge lit up in your sky",
+ "متصفحك لا يدعم تحديد الموضع":"Your browser does not support geolocation",
+ "نحدد موضعك الآن…":"Detecting your location…",
+ "موضعك الحالي (مُحدَّد تلقائيًا)":"Your current location (auto-detected)",
+ "إحداثياتك المُدخلة يدويًا":"Your manually entered coordinates",
+ "حُفظ موضعك في جهازك وحده — تُحسب المواقيت منه محليًا":"Your location was saved on your device only — times are computed locally from it",
+ "تعذّر تحديد الموضع — تحقّق من إذن الموقع ثم أعد المحاولة":"Could not detect location — check the permission and try again",
+ "أدخل إحداثياتٍ صحيحة: خط عرضٍ من -90 إلى 90 وخط طولٍ من -180 إلى 180":"Enter valid coordinates: latitude from -90 to 90 and longitude from -180 to 180",
+ "حُفظت الإحداثيات — تُحسب المواقيت منها محليًا":"Coordinates saved — times are computed locally from them"
+});
+
+function fiqhInit(){
+ if(document.body.dataset.fiqhInit)return; document.body.dataset.fiqhInit='1';
+ buildFiqhShell();
+ bindPraySettings();
+ khuSwipeInit();
+ prayCompute();
+ if($('#prayRow')){ prayBuildCells(); }
+ renderPrayCard();
+ prayStart();
+ /* لو كان آخر شاشةٍ محفوظةٍ هي فقه العبادات فشُغِّلت قبل تحميل هذه الوحدة */
+ if($('#screen-fiqh')&&$('#screen-fiqh').classList.contains('active'))renderFiqh();
+}
+fiqhInit();
 
 </script>
 </body>
