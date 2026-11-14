@@ -488,6 +488,34 @@ details.doc .body b{color:var(--gold2)}
 .azkdone svg{width:14px;height:14px}
 .azknote{border:1px solid var(--line);border-radius:16px;background:var(--bg2);padding:12px 14px;margin-top:14px;font-size:.72rem;color:var(--muted);line-height:2.1}
 .azknote b{color:var(--gold2)}
+/* --- سماء الخير الغامرة (v3.8.0): منظرٌ ملء الشاشة تلامس فيه النجوم الأرض --- */
+.skyveil{position:fixed;inset:0;z-index:82;background:#04070f;transform:translateY(103%);transition:transform .45s cubic-bezier(.22,1,.36,1);display:flex;flex-direction:column;overflow:hidden}
+.skyveil.show{transform:translateY(0)}
+#skyCanvas{position:absolute;inset:0;width:100%;height:100%;display:block}
+.skyhud{position:relative;z-index:2;display:flex;align-items:center;gap:10px;padding:calc(14px + env(safe-area-inset-top,0px)) 16px 8px}
+.skyhud .sktitle{display:flex;flex-direction:column;gap:2px;flex:1;min-width:0}
+.skyhud .sktitle b{font-size:1.02rem;color:#f2d992}
+.skyhud .sktitle span{font-size:.68rem;color:#9db2cc}
+.skyhud .card-x{width:40px;height:40px;border-radius:12px;border:1px solid rgba(242,217,146,.32);background:rgba(255,255,255,.06);color:#f2d992;display:grid;place-items:center;cursor:pointer;flex:none}
+.skyhud .card-x svg{width:19px;height:19px}
+.skychip{position:absolute;z-index:3;top:calc(66px + env(safe-area-inset-top,0px));left:50%;transform:translateX(-50%) translateY(-6px);background:rgba(10,22,40,.9);border:1px solid rgba(242,217,146,.4);color:#f2d992;font-size:.74rem;font-weight:800;padding:7px 14px;border-radius:99px;opacity:0;transition:opacity .35s,transform .35s;pointer-events:none;max-width:86vw;text-align:center}
+.skychip.show{opacity:1;transform:translateX(-50%) translateY(0)}
+.skyverse{position:relative;z-index:2;margin:auto 18px calc(110px + env(safe-area-inset-bottom,0px));text-align:center;opacity:0;transition:opacity 1.5s ease;pointer-events:none}
+.skyverse.show{opacity:1}
+.skyverse .qv{font-family:var(--f-read);font-size:1.26rem;line-height:2.35;color:#f2d992;text-shadow:0 2px 18px rgba(0,0,0,.65)}
+.skyverse .qs{display:inline-block;margin-top:9px;font-size:.7rem;color:#c9b8ff;font-weight:800;border:1px solid rgba(201,184,255,.35);border-radius:99px;padding:4px 12px;background:rgba(10,20,40,.55)}
+/* --- خطوط التقدم في تقرير السماء (v3.8.0) --- */
+.skypg{margin-top:10px;border:1px solid var(--line);border-radius:14px;padding:11px 13px;background:var(--bg2)}
+.skypg .pgt{font-size:.78rem;font-weight:800;color:var(--gold2);margin-bottom:2px}
+.pgrow{display:flex;align-items:center;gap:9px;margin-top:8px;font-size:.66rem;color:var(--muted);font-weight:700}
+.pgrow b{color:var(--ink);font-size:.7rem;flex:none;width:104px}
+.pgrow .prtrack{flex:1;height:5px;border-radius:99px;background:var(--line);overflow:hidden}
+.pgrow .prfill{display:block;height:100%;border-radius:99px;background:linear-gradient(90deg,var(--gold),var(--gold2))}
+.pgrow .prn{flex:none;min-width:74px;text-align:left;font-size:.62rem;font-family:var(--f-read)}
+.skymini{display:flex;align-items:flex-end;gap:2.5px;height:46px;margin-top:11px;padding:7px 9px 5px;border-radius:10px;background:var(--bg2);border:1px solid var(--line)}
+.skymini i{flex:1;border-radius:3px 3px 0 0;background:linear-gradient(180deg,var(--gold2),var(--gold));min-height:3px;opacity:.8;transition:height .3s}
+.skymini i.today{background:linear-gradient(180deg,#7fe0a8,#2fae86);opacity:1}
+.skymeta{display:flex;justify-content:space-between;font-size:.6rem;color:var(--muted);margin-top:6px}
 /* بطاقة أذكار الرئيسية (v3.7.0): تستيقظ مع وقت الورد */
 .azkfeat .azkbadge{margin-inline-start:auto;flex:none}
 /* --- التقويم المطوي في الرئيسية وشاشة التقويم المستقلة (v2.3.0) --- */
@@ -1396,6 +1424,7 @@ button.pray-loc{background:none;border:none;font-family:var(--f-ui)}
     </details>
     <details class="doc">
       <summary>سجل الإصدار</summary>
+      <div class="body"><b>v3.8.0</b> — «السماءُ تلامسُ الأرض»: صارت سماءُ الخيرِ تجربةً كاملةً بمنظرٍ ملءِ الشاشة: تفتحُ بلمسةٍ من تقريرها فتزحفُ سماءٌ ليليةٌ عميقةٌ من أسفلِ الشاشة، فيها نجومُ أعمالِك بمواضعِها الثابتة وألوانِ أعمالِها تومضُ وتتنفسُ، وهلالٌ هادئٌ في أرجائها، وشهبٌ ذهبيةٌ تعبرُ كلَّ قليلٍ، وتلالٌ معتمةٌ في أسفلها تلامسُ النجومُ أطرافَها كأنَّ الخيرَ أنزلَ من السماءِ إلى الأرض، وفي صدرِ المنظر تتوالى آياتٌ من كتابِ اللهِ تُنيرُ محبةَ اللهِ ورحمتَه لعبادِه المؤمنينَ وثوابَ عبادِه الصالحينَ وتختفيُ بتأنٍّ كأنَّك في عالمٍ من الخيالِ البديع — ونقرةُ إصبعك على أيِّ نجمةٍ تُري لك أيَّ عملٍ أضاءها بنبضةٍ ذهبيةٍ ورسالةٍ لطيفة، وتحترمُ المنظرُ خيارَ «تقليل الحركة» فتستقرُ حينئذٍ بلا وميضٍ ولا شهب؛ وأضافَ تقريرُ السماءَ «خطَّ تقدُّمِك»: خطوطٌ حيَّةٌ أمام أعمالِك تُري اليومَ مقابلَ أفضلِ أيامِك، وأسبوعَك مقابلَ أفضلِ أسابيعِك، ومخططَ آخرَ أربعةَ عشرَ يومًا بعامودٍ أخضرٍ لليوم — فالتقدُّمُ يُرى ولا يُحتسبُ رقمًا فقط.</div>
       <div class="body"><b>v3.7.0</b> — «وردُ الصباح والمساء»: جُمِّعت عزيمةُ اليومَ في قائمةٍ منسدلةٍ تفتحُ لتختار وتغلقُ فتسعَ مساحةُ الشاشةِ لبقيةِ النور، وهدِيت زاويةُ «أذكار الصباح والمساء»: ورديتان موثَّقتان من الصحيحين والسنن المصنَّفة صحيحًا أو حسنًا عند أهل السنة والجماعة — ولم يُدرج ذكرٌ ضعيفُ الإسناد — ببطاقاتٍ تُعدُّ بلمسةٍ مع شريطِ تقدُّمٍ لكل ذكر، ويُصفَّر العدُّ تلقائيًا كلَّ يومٍ ويُحفظ تقدُّمُك في جهازك؛ وبطاقةٌ على الرئيسية تستيقظُ مع دخولِ وقتِ الورد: أذكارُ الصباحِ من الفجر، وأذكارُ المساءِ من العصر، فتُري كم أتممتَ وتفتحُ الوردياتِ بنقرة؛ ومن أتمَّ وردًا كاملًا أضاءت له نجمةُ ذكرٍ في سماء الخير، وسلسلةُ أتمامِ الورديتين معًا تنمو كلَّ يومٍ اتصل فيهما — بنفسِ خفّةِ اللمسِ وبلا مساسٍ ببياناتك.</div>
       <div class="body"><b>v3.6.0</b> — «مواقيت النور وفقهُ العبادات» أكبرُ إصدارٍ في رحلة نور، بأربعِ هداياٍ كبرى: <b>(١) مواقيتُ الصلاةِ الخمسِ بلا إنترنت</b> — محركٌ فلكيٌّ محليٌّ يعمل في جهازك بمواضيع الشمس المعيارية بلا أي خدمةٍ خارجيةٍ ولا إرسالٍ لموضعك، تختار طريقةَ الحساب (رابطة العالم الإسلامي، أم القرى، الهيئة المصرية، كراتشي، أمريكا الشمالية) ومذهبَ العصر (جمهور: شافعي/مالكي/حنبلي — أو حنفي)، وتضبط وقتَ الإقامةِ بعد الأذان لكل صلاةٍ على عادة مسجدك، ويدخل موضعُك بلمسةٍ من الإعدادات أو بإحداثياتٍ يدوية؛ وبطاقة «مواقيت اليوم» في صدر الرئيسية تُبرز الصلاةَ القادمةَ بعدّادٍ حيٍّ وخمسِ خاناتٍ بأوقات اليوم وإقامتها. <b>(٢) زاويةُ «فقه العبادات» ببابِ الصلاة</b> — كتابٌ ميسّرٌ مسندٌ من اثني عشرَ بابًا: الفضل، والأوقات، والشروط، والأركانِ الأربعةَ عشرَ، والواجباتِ الثماني وسجود السهو، والسنن، والمكروهات، والمبطلات، ونصُّ التشهد والصلاة الإبراهيمية وأذكار السلام، وأحدَ عشرَ خطأً شائعًا بتصحيحها، وكيف أصلي وفق السنةِ خطوةً خطوة، وأسئلةٌ سريعة — كلُّ دليلٍ بطاقةٌ قابلةٌ للطي بمصدره ورقمه، وبحثٌ سريعٌ في الأبواب، وخاتمُ قراءةٍ ذهبيٌّ لكل بابٍ يضيء نجمةَ علمٍ في سماء الخير ويكمل قرص تقدّمك نحو ختمةِ الكتاب. <b>(٣) أدواتٌ تخدم الفريضة</b> — «قبل الصلاة» فحصٌ بثلاثين ثانية يفتح بوصلةَ القبلة مباشرة، و«صلواتي اليوم» خمسُ خاناتٍ تُضاء بلمسةٍ وسجلٌّ أسبوعيٌّ خاصٌّ بك لا يراه أحد، و«أذكار ما بعد السلام» المسندة بعدّاد الاستغفار الثلاثي، و«مرشد سجود السهو» بأسئلته الثلاثة وأمثلتها العملية، و«وضع السفر» يبسّط القصرَ والجمعَ بدليلهما ويُظهر ركعاتِ القصر في «صلواتي اليوم». <b>(٤) تسهيلاتٌ وجمالٌ</b> — وضعُ القراءة A−/A+ بأربع درجاتٍ في الإعدادات وفي شاشات القراءة والزاوية، ودخولٌ متتابعٌ ناعمٌ للبطاقات يحترم خيار «تقليل الحركة»، وإغلاقُ جلسة الخشوع بالسحب نحو الأسفل من شريطيها العلوِّ والسفلي بلا مساسٍ بالنبضة ولا بالعدّاد، وتسريعُ الفتحِ بإجازة رسم ما دون مجال الرؤية، وتنحيفُ خطوط التحميل إلى الأوزان المستعملة فعلًا فأولُ فتحةٍ أسرع بلا أدنى تأثيرٍ في جودة الخط، وكاشُ التثبيتِ يُسمَّى باسم الإصدار (noor-v3.6.0) فيُنقّى القديم تلقائيًا — وكلُّ ذلك بلا مساسٍ ببياناتك: مهامُك وتسبيحُك ونجومُك وأذكارُك كما هي، وكلُّ الميزاتِ الجديدةِ مفاتيحُها مستقلةٌ في جهازك.
 <br/><br/><b>v3.5.3</b> — «النبضُ يصل»: عولج غيابُ نبضةِ النورِ على أجهزةِ الآيفونِ: كان محرّكُ WebKit يمتنعُ عن رسمِ عنصرٍ تبدأُ حركتُه من الصفرِ المطلقِ وهو علةٌ معروفة، فأعدنا بناءَ النبضةِ بمحرّكِ الحركةِ البرمجيِّ المباشرِ «Web Animations» مع بديلٍ تلقائيٍّ إذا غاب، ولم تعد تبدأُ من العدمِ — وإن بقيتْ غائبةً بعدَ هذا فافحصْ خيارَ «تقليلِ الحركة» في: الإعدادات > إتاحة > الحركة، فإنه يوقفُ مؤثراتِ الجلسةِ عمدًا احترامًا لراحتك.<br/><br/><b>v3.5.2</b> — «سكينةُ الخشوع»: استُكمِلت جلسةُ الذكرِ بملءِ الشاشة: عولجت مساحةُ أعلى الشاشةِ على الآيفونِ فبدأَ المحتوىُ تحتَ النيشِ والساعةِ بمساحةٍ آمنةٍ مرتّبةٍ لا يعلوها شيء، وأُضيفت نبضةُ نورٍ ذهبيةٌ تملأُ الشاشةَ من موضعِ إصبعك عند كلِّ ضغطةٍ فيتنفّسُ الذكرُ معك ويحيي قلبك، مع انتقالٍ ناعمٍ لدخولِ الجلسةِ وعدّادٍ ينبضُ خفوتًا مع كلِّ تسبيحةٍ — جلسةٌ أوصفَ للعينِ وأحضرَ للقلب.<br/><br/><b>v3.5.1</b> — «تصحيحُ البوصلة»: عولج انحرافُ البوصلةِ الحيّةِ على أندرويد فصارت دقيقةً كالآيفون بإذن الله — كان المتصفحُ على أندرويد يمنح زاويةَ دورانٍ نسبيةً تزلّف وتنحرف، وصارت القراءةُ الآن من الحسّاسِ المغناطيسيِّ المطلقِ المرجعيِّ إلى الشمالِ الحقيقيِّ «deviceorientationabsolute» مع إبقاءِ قراءةِ الآيفونِ الأدقَّ كما هي؛ وإن اضطربَ حسّاسُ جهازك تظهر لك رسالةُ معايرةٍ واحدةٌ: أبعدِ الجهازَ عن المعادنِ والغلافِ المغناطيسيِّ وحرّكه في الهواءِ على شكلِ رقمِ ٨ ثم اجعله أفقيًّا — فتصحُّ البوصلةُ.<br/><br/><b>v3.5.0</b> — «نورٌ بلسانين» يَنطقُ التطبيقُ بلغتين: بطاقةُ «اللغة» أولُ بطاقاتِ الإعداداتِ تُبدِّلُ الواجهةَ كلَّها بين العربيةِ وEnglish بلمسةٍ فورية — عناوينُ وأزرارٌ وشروحُ أسماءِ اللهِ الحسنى وبطاقاتُ النورِ المئةُ بأدلَّتِها وأدعيتِها ومصادرِها وكلُّ أدواتِ نورِ اليومِ والتقويمِ والمناسباتِ لها ترجمةٌ إنجليزيةٌ دقيقةٌ محقَّقة، مع حمايةٍ صارمةٍ للأصلِ العربيِّ المقدَّس: الآيةُ والحديثُ والدعاءُ والاسمُ العربيُّ لا يُمسُّ أبدًا وتُعرَضُ الترجمةُ تحته مباشرةً، والأرقامُ والأشهرُ والأيامُ تتبدَّلُ باللغةِ والاتجاهُ ينعكسُ كاملًا ويعودُ كلُّ شيءٍ لعربيَّتِهِ حرفيًّا عند الرجوع؛ وصار بالإمكانِ تخصيصُ بطاقةِ التهنئةِ بشاشةٍ كاملة: زرُ «تخصيص» يفتحُ عشرَ لوحاتِ ألوانٍ (خمسٌ للصباحِ وخمسٌ للمساء) وأربعةَ خطوطٍ (كوفي/نسخ/رقعة/عصري) وخيارَ «بكلماتي» لكتابةِ تهنئتكِ بعدِّادِ أحرفٍ وتحريرَ السطرينِ الختاميينَ ومعاينةً حيَّةً تتحدَّثُ فورًا مع كلِّ لمسةٍ وكلَّها محفوظةٌ على جهازك؛ وصار نور يُثبَّتُ تطبيقًا مجانًا على الأندرويدِ من كرومِ بأيقونةِ نورِ ويعملُ بلا إنترنتٍ بعدَ أولِ فتحةٍ عبرِ ملفَّي التثبيتِ الجديدين، والآيفونُ يضيفُهُ للشاشةِ الرئيسيةِ بأيقونةٍ رسميةٍ جديدةٍ من شعارِ نورِ نفسِه.<br/><br/><b>v3.4.0</b> — «لمعانُ السماء وقُبلةُ القلوب» تحسيناتُ جمالٍ ووضوحٍ طلبتَها بأدقِّ التفاصيل: نجومُ سماءِ الخير صارت نقاطًا حقيقيةً منتشرةً عشوائيًّا مع غبارٍ نجميٍّ خافتٍ للعمق، تلمعُ بالشفافيةِ فقط كالنجومِ فعلًا — بلا صعودٍ ولا هبوط — وكلُّ نجمةٍ تستقرُّ في موضعها الدائم كخريطةِ خيرك؛ وبوصلةُ القبلة صارت بوصلةً حقيقيةً: الاتجاهاتُ الأربعةُ (ش/ق/ج/غ) تدور مع جهازك في البوصلةِ الحيّة فتبقى حقيقيةً لا مغالطةَ فيها، والقبلةُ ثابتةٌ على سهمها لا تتأثر، وعلى رأسِ الإبرةِ مجسَّمُ الكعبةِ المباركةِ بمونو كلورٍ رقيقٍ مكانَ الدائرة، وأسفلَ الدائرةِ حسّاسُ موافاةٍ ككاشفِ الموجاتِ يهدأُ بالبُعدِ ويشتدُّ كلما اقتربتَ من الاتجاهِ الصحيحِ فتنبضُ الأمواجُ وتلمعُ بالذهبِ عند الموافاةِ التامة؛ وجلسةُ الخشوع صارت خالصةً: ذكرٌ ثابتٌ بلا انتقالٍ ولا تكرار، وعدُّها يخصُّ الجلسةَ وحدها لا يُضافُ إلى مسبحتك؛ وصفحةُ «المناسباتِ الإسلامية» أسفلَ التقويم: رأسُ السنةِ الهجريةِ وعاشوراءَ ورمضانَ والعشرَ الأواخرِ وليلةَ القدرِ وعيدَي الفطرِ والأضحى وصيامَ شوالِ الستِّ وأيامَ الحجِّ وعرفةَ والتشريق — ومقابلَ كلِّ مناسبةٍ كم بقي لها من أيامِك؛ ونُقلت وصيةُ اليومِ إلى الرئيسيةِ قبلَ المهماتِ مباشرةً وأُزيلت من أدوات نور اليوم؛ وصار سجلُّ بطاقاتِ النورِ واضحَ العنوانِ مشروحَ اللمسة: «بطاقاتُ النورِ التي قرأتها»؛ وفي «كم بقي من عمري» أُزيلَ تكرارُ «يوم حتى المتوقع» وأُضيفَ مكانه: كم رمضانًا في بقيةِ عمرك — بدقةٍ هجريةٍ يُعادُ حسابُها يوميًّا.<br/><br/><b>v3.3.0</b> — «نُفحات الرحمن» ثماني هدايا جديدة تُيسر العبادة: جلسةُ الخشوع بملء الشاشة في المسبحة — دائرةُ ذكرٍ تتنفّس أمامك ومؤقّتٌ (٣/٥/١٠ دقائق) وعدّادٌ يُسجَّل في مسبحتك بنقرةٍ على أي موضع، ويقفز الذكرُ تلقائيًا كل ثلاثٍ وثلاثين؛ ونُفحةٌ قرآنية وجوهرةُ سنةٍ لكل يومٍ على الرئيسية موثقة المصدر من الصحيحين والسنن المعتبرة تتجددان كل يوم وتُشارَكان وبتُنسَخان؛ وسلسلةُ النور تُوقدُ لك أيامَ اتصالك بالذكر المتتابعة في بطاقة الإحصاء وتحتفل بمناسباتها (٣/٧/١٤/٢١/٤٠/١٠٠ يومًا)؛ وشهابُ الخير يعبُر سماءَ أعمالك كلما أضاءت نجمة؛ وبوصلةُ القبلة في نور اليوم — الأداة الخامسة عشرة — تحسب اتجاه الكعبة من موضعك بمسار الدوائر الكبرى بلا إنترنت وتُري المسافة إلى مكة وتستجيب لحركة جهازك في «البوصلة الحيّة»؛ وتذكيرُ وردك بلحظةِ ذكرٍ كل ٣٠ أو ٦٠ أو ١٢٠ دقيقةً ما دام نور مفتوحًا (من الإعدادات)؛ وختمةُ الأسماء على الساعة تُحصي بطاقات النور التي قرأتها وتشجعك نحو «مَن أحصاها دخل الجنة» بمناسباتها من ١٠ إلى ١٠٠ — وكلها تعمل من دون إنترنت وبنفس خفّة اللمس على الآيفون والأندرويد.<br/><br/><b>v3.2.0</b> — «صباح النور ومساؤه»: أُهديت زاوية «كن سببًا في الخير» بطاقتَي تهنئة مصوَّرتين — «صباح الخير» على شفقٍ فجرّي مُشرِق، و«مساء الخير» على غروبٍ يعقبه ليلٌ يزينه النجوم — تختار بطاقتك بحسب وقتك، وتعاينها في ورقةٍ ثم ترسلها كصورةٍ واضحة إلى واتساب وتطبيقات جهازك أو تحفظها؛ في صدر كل بطاقة التهنئةُ الكبيرة وآيةُ نور، وفي قلبها ذكرٌ أو دعاءٌ أو آية موثقة المصدر من صحيح البخاري ومسلم والترمذي وأبي داود وابن ماجه تتجدد كل يوم، وإذا أحببت غيرها بدّلتها بلمسة، وتُختم البطاقة بخطٍّ رقيق جميل: «حفظكم الرحمن ورعاكم ونفعكم ونفع بكم» و«يوم جميل»؛ وعاد توقيعُ كل البطاقات إلى نصك الحرفي: «تم انشاء هذه الصورة من تطبيق نور-احسان … (اعذرني لو وجد خطاء)».<br/><br/><b>v3.1.0</b> — «نورٌ يُشارَك»: صار هدفُ تسبيحك وهدفُ وردك يدويَّي الإدخال خالصَين — تكتب العدد بنفسك كيفما أحببت بلا أعدادٍ مفروضة، أو تُلغي الهدفَ فيسبح وردًا حرًّا بلا حدّ؛ وأضيف إلى ساعة الأسماء زرُّ «مشاركة واتساب» يصوغ بطاقة نور في صورةٍ رفيعة تحمل الاسم الحاضر ومعناه وشرحه وتاريخ يومك بهجريه وميلاديه على سماءٍ بلون وقتك، فترسلها إلى واتساب وإلى كل تطبيقات جهازك، موقَّعةً أسفلها بخطٍّ صغيرٍ رقيق: «تم انشاء هذه الصورة من تطبيق نور-احسان · https://mouradalhaj.github.io/noor/ (اعذرني لو وجد خطاء)».<br/><br/><b>v3.0.0</b> — «بهاء النور» إصدارُ الاحتفاء الكبير: حلقةُ حركةٍ موحّدة (requestAnimationFrame واحدة) تُدير الساعة والشريط ولمعانه بأداءٍ أنعم وبطاريةٍ أهدأ، وحفظٌ مؤجّل للعدادات، وسماءٌ تتلوّن بأوقات اليوم من الفجر إلى الليل، ونبضةُ نورٍ حول الساعة عند كل اسم، ولمعانٌ ذهبي يجري في الشريط، ونجمةٌ تولد بنبضةٍ في سماء الخير، وعدادُ تسبيحٍ يتدحرج، ولوحةُ «ليل عميق» السوداء لشاشات AMOLED، ووضعٌ تلقائي نهاريّ/ليليّ، ووردٌ يوميّ للمسبحة بحلقة تقدّم وأهداف (١٠٠/٣٣٣/٥٠٠/١٠٠٠) وعدّادٍ لكل ذكر ونبضٍ اهتزازيّ كل ٣٣، وبحثٌ فوريّ في الأسماء ومفضلةٌ محفوظة واستعراضٌ هادئ للقرص، وأرشيفُ مهماتٍ وتكرارٌ يوميّ وأسبوعيّ، وحاسبةُ عمرٍ بقوسٍ يُظهر موقعك من العمر المتوقع وبأشهر وأسابيع وركعات فريضةٍ ورواتب متبقية، ورسمٌ أسبوعيّ لمحاسبتك، وخياراتُ جديدة للشريط (إظهار وسرعة وأذكارك المخصصة) — بلا أن تنكسر صلةٌ ولا تضيع بيانات.<br/><br/><b>v2.5.1</b> — علاجُ شريط الذكر والتذكير على الآيفون: صار دوره بمحرّكٍ جافاسكربتي بخطوات requestAnimationFrame لا يُجمّده WebKit، وحُذف قناع الشفافية الذي يوقف الحركة داخل العناصر المقنّعة، وأصبح اللمسُ يوقفه ورفعُ الإصبع يستأنفه بدل :hover الذي يلتصق باللمس — فيجري الذكرُ والتذكير ومهماتُك على كل جهازٍ بلا توقف.<br/><br/><b>v2.5.0</b> — «حالتي الآن وشريط النور»: صار «أنا غاضب» شاشة «حالتي الآن» بتبويبين — غاضبٌ بخطواته نفسها، وسعيدٌ بآداب الفرح من السنة (ابن ماجه، وأبو داود، والترمذي) — وأُضيف شريط تذكير متحرك فوق الأسماء والمسبحة يجري فيه الذكر والتذكير ومهماتك المسجلة بلا توقف، وصار حساب العمر من تاريخ ميلادك: عمرك تلقائيًا، وفروضُ صلواتك ونوافلُها المتبقية، ونومُك تقديرًا بالسنين والشهور والأيام، وصار «النشر والإستخدام» نبذةً خالصة بلا خطوات نشر.<br/><br/><b>v2.4.0</b> — «هوية الإحسان»: أُضيفت رسالة نور «إحسان» إلى «عن تطبيق نور» — فلا تصلح حياةُ الإنسان المؤمن بلا إحسان؛ فراقب يومك وحاسب نفسك واستعن بالله ولا تعجز — وصار القسم «النشر والإستخدام» برسالة المصمم المتواضعة ودعائه لأحبابه، ويُعرض سجل الإصدار مختصرًا: إصدارٌ وسطران لكل تحديث.<br/><br/><b>v2.3.1</b> — إصلاح جذري لخلل التقويم: اختفى «غير معرف» وعادت الأيام إلى أماكنها بإعادة بناء محرك التاريخ الهجري بسلسلة بدائل متعددة وتحقق صارم من كل نتيجة.<br/><br/><b>v2.3.0</b> — طُوي «التقويم والتاريخ» في الرئيسية بشاشة مستقلة تفتح وتُغلق حتى لا تمتلئ الشاشة، وأُضيفت بطاقة «المهمات» فوق «نور اليوم» بعدّاد إنجاز وشاشة خيارات كاملة.<br/><br/><b>v2.2.0</b> — «عزيمة اليوم»: نوايا متعددة ونيتك بكلماتك ومهمات إنجاز تضيء النجوم، و«سماء الخير» للعرض والإحصاء خالصة، وانتقل التقويم بأحداث الإسلام الموثقة إلى الرئيسية.<br/><br/><b>v2.1.0</b> — نجوم سماء الخير تلوّنها أنواع الأعمال بمفتاح ألوان، وتقويم الخير الشهري، ومهماتي اليومية، وتوسعة «القرآن وحالتي» و«محاسبتي» و«بنك الخيرات»، وأيقونات مونو كرور بدل الإيموجي.<br/><br/><b>v2.0.0</b> — شاشة «نور اليوم» الجديدة بأربع عشرة أداة يومية: من نية اليوم وتحدي الدقيقة وسجل الدعوات إلى محاسبتي قبل النوم وكن سببًا في الخير، مع إزاحة أمانة لشريط حالة الآيفون.<br/><br/><b>v1.6.0</b> — علاج نهائي لانعكاس الأسماء على درج الساعة برسم داخلي، وتقليص بطاقات النور إلى ثلاثة أقسام: المعنى، والدليل بمصدره، والدعاء بمصدره — حذفًا لقسمَي «عبرة لقلبك» و«سؤال تدبر».<br/><br/><b>v1.5.0</b> — تشكيل الأسماء المئة وضبط اتجاهها على الدرج، وإعادة صياغة البطاقات المئة توثيقًا من التويجري و«المختصر»، ومسبحات خمس وأحجام وأشكال للخرزة.<br/><br/><b>v1.4.0</b> — اكتمال بطاقات النور المئة موثقة من «مختصر فقه الأسماء الحسنى» للبدر و«التوحيد» للتويجري، وقسم المظهر: خمس لوحات ألوان وأربعة أنماط خلفية.<br/><br/><b>v1.3.0</b> — لغة درج الأسماء عربي أو English من الإعدادات، ونبض قلب حي في الساعة والمسبحة، وشاهد كل ذكر من القرآن والسنة في صفحة المسبحة.<br/><br/><b>v1.2.0</b> — أصوات الساعة (تِك توك، جرس، خشبي) وصوت المسبحة، وشكل الساعة وشكل المسبحة، وخط الأسماء، والتسبيح التلقائي وعقرب الثواني.<br/><br/><b>v1.1.0</b> — تحسين كامل لمقاسات الجوال، الأسماء على قرص الساعة بدل الدقائق والثواني، وسرعة من ١ إلى ١٠ ثوانٍ بمؤشر انزلاقي، ومسبحة خشبية واقعية بصوت خرز محسّن.<br/><br/><b>v1.0.0</b> — الإطلاق الأول: ساعة الأسماء الحسنى (١٠٠ اسم مع الشرح)، والمسبحة بصوت الخرز والاحتفال، والأذكار المخصصة، والإعدادات، والحفظ المحلي على الجهاز.</div>
@@ -1527,6 +1556,16 @@ button.pray-loc{background:none;border:none;font-family:var(--f-ui)}
     <p class="khu-timer" id="khuTimerTxt" hidden></p>
   </div>
   <p class="khu-foot">﴿الَّذِينَ آمَنُوا وَتَطْمَئِنُّ قُلُوبُهُم بِذِكْرِ اللَّهِ أَلَا بِذِكْرِ اللَّهِ تَطْمَئِنُّ الْقُلُوبُ﴾ — الرعد: ٢٨</p>
+</div>
+<!-- ====== سماء الخير الغامرة (v3.8.0) — على مستوى الجسم كجلسة الخشوع كي لا يحبسها سياق #app ====== -->
+<div id="skyVeil" class="skyveil" role="dialog" aria-modal="true" aria-label="سماء الخير" aria-hidden="true">
+  <canvas id="skyCanvas" aria-hidden="true"></canvas>
+  <div class="skyhud">
+    <div class="sktitle"><b>سماء الخير</b><span id="skyLive"></span></div>
+    <button type="button" id="skyClose" class="card-x" aria-label="إغلاق المنظر"><svg viewBox="0 0 24 24"><path d="M6 6l12 12M18 6L6 18" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" fill="none"/></svg></button>
+  </div>
+  <div class="skychip" id="skyChip"></div>
+  <div class="skyverse" id="skyVerse"><p class="qv" id="skyQ"></p><span class="qs" id="skyQS"></span></div>
 </div>
 <div id="toast" role="status"></div>
 <script>
@@ -6642,14 +6681,20 @@ const TOOLBUILD={
    +'<div class="skylegend">'+STARS_T.map(m=>'<span class="lg"><i style="background:'+m.c+'"></i>'+m.t+'</span>').join('')+'</div>'
    +'<p class="center" style="margin-top:9px;font-size:.86rem">نورك حتى الآن: <b style="color:var(--gold2)" id="skyCnt">٠</b> نجمة</p>'
    +'<div class="skyquote">املأ حياتك بأعمال الخير ولا تفتخر بها؛ فهذا فضل الله عليك، وتذكر أنك تعيش برحمة الله. وكلما أضاءت سماؤك زاد إحسانك — فاجتهد ولا تعجز.</div>'
+   +'<button type="button" id="skyEnter" class="btn gold azopen">دخول السماء — منظرٌ كاملٌ تلامس فيه النجوم الأرض</button>'
+   +'<p class="hint center" style="margin-top:7px">في المنظر الكامل: انقر أي نجمةٍ لتعرف أيَّ عملٍ أضاءها</p>'
    +'<div class="tblock"><div class="tq" style="font-weight:800;margin-bottom:6px;color:var(--gold2)">تقرير سمائك</div>'
    +'<div class="skyseg" id="skySeg"><button type="button" data-p="day" class="on">اليوم</button><button type="button" data-p="week">أسبوع</button><button type="button" data-p="month">شهر</button><button type="button" data-p="all">من البداية</button></div>'
    +'<div class="statgrid" id="skyStats"></div>'
-   +'<div class="catbars" id="skyBars"></div></div>'
+   +'<div class="catbars" id="skyBars"></div>'
+   +'<div class="skypg" id="skyProg"></div></div>'
    +'<p class="hint center" style="margin-top:12px">تُضاء نجومك تلقائيًا من: إنجاز المهمات في «عزيمة اليوم»، وجولة التسبيح، وتحدي الدقيقة، والمحاسبة الطيبة، و«فعلت» في بنك الخيرات — وكل تفصيل يومي تجده في «التقويم والتاريخ» بالصفحة الرئيسية.</p>';
  },b(){
    renderSky();
    buildSkyStats('day');
+   buildSkyProgress();
+   const se=$('#skyEnter'); if(se)se.addEventListener('click',()=>{ tapS(); vib(10); skyOpen(); });
+   const sw=$('.skywrap'); if(sw)sw.addEventListener('click',()=>{ tapS(); vib(10); skyOpen(); });
    $$('#skySeg button').forEach(b=>b.addEventListener('click',()=>{
      $$('#skySeg button').forEach(x=>x.classList.remove('on')); b.classList.add('on');
      buildSkyStats(b.dataset.p);
@@ -8440,6 +8485,208 @@ if(typeof TR!=='undefined')Object.assign(TR,{
  });
  updateAzkStates(); updateAzkBanner();
  setInterval(()=>{ azkRollover(); updateAzkStates(); updateAzkBanner(); },20000);
+})();
+/* ================= v3.8.0 «سماء الخير الغامرة + خطوط التقدم» ================= */
+/* آيات محبة الله ورحمته لعباده المؤمنين وثواب عباده الصالحين — كلها بمواضعها من كتاب الله */
+const SKY_VERSES=[
+ {q:'﴿قُلْ إِنْ كُنْتُمْ تُحِبُّونَ اللَّهَ فَاتَّبِعُونِي يُحْبِبْكُمُ اللَّهُ وَيَغْفِرْ لَكُمْ ذُنُوبَكُمْ وَاللَّهُ غَفُورٌ رَحِيمٌ﴾',s:'آل عمران: ٣١'},
+ {q:'﴿يَا أَيَّتُهَا النَّفْسُ الْمُطْمَئِنَّةُ * ارْجِعِي إِلَىٰ رَبِّكِ رَاضِيَةً مَرْضِيَّةً * فَادْخُلِي فِي عِبَادِي * وَادْخُلِي جَنَّتِي﴾',s:'الفجر: ٢٧–٣٠'},
+ {q:'﴿إِنَّ الَّذِينَ آمَنُوا وَعَمِلُوا الصَّالِحَاتِ أُولَٰئِكَ هُمْ خَيْرُ الْبَرِيَّةِ * جَزَاؤُهُمْ عِنْدَ رَبِّهِمْ جَنَّاتُ عَدْنٍ تَجْرِي مِنْ تَحْتِهَا الْأَنْهَارُ خَالِدِينَ فِيهَا أَبَدًا﴾',s:'البينة: ٧–٨'},
+ {q:'﴿مَنْ عَمِلَ صَالِحًا مِنْ ذَكَرٍ أَوْ أُنْثَىٰ وَهُوَ مُؤْمِنٌ فَلَنُحْيِيَنَّهُ حَيَاةً طَيِّبَةً وَلَنَجْزِيَنَّهُمْ أَجْرَهُمْ بِأَحْسَنِ مَا كَانُوا يَعْمَلُونَ﴾',s:'النحل: ٩٧'},
+ {q:'﴿فَلَا تَعْلَمُ نَفْسٌ مَا أُخْفِيَ لَهُمْ مِنْ قُرَّةِ أَعْيُنٍ جَزَاءً بِمَا كَانُوا يَعْمَلُونَ﴾',s:'السجدة: ١٧'},
+ {q:'﴿إِنَّ الَّذِينَ قَالُوا رَبُّنَا اللَّهُ ثُمَّ اسْتَقَامُوا تَتَنَزَّلُ عَلَيْهِمُ الْمَلَائِكَةُ أَلَّا تَخَافُوا وَلَا تَحْزَنُوا وَأَبْشِرُوا بِالْجَنَّةِ الَّتِي كُنْتُمْ تُوعَدُونَ﴾',s:'فصلت: ٣٠'},
+ {q:'﴿وَمَنْ يُطِعِ اللَّهَ وَالرَّسُولَ فَأُولَٰئِكَ مَعَ الَّذِينَ أَنْعَمَ اللَّهُ عَلَيْهِمْ مِنَ النَّبِيِّينَ وَالصِّدِّيقِينَ وَالشُّهَدَاءِ وَالصَّالِحِينَ وَحَسُنَ أُولَٰئِكَ رَفِيقًا﴾',s:'النساء: ٦٩'},
+ {q:'﴿لِلَّذِينَ أَحْسَنُوا الْحُسْنَىٰ وَزِيَادَةٌ﴾',s:'يونس: ٢٦'},
+ {q:'﴿إِنَّ اللَّهَ مَعَ الَّذِينَ اتَّقَوْا وَالَّذِينَ هُمْ مُحْسِنُونَ﴾',s:'النحل: ١٢٨'},
+ {q:'﴿إِنَّ اللَّهَ يُحِبُّ التَّوَّابِينَ وَيُحِبُّ الْمُتَطَهِّرِينَ﴾',s:'البقرة: ٢٢٢'},
+ {q:'﴿وَأَمَّا الَّذِينَ سُعِدُوا فِي الْجَنَّةِ خَالِدِينَ فِيهَا مَا دَامَتِ السَّمَاوَاتُ وَالْأَرْضُ إِلَّا مَا شَاءَ رَبُّكَ عَطَاءً غَيْرَ مَجْذُوذٍ﴾',s:'هود: ١٠٨'},
+ {q:'﴿إِنَّ الَّذِينَ آمَنُوا وَعَمِلُوا الصَّالِحَاتِ لَهُمْ جَنَّاتُ الْفِرْدَوْسِ نُزُلًا﴾',s:'الكهف: ١٠٧'},
+ {q:'﴿وَإِنِّي لَغَفَّارٌ لِمَنْ تَابَ وَآمَنَ وَعَمِلَ صَالِحًا ثُمَّ اهْتَدَىٰ﴾',s:'طه: ٨٢'},
+ {q:'﴿وَتِلْكَ الْجَنَّةُ الَّتِي أُورِثْتُمُوهَا بِمَا كُنْتُمْ تَعْمَلُونَ﴾',s:'الزخرف: ٧٢'}
+];
+let skyOn=false, skyCv=null, skyCtx=null, skyW=0, skyH=0, skyVerseT=null, skyVerseI=-1, skyMeteors=[], skyLastMeteor=0, skyPulse=null, skyChipT=null, skySwapT=null;
+const SKY_RM=(window.matchMedia&&window.matchMedia('(prefers-reduced-motion: reduce)').matches);
+function skyCountDay(){ return sky.filter(s=>s.d===todayStr()).length; }
+function skyStarsMap(){
+ return sky.map((s,i)=>{
+  const m=starMeta(s.k);
+  const seed=(((i+1)*2654435761)+Math.floor((s.ts||0)/1000)*97+13)>>>0;
+  const r1=skyRand(seed), r2=skyRand(seed+7), r3=skyRand(seed+13), r4=skyRand(seed+19);
+  return {c:m.c,l:s.l||m.t,x:0.02+r1*0.96,y:0.03+r2*0.74,r:(r3>0.78?(2.4+r4*1.1):(1.4+r4*1.0)),tw:(0.5+r3*1.3),ph:r4*6.283};
+ });
+}
+function skySize(){
+ if(!skyCv)return;
+ const dpr=Math.min(window.devicePixelRatio||1,2);
+ skyW=skyCv.clientWidth||window.innerWidth; skyH=skyCv.clientHeight||window.innerHeight;
+ skyCv.width=Math.round(skyW*dpr); skyCv.height=Math.round(skyH*dpr);
+ skyCtx=skyCv.getContext('2d'); skyCtx.setTransform(dpr,0,0,dpr,0,0);
+}
+function skyHillPath(ctx,base,amp,seed){
+ ctx.beginPath(); ctx.moveTo(-4,skyH+4); ctx.lineTo(-4,base);
+ let x=-4, i=0;
+ while(x<skyW+10){
+  const seg=Math.max(90,skyW/5.5);
+  const cx=x+seg*0.55, px=Math.min(x+seg,skyW+10);
+  const y1=base-(skyRand(seed+i*3)*amp)-amp*0.2;
+  const y2=base-(skyRand(seed+i*3+1)*amp);
+  ctx.quadraticCurveTo(cx,y1,px,y2); x=px; i++;
+ }
+ ctx.lineTo(skyW+4,skyH+4); ctx.closePath();
+}
+function skyDraw(ts){
+ if(!skyOn)return false;
+ const ctx=skyCtx; if(!ctx)return false;
+ const t=ts/1000;
+ const g=ctx.createLinearGradient(0,0,0,skyH);
+ g.addColorStop(0,'#050a18'); g.addColorStop(.45,'#0a1730'); g.addColorStop(.8,'#122744'); g.addColorStop(1,'#1b3352');
+ ctx.fillStyle=g; ctx.fillRect(0,0,skyW,skyH);
+ const hg=ctx.createRadialGradient(skyW*.5,skyH*.88,10,skyW*.5,skyH*.88,skyW*.8);
+ hg.addColorStop(0,'rgba(242,217,146,.11)'); hg.addColorStop(1,'rgba(242,217,146,0)');
+ ctx.fillStyle=hg; ctx.fillRect(0,skyH*.55,skyW,skyH*.45);
+ /* الهلال */
+ ctx.save(); ctx.globalAlpha=.94; ctx.fillStyle='#efe8d4';
+ ctx.beginPath(); ctx.arc(skyW*.84,skyH*.14,16,0,6.283); ctx.fill();
+ ctx.globalCompositeOperation='destination-out';
+ ctx.beginPath(); ctx.arc(skyW*.84-7.5,skyH*.14-4,13.5,0,6.283); ctx.fill();
+ ctx.restore();
+ /* غبارٌ نجمي خافت */
+ ctx.fillStyle='#d8e6f2';
+ for(let i=0;i<110;i++){
+  const r1=skyRand(i*131+7),r2=skyRand(i*197+29),r3=skyRand(i*277+53);
+  const tw=SKY_RM?.6:(.5+.5*Math.sin(t*(.35+r3*.8)+r1*6.283));
+  ctx.globalAlpha=.07+.13*tw;
+  ctx.beginPath(); ctx.arc(r1*skyW,r2*skyH*.9,.5+r3*.85,0,6.283); ctx.fill();
+ }
+ /* نجومُ أعمالِك — وكلُّ نجمةٍ عملٌ أضاءها */
+ skyStarsMap().forEach(s=>{
+  const x=s.x*skyW, y=s.y*skyH;
+  const tw=SKY_RM?.85:(.7+.3*Math.sin(t*s.tw*1.5+s.ph));
+  ctx.globalAlpha=.17*tw; ctx.fillStyle=s.c;
+  ctx.beginPath(); ctx.arc(x,y,s.r*3.1,0,6.283); ctx.fill();
+  ctx.globalAlpha=tw;
+  ctx.beginPath(); ctx.arc(x,y,s.r,0,6.283); ctx.fill();
+ });
+ ctx.globalAlpha=1;
+ /* الشهب العابرة */
+ if(!SKY_RM){
+  if(ts-skyLastMeteor>7000+skyRand(Math.floor(ts/900))*8000){
+   skyMeteors.push({x:skyW*(.15+Math.random()*.6),y:skyH*(.05+Math.random()*.3),vx:-(200+Math.random()*150),vy:130+Math.random()*80,life:1});
+   skyLastMeteor=ts;
+  }
+  skyMeteors=skyMeteors.filter(mm=>mm.life>0);
+  skyMeteors.forEach(mm=>{
+   mm.x+=mm.vx*.024; mm.y+=mm.vy*.024; mm.life-=.017;
+   const lg=ctx.createLinearGradient(mm.x,mm.y,mm.x-mm.vx*.24,mm.y-mm.vy*.24);
+   lg.addColorStop(0,'rgba(242,217,146,'+(0.9*mm.life).toFixed(3)+')'); lg.addColorStop(1,'rgba(242,217,146,0)');
+   ctx.strokeStyle=lg; ctx.lineWidth=1.7; ctx.lineCap='round';
+   ctx.beginPath(); ctx.moveTo(mm.x,mm.y); ctx.lineTo(mm.x-mm.vx*.24,mm.y-mm.vy*.24); ctx.stroke();
+  });
+ }
+ /* نبضة النجمة المنقورة */
+ if(skyPulse){
+  const dt=ts-skyPulse.t0;
+  if(dt>650)skyPulse=null;
+  else{ ctx.globalAlpha=1-dt/650; ctx.strokeStyle='#f2d992'; ctx.lineWidth=1.5;
+   ctx.beginPath(); ctx.arc(skyPulse.x,skyPulse.y,4+dt/650*17,0,6.283); ctx.stroke(); ctx.globalAlpha=1; }
+ }
+ /* التلال — حيث تلامس النجومُ الأرض */
+ ctx.fillStyle='#0b1626'; skyHillPath(ctx,skyH*.865,26,11); ctx.fill();
+ ctx.fillStyle='#081120'; skyHillPath(ctx,skyH*.905,18,29); ctx.fill();
+ ctx.fillStyle='#04090f'; skyHillPath(ctx,skyH*.945,12,47); ctx.fill();
+ return true;
+}
+function skyVerseNext(){
+ const v=$('#skyVerse'); if(!v||!skyOn)return;
+ v.classList.remove('show');
+ clearTimeout(skySwapT);
+ skySwapT=setTimeout(()=>{
+  if(!skyOn)return;
+  skyVerseI=(skyVerseI+1)%SKY_VERSES.length;
+  const a=SKY_VERSES[skyVerseI];
+  $('#skyQ').textContent=a.q; $('#skyQS').textContent=a.s;
+  v.classList.add('show');
+ },750);
+}
+function skyOpen(){
+ if(skyOn)return;
+ const v=$('#skyVeil'); if(!v)return;
+ skyOn=true; v.hidden=false; v.setAttribute('aria-hidden','false');
+ requestAnimationFrame(()=>v.classList.add('show'));
+ skyCv=$('#skyCanvas'); skySize();
+ skyMeteors=[]; skyLastMeteor=performance.now(); skyPulse=null;
+ const lv=$('#skyLive'); if(lv)lv.textContent=T('نجومك ')+AR(sky.length)+T(' · اليوم ')+AR(skyCountDay());
+ skyVerseI=-1;
+ skyVerseNext();
+ skyVerseT=setInterval(skyVerseNext,8000);
+ coreAdd(skyDraw);
+}
+function skyClose(){
+ if(!skyOn)return;
+ const v=$('#skyVeil');
+ v.classList.remove('show'); v.setAttribute('aria-hidden','true');
+ clearInterval(skyVerseT); clearTimeout(skySwapT); clearTimeout(skyChipT);
+ setTimeout(()=>{ v.hidden=true; skyOn=false; },470);
+}
+/* --- خطوط التقدم (v3.8.0): اليوم وأسبوعك مقابل أفضل أيامك وأسابيعك، ومخطط ١٤ يومًا --- */
+function skyParse(k){ return new Date(+k.slice(0,4),+k.slice(5,7)-1,+k.slice(8,10)); }
+function buildSkyProgress(){
+ const el=$('#skyProg'); if(!el)return;
+ const counts={}; sky.forEach(s=>{ counts[s.d]=(counts[s.d]||0)+1; });
+ const today=counts[todayStr()]||0;
+ let bestD=0; Object.keys(counts).forEach(k=>{ if(counts[k]>bestD)bestD=counts[k]; });
+ let bestW=0;
+ Object.keys(counts).forEach(k=>{
+  let w=0; for(let i=0;i<7;i++){ const dd=dateStrOf(new Date(skyParse(k).getTime()-i*864e5)); w+=counts[dd]||0; }
+  if(w>bestW)bestW=w;
+ });
+ let cw=0; for(let i=0;i<7;i++){ const dd=dateStrOf(new Date(Date.now()-i*864e5)); cw+=counts[dd]||0; }
+ const days=[]; let mx=1;
+ for(let i=13;i>=0;i--){ const dd=dateStrOf(new Date(Date.now()-i*864e5)); const v=counts[dd]||0; days.push(v); if(v>mx)mx=v; }
+ if(bestD>mx)mx=bestD;
+ el.innerHTML='<div class="pgt">'+T('خط تقدّمك')+'</div>'
+ +'<div class="pgrow"><b>'+T('اليوم · أفضل يوم')+'</b><span class="prtrack"><span class="prfill" style="width:'+(bestD?Math.round(today/bestD*100):0)+'%"></span></span><span class="prn">'+AR(today)+' / '+AR(bestD)+'</span></div>'
+ +'<div class="pgrow"><b>'+T('أسبوعك · أفضل أسبوع')+'</b><span class="prtrack"><span class="prfill" style="width:'+(bestW?Math.round(cw/bestW*100):0)+'%"></span></span><span class="prn">'+AR(cw)+' / '+AR(bestW)+'</span></div>'
+ +'<div class="skymini">'+days.map((v,i)=>'<i style="height:'+Math.max(6,Math.round(v/mx*100))+'%"'+(i===13?' class="today"':'')+'></i>').join('')+'</div>'
+ +'<div class="skymeta"><span>'+T('آخر ١٤ يومًا')+'</span><span>'+T('العمود الأخضر: اليوم')+'</span></div>';
+}
+/* ترجمات الوحدة الجديدة (v3.8.0) */
+if(typeof TR!=='undefined')Object.assign(TR,{
+ 'خط تقدّمك':'Your progress line',
+ 'اليوم · أفضل يوم':'Today · best day',
+ 'أسبوعك · أفضل أسبوع':'Your week · best week',
+ 'آخر ١٤ يومًا':'Last 14 days',
+ 'العمود الأخضر: اليوم':'Green column: today',
+ 'دخول السماء — منظرٌ كاملٌ تلامس فيه النجوم الأرض':'Enter the sky — a full-screen view where stars touch the earth',
+ 'في المنظر الكامل: انقر أي نجمةٍ لتعرف أيَّ عملٍ أضاءها':'In the full view: tap any star to see which deed lit it',
+ 'نجومك ':'Your stars: ',' · اليوم ':' · today: ',
+ 'سماء الخير':'Sky of Goodness',
+ 'إغلاق المنظر':'Close the view'
+});
+/* تهيئة وربط السماء الغامرة (v3.8.0) */
+(function skyInit(){
+ const v=$('#skyVeil'); if(!v)return;
+ $('#skyClose').addEventListener('click',()=>{ tapS(); skyClose(); });
+ v.addEventListener('pointerdown',e=>{
+  if(!skyOn||!skyCv)return;
+  if(e.target.closest('.card-x'))return;
+  const rect=skyCv.getBoundingClientRect();
+  const px=e.clientX-rect.left, py=e.clientY-rect.top;
+  let best=null,bd=24;
+  skyStarsMap().forEach(s=>{
+   const dx=s.x*skyW-px, dy=s.y*skyH-py, d=Math.sqrt(dx*dx+dy*dy);
+   if(d<bd){ bd=d; best=s; }
+  });
+  if(best){
+   skyPulse={x:best.x*skyW,y:best.y*skyH,t0:performance.now()};
+   const chip=$('#skyChip');
+   chip.textContent=(starMeta(best.k).t)+(best.l?(' — '+best.l):'');
+   chip.classList.add('show'); clearTimeout(skyChipT);
+   skyChipT=setTimeout(()=>chip.classList.remove('show'),2600);
+   vib(9);
+  }
+ });
+ window.addEventListener('resize',()=>{ if(skyOn)skySize(); });
 })();
 function prayTick(force){
  if(document.hidden&&!force)return;
