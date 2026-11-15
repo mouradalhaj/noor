@@ -1449,6 +1449,7 @@ button.pray-loc{background:none;border:none;font-family:var(--f-ui)}
     </details>
     <details class="doc">
       <summary>سجل الإصدار</summary>
+      <div class="body"><b>v3.12.0</b> — «شاشةُ الأوقاتِ وأقواسٌ لا تُقاوم» بأربعِ هداياٍ على بركةِ الله: <b>(١) شاشةُ تعديلِ وقتِ كلِّ صلاةٍ من الشاشةِ الرئيسية</b> — كنتَ أخبرتني أن أسهمَ التعديلِ لا تظهرُ على الآيفون (وهي أسهمُ حقولِ الأرقامِ التي يخفيها Safari أصلًا)، فصمّمتُ على طرازِ تطبيقِ بلال: <b>انقر وقتَ الأذانِ لأيِّ صلاةٍ في بطاقةِ المواقيتِ فتُفتَحُ شاشةٌ مخصصةٌ لذلك اليومِ والصلاةِ</b>: وقتُ الأذانِ الناتجُ كبيرًا وواضحًا مع الأساسِ الفلكيِّ تحته، وزران كبيران (٥٦ بكسلًا) لِ+ و− لتعديلِ الأذانِ من −٣٠ إلى +٣٠ دقيقةً بالضغطِ الواحدِ أو المطوَّل، وصفٌ ثانٍ للإقامةِ بعد الأذانِ (٠–١٨٠ دقيقة) بمعاينةٍ حيّةٍ لوقتِ الإقامةِ الناتج، وزرَا حفظٍ وتصفير — وكلُّ زرٍّ نصٌّ عاديٌّ (+ و−) لا رموزُ ناقصةَ في خطوطِ الآيفون، فتعملُ الشاشةُ على iOS وAndroid وأجهزةِ الكمبيوترِ سواء. والحفظُ يختمُ في جهازك ويحدّثُ البطاقةَ فورًا ويزامنُ خاناتِ الإعدادات. <b>(٢) قلعتُ جذرَ مشكلةِ أقواسِ صباحِ الخيرِ ومساءِ الخير</b> — اكتشفتُ أن للتطبيقِ نسختَين من بانيةِ بطاقاتِ التهنئةِ وبانيةِ الأسماءِ (الأخيرةُ هي الحيّةُ في JavaScript)، وكان إصلاحي السابقُ مسّ النسخِ الميتةِ في بعضِ المواضع! فلعقتُ الكودَ موضعًا موضعًا: البانيةُ الحيّةُ لصباح/مساء الخيرِ أصلحتُ مصادرَ نصِّها الأربعةَ (نصُّ الفائدةِ ومصدرُها وسطرُ التهنئةِ ومصدرُ آيةِ الصدر)، وآيةُ البانيةِ الميتةِ أيضًا للاتساق — فصار المجموعُ ١٦ موضعًا مرآويًّا لا خامسَ لها، وتحققتُ بصريًّا من بطاقةٍ حقيقيةٍ: ﴿أَلَا بِذِكْرِ اللهِ تَطْمَئِنُّ الْقُلُوبُ﴾ و«اللَّهُمَّ أَعِنِّي عَلَى ذِكْرِكَ» يحتضنُ القوسانُ النصَّ من الداخلِ في كلِّ بطاقاتِ النورِ المصوَّرةِ الآن. <b>(٣) وثّقتُ أفكارًا مستوحاةً من تطبيقِ بلال</b> في ملفِّ الانتقال: أصواتُ أذانٍ لكلِّ صلاةٍ وإشعارٌ قبلَ الأذانِ (انظر شرحَ الإمكانياتِ في الرد) — أمرُني بها متى شئت. وبلا مساسٍ ببياناتك.</div>
       <div class="body"><b>v3.11.0</b> — «أقواسٌ محتضنة وسرُّ الدقةِ مكشوف» بإنجازين: <b>(١) تصويبُ انقلابِ الأقواسِ في البطاقاتِ المصوَّرة</b> — كنتَ لاحظتَ أن الأقواسَ المزخرفةَ ﴿﴾ وقوسَي التنصيصِ «» قبلَ الآياتِ وبعدها تظهرُ في البطاقاتِ المشتركةِ منقلبةً إلى الخارجِ خلافَ ما في التطبيق؛ فقد أثبتَ الاختبارُ البصريُّ أن الرسمَ على canvas يعكسُ هذه الأقواسَ الثنائيةَ الاتجاهِ عكسَ عرضِ صفحاتِ الويب، فعالجناها بدالةِ تبديلٍ ذكيةٍ (cMirror) تُبدِّلُها قبل الرسمِ فيُحتضنَ النصُّ كما يجب — وطُبِّقت على كلِّ بطاقاتِ النور المصوَّرة: الآيةُ التأسيسيةُ في بطاقاتِ الأسماء، ونصوصُ الأسماءِ وشروحِها، ونُفحةُ القرآنِ وجوهرةُ السنةِ ووصيةِ اليومِ بنصِّها ومصدرِها وفائدتِها، وآياتُ صدرِ بطاقتَي صباحِ الخيرِ ومساءِ الخيرِ وفوائدِهما — عشرَةُ مواضعَ بلا استثناء. <b>(٢) كشفُ آليةِ «مواقيت فلسطين» بهندسةٍ عكسيةٍ حقيقية</b> — نزَّلنا حزمتَه (6.28 من Aptoide) وشرَّحنا كودَه: التطبيقُ **لا يحسبُ المواقيتَ فلكيًا إطلاقًا**؛ بل يجلبُها جاهزةً من قاعدةِ بياناتِ Firebase السحابيةِ (مشروعُ qiblapro-b1f41) مفهرسةً بالمدينةِ، ويخزّنُها بالدقائقِ (fajrMinutes…) مع عامِلِ تحديثٍ خلفيٍّ (PrayerInfoUpdateWorker) ومعالجةِ المنطقةِ الزمنية — أي أنه **واجهةٌ لعرضِ «الجدولِ الزمنيِّ المعتمدِ الرسميِّ» لدائرةِ الأوقافِ الشرعيةِ الفلسطينيةِ** كما يقولُ وصفُه في المتجرِ حرفيًّا، وقاعدتُه مغلقةٌ أمامَ الخارجِ (فحصناها). والدرسُ المُستفادُ: دقته ليست خوارزميةً بل بياناتٌ رسمية؛ وبما أن الجداولَ غيرَ متاحةٍ علنًا، فالطريقُ العمليُّ لمطابقتِها في نورٍ هو التعديلُ اليدويُّ لكلِّ صلاةٍ (الميزةُ التي أضفناها في v3.10.0) — والهندسةُ العكسيةُ وثَّقتِ البنيةَ كاملةً في ملفِّ الانتقال. وبلا مساسٍ ببياناتك.</div>
       <div class="body"><b>v3.10.0</b> — «بطاقةٌ تُشارَك ومواقيتُ تُضبَط» بثلاثِ هداياٍ طلبتَها: <b>(١) إصلاحُ سماءِ الخير على الأجهزةِ القديمة</b> — كان غلافُ السماءِ يعتمدُ خاصيةَ CSS‏ «inset» المختصرةَ التي لا تدعمها إصداراتُ الآيفونِ الأقدم، فيسقطُ تحديدُها ويظهر المنظرُ خارجَ الحدودِ تحت شبكةِ الأدوات؛ فوسَّعنا الإحداثياتِ صراحةً (top/right/bottom/left) في كلِّ الطبقاتِ الثابتةِ العشر — السماءُ والحجابُ والخشوعُ والاحتفالُ والساعةُ والمسبحة — فتعودُ إلى حدودِ الشاشةِ كاملةً مع مساحاتِ الأمان. <b>(٢) بطاقاتُ النور تُشارَك على واتساب صورًا حقيقيةً بنفسِ الجماليةِ والترتيب</b> — نُفحةُ القرآنِ لليوم، وجوهرةُ السنةِ لليوم، ووصيةُ اليوم: تُرسَم كلٌّ منها لحظةَ المشاركة على قماشٍ عاليِ الدقة (١٠٨٠×١٣٥٠) بسماءِ اللحظةِ الزمنيةِ ونجومِها، والإطارِ المزدوجِ الذهبيِّ ومعيناتِ الزوايا، ووسمِ البطاقةِ في شريطٍ مموَّج، والنصِّ بخطِ الأميري المتكيف، والمصدرِ والفائدةِ العملية، وختمِ اليومِ الهجريِّ والميلادي، وشعارِ النورِ والتوقيع — ثم تُشارَك بملفٍ حقيقيٍّ عبر لوحة المشاركةِ (وفي الآيفون تصل صورةً في المحادثة)، وفي المتصفحاتِ القديمةِ تُنزَّل الصورةُ ويُفتح واتساب برسالةِ الاستعداد. <b>(٣) مواقيتٌ أضبطُ وأقربُ لمسجدك</b> — فُسِّر سببُ اختلافِ المغربِ والعشاءِ (ميلُ الأفقِ بالارتفاع، وفاصلُ أم القرى الثابتِ ٩٠/١٢٠ في رمضان، وتناهضُ الخوارزمياتِ دقيقةً) وأُضيف الارتفاعُ عن سطحِ البحرِ ليُصحَّح غيابُ القرصِ بالميلَ الأفقيَّ المعياريَّ (0.0347·√h)، وأُضيف تعديلٌ يدويٌّ بالدقائقِ (من −٣٠ إلى +٣٠) لكلِّ صلاةٍ على حدةٍ يطابقُ مواقيتَ مسجدكِ بالضبطِ — يُضاف إلى الأذانِ وتُضاف الإقامةُ فوقه، مع زرِّ تصفيرٍ يعيد الحسابَ الفلكيَّ الخالص؛ وصارت «أم القرى» تمدُّ فاصلَ العشاءِ إلى ١٢٠ دقيقةً في رمضان تلقائيًّا وفق المعيارِ الرسمي — وبلا مساسٍ ببياناتك: كلُّ شيءٍ محسوبٌ في جهازك.</div>
       <div class="body"><b>v3.9.0</b> — «اعتمادُ بابِ الطهارة»: دخلَ بابُ الطهارةِ زاويةَ فقه العباداتِ بجانبَ بابِ الصلاة، بمبدِّلِ أبوابٍ أنيقٍ يفتحُ كلَّ كتابٍ لوحده بنفسِ المهنيةِ وخوارزميةِ الفهم العميق: بطاقاتُ الأبوابِ القابلةُ للطي، والأدلةُ المسنَدةُ بمصادِرها، والأخطاءُ الشائعةُ بتصحيحِها، والجداولُ المقارنةُ، والبحثُ السريعُ في بابٍ واحد، وخطُّ التقدُّم، وخاتمُ القراءةِ الذهبيُّ الذي يضيء نجمةَ علمٍ في سماء الخير — تِسعةُ أبوابٍ في الطهارة: التعريفُ والحكم، والمياه، والآنية، والنجاسات، والاستنجاد، والوضوء، والمسح، والتيمم، والغسل. وعُدَّت على المنهجيةِ الأربعِ بمصطلحاتِها الدقيقة: الترجيحُ من «الشرح الممتع»، والاختصارُ والترتيبُ من «الملخص الفقهي»، والإجماعاتُ المنقولةُ في «المغني»، وتم الاعتماد في بيان درجة الحديث على أحكام المحدثين المنقولة في موسوعة الدرر السنية — وتحسبًا للعدلِ في عرض الخلاف: نُبِّه في تقسيم الماء على ترجيحِ القسمين عند ابن تيمية وابن القيم وابن باز وابن عثيمين مع ثبوت التقسيمِ الثلاثيِّ قولًا فقهيًّا معتبرًا لا محلَّ اتفاق، وصُحِّح نصُّ الدباغةِ إلى الحديثِ الثابتِ في مسلم (٣٦٣ و٣٦٦) عن شاة ميمونة، وفرُّق في النواقضِ بين المتفق عليه وبين مسألتي القيءِ والدمِ من أشهر مواضع الخلاف — بنفسِ خفّةِ اللمسِ وبلا مساسٍ ببياناتك.</div>
@@ -5095,7 +5096,7 @@ async function buildNoorCard(){
   x.textAlign='center';
   /* الآية التأسيسية */
   x.fillStyle=F2; x.font='700 36px Amiri,"Noto Naskh Arabic",serif';
-  x.fillText('﴿ وَلِلَّهِ الْأَسْمَاءُ الْحُسْنَىٰ فَادْعُوهُ بِهَا ﴾',W/2,152);
+  x.fillText(cMirror('﴿ وَلِلَّهِ الْأَسْمَاءُ الْحُسْنَىٰ فَادْعُوهُ بِهَا ﴾'),W/2,152);
   x.fillStyle='rgba(238,233,220,.6)'; x.font='24px Cairo,"Noto Sans Arabic",sans-serif';
   x.fillText('سورة الأعراف · الآية ١٨٠',W/2,196);
   /* عنوان الساعة ورقم الاسم */
@@ -7854,7 +7855,7 @@ async function buildGreetCard(mode,off){
     x.direction='rtl';
   }
   x.fillStyle='rgba(238,233,220,.6)'; x.font='24px Cairo,"Noto Sans Arabic",sans-serif';
-  x.fillText(T(hd.ays),W/2,EN?266:194);
+  x.fillText(cMirror(T(hd.ays)),W/2,EN?266:194);
   const logoY=EN?312:262;
   x.strokeStyle=F; x.lineWidth=2.2; x.beginPath(); x.arc(W/2,logoY,16,0,7); x.stroke();
   x.fillStyle=F2; x.beginPath(); x.arc(W/2,logoY,4.5,0,7); x.fill();
@@ -7864,7 +7865,7 @@ async function buildGreetCard(mode,off){
   x.fillText(T(hd.big),W/2,EN?440:404); x.shadowBlur=0;
   x.fillStyle='rgba(238,233,220,.88)';
   if(EN){ x.font='italic 30px Georgia,serif'; x.direction='ltr'; x.fillText(T(hd.sub),W/2,494); x.direction='rtl'; }
-  else{ x.font='34px Amiri,"Noto Naskh Arabic",serif'; x.fillText(hd.sub,W/2,468); }
+  else{ x.font='34px Amiri,"Noto Naskh Arabic",serif'; x.fillText(cMirror(hd.sub),W/2,468); }
   const divY=EN?546:530;
   x.strokeStyle='rgba(217,182,97,.7)'; x.lineWidth=2;
   x.beginPath(); x.moveTo(W/2-150,divY); x.lineTo(W/2+150,divY); x.stroke();
@@ -7872,8 +7873,8 @@ async function buildGreetCard(mode,off){
   /* المحتوى: بنك النور أو كلمات المستخدم */
   const custom=(GREET_CFG.mode==='custom'&&GREET_CFG.text.trim());
   const tyTxt=custom?T('بكلماتي'):T(item.ty);
-  const bodyTxt=custom?GREET_CFG.text.trim():item.t;
-  const srcTxt=custom?'':item.s;
+  const bodyTxt=cMirror(custom?GREET_CFG.text.trim():item.t);
+  const srcTxt=cMirror(custom?'':item.s);
   x.fillStyle='rgba(242,217,146,.95)'; x.font='700 32px Cairo,"Noto Sans Arabic",sans-serif';
   x.fillText(tyTxt,W/2,divY+70);
   x.fillStyle='rgba(238,233,220,.97)'; x.font='38px Amiri,"Noto Naskh Arabic",serif';
@@ -9361,6 +9362,127 @@ function fiqhInit(){
 }
 fiqhInit();
 
+</script>
+<!-- v3.12.0: شاشةُ تعديلِ وقتِ الصلاة — تُفتَحُ بنقرِ وقتِ الأذانِ في الشاشةِ الرئيسية (طرازٌ صديقٌ للمس؛ أسهمُ إدخالِ الأرقامِ لا تظهرُ على iPhone فصمّمنا أزرارًا كبيرةً بدلَها) -->
+<style>
+#adjs{position:fixed;inset:0;z-index:980;display:none;touch-action:manipulation}
+#adjs.on{display:block}
+#adjs .adjback{position:absolute;inset:0;background:rgba(3,12,9,.72);-webkit-backdrop-filter:blur(6px);backdrop-filter:blur(6px)}
+#adjs .adjcard{position:absolute;left:50%;bottom:0;transform:translateX(-50%);width:min(560px,100%);max-height:92dvh;overflow:auto;
+  background:linear-gradient(180deg,var(--card2),var(--card));border:1px solid var(--line);border-bottom:none;
+  border-radius:26px 26px 0 0;padding:20px 20px calc(18px + env(safe-area-inset-bottom));box-shadow:0 -18px 60px rgba(0,0,0,.5)}
+#adjs .adjgrab{width:56px;height:5px;border-radius:3px;background:var(--line);margin:0 auto 14px}
+#adjs h3{margin:0 0 2px;font:700 26px/1.3 var(--f-disp);color:var(--gold2)}
+#adjs .adjsm{margin:0 0 14px;font:400 15px/1.6 var(--f-ui);color:var(--muted)}
+#adjs .adjbig{display:flex;align-items:center;justify-content:center;gap:14px;background:rgba(30,122,90,.12);border:1px solid var(--line);
+  border-radius:16px;padding:14px 10px;margin-bottom:14px}
+#adjs .adjbig b{font:700 44px/1 'Reem Kufi',var(--f-disp);color:var(--gold2);letter-spacing:1px}
+#adjs .adjbig span{font:600 15px/1.4 var(--f-ui);color:var(--muted);text-align:right}
+#adjs .adjbig span em{font-style:normal;color:var(--ink)}
+#adjs .steprow{display:flex;align-items:center;justify-content:space-between;gap:10px;background:var(--bg2);
+  border:1px solid var(--line);border-radius:16px;padding:10px 12px;margin-bottom:10px}
+#adjs .steplbl{font:600 16px/1.5 var(--f-ui);color:var(--ink);min-width:96px}
+#adjs .steplbl small{display:block;font:400 12.5px/1.4 var(--f-ui);color:var(--muted)}
+#adjs .stepctl{display:flex;align-items:center;gap:8px}
+#adjs .stepctl button{width:56px;height:48px;border-radius:14px;border:1px solid var(--line);background:var(--card);
+  color:var(--gold2);font:700 30px/1 'Cairo',var(--f-ui);cursor:pointer;-webkit-tap-highlight-color:transparent}
+#adjs .stepctl button:active{background:var(--emerald);color:#fff}
+#adjs .stepval{min-width:64px;text-align:center;font:700 26px/1 'Reem Kufi',var(--f-disp);color:var(--ink)}
+#adjs .stepval small{display:block;font:400 12px/1.4 var(--f-ui);color:var(--muted)}
+#adjs .adjbtns{display:flex;gap:10px;margin-top:14px}
+#adjs .adjbtns .btn{flex:1;padding:14px 10px;border-radius:14px;font:700 17px/1.3 var(--f-ui);cursor:pointer}
+#adjs .adjbtns .prim{background:linear-gradient(135deg,var(--emerald),var(--teal));color:#fff;border:none}
+#adjs .adjbtns .ghost{background:transparent;border:1px solid var(--line);color:var(--ink)}
+#adjs .adjx{position:absolute;top:14px;left:16px;background:transparent;border:1px solid var(--line);color:var(--muted);
+  border-radius:12px;padding:7px 14px;font:600 14px/1 var(--f-ui);cursor:pointer}
+</style>
+<div id="adjs" role="dialog" aria-modal="true">
+  <div class="adjback" data-adjs-close></div>
+  <div class="adjcard">
+    <div class="adjgrab"></div>
+    <button type="button" class="adjx" data-adjs-close>إغلاق</button>
+    <h3 id="adjT">—</h3>
+    <p class="adjsm" id="adjHint">اضبط الدقائق على عادة مسجدك أو الجدول الرسمي — تُحفظ في جهازك وتُطبَّق كل يوم.</p>
+    <div class="adjbig"><b id="adjPrev">—</b><span>وقت الأذان<br><em id="adjBase">—</em></span></div>
+    <div class="steprow">
+      <div class="steplbl">تعديل الأذان<small>من −٣٠ إلى +٣٠ دقيقة</small></div>
+      <div class="stepctl">
+        <button type="button" id="adjM" aria-label="إنقاص دقيقة">−</button>
+        <div class="stepval"><span id="adjV">0</span><small>دقيقة</small></div>
+        <button type="button" id="adjP" aria-label="زيادة دقيقة">+</button>
+      </div>
+    </div>
+    <div class="steprow">
+      <div class="steplbl">الإقامة بعد الأذان<small>حسب عادة مسجدك</small></div>
+      <div class="stepctl">
+        <button type="button" id="iqM" aria-label="إنقاص دقيقة">−</button>
+        <div class="stepval"><span id="iqV">0</span><small>دقيقة</small></div>
+        <button type="button" id="iqP" aria-label="زيادة دقيقة">+</button>
+      </div>
+    </div>
+    <div class="adjbig" style="padding:10px"><b id="iqPrev" style="font-size:34px">—</b><span>وقت الإقامة<br><em id="adjNote">—</em></span></div>
+    <div class="adjbtns">
+      <button type="button" class="btn ghost" id="adjZero">تصفير</button>
+      <button type="button" class="btn prim" id="adjSave">حفظ</button>
+    </div>
+  </div>
+</div>
+<script>
+/* v3.12.0: منطقُ شاشةِ التعديل — نقرُ خليةِ الصلاةِ في بطاقةِ المواقيتِ يفتحُها؛ أزرارُ + و− كبيرةٌ تعملُ باللمسِ والضغطِ المطوَّل */
+(function(){
+  const sh=document.getElementById('adjs'); if(!sh)return;
+  let K='fajr', adj=0, iq=0, base=0;
+  const $=s=>sh.querySelector(s), T2=(s)=>(typeof T==='function'?T(s):s);
+  const MN={fajr:'الفجر',dhuhr:'الظهر',asr:'العصر',maghrib:'المغرب',isha:'العشاء'};
+  function fmt(h){ return (typeof fmtT==='function')?fmtT(h):String(h); }
+  function render(){
+    $('#adjT').textContent=T2(MN[K]||K);
+    $('#adjPrev').textContent=fmt(base+adj/60);
+    $('#adjBase').textContent=T2('الأساس الفلكي')+' '+fmt(base)+(adj?(' ('+(adj>0?'+':'−')+Math.abs(adj)+' '+T2('د')+')'):'');
+    $('#adjV').textContent=(typeof AR==='function')?AR(adj):String(adj);
+    $('#iqV').textContent=(typeof AR==='function')?AR(iq):String(iq);
+    const ih=(((base+adj/60)*60+iq)%1440+1440)%1440/60;
+    $('#iqPrev').textContent=fmt(ih);
+    $('#adjNote').textContent=T2('بعد الأذان')+' '+(typeof AR==='function'?AR(iq):String(iq))+' '+T2('د');
+  }
+  function open(k){
+    if(typeof PRAY_KEYS==='undefined'||!PRAY_KEYS.includes(k))return;
+    K=k; if(!PRAY_TODAY)prayCompute();
+    adj=Math.min(30,Math.max(-30,Math.round(+S.prayAdj[k]||0)));
+    iq=Math.min(180,Math.max(0,Math.round(+S.iqama[k]||0)));
+    base=(PRAY_TODAY&&PRAY_TODAY.t)?PRAY_TODAY.t[k]-adj/60:0;
+    render(); sh.classList.add('on');
+    try{document.body.style.overflow='hidden';}catch(e){}
+  }
+  function close(){ sh.classList.remove('on'); try{document.body.style.overflow='';}catch(e){} }
+  function save(){
+    S.prayAdj[K]=adj; S.iqama[K]=iq; saveS(); prayCompute(); renderPrayCard();
+    const ai=document.getElementById('adj_'+K), ii=document.getElementById('iq_'+K);
+    if(ai)ai.value=adj; if(ii)ii.value=iq;
+    close(); toast(T2('حُفِظَ تعديلُ '+(MN[K]||K)+' — الأذانُ '+fmt(base+adj/60)+(iq?(' والإقامةُ بعده بـ'+(typeof AR==='function'?AR(iq):iq)+' '+T2('د')):'')));
+  }
+  /* ضغطٌ مطوَّلٌ يُكرِّر الخطوة (iOS وAndroid)، والنقرةُ الواحدةُ (لمسًا أو فأرةً أو لوحةَ مفاتيح) تعملُ دائمًا */
+  function hold(btn,fn){
+    let t=null, armed=false;
+    const stop=()=>{ if(t){clearInterval(t);t=null;} setTimeout(()=>{armed=false;},400); };
+    btn.addEventListener('pointerdown',e=>{ e.preventDefault(); armed=true; fn(); t=setInterval(fn,160); });
+    ['pointerup','pointercancel','pointerleave'].forEach(ev=>btn.addEventListener(ev,stop));
+    btn.addEventListener('click',e=>{ e.preventDefault(); if(armed)return; fn(); });
+  }
+  hold($('#adjM'),()=>{ adj=Math.max(-30,adj-1); render(); });
+  hold($('#adjP'),()=>{ adj=Math.min(30,adj+1); render(); });
+  hold($('#iqM'),()=>{ iq=Math.max(0,iq-1); render(); });
+  hold($('#iqP'),()=>{ iq=Math.min(180,iq+1); render(); });
+  $('#adjZero').addEventListener('click',()=>{ adj=0; render(); });
+  $('#adjSave').addEventListener('click',save);
+  sh.querySelectorAll('[data-adjs-close]').forEach(b=>b.addEventListener('click',close));
+  /* الفتحُ بنقرِ خليةِ الصلاةِ في بطاقةِ المواقيت */
+  document.addEventListener('click',e=>{
+    const b=e.target.closest('.pcell'); if(!b)return;
+    const k=b.getAttribute('data-pk'); if(k)open(k);
+  });
+  window.__openAdjSheet=open;
+})();
 </script>
 </body>
 </html>
