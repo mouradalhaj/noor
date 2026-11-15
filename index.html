@@ -116,7 +116,7 @@ body{
   transition:background .35s ease,color .35s ease;
 }
 body::before{
-  content:''; position:fixed; inset:0; pointer-events:none; z-index:0;
+  content:''; position:fixed; inset:0;top:0;right:0;bottom:0;left:0; pointer-events:none; z-index:0;
   transition:opacity 1.4s ease;
   background:
     radial-gradient(900px 480px at 50% -8%, rgba(47,174,134,.13), transparent 60%),
@@ -125,7 +125,7 @@ body::before{
 }
 /* سماء اليوم (v3.0.0): تدرّج جمالي يتبع أوقات النهار من الفجر إلى الليل — تقريب جمالي لا يُعتمد عليه في المواقيت */
 body::after{
-  content:''; position:fixed; inset:0; pointer-events:none; z-index:0;
+  content:''; position:fixed; inset:0;top:0;right:0;bottom:0;left:0; pointer-events:none; z-index:0;
   opacity:0; transition:opacity 1.6s ease, background 1.6s ease;
 }
 html[data-sky="fajr"] body::after{opacity:1;background:linear-gradient(180deg,rgba(105,132,184,.16),rgba(105,132,184,.03) 52%,transparent 78%)}
@@ -189,7 +189,7 @@ button{font-family:inherit;color:inherit}
 /* ====== ساعة الأسماء ====== */
 .clockwrap{position:relative;width:100%;max-width:min(360px,92vw);margin:8px auto 0;cursor:pointer;touch-action:manipulation;user-select:none;-webkit-user-select:none}
 .clockwrap svg{width:100%;height:auto;display:block}
-.clock-center{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:0 22%;pointer-events:none;gap:4px;z-index:2}
+.clock-center{position:absolute;inset:0;top:0;right:0;bottom:0;left:0;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:0 22%;pointer-events:none;gap:4px;z-index:2}
 .clock-center::before{content:'';position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);width:54%;aspect-ratio:1;border-radius:50%;background:radial-gradient(circle,var(--bg2) 42%,rgba(10,32,25,.6) 72%,transparent 82%);box-shadow:0 0 26px 12px rgba(10,32,25,.3);z-index:-1}
 :root[data-theme="light"] .clock-center::before{background:radial-gradient(circle,var(--bg2) 42%,rgba(235,227,205,.7) 72%,transparent 82%);box-shadow:0 0 26px 12px rgba(235,227,205,.35)}
 .nnum{font-size:.7rem;color:var(--gold);letter-spacing:.08em;font-weight:700}
@@ -248,7 +248,7 @@ html[data-namefont="ruqaa"] .nname{font-family:'Aref Ruqaa','Amiri',serif}
 .tagbu{background:linear-gradient(135deg,var(--gold),#b98d2f);color:#231a08;border:none;border-radius:999px;font-size:.72rem;font-weight:800;padding:6px 14px;cursor:pointer;font-family:var(--f-ui);letter-spacing:.02em;box-shadow:0 4px 14px rgba(217,182,97,.25);transition:.15s;white-space:nowrap}
 .tagbu:active{transform:scale(.94)}
 body.cardopen{overflow:hidden}
-.cardveil{position:fixed;inset:0;background:rgba(3,10,7,.64);backdrop-filter:blur(3px);-webkit-backdrop-filter:blur(3px);opacity:0;pointer-events:none;transition:opacity .3s;z-index:70}
+.cardveil{position:fixed;inset:0;top:0;right:0;bottom:0;left:0;background:rgba(3,10,7,.64);backdrop-filter:blur(3px);-webkit-backdrop-filter:blur(3px);opacity:0;pointer-events:none;transition:opacity .3s;z-index:70}
 .cardveil.show{opacity:1;pointer-events:auto}
 :root[data-theme="light"] .cardveil{background:rgba(40,32,16,.45)}
 .noorsheet{position:fixed;left:50%;bottom:0;transform:translate(-50%,110%);width:100%;max-width:470px;z-index:71;background:linear-gradient(180deg,var(--card2),var(--card));border:1px solid var(--line);border-bottom:none;border-radius:26px 26px 0 0;box-shadow:0 -20px 60px rgba(0,0,0,.5);transition:transform .38s cubic-bezier(.22,1,.36,1)}
@@ -288,7 +288,7 @@ html[data-namefont="ruqaa"] .nc-name{font-family:'Aref Ruqaa','Amiri',serif}
 .beadG.hot .bead{fill:url(#ggrad)!important;stroke:var(--gold2)!important}
 .beadG.hot .bshine{fill:rgba(255,255,255,.65)!important}
 .ring{transform-box:view-box;transform-origin:130px 130px;transition:transform .32s cubic-bezier(.3,1.25,.45,1)}
-.beads-center{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;pointer-events:none;gap:2px;z-index:2}
+.beads-center{position:absolute;inset:0;top:0;right:0;bottom:0;left:0;display:flex;flex-direction:column;align-items:center;justify-content:center;pointer-events:none;gap:2px;z-index:2}
 .beads-center::before{content:'';position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);width:56%;aspect-ratio:1;border-radius:50%;background:radial-gradient(circle,var(--bg2) 38%,rgba(10,32,25,.55) 74%,transparent 85%);box-shadow:0 0 24px 10px rgba(10,32,25,.28);z-index:-1}
 :root[data-theme="light"] .beads-center::before{background:radial-gradient(circle,var(--bg2) 38%,rgba(235,227,205,.72) 74%,transparent 85%);box-shadow:0 0 24px 10px rgba(235,227,205,.32)}
 .beads-center::after{content:'';position:absolute;left:50%;top:50%;width:44%;aspect-ratio:1;border-radius:50%;border:1.2px solid var(--gold);opacity:0;pointer-events:none;z-index:-1;transform:translate(-50%,-50%);animation:ringBeat 2.7s ease-out infinite}
@@ -403,7 +403,7 @@ details.doc .body b{color:var(--gold2)}
 .timerwrap svg{width:100%;height:100%;transform:rotate(-90deg)}
 .tring{fill:none;stroke:var(--line);stroke-width:7}
 .tprog{fill:none;stroke:var(--gold);stroke-width:7;stroke-linecap:round;transition:stroke-dashoffset 1s linear}
-.tnum{position:absolute;inset:0;display:grid;place-items:center;font-family:var(--f-read);font-size:2rem;color:var(--gold2)}
+.tnum{position:absolute;inset:0;top:0;right:0;bottom:0;left:0;display:grid;place-items:center;font-family:var(--f-read);font-size:2rem;color:var(--gold2)}
 .breath{width:112px;height:112px;border-radius:50%;margin:14px auto;border:1.5px solid var(--gold);display:grid;place-items:center;font-size:.8rem;color:var(--gold2);animation:brth 8s ease-in-out infinite;text-align:center}
 @keyframes brth{0%,100%{transform:scale(.82);opacity:.6}50%{transform:scale(1.08);opacity:1}}
 .skywrap{position:relative;border-radius:18px;overflow:hidden;border:1px solid var(--line);background:radial-gradient(140% 110% at 50% 0%,#122b44 0%,#0a1120 58%,#060a12 100%)}
@@ -489,9 +489,9 @@ details.doc .body b{color:var(--gold2)}
 .azknote{border:1px solid var(--line);border-radius:16px;background:var(--bg2);padding:12px 14px;margin-top:14px;font-size:.72rem;color:var(--muted);line-height:2.1}
 .azknote b{color:var(--gold2)}
 /* --- سماء الخير الغامرة (v3.8.0): منظرٌ ملء الشاشة تلامس فيه النجوم الأرض --- */
-.skyveil{position:fixed;inset:0;z-index:82;background:#04070f;transform:translateY(103%);transition:transform .45s cubic-bezier(.22,1,.36,1);display:flex;flex-direction:column;overflow:hidden}
+.skyveil{position:fixed;inset:0;top:0;right:0;bottom:0;left:0;z-index:82;background:#04070f;transform:translateY(103%);transition:transform .45s cubic-bezier(.22,1,.36,1);display:flex;flex-direction:column;overflow:hidden}
 .skyveil.show{transform:translateY(0)}
-#skyCanvas{position:absolute;inset:0;width:100%;height:100%;display:block}
+#skyCanvas{position:absolute;inset:0;top:0;right:0;bottom:0;left:0;width:100%;height:100%;display:block}
 .skyhud{position:relative;z-index:2;display:flex;align-items:center;gap:10px;padding:calc(14px + env(safe-area-inset-top,0px)) 16px 8px}
 .skyhud .sktitle{display:flex;flex-direction:column;gap:2px;flex:1;min-width:0}
 .skyhud .sktitle b{font-size:1.02rem;color:#f2d992}
@@ -711,7 +711,7 @@ details.doc .body b{color:var(--gold2)}
 .khushubtn span{display:block;font-size:.7rem;color:var(--muted);margin-top:3px;line-height:1.7}
 .khushubtn:active{transform:scale(.98)}
 /* جلسة الخشوع بملء الشاشة: دائرة تنفّس وعدّاد ومؤقت */
-.khushuveil{position:fixed;inset:0;z-index:80;display:flex;flex-direction:column;opacity:0;pointer-events:none;transition:opacity .35s;background:linear-gradient(180deg,var(--bg) 0%,var(--bg2) 58%,var(--bg) 100%);padding:calc(18px + env(safe-area-inset-top,0px)) 16px calc(16px + env(safe-area-inset-bottom,0px))}
+.khushuveil{position:fixed;inset:0;top:0;right:0;bottom:0;left:0;z-index:80;display:flex;flex-direction:column;opacity:0;pointer-events:none;transition:opacity .35s;background:linear-gradient(180deg,var(--bg) 0%,var(--bg2) 58%,var(--bg) 100%);padding:calc(18px + env(safe-area-inset-top,0px)) 16px calc(16px + env(safe-area-inset-bottom,0px))}
 .khushuveil.show{opacity:1;pointer-events:auto}
 .khushuveil.show .khu-mid{opacity:1;transform:none}
 .khu-top{display:flex;align-items:center;justify-content:space-between;gap:8px}
@@ -759,7 +759,7 @@ details.doc .body b{color:var(--gold2)}
 .nav-b.on{color:var(--gold2);background:rgba(217,182,97,.12)}
 
 /* ====== الاحتفال والتنبيه ====== */
-#celebrate{position:fixed;inset:0;background:rgba(4,12,9,.74);backdrop-filter:blur(4px);-webkit-backdrop-filter:blur(4px);display:none;align-items:center;justify-content:center;z-index:80;padding:24px}
+#celebrate{position:fixed;inset:0;top:0;right:0;bottom:0;left:0;background:rgba(4,12,9,.74);backdrop-filter:blur(4px);-webkit-backdrop-filter:blur(4px);display:none;align-items:center;justify-content:center;z-index:80;padding:24px}
 #celebrate.show{display:flex}
 .cele{position:relative;text-align:center;padding:28px 30px;border-radius:26px;max-width:340px;width:100%;background:linear-gradient(160deg,var(--card),var(--card2));border:1px solid var(--gold);animation:pop .45s cubic-bezier(.2,1.4,.4,1)}
 .ok{width:84px;height:84px;border-radius:50%;background:linear-gradient(135deg,var(--gold),#b98d2f);display:grid;place-items:center;margin:0 auto 14px;box-shadow:0 12px 30px rgba(217,182,97,.4)}
@@ -999,6 +999,7 @@ button.pray-loc{background:none;border:none;font-family:var(--f-ui)}
     <p class="aya" id="wasiyaHomeP"></p>
     <p class="src" id="wasiyaHomeS"></p>
     <p class="hint" style="text-align:center;margin-top:2px">وصيةٌ واحدةٌ كلَّ يومٍ من القرآنِ والسنةِ والسلف — اجعلها شعارَ يومك</p>
+    <div class="dailybtns"><button type="button" id="wasiyaShare" class="miniact">مشاركة</button><button type="button" id="wasiyaCopy" class="miniact">نسخ</button></div>
   </div>
   <div class="grid2">
     <button type="button" class="feat" data-go="names">
@@ -1370,6 +1371,17 @@ button.pray-loc{background:none;border:none;font-family:var(--f-ui)}
     <div class="coordrow"><input id="prayLat" type="number" step="0.0001" inputmode="decimal" placeholder="خط العرض" aria-label="خط العرض"><input id="prayLon" type="number" step="0.0001" inputmode="decimal" placeholder="خط الطول" aria-label="خط الطول"><button type="button" id="prayLocApply" class="btn">تطبيق</button></div>
     <div class="srow"><span class="lbl2">طريقة الحساب</span><div class="seg" id="segPrayMethod"><button type="button">الرابطة الإسلامية</button><button type="button">أم القرى</button><button type="button">الهيئة المصرية</button><button type="button">كراتشي</button><button type="button">أمريكا الشمالية</button></div></div>
     <div class="srow"><span class="lbl2">مذهب العصر</span><div class="seg" id="segPrayAsr"><button type="button">جمهور (شافعي/مالكي/حنبلي)</button><button type="button">حنفي</button></div></div>
+    <div class="srow"><span class="lbl2">الارتفاع عن سطح البحر</span><div class="coordrow"><input id="prayAlt" type="number" min="0" max="4000" step="1" inputmode="numeric" placeholder="بالمتر — ٠ إن لم تعرفه"><button type="button" id="prayAltApply" class="btn">تطبيق</button></div></div>
+    <p class="small">لماذا قد يختلف المغربُ والعشاءُ عن مسجدك مع صحة الموضع؟ المغربُ لحظةُ غيابِ القرصِ كليًّا فيتأثر بارتفاعِ موضعك (فوق المرتفعاتِ يطولُ النهارُ: يتأخر المغربُ ويتبكَّرُ الشروقُ، وضمن السفحِ بالعكس) ونحسبُ ذلك بالميلَ الأفقيَّ المعياريَّ للأفق؛ وأما العشاءُ فطريقةُ «أم القرى» تجعله بعد المغربِ بفاصلٍ ثابتٍ (٩٠ دقيقة، وتصبح ١٢٠ في رمضان) بينما الرابطةُ والمصريةُ بزاويةِ الشفق؛ وتناهضُ الخوارزمياتِ المعياريةِ دقيقةً يسيرة — فإن أردتَ المطابقةَ التامة لمواقيتِ مسجدك فاستعمل التعديلَ اليدويَّ أدناه، فهو أضمنُ حلٍّ عمليٍّ معتمدٌ في التطبيقاتِ الكبرى.</p>
+    <p class="small">تعديل يدوي بالدقائق لكل صلاة (من −٣٠ إلى +٣٠) — يُضاف إلى وقت الأذان المحسوب، وتُضاف الإقامةُ فوقه:</p>
+    <div class="numrow">
+      <label>الفجر<input id="adj_fajr" type="number" min="-30" max="30" inputmode="numeric"></label>
+      <label>الظهر<input id="adj_dhuhr" type="number" min="-30" max="30" inputmode="numeric"></label>
+      <label>العصر<input id="adj_asr" type="number" min="-30" max="30" inputmode="numeric"></label>
+      <label>المغرب<input id="adj_maghrib" type="number" min="-30" max="30" inputmode="numeric"></label>
+      <label>العشاء<input id="adj_isha" type="number" min="-30" max="30" inputmode="numeric"></label>
+    </div>
+    <div style="margin-top:8px"><button type="button" id="prayAdjReset" class="miniact">تصفير التعديلات</button></div>
     <p class="small">الإقامة بعد الأذان (دقائق) — عدّلها على عادة مسجدك:</p>
     <div class="numrow">
       <label>الفجر<input id="iq_fajr" type="number" min="0" max="180" inputmode="numeric"></label>
@@ -1437,6 +1449,7 @@ button.pray-loc{background:none;border:none;font-family:var(--f-ui)}
     </details>
     <details class="doc">
       <summary>سجل الإصدار</summary>
+      <div class="body"><b>v3.10.0</b> — «بطاقةٌ تُشارَك ومواقيتُ تُضبَط» بثلاثِ هداياٍ طلبتَها: <b>(١) إصلاحُ سماءِ الخير على الأجهزةِ القديمة</b> — كان غلافُ السماءِ يعتمدُ خاصيةَ CSS‏ «inset» المختصرةَ التي لا تدعمها إصداراتُ الآيفونِ الأقدم، فيسقطُ تحديدُها ويظهر المنظرُ خارجَ الحدودِ تحت شبكةِ الأدوات؛ فوسَّعنا الإحداثياتِ صراحةً (top/right/bottom/left) في كلِّ الطبقاتِ الثابتةِ العشر — السماءُ والحجابُ والخشوعُ والاحتفالُ والساعةُ والمسبحة — فتعودُ إلى حدودِ الشاشةِ كاملةً مع مساحاتِ الأمان. <b>(٢) بطاقاتُ النور تُشارَك على واتساب صورًا حقيقيةً بنفسِ الجماليةِ والترتيب</b> — نُفحةُ القرآنِ لليوم، وجوهرةُ السنةِ لليوم، ووصيةُ اليوم: تُرسَم كلٌّ منها لحظةَ المشاركة على قماشٍ عاليِ الدقة (١٠٨٠×١٣٥٠) بسماءِ اللحظةِ الزمنيةِ ونجومِها، والإطارِ المزدوجِ الذهبيِّ ومعيناتِ الزوايا، ووسمِ البطاقةِ في شريطٍ مموَّج، والنصِّ بخطِ الأميري المتكيف، والمصدرِ والفائدةِ العملية، وختمِ اليومِ الهجريِّ والميلادي، وشعارِ النورِ والتوقيع — ثم تُشارَك بملفٍ حقيقيٍّ عبر لوحة المشاركةِ (وفي الآيفون تصل صورةً في المحادثة)، وفي المتصفحاتِ القديمةِ تُنزَّل الصورةُ ويُفتح واتساب برسالةِ الاستعداد. <b>(٣) مواقيتٌ أضبطُ وأقربُ لمسجدك</b> — فُسِّر سببُ اختلافِ المغربِ والعشاءِ (ميلُ الأفقِ بالارتفاع، وفاصلُ أم القرى الثابتِ ٩٠/١٢٠ في رمضان، وتناهضُ الخوارزمياتِ دقيقةً) وأُضيف الارتفاعُ عن سطحِ البحرِ ليُصحَّح غيابُ القرصِ بالميلَ الأفقيَّ المعياريَّ (0.0347·√h)، وأُضيف تعديلٌ يدويٌّ بالدقائقِ (من −٣٠ إلى +٣٠) لكلِّ صلاةٍ على حدةٍ يطابقُ مواقيتَ مسجدكِ بالضبطِ — يُضاف إلى الأذانِ وتُضاف الإقامةُ فوقه، مع زرِّ تصفيرٍ يعيد الحسابَ الفلكيَّ الخالص؛ وصارت «أم القرى» تمدُّ فاصلَ العشاءِ إلى ١٢٠ دقيقةً في رمضان تلقائيًّا وفق المعيارِ الرسمي — وبلا مساسٍ ببياناتك: كلُّ شيءٍ محسوبٌ في جهازك.</div>
       <div class="body"><b>v3.9.0</b> — «اعتمادُ بابِ الطهارة»: دخلَ بابُ الطهارةِ زاويةَ فقه العباداتِ بجانبَ بابِ الصلاة، بمبدِّلِ أبوابٍ أنيقٍ يفتحُ كلَّ كتابٍ لوحده بنفسِ المهنيةِ وخوارزميةِ الفهم العميق: بطاقاتُ الأبوابِ القابلةُ للطي، والأدلةُ المسنَدةُ بمصادِرها، والأخطاءُ الشائعةُ بتصحيحِها، والجداولُ المقارنةُ، والبحثُ السريعُ في بابٍ واحد، وخطُّ التقدُّم، وخاتمُ القراءةِ الذهبيُّ الذي يضيء نجمةَ علمٍ في سماء الخير — تِسعةُ أبوابٍ في الطهارة: التعريفُ والحكم، والمياه، والآنية، والنجاسات، والاستنجاد، والوضوء، والمسح، والتيمم، والغسل. وعُدَّت على المنهجيةِ الأربعِ بمصطلحاتِها الدقيقة: الترجيحُ من «الشرح الممتع»، والاختصارُ والترتيبُ من «الملخص الفقهي»، والإجماعاتُ المنقولةُ في «المغني»، وتم الاعتماد في بيان درجة الحديث على أحكام المحدثين المنقولة في موسوعة الدرر السنية — وتحسبًا للعدلِ في عرض الخلاف: نُبِّه في تقسيم الماء على ترجيحِ القسمين عند ابن تيمية وابن القيم وابن باز وابن عثيمين مع ثبوت التقسيمِ الثلاثيِّ قولًا فقهيًّا معتبرًا لا محلَّ اتفاق، وصُحِّح نصُّ الدباغةِ إلى الحديثِ الثابتِ في مسلم (٣٦٣ و٣٦٦) عن شاة ميمونة، وفرُّق في النواقضِ بين المتفق عليه وبين مسألتي القيءِ والدمِ من أشهر مواضع الخلاف — بنفسِ خفّةِ اللمسِ وبلا مساسٍ ببياناتك.</div>
       <div class="body"><b>v3.8.0</b> — «السماءُ تلامسُ الأرض»: صارت سماءُ الخيرِ تجربةً كاملةً بمنظرٍ ملءِ الشاشة: تفتحُ بلمسةٍ من تقريرها فتزحفُ سماءٌ ليليةٌ عميقةٌ من أسفلِ الشاشة، فيها نجومُ أعمالِك بمواضعِها الثابتة وألوانِ أعمالِها تومضُ وتتنفسُ، وهلالٌ هادئٌ في أرجائها، وشهبٌ ذهبيةٌ تعبرُ كلَّ قليلٍ، وتلالٌ معتمةٌ في أسفلها تلامسُ النجومُ أطرافَها كأنَّ الخيرَ أنزلَ من السماءِ إلى الأرض، وفي صدرِ المنظر تتوالى آياتٌ من كتابِ اللهِ تُنيرُ محبةَ اللهِ ورحمتَه لعبادِه المؤمنينَ وثوابَ عبادِه الصالحينَ وتختفيُ بتأنٍّ كأنَّك في عالمٍ من الخيالِ البديع — ونقرةُ إصبعك على أيِّ نجمةٍ تُري لك أيَّ عملٍ أضاءها بنبضةٍ ذهبيةٍ ورسالةٍ لطيفة، وتحترمُ المنظرُ خيارَ «تقليل الحركة» فتستقرُ حينئذٍ بلا وميضٍ ولا شهب؛ وأضافَ تقريرُ السماءَ «خطَّ تقدُّمِك»: خطوطٌ حيَّةٌ أمام أعمالِك تُري اليومَ مقابلَ أفضلِ أيامِك، وأسبوعَك مقابلَ أفضلِ أسابيعِك، ومخططَ آخرَ أربعةَ عشرَ يومًا بعامودٍ أخضرٍ لليوم — فالتقدُّمُ يُرى ولا يُحتسبُ رقمًا فقط.</div>
       <div class="body"><b>v3.7.0</b> — «وردُ الصباح والمساء»: جُمِّعت عزيمةُ اليومَ في قائمةٍ منسدلةٍ تفتحُ لتختار وتغلقُ فتسعَ مساحةُ الشاشةِ لبقيةِ النور، وهدِيت زاويةُ «أذكار الصباح والمساء»: ورديتان موثَّقتان من الصحيحين والسنن المصنَّفة صحيحًا أو حسنًا عند أهل السنة والجماعة — ولم يُدرج ذكرٌ ضعيفُ الإسناد — ببطاقاتٍ تُعدُّ بلمسةٍ مع شريطِ تقدُّمٍ لكل ذكر، ويُصفَّر العدُّ تلقائيًا كلَّ يومٍ ويُحفظ تقدُّمُك في جهازك؛ وبطاقةٌ على الرئيسية تستيقظُ مع دخولِ وقتِ الورد: أذكارُ الصباحِ من الفجر، وأذكارُ المساءِ من العصر، فتُري كم أتممتَ وتفتحُ الوردياتِ بنقرة؛ ومن أتمَّ وردًا كاملًا أضاءت له نجمةُ ذكرٍ في سماء الخير، وسلسلةُ أتمامِ الورديتين معًا تنمو كلَّ يومٍ اتصل فيهما — بنفسِ خفّةِ اللمسِ وبلا مساسٍ ببياناتك.</div>
@@ -5124,6 +5137,109 @@ async function buildNoorCard(){
   x.fillText(CARD_SORRY,W/2,H-72);
   return cv;
 }
+/* ===== بطاقات نور اليومية المصوَّرة (v3.10.0): نُفحة قرآنية، جوهرة السنة، وصية اليوم — بنفس جمالية بطاقة الأسماء تُشارك على واتساب ===== */
+function quotePill(x,cx,cy,txt,fs){
+ x.font='700 '+fs+'px Cairo,"Noto Sans Arabic",sans-serif';
+ const w=x.measureText(txt).width+64, rx=cx-w/2, ry=cy-fs-14, rh=fs+30;
+ x.fillStyle='rgba(10,20,40,.45)'; x.strokeStyle='rgba(217,182,97,.75)'; x.lineWidth=2.2;
+ if(x.roundRect){ x.beginPath(); x.roundRect(rx,ry,w,rh,rh/2); x.fill(); x.stroke(); }
+ else{ x.fillRect(rx,ry,w,rh); x.strokeRect(rx,ry,w,rh); }
+ x.fillStyle='#f2d992'; x.fillText(txt,cx,cy+8);
+}
+async function buildQuoteCard(o){
+ const W=1080,H=1350;
+ const cv=document.createElement('canvas'); cv.width=W; cv.height=H;
+ const x=cv.getContext('2d');
+ try{ if(document.fonts&&document.fonts.ready)await document.fonts.ready; }catch(e){}
+ /* نفس السماء الزمنية والإطار المزدوج ومعينات الزوايا كما في بطاقة الأسماء */
+ const cols=cardSkyCols(), g=x.createLinearGradient(0,0,0,H);
+ g.addColorStop(0,cols[0]); g.addColorStop(.55,cols[1]); g.addColorStop(1,cols[2]);
+ x.fillStyle=g; x.fillRect(0,0,W,H);
+ const ph=skyPhase();
+ if(ph==='night'||ph==='isha'||ph==='fajr'){
+   for(let i=0;i<90;i++){ x.globalAlpha=(Math.random()*.5+.22)*(ph==='fajr'?.6:1);
+     x.fillStyle='#f4ead0'; x.beginPath(); x.arc(Math.random()*W,Math.random()*H*.6,Math.random()*1.8+.5,0,7); x.fill(); }
+   x.globalAlpha=1;
+ }
+ const hg=x.createRadialGradient(W/2,150,40,W/2,150,660);
+ hg.addColorStop(0,'rgba(242,217,146,.15)'); hg.addColorStop(1,'rgba(242,217,146,0)');
+ x.fillStyle=hg; x.fillRect(0,0,W,H);
+ const F='#d9b661',F2='#f2d992';
+ const dia=(cx,cy)=>{ x.save(); x.translate(cx,cy); x.rotate(Math.PI/4); x.fillStyle=F2; x.fillRect(-7,-7,14,14); x.restore(); };
+ x.strokeStyle=F; x.lineWidth=3; x.strokeRect(38,38,W-76,H-76);
+ x.strokeStyle='rgba(217,182,97,.45)'; x.lineWidth=1.4; x.strokeRect(54,54,W-108,H-108);
+ dia(38,38); dia(W-38,38); dia(38,H-38); dia(W-38,H-38);
+ x.textAlign='center';
+ /* وسم البطاقة داخل شريطٍ مموَّج */
+ quotePill(x,W/2,182,String(o.tag||'بطاقة نور'),30);
+ /* النص الرئيس بخط أميريٍّ متكيفٍ مع طول المقاطع */
+ const wrapAt=(fs,maxW)=>{ x.font='700 '+fs+'px Amiri,"Noto Naskh Arabic",serif';
+   const out=[]; let cur='';
+   String(o.aya||'').split(' ').forEach(w=>{ const t=cur?cur+' '+w:w;
+     if(x.measureText(t).width>maxW&&cur){ out.push(cur); cur=w; } else cur=t; });
+   if(cur)out.push(cur); return out; };
+ let fs=60, lines=wrapAt(fs,W-260);
+ while((lines.length>7||lines.some(l=>x.measureText(l).width>W-240))&&fs>34){ fs-=4; lines=wrapAt(fs,W-260); }
+ const lh=Math.round(fs*1.62), yA=560-(lines.length-1)*lh/2;
+ x.fillStyle='#f6e7bd'; x.shadowColor='rgba(0,0,0,.42)'; x.shadowBlur=16;
+ lines.forEach((L,k)=>x.fillText(L,W/2,yA+k*lh));
+ x.shadowBlur=0;
+ let y=yA+(lines.length-1)*lh+64;
+ /* المصدر ثم فاصلٌ مزخرفٌ والفائدة العملية إن وجدت */
+ x.fillStyle='rgba(217,182,97,.95)'; x.font='600 30px Cairo,"Noto Sans Arabic",sans-serif';
+ x.fillText('— '+String(o.src||''),W/2,y); y+=66;
+ const orn=(cy)=>{ x.strokeStyle='rgba(217,182,97,.7)'; x.lineWidth=2;
+   x.beginPath(); x.moveTo(W/2-150,cy); x.lineTo(W/2+150,cy); x.stroke(); dia(W/2,cy); };
+ if(o.mean){ orn(y); y+=64;
+   x.fillStyle='rgba(238,233,220,.92)'; x.font='34px Cairo,"Noto Sans Arabic",sans-serif';
+   const mw=String(o.mean).split(' '),mls=[]; let mc='';
+   mw.forEach(w=>{ const t=mc?mc+' '+w:w; if(x.measureText(t).width>W-300&&mc){ mls.push(mc); mc=w; } else mc=t; });
+   if(mc)mls.push(mc); if(mls.length>3){ mls.length=3; mls[2]+='…'; }
+   mls.forEach(L=>{ x.fillText(L,W/2,y); y+=52; });
+ } else orn(y);
+ /* ختم اليوم والشعار والتوقيع — الترتيب نفسه في بطاقة الأسماء */
+ const now=new Date();
+ x.fillStyle='rgba(242,217,146,.92)'; x.font='700 31px Cairo,"Noto Sans Arabic",sans-serif';
+ x.fillText(hijriNice(now)+'  ·  '+gregNice(now),W/2,H-288);
+ x.strokeStyle=F; x.lineWidth=2.6; x.beginPath(); x.arc(W/2,H-212,26,0,7); x.stroke();
+ x.fillStyle=F2; x.beginPath(); x.arc(W/2,H-212,7,0,7); x.fill();
+ x.fillStyle='rgba(238,233,220,.55)'; x.font='21px Cairo,"Noto Sans Arabic",sans-serif';
+ x.fillText(CARD_NOTE,W/2,H-138);
+ x.direction='ltr'; x.fillText(CARD_URL,W/2,H-105); x.direction='rtl';
+ x.fillText(CARD_SORRY,W/2,H-72);
+ return cv;
+}
+async function shareQuoteCardImage(o){
+ try{
+   const cv=await buildQuoteCard(o);   const blob=await new Promise(res=>{ try{ cv.toBlob(res,'image/png'); }catch(e){ res(null); } });
+   if(!blob){ toast(T('تعذّر إنشاء الصورة في هذا المتصفح')); return; }
+   const file=new File([blob],'noor-quote.png',{type:'image/png'});
+   if(navigator.canShare&&navigator.canShare({files:[file]})){
+     await navigator.share({files:[file],title:'بطاقة نور',text:(o.txt||o.aya||'')+'\n\n'+CARD_URL});
+   }else{
+     /* بديل المتصفحات القديمة: تنزيل الصورة ثم فتح واتساب برسالة الاستعداد */
+     const a=document.createElement('a'); a.href=URL.createObjectURL(blob); a.download='noor-quote.png';
+     document.body.appendChild(a); a.click(); a.remove();
+     setTimeout(()=>URL.revokeObjectURL(a.href),8000);
+     window.open('https://wa.me/?text='+encodeURIComponent((o.txt||o.aya||'')+'\n\n'+CARD_URL),'_blank','noopener');
+     toast(T('نُزِّلت صورة البطاقة — أرفِقها في واتساب وشارِكها'));
+   }
+ }catch(e){
+   if(!e||e.name!=='AbortError')toast(T('تعذّرت المشاركة هنا — افتح نور من متصفح جهازك وشارِك'));
+ }
+}
+if(typeof TR!=='undefined')Object.assign(TR,{
+ 'نُزِّلت صورة البطاقة — أرفِقها في واتساب وشارِكها':'Card image downloaded — attach it in WhatsApp and share',
+ 'تعذّر إنشاء الصورة في هذا المتصفح':'Could not build the image in this browser',
+ 'تعذّرت المشاركة هنا — افتح نور من متصفح جهازك وشارِك':'Sharing failed here — open Noor in your device browser to share',
+ 'الارتفاع عن سطح البحر':'Elevation above sea level',
+ 'بالمتر — ٠ إن لم تعرفه':'in meters — 0 if unknown',
+ 'حُفظ الارتفاع — صُحِّح به ميلُ الأفقِ في الشروقِ والمغرب':'Elevation saved — horizon dip corrected for sunrise & sunset',
+ 'صُفِّرت التعديلات — عادت المواقيتُ إلى الحسابِ الفلكيِّ الخالص':'Adjustments reset — times restored to pure astronomical calculation',
+ 'تصفير التعديلات':'Reset adjustments',
+ 'تعديل يدوي بالدقائق لكل صلاة (من −٣٠ إلى +٣٠) — يُضاف إلى وقت الأذان المحسوب، وتُضاف الإقامةُ فوقه:':'Manual per-prayer adjustment in minutes (−30 to +30) — added to the calculated adhan time; iqama adds on top:',
+ 'لماذا قد يختلف المغربُ والعشاءُ عن مسجدك مع صحة الموضع؟':'Why may Maghrib & Isha differ from your mosque even with a correct location?'
+});
 async function shareNoorCard(){
   const btn=$('#btnShare'); if(btn)btn.disabled=true;
   try{
@@ -7257,9 +7373,10 @@ function renderDaily(){
   const qa=$('#qDayA'); if(!qa)return;
   qa.textContent=q.a; $('#qDayS').textContent='— '+q.s; $('#qDayM').textContent=q.m;
   $('#hDayT').textContent=h.t; $('#hDayS').textContent='— '+h.s; $('#hDayM').textContent=h.m;
-  $('#qDayShare').addEventListener('click',()=>shareText(T('نُفحة قرآنية من تطبيق نور\n\n')+q.a+'\n— '+T(q.s)+'\n\n'+T(q.m)+T('\n\n﴿وَلَقَدْ يَسَّرْنَا الْقُرْآنَ لِلذِّكْرِ فَهَلْ مِن مُّدَّكِرٍ﴾ (القمر: ١٧)')));
+  /* المشاركة كبطاقةٍ مصوَّرةٍ بنفس الجمالية (v3.10.0) — والنسخ نصًّا كما كان */
+  $('#qDayShare').onclick=()=>shareQuoteCardImage({tag:'نُفحة قرآنية لليوم',aya:q.a,src:q.s,mean:q.m,txt:T('نُفحة قرآنية من تطبيق نور\n\n')+q.a+'\n— '+T(q.s)+'\n\n'+T(q.m)+T('\n\n﴿وَلَقَدْ يَسَّرْنَا الْقُرْآنَ لِلذِّكْرِ فَهَلْ مِن مُّدَّكِرٍ﴾ (القمر: ١٧)')});
   $('#qDayCopy').addEventListener('click',()=>copyText(T('نُفحة قرآنية من تطبيق نور\n\n')+q.a+'\n— '+T(q.s)+'\n\n'+T(q.m)));
-  $('#hDayShare').addEventListener('click',()=>shareText(T('جوهرة من السنة من تطبيق نور\n\n')+h.t+'\n— '+T(h.s)+'\n\n'+T(h.m)+T('\n\n﴿وَمَا آتَاكُمُ الرَّسُولُ فَخُذُوهُ وَمَا نَهَاكُمْ عَنْهُ فَانتَهُوا﴾ (الحشر: ٧)')));
+  $('#hDayShare').onclick=()=>shareQuoteCardImage({tag:'جوهرة من السنة لليوم',aya:h.t,src:h.s,mean:h.m,txt:T('جوهرة من السنة من تطبيق نور\n\n')+h.t+'\n— '+T(h.s)+'\n\n'+T(h.m)+T('\n\n﴿وَمَا آتَاكُمُ الرَّسُولُ فَخُذُوهُ وَمَا نَهَاكُمْ عَنْهُ فَانتَهُوا﴾ (الحشر: ٧)')});
   $('#hDayCopy').addEventListener('click',()=>copyText(T('جوهرة من السنة من تطبيق نور\n\n')+h.t+'\n— '+T(h.s)+'\n\n'+T(h.m)));
 }
 
@@ -7570,6 +7687,10 @@ function renderWasiyaHome(){
   const p=$('#wasiyaHomeP'), s=$('#wasiyaHomeS');
   if(p)p.textContent=w.p;
   if(s)s.textContent='— '+w.s;
+  /* المشاركة كبطاقةٍ مصوَّرةٍ بنفس الجمالية (v3.10.0) */
+  const ws=$('#wasiyaShare'), wc=$('#wasiyaCopy');
+  if(ws)ws.onclick=()=>shareQuoteCardImage({tag:'وصية اليوم',aya:w.p,src:w.s,txt:T('وصية اليوم من تطبيق نور\n\n')+w.p+'\n— '+T(w.s)});
+  if(wc)wc.onclick=()=>copyText(T('وصية اليوم من تطبيق نور\n\n')+w.p+'\n— '+T(w.s));
   box.hidden=false;
 }
 /* --- شرح سجل بطاقات النور بلمسة (v3.4.0) --- */
@@ -8305,6 +8426,12 @@ if(S.prayAsr!=='hanafi')S.prayAsr='jamhur';
 if(S.pray24!=='h24')S.pray24='h12';
 if(!S.iqama||typeof S.iqama!=='object')S.iqama=Object.assign({},IQ_DEF);
 PRAY_KEYS.forEach(k=>{ const v=+S.iqama[k]; if(!isFinite(v)||v<0||v>180)S.iqama[k]=IQ_DEF[k]; });
+/* v3.10.0: تعديلٌ يدويٌّ بالدقائق لكل صلاة (للتقابل مع مواقيت المسجد المحلي) + ارتفاع الموضع عن سطح البحر */
+const ADJ_DEF={fajr:0,dhuhr:0,asr:0,maghrib:0,isha:0};
+if(!S.prayAdj||typeof S.prayAdj!=='object')S.prayAdj=Object.assign({},ADJ_DEF);
+PRAY_KEYS.forEach(k=>{ const v=+S.prayAdj[k]; if(!isFinite(v)||v<-30||v>30)S.prayAdj[k]=0; });
+if(!isFinite(+S.prayAlt)||+S.prayAlt<0||+S.prayAlt>4000)S.prayAlt=0;
+function hijriMonthOf(d){ try{ const s=new Intl.DateTimeFormat('en-u-ca-islamic-umalqura',{month:'numeric'}).format(d); const n=parseInt(s,10); return isFinite(n)?n:0; }catch(e){ return 0; } }
 let PRAY_LOC=store.get('prayLoc',{lat:21.4225,lon:39.8262,label:'مكة المكرمة — افتراضيًا حتى تحدّد موضعك'});
 if(!isFinite(PRAY_LOC.lat)||!isFinite(PRAY_LOC.lon))PRAY_LOC={lat:21.4225,lon:39.8262,label:'مكة المكرمة — افتراضيًا حتى تحدّد موضعك'};
 
@@ -8334,16 +8461,22 @@ function prayTimesFor(date){
  const tz=-date.getTimezoneOffset()/60;
  /* الزوال: ١٢ − معادلة الوقت + المنطقة الزمنية − خط الطول ساعاتًا (المعيار كما في المراجع) */
  const dhuhr=12+tz-PRAY_LOC.lon/15-sp.eq;
- /* زوايا تحت الأفق تُمرَّر سالبة: الفجر والشروق والمغرب والعشاء؛ أما العصر فارتفاعٌ فوق الأفق */
- const sunrise=dhuhr-prayT(-0.833,sp.decl,PRAY_LOC.lat);
- const maghrib=dhuhr+prayT(-0.833,sp.decl,PRAY_LOC.lat);
+ /* زوايا تحت الأفق تُمرَّر سالبة: الفجر والشروق والمغرب والعشاء؛ أما العصر فارتفاعٌ فوق الأفق.
+    ميلُ الأفقِ بسبب الارتفاع عن سطح البحر (المعيار 0.0347·√h درجة): كلما ارتفعتَ طالَ يومُك — يتبكَّرُ الشروقُ ويتأخر المغرب */
+ const dip=0.0347*Math.sqrt(Math.max(0,+S.prayAlt||0));
+ const hz=0.833+dip;
+ const sunrise=dhuhr-prayT(-hz,sp.decl,PRAY_LOC.lat);
+ const maghrib=dhuhr+prayT(-hz,sp.decl,PRAY_LOC.lat);
  let fajr=dhuhr-prayT(-meth.fajr,sp.decl,PRAY_LOC.lat);
- let isha=(meth.ishaM!=null)?maghrib+meth.ishaM/60:dhuhr+prayT(-meth.isha,sp.decl,PRAY_LOC.lat);
+ /* أم القرى: العشاء بعد المغرب بفاصلٍ ثابتٍ رسميّ — ٩٠ دقيقةً، ويصبح ١٢٠ في رمضان */
+ let ishaMin=meth.ishaM;
+ if(ishaMin!=null&&hijriMonthOf(date)===9)ishaMin+=30;
+ let isha=(ishaMin!=null)?maghrib+ishaMin/60:dhuhr+prayT(-meth.isha,sp.decl,PRAY_LOC.lat);
  /* حمايةُ خطوطِ العرضِ العليا: نصيبُ الليلِ بالزاوية */
  if(isNaN(fajr)||isNaN(isha)){
    const night=(24-maghrib)+sunrise;
    if(isNaN(fajr))fajr=sunrise-night*meth.fajr/60;
-   if(isNaN(isha)&&meth.ishaM==null)isha=maghrib+night*meth.isha/60;
+   if(isNaN(isha)&&ishaMin==null)isha=maghrib+night*meth.isha/60;
  }
  const asrA=Math.atan(1/(asrF+Math.tan(Math.abs(PRAY_LOC.lat-sp.decl)*Math.PI/180)))/(Math.PI/180);
  let asr=dhuhr+prayT(asrA,sp.decl,PRAY_LOC.lat);
@@ -8352,7 +8485,10 @@ function prayTimesFor(date){
 }
 function prayCompute(){
  const d=new Date();
- PRAY_TODAY={date:todayStr(),t:prayTimesFor(d)};
+ const t=prayTimesFor(d);
+ /* التعديل اليدوي بالدقائق يُضاف إلى وقت الأذان المحسوب — ووقت الشروق يبقى رصدًا فلكيًّا خالصًا؛ الإقامة تُضاف فوق التعديل */
+ const a=(S.prayAdj&&typeof S.prayAdj==='object')?S.prayAdj:ADJ_DEF;
+ PRAY_TODAY={date:todayStr(),t:{fajr:t.fajr+(+a.fajr||0)/60,sunrise:t.sunrise,dhuhr:t.dhuhr+(+a.dhuhr||0)/60,asr:t.asr+(+a.asr||0)/60,maghrib:t.maghrib+(+a.maghrib||0)/60,isha:t.isha+(+a.isha||0)/60}};
 }
 let PRAY_TODAY=null;
 
@@ -9159,6 +9295,30 @@ function bindPraySettings(){
      inp.value=v; S.iqama[k]=v; saveS(); renderPrayCard();
    });
  });
+ PRAY_KEYS.forEach(k=>{
+   const ai=$('#adj_'+k); if(!ai)return;
+   ai.value=S.prayAdj[k];
+   ai.addEventListener('change',()=>{
+     let v=+ai.value; if(!isFinite(v))v=0; v=Math.min(30,Math.max(-30,Math.round(v)));
+     ai.value=v; S.prayAdj[k]=v; saveS(); prayCompute(); renderPrayCard(); tapS();
+   });
+ });
+ const adjR=$('#prayAdjReset');
+ if(adjR)adjR.addEventListener('click',()=>{
+   S.prayAdj=Object.assign({},ADJ_DEF);
+   PRAY_KEYS.forEach(k=>{ const ai=$('#adj_'+k); if(ai)ai.value=0; });
+   saveS(); prayCompute(); renderPrayCard(); tapS();
+   toast(T('صُفِّرت التعديلات — عادت المواقيتُ إلى الحسابِ الفلكيِّ الخالص'));
+ });
+ const al=$('#prayAlt');
+ if(al){ al.value=S.prayAlt;
+   const ab=$('#prayAltApply');
+   if(ab)ab.addEventListener('click',()=>{
+     let v=+al.value; if(!isFinite(v))v=0; v=Math.min(4000,Math.max(0,Math.round(v)));
+     al.value=v; S.prayAlt=v; saveS(); prayCompute(); renderPrayCard(); tapS();
+     toast(T('حُفظ الارتفاع — صُحِّح به ميلُ الأفقِ في الشروقِ والمغرب'));
+   });
+ }
  prayPaintInputs();
 }
 function prayPaintInputs(){
