@@ -973,6 +973,7 @@ button.pray-loc{background:none;border:none;font-family:var(--f-ui)}
       <button type="button" class="pray-gear" id="prayGear" aria-label="إعدادات المواقيت"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="3.1"/><path d="M19.2 14.8a1.6 1.6 0 0 0 .32 1.77l.06.06a1.95 1.95 0 1 1-2.76 2.76l-.06-.06a1.6 1.6 0 0 0-1.77-.32 1.6 1.6 0 0 0-.97 1.47v.17a1.95 1.95 0 1 1-3.9 0v-.09a1.6 1.6 0 0 0-1.05-1.47 1.6 1.6 0 0 0-1.77.32l-.06.06a1.95 1.95 0 1 1-2.76-2.76l.06-.06a1.6 1.6 0 0 0 .32-1.77 1.6 1.6 0 0 0-1.47-.97h-.17a1.95 1.95 0 1 1 0-3.9h.09a1.6 1.6 0 0 0 1.47-1.05 1.6 1.6 0 0 0-.32-1.77l-.06-.06a1.95 1.95 0 1 1 2.76-2.76l.06.06a1.6 1.6 0 0 0 1.77.32h.09a1.6 1.6 0 0 0 .97-1.47v-.17a1.95 1.95 0 1 1 3.9 0v.09a1.6 1.6 0 0 0 .97 1.47 1.6 1.6 0 0 0 1.77-.32l.06-.06a1.95 1.95 0 1 1 2.76 2.76l-.06.06a1.6 1.6 0 0 0-.32 1.77v.09a1.6 1.6 0 0 0 1.47.97h.17a1.95 1.95 0 1 1 0 3.9h-.09a1.6 1.6 0 0 0-1.47.97z"/></svg></button>
     </div>
     <div class="pray-row" id="prayRow"></div>
+    <p class="small" id="thirdRow" style="margin:10px 4px 0;text-align:center"></p>
     <button type="button" class="pray-loc" id="prayLocLink">—</button>
   </div>
 
@@ -1362,6 +1363,21 @@ button.pray-loc{background:none;border:none;font-family:var(--f-ui)}
     <p class="small">اضبط سرعة الساعة من ثانية واحدة إلى عشر ثوانٍ لكل اسم، واختر لغة درج الأسماء (عربي أو English) وشكلها وخط الأسماء وصوت الدقّة. ومع اقتراب انتقال الاسم تدور عقرب الثواني وينبض القرص مع تدرّج التقدم من الداخل.</p>
   </div>
   <!-- مواقيت الصلاة (v3.6.0 P1): محركٌ محليٌّ بلا إنترنت — الموضع والطريقة والمذهب والإقامة -->
+  <!-- v3.13.0: بطاقة التنبيهات — إشعارٌ قبل الأذان وبالأذكار ودخول الثلث الأخير: محليٌّ أثناء الفتح + Web Push بعد الإغلاق عبر خادم اختياري -->
+  <div class="set card" id="notifCard">
+    <h3>التنبيهات</h3>
+    <p class="small">ذكّرك بوقتِ الصلاةِ قبلَ دخولِه، وبأذكارِ الصباحِ والمساءِ (بعد الفجرِ والمغربِ بساعةٍ)، ودخولِ الثلثِ الأخيرِ من الليل. التنبيهاتُ أثناءَ فتحِ التطبيقِ تعملُ في كلِّ الأجهزةِ بلا خادمٍ؛ ولتصلكَ بعدَ إغلاقِ التطبيقِ: على أندرويد ربطُ خادمِ الإرسالِ أدناه، وعلى الآيفونِ (iOS 16.4+) أضِف نورًا من Safari بـ «إضافة إلى الشاشةِ الرئيسية» ثم ربطِ الخادم.</p>
+    <div class="srow"><span class="lbl2">تفعيل التنبيهات</span><button type="button" class="btn" id="notifBtn">تفعيل</button></div>
+    <div class="srow"><span class="lbl2">قبل الأذان بـ</span><div class="seg" id="segNotifLead"><button type="button">عند دخولِ الوقت</button><button type="button">٥ دقائق</button><button type="button">١٠ دقائق</button><button type="button">١٥ دقيقة</button><button type="button">٣٠ دقيقة</button></div></div>
+    <div class="srow"><span class="lbl2">تنبيه الأذان — كل الصلوات</span><button type="button" class="tgl" id="tgNPray" aria-label="تنبيه الأذان"></button></div>
+    <div class="srow"><span class="lbl2">أذكار الصباح</span><button type="button" class="tgl" id="tgAzkM" aria-label="أذكار الصباح"></button></div>
+    <div class="srow"><span class="lbl2">أذكار المساء</span><button type="button" class="tgl" id="tgAzkE" aria-label="أذكار المساء"></button></div>
+    <div class="srow"><span class="lbl2">دخول الثلث الأخير من الليل</span><button type="button" class="tgl" id="tgNThird" aria-label="الثلث الأخير"></button></div>
+    <p class="small">خادمُ الإرسال (اختياري — للتنبيهِ بعدَ إغلاقِ التطبيق): عنوانُ خادمِ نورِ البسيطِ المرفق، مثل <b>https://noor-push.example.com</b>. الخادمُ مجانيٌّ وشغّالٌ على أيِّ استضافةٍ صغيرةٍ، ومفاتيحُهُ تُولَّدُ محليًّا ولا تُرسَلُ بياناتُكَ لأيِّ طرفٍ سواه.</p>
+    <div class="coordrow"><input id="pushSrv" type="url" inputmode="url" placeholder="https://… خادم الإرسال (اختياري)" aria-label="عنوان خادم الإرسال" style="flex:1"></div>
+    <div style="margin-top:8px;display:flex;gap:8px"><button type="button" class="miniact" id="pushTest">إرسال تنبيهٍ تجريبيٍّ عبر الخادم</button></div>
+    <p class="small" id="notifState" style="margin-top:6px">—</p>
+  </div>
   <div class="set card" id="praySetCard">
     <h3>مواقيت الصلاة</h3>
     <p class="small">تُحسَب المواقيتُ في جهازك محليًا بمواضيع الشمس الفلكية المعيارية، بلا أي إنترنت أو خدمةٍ خارجية، بدقةٍ تقارب الدقيقة — فتأكَّد من موضعك ومذهبك، واعتمد الرصدَ عند الحدود.</p>
@@ -1449,6 +1465,7 @@ button.pray-loc{background:none;border:none;font-family:var(--f-ui)}
     </details>
     <details class="doc">
       <summary>سجل الإصدار</summary>
+      <div class="body"><b>v3.13.0</b> — «التنبيهاتُ تشتدُّ والليلُ يُحسَب» بثلاثِ نعمتين أمرتَني بها: <b>(١) منظومةُ التنبيهاتِ الكاملةُ بالخادم</b> — طبقتان تعملان معًا: محليّةٌ أثناءَ فتحِ التطبيقِ في كلِّ الأجهزةِ بلا خادمٍ (إذنٌ واحدٌ ثم جدولةٌ ذكية)، وبَثٌّ خلفيٌّ Web Push بعدَ إغلاقِ التطبيقِ عبرَ خادمِ نورِ البسيطِ المرفق (مجلَّدُ noor-push-server): خادمٌ بملفٍّ واحدٍ بلا قواعدِ بياناتٍ خارجيةٍ، يولّدُ مفاتيحَ VAPID خاصتَكَ محليًّا عند أول تشغيل، ويستقبلُ جدولَ التنبيهاتِ لثلاثةِ أيامٍ من محرّكِ المواقيتِ المحليِّ نفسِه (فلا موقعٌ ولا حسابُ صلاةٍ على الخادم — خصوصيتُكَ كاملة)، وينبضُ كلَّ عشرين ثانيةً فيُبعثُ كلَّ تنبيهٍ في موعده ويُنظِّفُ ما أُرسلَ وما انتهى وما تعطَّلَ من اشتراكاتٍ. اختبارُهُ حيًّا نجحَ دورةً كاملة: فحصٌ ومفتاحٌ وجدولةٌ ونبضٌ وإرسالٌ وتعاملٌ لطيفٌ مع الفشل. وعميلُ التطبيق: بطاقةُ «التنبيهات» في الإعدادات (تفعيلٌ وإذنٌ وحالةٌ صادقة)، اختيارُ مقدارِ التبكير: عند دخولِ الوقت أو قبلَه ٥/١٠/١٥/٣٠ دقيقةً (وافتراضُنا العشرُ عندنا)، مفاتيحُ مستقلةٌ لتنبيهِ الأذانِ لكلِّ الصلواتِ وأذكارِ الصباحِ (بعد الفجرِ بساعةٍ) والمساءِ (بعد المغربِ بساعةٍ) ودخولِ الثلثِ الأخير، وخانةُ عنوانِ الخادمِ وزرُّ تنبيهٍ تجريبيٍّ، وإعادةُ جدولةٍ تلقائيةٌ عند الفتحِ وعودةِ الظهورِ وكلَّ نصفِ ساعةٍ وعند كلِّ تعديلٍ للمواقيت — وعلى الآيفون: iOS 16.4+ بشرطِ تثبيتِ نورٍ بـ «إضافة إلى الشاشةِ الرئيسية» (والمتصفحُ الرفضُ يُعالَجُ برسالةٍ تدلُّك). <b>(٢) العدّادُ التنازليُّ في شاشةِ الأوقات</b> — تُفتَحُ شاشةُ أيِّ صلاةٍ فترى تحتَ وقتِ الأذانِ سطرًا ذهبيًّا حيًّا: «باقٍ حتى الأذان: ١ ساعة ٥ دقيقة» يتنفّسُ كلَّ ١٥ ثانيةً، وإن انتهى الوقتُ قال: «انتهى وقته اليوم — يُحسبُ حتى أذانِ الغد» (فكرةٌ من تطبيقِ بلال كما اقترحتَ). <b>(٣) حاسبةُ الثلثِ الأخيرِ من الليل</b> — سطرٌ دائمٌ في بطاقةِ مواقيتِ الرئيسية: «قيام الليل — الثلث الأخير: من ١٠:٢٥ م إلى ٠٢:١٥ ص» يحسَبُ من مغربِ اليومِ إلى فجرِ الغدِ الحقيقيِّ من محرّكِ المواقيتِ (بالتعديلِ اليدويِّ معه)، وهو نفسُهُ يغذّي تنبيهَ القيامِ في الليل. كلُّ ذلك دون مساسٍ ببياناتِك، والسكينةُ بانتظارِ ملفاتِكَ يا صاحب التطبيق.</div>
       <div class="body"><b>v3.12.0</b> — «شاشةُ الأوقاتِ وأقواسٌ لا تُقاوم» بأربعِ هداياٍ على بركةِ الله: <b>(١) شاشةُ تعديلِ وقتِ كلِّ صلاةٍ من الشاشةِ الرئيسية</b> — كنتَ أخبرتني أن أسهمَ التعديلِ لا تظهرُ على الآيفون (وهي أسهمُ حقولِ الأرقامِ التي يخفيها Safari أصلًا)، فصمّمتُ على طرازِ تطبيقِ بلال: <b>انقر وقتَ الأذانِ لأيِّ صلاةٍ في بطاقةِ المواقيتِ فتُفتَحُ شاشةٌ مخصصةٌ لذلك اليومِ والصلاةِ</b>: وقتُ الأذانِ الناتجُ كبيرًا وواضحًا مع الأساسِ الفلكيِّ تحته، وزران كبيران (٥٦ بكسلًا) لِ+ و− لتعديلِ الأذانِ من −٣٠ إلى +٣٠ دقيقةً بالضغطِ الواحدِ أو المطوَّل، وصفٌ ثانٍ للإقامةِ بعد الأذانِ (٠–١٨٠ دقيقة) بمعاينةٍ حيّةٍ لوقتِ الإقامةِ الناتج، وزرَا حفظٍ وتصفير — وكلُّ زرٍّ نصٌّ عاديٌّ (+ و−) لا رموزُ ناقصةَ في خطوطِ الآيفون، فتعملُ الشاشةُ على iOS وAndroid وأجهزةِ الكمبيوترِ سواء. والحفظُ يختمُ في جهازك ويحدّثُ البطاقةَ فورًا ويزامنُ خاناتِ الإعدادات. <b>(٢) قلعتُ جذرَ مشكلةِ أقواسِ صباحِ الخيرِ ومساءِ الخير</b> — اكتشفتُ أن للتطبيقِ نسختَين من بانيةِ بطاقاتِ التهنئةِ وبانيةِ الأسماءِ (الأخيرةُ هي الحيّةُ في JavaScript)، وكان إصلاحي السابقُ مسّ النسخِ الميتةِ في بعضِ المواضع! فلعقتُ الكودَ موضعًا موضعًا: البانيةُ الحيّةُ لصباح/مساء الخيرِ أصلحتُ مصادرَ نصِّها الأربعةَ (نصُّ الفائدةِ ومصدرُها وسطرُ التهنئةِ ومصدرُ آيةِ الصدر)، وآيةُ البانيةِ الميتةِ أيضًا للاتساق — فصار المجموعُ ١٦ موضعًا مرآويًّا لا خامسَ لها، وتحققتُ بصريًّا من بطاقةٍ حقيقيةٍ: ﴿أَلَا بِذِكْرِ اللهِ تَطْمَئِنُّ الْقُلُوبُ﴾ و«اللَّهُمَّ أَعِنِّي عَلَى ذِكْرِكَ» يحتضنُ القوسانُ النصَّ من الداخلِ في كلِّ بطاقاتِ النورِ المصوَّرةِ الآن. <b>(٣) وثّقتُ أفكارًا مستوحاةً من تطبيقِ بلال</b> في ملفِّ الانتقال: أصواتُ أذانٍ لكلِّ صلاةٍ وإشعارٌ قبلَ الأذانِ (انظر شرحَ الإمكانياتِ في الرد) — أمرُني بها متى شئت. وبلا مساسٍ ببياناتك.</div>
       <div class="body"><b>v3.11.0</b> — «أقواسٌ محتضنة وسرُّ الدقةِ مكشوف» بإنجازين: <b>(١) تصويبُ انقلابِ الأقواسِ في البطاقاتِ المصوَّرة</b> — كنتَ لاحظتَ أن الأقواسَ المزخرفةَ ﴿﴾ وقوسَي التنصيصِ «» قبلَ الآياتِ وبعدها تظهرُ في البطاقاتِ المشتركةِ منقلبةً إلى الخارجِ خلافَ ما في التطبيق؛ فقد أثبتَ الاختبارُ البصريُّ أن الرسمَ على canvas يعكسُ هذه الأقواسَ الثنائيةَ الاتجاهِ عكسَ عرضِ صفحاتِ الويب، فعالجناها بدالةِ تبديلٍ ذكيةٍ (cMirror) تُبدِّلُها قبل الرسمِ فيُحتضنَ النصُّ كما يجب — وطُبِّقت على كلِّ بطاقاتِ النور المصوَّرة: الآيةُ التأسيسيةُ في بطاقاتِ الأسماء، ونصوصُ الأسماءِ وشروحِها، ونُفحةُ القرآنِ وجوهرةُ السنةِ ووصيةِ اليومِ بنصِّها ومصدرِها وفائدتِها، وآياتُ صدرِ بطاقتَي صباحِ الخيرِ ومساءِ الخيرِ وفوائدِهما — عشرَةُ مواضعَ بلا استثناء. <b>(٢) كشفُ آليةِ «مواقيت فلسطين» بهندسةٍ عكسيةٍ حقيقية</b> — نزَّلنا حزمتَه (6.28 من Aptoide) وشرَّحنا كودَه: التطبيقُ **لا يحسبُ المواقيتَ فلكيًا إطلاقًا**؛ بل يجلبُها جاهزةً من قاعدةِ بياناتِ Firebase السحابيةِ (مشروعُ qiblapro-b1f41) مفهرسةً بالمدينةِ، ويخزّنُها بالدقائقِ (fajrMinutes…) مع عامِلِ تحديثٍ خلفيٍّ (PrayerInfoUpdateWorker) ومعالجةِ المنطقةِ الزمنية — أي أنه **واجهةٌ لعرضِ «الجدولِ الزمنيِّ المعتمدِ الرسميِّ» لدائرةِ الأوقافِ الشرعيةِ الفلسطينيةِ** كما يقولُ وصفُه في المتجرِ حرفيًّا، وقاعدتُه مغلقةٌ أمامَ الخارجِ (فحصناها). والدرسُ المُستفادُ: دقته ليست خوارزميةً بل بياناتٌ رسمية؛ وبما أن الجداولَ غيرَ متاحةٍ علنًا، فالطريقُ العمليُّ لمطابقتِها في نورٍ هو التعديلُ اليدويُّ لكلِّ صلاةٍ (الميزةُ التي أضفناها في v3.10.0) — والهندسةُ العكسيةُ وثَّقتِ البنيةَ كاملةً في ملفِّ الانتقال. وبلا مساسٍ ببياناتك.</div>
       <div class="body"><b>v3.10.0</b> — «بطاقةٌ تُشارَك ومواقيتُ تُضبَط» بثلاثِ هداياٍ طلبتَها: <b>(١) إصلاحُ سماءِ الخير على الأجهزةِ القديمة</b> — كان غلافُ السماءِ يعتمدُ خاصيةَ CSS‏ «inset» المختصرةَ التي لا تدعمها إصداراتُ الآيفونِ الأقدم، فيسقطُ تحديدُها ويظهر المنظرُ خارجَ الحدودِ تحت شبكةِ الأدوات؛ فوسَّعنا الإحداثياتِ صراحةً (top/right/bottom/left) في كلِّ الطبقاتِ الثابتةِ العشر — السماءُ والحجابُ والخشوعُ والاحتفالُ والساعةُ والمسبحة — فتعودُ إلى حدودِ الشاشةِ كاملةً مع مساحاتِ الأمان. <b>(٢) بطاقاتُ النور تُشارَك على واتساب صورًا حقيقيةً بنفسِ الجماليةِ والترتيب</b> — نُفحةُ القرآنِ لليوم، وجوهرةُ السنةِ لليوم، ووصيةُ اليوم: تُرسَم كلٌّ منها لحظةَ المشاركة على قماشٍ عاليِ الدقة (١٠٨٠×١٣٥٠) بسماءِ اللحظةِ الزمنيةِ ونجومِها، والإطارِ المزدوجِ الذهبيِّ ومعيناتِ الزوايا، ووسمِ البطاقةِ في شريطٍ مموَّج، والنصِّ بخطِ الأميري المتكيف، والمصدرِ والفائدةِ العملية، وختمِ اليومِ الهجريِّ والميلادي، وشعارِ النورِ والتوقيع — ثم تُشارَك بملفٍ حقيقيٍّ عبر لوحة المشاركةِ (وفي الآيفون تصل صورةً في المحادثة)، وفي المتصفحاتِ القديمةِ تُنزَّل الصورةُ ويُفتح واتساب برسالةِ الاستعداد. <b>(٣) مواقيتٌ أضبطُ وأقربُ لمسجدك</b> — فُسِّر سببُ اختلافِ المغربِ والعشاءِ (ميلُ الأفقِ بالارتفاع، وفاصلُ أم القرى الثابتِ ٩٠/١٢٠ في رمضان، وتناهضُ الخوارزمياتِ دقيقةً) وأُضيف الارتفاعُ عن سطحِ البحرِ ليُصحَّح غيابُ القرصِ بالميلَ الأفقيَّ المعياريَّ (0.0347·√h)، وأُضيف تعديلٌ يدويٌّ بالدقائقِ (من −٣٠ إلى +٣٠) لكلِّ صلاةٍ على حدةٍ يطابقُ مواقيتَ مسجدكِ بالضبطِ — يُضاف إلى الأذانِ وتُضاف الإقامةُ فوقه، مع زرِّ تصفيرٍ يعيد الحسابَ الفلكيَّ الخالص؛ وصارت «أم القرى» تمدُّ فاصلَ العشاءِ إلى ١٢٠ دقيقةً في رمضان تلقائيًّا وفق المعيارِ الرسمي — وبلا مساسٍ ببياناتك: كلُّ شيءٍ محسوبٌ في جهازك.</div>
@@ -8524,7 +8541,7 @@ function prayBuildCells(){
 function renderPrayCard(){
  if(!PRAY_TODAY||PRAY_TODAY.date!==todayStr())prayCompute();
  const locEl=$('#prayLocLink'); if(locEl)locEl.textContent=T('الموضع')+': '+PRAY_LOC.label+' — '+T('عدّل من الإعدادات');
- prayBuildCells(); prayTick(true);
+ prayBuildCells(); prayTick(true); if(typeof renderThird==='function')renderThird();
 }
 /* ================= v3.7.0 «ورد الصباح والمساء» ================= */
 /* أمانة التوثيق: كل ذكر هنا من الصحيحين أو السنن المصنفة صحيحًا أو حسنًا عند أهل السنة والجماعة.
@@ -9421,6 +9438,7 @@ fiqhInit();
       </div>
     </div>
     <div class="adjbig" style="padding:10px"><b id="iqPrev" style="font-size:34px">—</b><span>وقت الإقامة<br><em id="adjNote">—</em></span></div>
+    <p class="adjsm" id="adjCount" style="text-align:center;margin:-6px 0 12px;font-weight:600;color:var(--gold2)">—</p>
     <div class="adjbtns">
       <button type="button" class="btn ghost" id="adjZero">تصفير</button>
       <button type="button" class="btn prim" id="adjSave">حفظ</button>
@@ -9451,10 +9469,21 @@ fiqhInit();
     adj=Math.min(30,Math.max(-30,Math.round(+S.prayAdj[k]||0)));
     iq=Math.min(180,Math.max(0,Math.round(+S.iqama[k]||0)));
     base=(PRAY_TODAY&&PRAY_TODAY.t)?PRAY_TODAY.t[k]-adj/60:0;
-    render(); sh.classList.add('on');
+    render(); tickCount(); if(cInt)clearInterval(cInt); cInt=setInterval(tickCount,15000);
+    sh.classList.add('on');
     try{document.body.style.overflow='hidden';}catch(e){}
   }
-  function close(){ sh.classList.remove('on'); try{document.body.style.overflow='';}catch(e){} }
+  function close(){ sh.classList.remove('on'); if(cInt){clearInterval(cInt);cInt=null;} try{document.body.style.overflow='';}catch(e){} }
+  /* v3.13.0: عدّادٌ تنازليٌّ حتى أذانِ هذه الصلاة (مستوحى من تطبيق بلال) */
+  let cInt=null;
+  function tickCount(){
+    const el=document.getElementById('adjCount'); if(!el)return;
+    const now=new Date(); const nowH=now.getHours()+now.getMinutes()/60+now.getSeconds()/3600;
+    let sec=Math.round((base+adj/60)*3600-nowH*3600), pre='باقٍ حتى الأذان';
+    if(sec<0){ sec+=86400; pre='انتهى وقته اليوم — يُحسبُ حتى أذانِ الغد'; }
+    const h=Math.floor(sec/3600), m=Math.floor((sec%3600)/60), ar=(typeof AR==='function')?AR:(x)=>String(x);
+    el.textContent=pre+': '+(h>0?ar(h)+' ساعة ':'')+ar(m)+' دقيقة'+(adj?(' (بعد تعديلِكِ '+ar(adj)+' د)'):'');
+  }
   function save(){
     S.prayAdj[K]=adj; S.iqama[K]=iq; saveS(); prayCompute(); renderPrayCard();
     const ai=document.getElementById('adj_'+K), ii=document.getElementById('iq_'+K);
@@ -9482,6 +9511,126 @@ fiqhInit();
     const k=b.getAttribute('data-pk'); if(k)open(k);
   });
   window.__openAdjSheet=open;
+})();
+</script>
+<script>
+/* v3.13.0: محركُ التنبيهات — إشعارٌ قبل الأذان وبأذكارِ الصباحِ والمساءِ ودخولِ الثلثِ الأخيرِ من الليل.
+   طبقتان: (١) محليةٌ أثناءَ فتحِ التطبيقِ في كل الأجهزة (Notification + مؤقّتات الصفحة) — (٢) Web Push بعدَ إغلاقِ التطبيقِ عبرَ خادمِ نورِ الاختياري.
+   الجدولُ يُبنى محليًّا من محرّكِ المواقيتِ لثلاثةِ أيامٍ (لا بياناتُ مواقيتٍ على الخادم — النورُ محليٌّ أصلًا)، ويُرسَلُ للخادمِ ليعيدَ إرسالَه في موعده، وتتكررُ الجدولةُ عند فتحِ الصفحةِ وعودةِ ظهورِها وكلَّ نصفِ ساعة. */
+(function(){
+  const NDEF={on:false,lead:10,pray:true,azkM:true,azkE:true,third:true,srv:''};
+  S.notif=Object.assign({},NDEF,(typeof S.notif==='object'&&S.notif)||{});
+  const $=s=>document.querySelector(s);
+  const T2=s=>(typeof T==='function'?T(s):s);
+  const ar=(typeof AR==='function')?AR:(x)=>String(x);
+  const fmt=(typeof fmtT==='function')?fmtT:(h)=>String(Math.floor(h))+':'+String(Math.round(h%1*60));
+  let SUB=null, localTimers=[];
+  function u8(b64){ const b=(b64+'='.repeat((4-b64.length%4)%4)).replace(/-/g,'+').replace(/_/g,'/');
+    const raw=atob(b); const a=new Uint8Array(raw.length); for(let i=0;i<raw.length;i++)a[i]=raw.charCodeAt(i); return a; }
+  function D(day){ const d=new Date(); d.setDate(d.getDate()+day); return d; }
+  function dayTimes(day){ const t=prayTimesFor(D(day)); const a=S.prayAdj||{};
+    return {fajr:t.fajr+(+a.fajr||0)/60,sunrise:t.sunrise,dhuhr:t.dhuhr+(+a.dhuhr||0)/60,asr:t.asr+(+a.asr||0)/60,maghrib:t.maghrib+(+a.maghrib||0)/60,isha:t.isha+(+a.isha||0)/60}; }
+  function at(day,h){ const d=D(day); d.setHours(0,0,0,0); return new Date(+d+Math.round(h*3600e3)).toISOString(); }
+
+  function buildSchedule(){
+    const L=[], now=Date.now(), lead=(+S.notif.lead||0)*60e3;
+    const NAMES={fajr:'الفجر',dhuhr:'الظهر',asr:'العصر',maghrib:'المغرب',isha:'العشاء'};
+    for(let day=0;day<3;day++){
+      const t=dayTimes(day);
+      if(S.notif.pray)['fajr','dhuhr','asr','maghrib','isha'].forEach(k=>{
+        const tAt=at(day,t[k]); let title,body;
+        if(lead>0){ title='بعد '+ar(S.notif.lead)+' دقائق: أذان '+NAMES[k]; body='تهيّأ للصلاة — طهارةٌ وقلبٌ حاضر'; }
+        else{ title='حان وقت صلاة '+NAMES[k]; body='الأذانُ الآن — أقبِل الصلاةَ بالطهارةِ والسكينة'; }
+        L.push({at:new Date(+new Date(tAt)-lead).toISOString(),tag:'pray-'+k+'-'+day,title:T2(title),body:T2(body)});
+      });
+      if(S.notif.azkM)L.push({at:at(day,t.fajr+1),tag:'azkM-'+day,title:T2('أذكار الصباح'),body:T2('حصّن يومك بأذكار الصباح — وردُك بانتظارك في نور')});
+      if(S.notif.azkE)L.push({at:at(day,t.maghrib+1),tag:'azkE-'+day,title:T2('أذكار المساء'),body:T2('جرّد يومك بأذكار المساء — وردُك بانتظارك في نور')});
+      if(S.notif.third){
+        const t2=dayTimes(day+1), night=t2.fajr+24-t.maghrib, third=t.maghrib+night*2/3;
+        L.push({at:at(day,third),tag:'third-'+day,title:T2('دخل الثلث الأخير من الليل'),body:T2('وقتُ القيامِ والاجتهاد — «فيقول: من يدعوني فأستجيبَ له» — البخاري ومسلم')});
+      }
+    }
+    return L.filter(x=>+new Date(x.at)>now).sort((a,b)=>+new Date(a.at)-+new Date(b.at)).slice(0,60);
+  }
+  window.__noorSchedule=buildSchedule;
+
+  function fireLocal(it){ try{ if(typeof Notification!=='undefined'&&Notification.permission==='granted') new Notification(it.title,{body:it.body,tag:it.tag}); }catch(e){} }
+  function scheduleLocal(){
+    localTimers.forEach(clearTimeout); localTimers=[];
+    if(!S.notif.on||typeof Notification==='undefined'||Notification.permission!=='granted')return;
+    buildSchedule().forEach(it=>{ const ms=+new Date(it.at)-Date.now();
+      if(ms>0&&ms<20*3600e3)localTimers.push(setTimeout(()=>fireLocal(it),ms)); });
+  }
+  async function pushReg(){
+    if(!('serviceWorker' in navigator)||!('PushManager' in window)) throw new Error(T2('المتصفح لا يدعم البث — ستعمل التنبيهات أثناء الفتح'));
+    const reg=await navigator.serviceWorker.ready;
+    let pub='';
+    if(S.notif.srv){ try{ pub=(await (await fetch(S.notif.srv.replace(/\/+$/,'')+'/vapid.pub')).text()).trim(); }catch(e){} }
+    if(!pub) throw new Error(T2('لم يُمكن جلب مفتاح الخادم — ستعمل التنبيهات أثناء الفتح'));
+    SUB=await reg.pushManager.subscribe({userVisibleOnly:true,applicationServerKey:u8(pub)});
+  }
+  async function sendSchedule(){
+    if(!SUB||!S.notif.srv)return false;
+    try{ const r=await fetch(S.notif.srv.replace(/\/+$/,'')+'/schedule',{method:'POST',headers:{'Content-Type':'application/json'},
+      body:JSON.stringify({subscription:SUB,schedule:buildSchedule()})}); return r.ok; }catch(e){ return false; }
+  }
+  async function enable(){
+    try{
+      if(typeof Notification==='undefined'){ toast(T2('هذا المتصفح لا يدعم الإشعارات')); paint(); return; }
+      const p=await Notification.requestPermission();
+      if(p!=='granted'){ paint(); toast(T2('لم يُمنَح الإذن — فعِّله من إعدادات المتصفح إن أردت التنبيهات')); return; }
+      S.notif.on=true; saveS();
+      let pushMsg='';
+      try{ await pushReg(); const ok=await sendSchedule(); pushMsg=ok?' — والبثُّ بعد الإغلاقِ مفعَّلٌ عبرَ الخادم':' — والبثُّ بعد الإغلاقِ بانتظارِ ردِّ الخادم'; }
+      catch(e){ pushMsg=' — '+(e&&e.message?e.message:'البثُّ بعد الإغلاقِ غير متاحٍ هنا'); }
+      scheduleLocal(); paint();
+      toast(T2('تفعّلت التنبيهات أثناء فتح التطبيق')+pushMsg);
+    }catch(e){ toast(T2('تعذّر التفعيل: ')+(e&&e.message||e)); }
+    paint();
+  }
+  function paint(){
+    const b=$('#notifBtn');
+    if(b){ b.textContent=S.notif.on?'مفعَّلة ✓':'تفعيل'; }
+    const st=$('#notifState');
+    if(st){ const perm=(typeof Notification!=='undefined')?Notification.permission:'na';
+      st.textContent=(perm==='granted'?'الإذن: ممنوح':'الإذن: غير ممنوح بعد')
+        +' · أثناء الفتح: '+(S.notif.on?'تعمل':'متوقفة')
+        +' · البثُّ بعد الإغلاق: '+(S.notif.srv?(SUB?'مربوط ومجدول':'بانتظار الربط'):'بلا خادم (اختياري)'); }
+  }
+  function renderThird(){
+    const el=document.getElementById('thirdRow'); if(!el||!PRAY_TODAY)return;
+    const t=dayTimes(0), t2=dayTimes(1);
+    const night=t2.fajr+24-t.maghrib, third=t.maghrib+night*2/3;
+    el.textContent=T2('قيام الليل — الثلث الأخير: من ')+fmt(third)+T2(' إلى ')+fmt(t2.fajr);
+  }
+  window.__renderThird=renderThird;
+
+  const NB=$('#notifBtn'); if(NB)NB.addEventListener('click',enable);
+  if(typeof bindSeg==='function'&&$('#segNotifLead')) bindSeg('#segNotifLead',[0,5,10,15,30],'notifLead',()=>{ scheduleLocal(); if(SUB)sendSchedule(); });
+  function bindTg(id,key){ const el=$(id); if(!el)return;
+    el.classList.toggle('on',!!S.notif[key]);
+    el.addEventListener('click',()=>{ S.notif[key]=!S.notif[key]; el.classList.toggle('on',!!S.notif[key]); saveS(); scheduleLocal(); if(SUB)sendSchedule(); paint(); }); }
+  bindTg('#tgNPray','pray'); bindTg('#tgAzkM','azkM'); bindTg('#tgAzkE','azkE'); bindTg('#tgNThird','third');
+  const SI=$('#pushSrv');
+  if(SI){ SI.value=S.notif.srv||'';
+    SI.addEventListener('change',()=>{ S.notif.srv=SI.value.trim(); saveS(); paint(); if(S.notif.on)pushReg().then(sendSchedule).catch(()=>{}); }); }
+  const TB=$('#pushTest');
+  if(TB)TB.addEventListener('click',async()=>{
+    if(!S.notif.srv){ toast(T2('اكتب عنوان الخادم أولًا')); return; }
+    try{ if(!SUB)await pushReg();
+      const r=await fetch(S.notif.srv.replace(/\/+$/,'')+'/test',{method:'POST',headers:{'Content-Type':'application/json'},
+        body:JSON.stringify({subscription:SUB,title:T2('تنبيه تجريبي من نور'),body:T2('إذا وصلتك هذه الرسالة فالخادم يعمل')})});
+      toast(r.ok?T2('أُرسل التنبيه التجريبي — إن لم يصلك فتحقّق من التثبيتِ والإذن'):T2('ردّ الخادم: '+r.status));
+    }catch(e){ toast(T2('تعذّر الوصول إلى الخادم — تأكد من العنوان')); } });
+  /* استرجاعُ الاشتراكِ بعد إعادةِ التحميل وإعادةُ الجدولةِ تلقائيًّا */
+  if('serviceWorker' in navigator&&'PushManager' in window){
+    navigator.serviceWorker.ready.then(reg=>reg.pushManager.getSubscription()).then(s=>{
+      SUB=s; if(s&&S.notif.on&&S.notif.srv)sendSchedule();
+    }).catch(()=>{});
+  }
+  document.addEventListener('visibilitychange',()=>{ if(!document.hidden){ scheduleLocal(); if(S.notif.on&&S.notif.srv&&SUB)sendSchedule(); } });
+  setInterval(()=>{ scheduleLocal(); },30*60e3);
+  scheduleLocal(); paint(); renderThird();
 })();
 </script>
 </body>
