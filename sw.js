@@ -4,7 +4,7 @@
      والنسخة المخزنة تُستخدم فقط عند انقطاع الاتصال.
    - الموارد الأخرى (الخطوط وغيرها): الكاش أولًا مع تحديث في الخلفية (stale-while-revalidate).
    من v3.6.0: يُسمّى الكاش باسم الإصدار مع كل تحديث، وعند التفعيل يُنقّى تلقائيًا كلُّ كاشٍ قديم فلا يثقل ذاكرة الأجهزة. */
-const CACHE = 'noor-v3.9.0';
+const CACHE = 'noor-v3.15.0';
 const CORE = ['./', './index.html', './manifest.json', './icon-192.png', './icon-512.png', './icon-512-maskable.png', './apple-touch-icon.png'];
 
 self.addEventListener('install', (e) => {
@@ -21,6 +21,38 @@ self.addEventListener('activate', (e) => {
 });
 
 self.addEventListener('message', (e) => { if (e.data === 'skipWaiting') self.skipWaiting(); });
+
+/* v3.13.0: إشعارات Web Push — تصل بعد إغلاق التطبيق عبر خادم نور الاختياري */
+const NOTIF_ICON =
+  'data:image/svg+xml;utf8,' +
+  encodeURIComponent(
+    '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 192 192"><rect width="192" height="192" rx="42" fill="#0d261d"/><circle cx="96" cy="96" r="58" fill="none" stroke="#d9b661" stroke-width="7"/><circle cx="96" cy="96" r="7" fill="#f2d992"/><path d="M96 52v14M96 126v14M52 96h14M126 96h14" stroke="#f2d992" stroke-width="7" stroke-linecap="round"/></svg>'
+  );
+
+self.addEventListener('push', (e) => {
+  let d = {};
+  try { d = e.data ? e.data.json() : {}; } catch (_) { try { d = { title: 'نور', body: e.data ? e.data.text() : '' }; } catch (_2) {} }
+  e.waitUntil(
+    self.registration.showNotification(d.title || 'نور', {
+      body: d.body || 'به نورٍ تسير — نور في جيبك',
+      tag: d.tag || 'noor',
+      icon: NOTIF_ICON,
+      badge: NOTIF_ICON,
+      renotify: true,
+      data: { url: './' }
+    })
+  );
+});
+
+self.addEventListener('notificationclick', (e) => {
+  e.notification.close();
+  e.waitUntil(
+    self.clients.matchAll({ type: 'window', includeUncontrolled: true }).then((cs) => {
+      for (const c of cs) { if ('focus' in c) return c.focus(); }
+      return self.clients.openWindow('./');
+    })
+  );
+});
 
 self.addEventListener('fetch', (e) => {
   const req = e.request;
