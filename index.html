@@ -1031,7 +1031,7 @@ button.pray-loc{background:none;border:none;font-family:var(--f-ui)}
         <circle cx="50" cy="12.5" r="1" fill="var(--gold2)"/>
         <path d="M10 13.5c2.6 2.2 5.2 2.7 7.4 2.4" fill="none" stroke="var(--teal)" stroke-width="1.8" stroke-linecap="round"/>
       </svg>
-      <b>سَكينة</b><span>الملكُ والكهفُ وآياتُ السكينةِ والرُّقيةُ والمعوِّذاتُ — تفسيرٌ، صفحاتُ مصحفٍ، وتلاوةٌ تُضيءُ الكلمةَ كلمةً</span>
+      <b>سَكينة</b><span>الملكُ والكهفُ وآياتُ السكينةِ والرُّقيةُ والمعوِّذاتُ — تفسيرٌ وصفحاتُ مصحفٍ وتلاوةٌ مُضيئةٌ</span>
     </button>
     <button type="button" class="feat wide" id="homeTasksBtn">
       <svg viewBox="0 0 64 64" aria-hidden="true">
@@ -1453,6 +1453,15 @@ button.pray-loc{background:none;border:none;font-family:var(--f-ui)}
     <p class="small">ينبهك نور بلطفٍ (صوتٌ ورسالة) إلى لحظة ذكرٍ في الوقت الذي تحدده، وما دام نور مفتوحًا في متصفحك — لتسبيحةٍ هنا وهناك تملأ يومك. وعند تحويل نور إلى تطبيق هاتفٍ سيرسل لك تذكيرًا حقيقيًا حتى وهو مغلق.</p>
   </div>
   <div class="set card">
+    <h3>بطاقتي وترحيبي</h3>
+    <div class="srow"><span class="lbl2">الاسم</span><input id="usrNameIn" class="usrin" style="max-width:180px" type="text" maxlength="24" placeholder="اسمك"></div>
+    <div class="srow"><span class="lbl2">تاريخ الميلاد</span><input id="usrBirthIn" class="usrin" style="max-width:180px" type="date"></div>
+    <div class="srow"><span class="lbl2">الجنس (للتحية)</span><div class="wlchips" id="usrGenderSeg"><button type="button" class="wlchip" data-v="m">ذكر</button><button type="button" class="wlchip" data-v="f">أنثى</button></div></div>
+    <div class="srow" style="display:block"><span class="lbl2">صوتُ فاتحةِ القرآنِ عندَ فتحِ التطبيق</span><div class="wlchips" id="usrRecSeg" style="margin-top:8px"><button type="button" class="wlchip" data-v="husary">الحصري</button><button type="button" class="wlchip" data-v="minshawi">المنشاوي</button><button type="button" class="wlchip" data-v="sudais">السديس</button><button type="button" class="wlchip" data-v="shuraim">الشريم</button><button type="button" class="wlchip" data-v="lohaidan">لحيدان</button></div></div>
+    <button type="button" id="usrSave" class="btn">حفظ بطاقتي</button>
+    <p class="small">تُستخدمُ بطاقتُكَ لترحيبٍ شخصيٍّ عندَ كلِّ فتحٍ للنور: بسمِ اللهِ بصوتِكَ المختارِ ثم السلامُ عليكَ باسمِكَ. بياناتُكَ محفوظةٌ في جهازك وحده ولا تُرسلُ لأيِّ جهةٍ.</p>
+  </div>
+  <div class="set card">
     <h3>البيانات</h3>
     <div class="srow"><span class="lbl2">عدادات التسبيح</span><button type="button" id="resetCounts" class="btn danger">ضبط</button></div>
     <div class="srow"><span class="lbl2">كل البيانات والإعدادات</span><button type="button" id="resetAll" class="btn danger">حذف</button></div>
@@ -1477,8 +1486,10 @@ button.pray-loc{background:none;border:none;font-family:var(--f-ui)}
     </details>
     <details class="doc">
       <summary>سجل الإصدار</summary>
-      <div class="body"><b>v3.20.0</b> — «سَكينة» بزادِها: (١) وضعُ «صفحاتِ المصحفِ» بترقيمِ المصحفِ الإلكترونيِّ بالضبطِ (المُلْكُ ٥٦٢–٥٦٤، الكَهفُ ٢٩٣–٣٠٤، المعوِّذاتُ ٦٠٤) بورقٍ فاتحٍ وإطارٍ ذهبيٍّ مزخرفٍ ونصٍّ عثمانيٍّ موثَّقٍ يعملُ دونَ اتصال؛ (٢) التفسيرُ الميسَّرُ مضمَّنٌ تحتَ كلِّ آيةٍ بضغطةٍ (مجمعُ الملكِ فهد)؛ (٣) الإضاءةُ كلمةً كلمةً بالذهبيِّ معَ التلاوةِ الحقيقيةِ — صوتُ كلِّ كلمةٍ متسلسلٌ منَ quran.com، ويرجعُ تلقائيًّا لإضاءةِ الآيةِ إنَ انقطعتَ الشبكةُ؛ (٤) تبويبُ «الرُّقيةِ الشرعيةِ»: الفاتحةُ وآيةُ الكرسيِّ وخواتيمُ البقرةِ والمعوِّذاتُ + ستُّ أدعيةٍ نبويةٍ صحيحةٍ متفقٍ عليها أو صحيحةٍ بتصديقِها وكيفيةِ الرقيةِ — بلا زيادةٍ على دليلٍ.</div>
-      <div class="body"><b>v3.19.0</b> — «صفحةُ سَكينة» بأمرِ صاحبِ التطبيقِ: شاشةُ قراءةٍ كاملةٌ منَ الرئيسيةِ: سورةُ الملكِ والكهفِ وآياتُ السكينةِ المنتقاةَ (٢٤ آيةً في خمسِ مجموعاتٍ) والمعوِّذاتُ بالرسمِ العثمانيِّ (حفص)؛ تلاوةُ الحُصريِّ آيةً آيةً بتظليلٍ وتمريرٍ تلقائيٍّ؛ تكبيرُ الخطِّ بثلاثِ درجاتٍ، حفظُ آخرِ موضعِ قراءةٍ وتبويبٍ، نسخُ الآيةِ بلمسةٍ؛ عزوُ المصدرِ داخلَ الصفحةِ والنصُّ موثَّقٌ بمطابقةٍ حرفيةٍ عبرَ مسارَينِ.</div>
+      <div class="body"><b>v3.22.0</b> — بناءً على رأيِ صاحبِ التطبيقِ: ترحيبُ الدخولِ صارَ بفاتحةِ القرآنِ الكاملةِ بصوتِ القارئِ المختارِ (الحصريِّ أو المنشاويِّ أو السديسِ أو الشريمِ أو لحيدانَ) — ملفٌ واحدٌ لكلِّ قارئٍ منَ quranicaudio، وتمرُّ البوابةُ صامتةً بهدوءٍ إن لم تتوفرَ الشبكةُ. وتلاوةُ السكينةِ (آيةً آيةً) كما هي على المصادرِ المجانيةِ نفسِها.</div>
+      <div class="body"><b>v3.21.0</b> — برأيِ صاحبِ التطبيقِ: أُلغيتْ «كلمةٌ كلمةٌ» نهائيًّا وبقيت إضاءةُ الآيةِ كاملةً عندَ التلاوة، وتبويبُ الرقيةِ يبدأُ مباشرةً بـ«الرقيةُ منَ القرآنِ» بلا مقدمةٍ. وجديدُ النور: صفحةُ دخولٍ سحريةٍ — تسجيلُ الاسمِ وتاريخِ الميلادِ والجنسِ وصوتِ القارئِ مرةً واحدةً (تعديلُها فيما بعدُ منَ الإعداداتِ ← «بطاقتي»)، وبوابةُ نورٍ تتفتَّحُ بجسيماتِ ضوءٍ ثم «السَّلامُ عليكم ورحمةُ اللهِ وبركاتُه — يا أخي/أختي …» حسبَ الجنسِ. بياناتُ الترحيبِ في جهازك وحده.</div>
+      <div class="body"><b>v3.20.0</b> — «سَكينة» بزادِها: وضعُ «صفحاتِ المصحفِ» بترقيمِ المصحفِ الإلكترونيِّ بالضبطِ (المُلْكُ ٥٦٢–٥٦٤، الكَهفُ ٢٩٣–٣٠٤، المعوِّذاتُ ٦٠٤) بورقٍ فاتحٍ وإطارٍ ذهبيٍّ مزخرفٍ ونصٍّ عثمانيٍّ موثَّقٍ يعملُ دونَ اتصال؛ التفسيرُ الميسَّرُ مضمَّنٌ تحتَ كلِّ آيةٍ بضغطةٍ (مجمعُ الملكِ فهد)؛ وتبويبُ «الرُّقيةِ الشرعيةِ»: الفاتحةُ وآيةُ الكرسيِّ وخواتيمُ البقرةِ والمعوِّذاتُ + ستُّ أدعيةٍ نبويةٍ صحيحةٍ بتصديقِها وكيفيةِ الرقيةِ — بلا زيادةٍ على دليلٍ.</div>
+      <div class="body"><b>v3.19.0</b> — «صفحةُ سَكينة» بأمرِ صاحبِ التطبيقِ: شاشةُ قراءةٍ كاملةٌ منَ الرئيسيةِ: سورةُ الملكِ والكهفِ وآياتُ السكينةِ المنتقاةَ (٢٤ آيةً في خمسِ مجموعاتٍ) والمعوِّذاتُ بالرسمِ العثمانيِّ (حفص)؛ تلاوةٌ آيةً آيةً بتظليلٍ وتمريرٍ تلقائيٍّ؛ تكبيرُ الخطِّ بثلاثِ درجاتٍ، حفظُ آخرِ موضعِ قراءةٍ وتبويبٍ، نسخُ الآيةِ بلمسةٍ؛ عزوُ المصدرِ داخلَ الصفحةِ والنصُّ موثَّقٌ بمطابقةٍ حرفيةٍ عبرَ مسارَينِ.</div>
       <div class="body"><b>v3.18.0</b> — «مواقيتُ المسجدِ الأقصى وإتقانُ الرئيسية» بأمرِ صاحبِ التطبيقِ ومع جدولِهِ المرفوعِ (مواقيت الصلاة ٢٠٢٧ كاملة): <b>(١) طريقةُ «المسجد الأقصى — جدول فلسطين الرسمي»</b> أولَ الطرقِ في الإعداداتِ والافتراضيةُ للمستخدمِ الجديد — السنةُ كاملةً (٣٦٥ يومًا × ٦ مواقيت: فجر/شروق/ظهر/عصر/مغرب/عشاء) مُسلسلةٌ في التطبيقِ بـ ٨.٦ كيلوبايتٍ فقط، مُتحقَّقٌ حرفيًّا من عيناتِها عبرَ السنةِ، تُقرأُ قراءةً مباشرةً بلا حسابٍ فلكيٍّ فيُطابقُ لوحَ المسجدِ تمامًا بالتوقيتِ الرسميِّ صيفًا وشتاءً، والتعديلاتُ اليدويةُ والإقامةُ تعملانِ فوقَها كما هما، والعصرُ الحنفيُّ يُحسبُ فلكيًّا فوقَ زوالِ الجدولِ (الجدولُ بمنهجِ الجمهور)؛ <b>(٢) إتقانُ الرئيسية</b>: شريطُ الذكرِ والتذكيرِ تحتَ مواقيتِ اليومِ مباشرةً (علمُ الوقتِ ثم ذكرٌ يُسكِنُ القلب)، وحُذفتِ البطاقةُ المكررةُ وبقيتْ بوابةٌ واحدةٌ «المهمات والمواعيد» بملخّصٍ حيٍّ يجمعُ عدّادَ اليومِ من نظامِ العزيمةِ وأقربَ المواعيدِ المُجدوَلة، ونُصّتِ البلاطاتُ وكُثِّفتْ أوصافُها؛ <b>(٣) المهمات</b>: شرائحُ تواريخٍ سريعةٌ (اليوم/غدًا/بعد غد/بعد أسبوع)؛ <b>(٤) إصلاحانِ بنيويَّان</b>: مُنقّاحُ الجدولِ كان أُدرجَ خارجَ الدالةِ بـ return غيرِ مشروعٍ فأسقطَ السكربتَ كله — اكتشفهُ فحصُ vm.Script الجديدُ الصارمُ وأُعيدَ ترتيبُهُ داخلَ الدالة، وكُشِفَ المحركُ صراحةً للنافذةِ (window.prayTimesFor). اختبارٌ حيٌّ: مطابقةٌ حرفيةٌ لعيناتِ ينايرِ ويونيوَ وديسمبر، والحنفيُّ +٤١ دقيقةً، والدورةُ كاملةٌ بلا أخطاء.</div>
       <div class="body"><b>v3.17.0</b> — «مركزُ المهماتِ والمواعيد» بأمرِ صاحبِ التطبيقِ بعدَ نجاحِ أولِ إشعارٍ حيٍّ على الآيفون: بطاقةٌ جديدةٌ في الشاشةِ الرئيسيةِ تلخّصُ قادمَك («١ واجب — أقربُها: غدًا ٩:٣٠ ص» وتنبّهُ بالمتأخراتِ أيضًا)، وصحيفةٌ منبثقةٌ على منوالِ شاشةِ التعديلِ فيها: <b>(١) تقويمٌ شهريٌّ</b> بنقاطٍ ذهبيةٍ للأيامِ المهمةِ ونقرُ يومٍ يعبّئُ التاريخَ في نموذجِ الإضافة، <b>(٢) إضافةٌ بتصنيفاتٍ</b> (واجبٌ مدرسيٌّ/مهمةٌ/موعد) ووقتٍ وتذكيرٍ مسبقٍ لكلِّ مهمةٍ (عند الموعد/١٠/٣٠ دقيقة/ساعة/يوم)، <b>(٣) جدولٌ مفتوحٌ</b> يُظهرُ المتأخرَ بعلامةٍ ذهبيةٍ «متأخرة!» وقسمُ المُنجَزةِ بإحصاءِ الأسبوع، <b>(٤) الدمجُ الحقيقيُّ</b>: بنودُ المهماتِ تدخلُ محرّكَ التنبيهاتِ نفسَهُ — أثناءَ الفتحِ محليًّا وبعدَ الإغلاقِ عبرَ بثِّ الخادمِ في موعدها بعدَ الإبقاءِ المسبقِ (بضغطةِ «إعادةِ الجدولة» الفوريةِ عندَ كلِّ تغيير)، <b>(٥) تذكيرٌ صباحيٌّ</b> بعدَ الفجرِ بساعةٍ بما تأخّرَ منك برسالةٍ لطيفةٍ واحدة، <b>(٦) مديحٌ عندَ كلِّ إنجازٍ</b> وخصلةُ «ما شاء الله» كلَّ خمسِ إنجازاتٍ في الأسبوع؛ وإصلاحاتُ اختبارٍ حيٍّ: paintAll المفقودة، ومُنسِّقُ أرقامٍ عربيٌّ بلا فواصلِ آلافٍ للسنة، والجدولُ أُوسِعَ إلى ٩٠ بندًا (٨٠ مهمةً كحدٍّ للتخزين).</div>
       <div class="body"><b>v3.16.0</b> — «العاملُ القديمُ هو الجاني» — حلُّ لغزِ «لا إشعارٌ على أيِّ جهازٍ رغمَ نجاحِ الاشتراكِ والإرسال»: فحصُ الموقعِ المنشورِ كشفَ أن sw.js الحيَّ عندهُ من نسخةٍ قديمةٍ (v3.9.0) بلا معالجِ push أصلًا — والخادمُ برهانُ ذلك عندنا: سجلُّهُ الحيُّ يظهرُ أن آبلَ وافقتْ على التجربةِ وأنهُ بعثَ فعلاً تنبيهَ «أذان العصر» الساعةَ ١٢:٠٩ بنجاح، والعاملُ القديمُ على الموقعِ يستقبلُ الرسالةَ ثم يرميها صامتًا لأنهُ لا يعرفُ عرضَها؛ العلاجُ الكليَّ رفعُ sw.js الصحيحِ بجوارِ index.html (وضُبطَ مجلدُ التسليمِ بحذفِ كلِّ ملفاتِ sw القديمةِ حتى لا تتكررُ الواقعة). وفي التطبيق: <b>(١) حارسُ التفعيلِ</b> — إن لم يكن عاملُ الخلفيةِ مسجَّلًا حاولَ تسجيلَه، وإن لم يجهّزْ خلال ١٢ ثانية أظهرَ رسالةً صادقةً بدلَ تعليقِ زرِّ التفعيلِ صامتًا (شكوى سامسونج S26)؛ <b>(٢) خفّةُ الاقلاع</b> — تأجيلُ استرجاعِ الاشتراكِ والجدولةِ عبرَ الخادمِ ٤ ثوانٍ بعدَ الفتحِ فتعملُ الواجهةُ فورًا؛ <b>(٣) إرشادُ أندرويدِ</b> في البطاقة: كروم، وsw.js الصحيحُ شرطُ العرضِ بعدَ الإغلاق على كلِّ المنصات.</div>
@@ -9781,7 +9792,7 @@ fiqhInit();
 #tkscr .tkrow button{flex:none;background:transparent;border:1px solid var(--line);color:var(--ink);border-radius:10px;padding:8px 10px;font:600 13.5px/1 var(--f-ui);cursor:pointer;-webkit-tap-highlight-color:transparent}
 #tkscr .tkrow .okb{color:var(--teal);border-color:var(--teal)}
 #tkscr .tkrow.done{opacity:.55}
-/* ═══ v3.19.0-3.20.0 سَكينة ═══ */
+/* ═══ v3.19.0-3.21.0 سَكينة ═══ */
 #skscr{position:fixed;inset:0;z-index:985;display:none;flex-direction:column;background:var(--bg);touch-action:manipulation;--skfs:1.22rem}
 #skscr.on{display:flex}
 #skscr .skhd{display:flex;align-items:center;gap:10px;padding:10px 14px;padding-top:calc(10px + env(safe-area-inset-top));background:var(--bg2);border-bottom:1px solid var(--line)}
@@ -9815,11 +9826,9 @@ fiqhInit();
 #skscr .skat{display:block;font-family:var(--f-read);font-size:var(--skfs);line-height:2.15;color:var(--ink)}
 #skscr .skayn{display:inline-block;margin-inline-start:6px;color:var(--gold2);font-size:calc(var(--skfs)*.72);line-height:1}
 #skscr .skal{display:inline-block;margin-top:8px;font:700 .68rem/1 var(--f-ui);font-style:normal;color:var(--muted);border:1px solid var(--line);border-radius:999px;padding:5px 11px}
-#skscr .skw{transition:color .15s,text-shadow .15s}
-#skscr .skw.on{color:var(--gold2);text-shadow:0 0 14px rgba(214,166,66,.55)}
 #skscr .sktf{margin-top:8px;border-top:1px dashed var(--line);color:var(--muted);font:400 .78rem/1.9 var(--f-ui);background:rgba(184,141,47,.07);border-radius:8px;padding:8px 12px}
 #skscr .sktf::before{content:'التفسير الميسَّر: ';color:var(--gold2);font-weight:700}
-/* صفحات المصحف — ورقٌ فاتحٌ بإطارٍ ذهبيٍّ مزخرفٍ كالمرفق */
+/* صفحات المصحف — ورقٌ فاتحٌ بإطارٍ ذهبيٍّ مزخرفٍ */
 #skscr .skpg{max-width:760px;margin:14px auto 26px;background:#f8f1df;border:1px solid var(--gold);border-radius:6px;padding:0 0 12px;box-shadow:0 12px 38px rgba(60,40,0,.18);position:relative;animation:skfade .4s ease}
 #skscr .skpg::before{content:'';position:absolute;inset:6px;border:1px solid rgba(184,141,47,.55);border-radius:4px;pointer-events:none}
 #skscr .skpg::after{content:'';position:absolute;inset:11px;border:1px solid rgba(184,141,47,.22);border-radius:3px;pointer-events:none}
@@ -9844,7 +9853,77 @@ fiqhInit();
 #skscr .skrh b{color:var(--ink)}
 #skscr .skft{padding:10px 16px;padding-bottom:calc(10px + env(safe-area-inset-bottom));background:var(--bg2);border-top:1px solid var(--line);color:var(--muted);font:400 .66rem/1.7 var(--f-ui);text-align:center}
 #skscr .skft b{color:var(--gold2);font-weight:700}
+/* ═══ v3.21.0 صفحة الدخول السحرية ═══ */
+#wlscr{position:fixed;inset:0;z-index:1200;display:none;overflow:hidden;background:radial-gradient(130% 130% at 50% 0%,#0e382e 0%,#08211b 52%,#040f0c 100%);color:var(--ink);-webkit-tap-highlight-color:transparent}
+#wlscr.on{display:block}
+#wlscr.bye{opacity:0;transition:opacity .6s ease}
+#wlscr .wlcenter{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:22px;text-align:center;z-index:3}
+#wlscr .wlbas{font-family:var(--f-read);font-size:clamp(1.45rem,6.8vw,2.25rem);line-height:1.9;color:#e9c877;text-shadow:0 0 26px rgba(214,166,66,.5);opacity:0;transform:scale(.94);transition:opacity 1.1s ease,transform 1.1s ease;margin:0 0 14px}
+#wlscr .wlbas.go{opacity:1;transform:none}
+#wlscr .wlbas.dim{opacity:.35}
+#wlscr .wltap{color:var(--muted);font:700 .85rem/1.5 var(--f-ui);animation:wlpulse 1.6s ease-in-out infinite;cursor:pointer;padding:10px 18px;border:1px solid var(--line);border-radius:999px;background:rgba(255,255,255,.04);margin:8px 0 0}
+@keyframes wlpulse{0%,100%{opacity:.45}50%{opacity:1}}
+#wlscr .wlttl{font:700 clamp(1.5rem,7vw,2rem)/1.3 var(--f-disp);color:var(--gold2);margin:6px 0 8px}
+#wlscr .wlsub{max-width:520px;color:var(--muted);font:400 .8rem/1.8 var(--f-ui);margin:0 auto 16px}
+#wlscr .wlform{width:min(92vw,430px);background:rgba(9,32,26,.72);border:1px solid var(--line);border-radius:20px;padding:18px 16px;box-shadow:0 24px 70px rgba(0,0,0,.5);backdrop-filter:blur(6px)}
+#wlscr .usrin{display:block;width:100%;box-sizing:border-box;background:rgba(255,255,255,.06);border:1px solid var(--line);border-radius:12px;color:var(--ink);font:700 .95rem/1.4 var(--f-ui);padding:12px 14px;margin:0 0 12px;outline:none}
+#wlscr .usrin:focus{border-color:var(--gold)}
+#wlscr .wlrow{display:flex;align-items:center;justify-content:space-between;gap:10px;margin:0 0 12px;flex-wrap:wrap}
+#wlscr .wlrow>span{color:var(--muted);font:700 .76rem/1.4 var(--f-ui)}
+#wlscr .wlchips{display:flex;gap:6px;flex-wrap:wrap}
+#wlscr .wlchip{background:transparent;border:1px solid var(--line);color:var(--ink);border-radius:999px;padding:8px 13px;font:700 .74rem/1 var(--f-ui);cursor:pointer;-webkit-tap-highlight-color:transparent}
+#wlscr .wlchip.on{background:linear-gradient(135deg,var(--gold),#b98d2f);color:#231a08;border-color:transparent}
+#wlscr .wlgo{display:block;width:100%;margin-top:6px;background:linear-gradient(135deg,var(--gold),#b98d2f);color:#231a08;border:0;border-radius:14px;padding:13px;font:700 1rem/1 var(--f-ui);cursor:pointer;-webkit-tap-highlight-color:transparent}
+#wlscr .wlgo:active{transform:scale(.985)}
+#wlscr .wlgreet{opacity:0;transform:translateY(20px);transition:opacity .9s ease,transform .9s ease;max-width:560px}
+#wlscr .wlgreet.go{opacity:1;transform:none}
+#wlscr .wlslm{font:700 clamp(1.15rem,5.4vw,1.6rem)/1.6 var(--f-disp);color:#fff;margin:0 0 10px;text-shadow:0 2px 24px rgba(0,0,0,.6)}
+#wlscr .wlname{font:700 clamp(1.3rem,6vw,1.9rem)/1.5 var(--f-disp);color:var(--gold2);margin:0 0 8px}
+#wlscr .wlsub2{color:var(--muted);font:400 .8rem/1.8 var(--f-ui);margin:0 0 18px}
+/* بوابة النور */
+#wlFx{position:absolute;inset:0;z-index:1;pointer-events:none;opacity:0;transition:opacity .5s}
+#wlFx.go{opacity:1}
+#wlscr .wlslit{position:absolute;left:50%;top:0;height:100%;width:min(130vw,1400px);transform:translateX(-50%) scaleX(.003);background:linear-gradient(180deg,rgba(255,236,180,0) 0%,#ffe9b0 18%,#fff8e0 50%,#ffe9b0 82%,rgba(255,236,180,0) 100%);box-shadow:0 0 80px 30px rgba(255,222,140,.4)}
+#wlFx.go .wlslit{animation:wlopen 2.3s cubic-bezier(.22,.61,.36,1) forwards}
+@keyframes wlopen{from{transform:translateX(-50%) scaleX(.003);opacity:1}70%{opacity:1}to{transform:translateX(-50%) scaleX(1);opacity:0}}
+#wlscr .wldoor{position:absolute;top:0;bottom:0;width:50.5%;background:linear-gradient(180deg,#0a2c24,#061813);z-index:2}
+#wlscr .wldoor.d1{right:0;transform:translateX(0)}
+#wlscr .wldoor.d2{left:0;transform:translateX(0)}
+#wlFx.go .wldoor.d1{animation:wldR 2.3s cubic-bezier(.22,.61,.36,1) forwards}
+#wlFx.go .wldoor.d2{animation:wldL 2.3s cubic-bezier(.22,.61,.36,1) forwards}
+@keyframes wldR{to{transform:translateX(102%)}}
+@keyframes wldL{to{transform:translateX(-102%)}}
+#wlParts{position:absolute;inset:0;z-index:2;pointer-events:none;overflow:hidden}
+#wlParts span{position:absolute;bottom:-14px;border-radius:50%;background:radial-gradient(circle,#ffefc0 0%,rgba(255,233,176,0) 70%);animation:wlfly linear infinite}
+@keyframes wlfly{to{transform:translateY(-112vh);opacity:0}}
+@media (prefers-reduced-motion:reduce){#wlFx.go .wlslit,#wlFx.go .wldoor.d1,#wlFx.go .wldoor.d2,#wlParts span{animation-duration:.01s}}
 </style>
+<section id="wlscr" aria-label="ترحيب نور">
+  <div id="wlFx" aria-hidden="true"><i class="wlslit"></i><i class="wldoor d1"></i><i class="wldoor d2"></i></div>
+  <div id="wlParts" aria-hidden="true"></div>
+  <div class="wlcenter" id="wlReg" hidden>
+    <p class="wlbas go">بِسْمِ ٱللَّهِ ٱلرَّحْمَٰنِ ٱلرَّحِيمِ</p>
+    <h2 class="wlttl">أهلًا بك في نور</h2>
+    <p class="wlsub">سجِّل اسمك مرَّةً واحدةً لِيُسلِّمَ عليكَ نورُك في كلِّ فتحٍ — بياناتُك تُحفظُ في جهازك وحده، ويمكنك تعديلُها فيما بعدُ منَ الإعداداتِ ← «بطاقتي».</p>
+    <div class="wlform">
+      <input id="wlName" class="usrin" type="text" maxlength="24" placeholder="اسمك (مثال: عبد الرحمن)" autocomplete="name">
+      <input id="wlBirth" class="usrin" type="date" aria-label="تاريخ الميلاد">
+      <div class="wlrow"><span>الجنس</span><div class="wlchips" id="wlG"><button type="button" class="wlchip on" data-v="m">ذكر</button><button type="button" class="wlchip" data-v="f">أنثى</button></div></div>
+      <div class="wlrow"><span>صوتُ فاتحةِ القرآنِ عندَ الدخول</span><div class="wlchips" id="wlR"><button type="button" class="wlchip on" data-v="husary">الحصري</button><button type="button" class="wlchip" data-v="minshawi">المنشاوي</button><button type="button" class="wlchip" data-v="sudais">السديس</button><button type="button" class="wlchip" data-v="shuraim">الشريم</button><button type="button" class="wlchip" data-v="lohaidan">لحيدان</button></div></div>
+      <button type="button" id="wlSave" class="wlgo">ابدأ رحلةَ النور ✦</button>
+    </div>
+  </div>
+  <div class="wlcenter" id="wlGateView" hidden>
+    <p class="wlbas" id="wlBasTxt">بِسْمِ ٱللَّهِ ٱلرَّحْمَٰنِ ٱلرَّحِيمِ</p>
+    <button type="button" class="wltap" id="wlTap" hidden>اضغطْ للدخول</button>
+    <div class="wlgreet" id="wlGreet">
+      <p class="wlslm">السَّلامُ عليكم ورحمةُ اللهِ وبركاتُه</p>
+      <p class="wlname" id="wlNameTxt"></p>
+      <p class="wlsub2" id="wlDay"></p>
+      <button type="button" id="wlEnter" class="wlgo">تَفَضَّل بالدخول</button>
+    </div>
+  </div>
+</section>
 <section id="skscr" aria-label="سَكينة">
   <header class="skhd">
     <button type="button" class="skx" id="skBack" aria-label="رجوع"><svg viewBox="0 0 24 24"><path d="M9.5 5l7 7-7 7" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
@@ -9865,10 +9944,9 @@ fiqhInit();
   <div class="sktools" id="skTools">
     <button type="button" id="skTfs">تَفسيرُ</button>
     <button type="button" id="skPg">صفحاتُ المصحفِ</button>
-    <button type="button" id="skWbw">كلمةٌ كلمةٌ</button>
   </div>
   <div class="sklist" id="skList"></div>
-  <footer class="skft" id="skFt">النصُّ القرآنيُّ بالرسمِ العثمانيِّ (حفص) — <b>المصحفُ الإلكترونيُّ، جامعةُ الملكِ سعودِ</b> quran.ksu.edu.sa · موثَّقٌ بمطابقةٍ حرفيةٍ عبرَ مسارَينِ (٢٠٦٢ آيةً) · التفسيرُ الميسَّرُ: مجمعُ الملكِ فهدِ · التلاوةُ: الحُصريُّ، وصوتُ الكلماتِ منَ quran.com — النصُّ مضمَّنٌ يعملُ دونَ اتصالٍ والتلاوةُ تحتاجُ إنترنتًا</footer>
+  <footer class="skft" id="skFt">النصُّ القرآنيُّ بالرسمِ العثمانيِّ (حفص) — <b>المصحفُ الإلكترونيُّ، جامعةُ الملكِ سعودِ</b> quran.ksu.edu.sa · موثَّقٌ بمطابقةٍ حرفيةٍ عبرَ مسارَينِ (٢٠٦٢ آيةً) · التفسيرُ الميسَّرُ: مجمعُ الملكِ فهدِ · تلاوةُ السكينةِ: الحُصريُّ والمنشاويُّ والسديسُ والشريمُ · ترحيبُ الدخولِ: فاتحةٌ كاملةٌ بصوتِ القارئِ المختارِ — النصُّ مضمَّنٌ دونَ اتصالٍ والتلاوةُ تحتاجُ إنترنتًا</footer>
 </section>
 <div id="tkscr" role="dialog" aria-modal="true">
   <div class="adjback" data-tk-close></div>
@@ -10051,29 +10129,34 @@ const SKRQS=[["الرقيةُ بالفاتحة","«وما يدريكَ أنها 
 const SKRQH=["النيّةُ: أنت تطلبُ الشفاءَ من اللهِ وحده","اقرأُ الفاتحةَ وآيةَ الكرسيِّ وخواتيمَ البقرةِ والمعوِّذاتِ على نفسِكَ","انفثْ بريقُ لُعابِكَ بكفَّيكَ اليسرى وامسحْ بهما على موضعِ الألمِ والرأسِ","قلْ أدعيةَ الرقيةَ السابقةَ بإيمانٍ ورجاءٍ","أواصلْ صباحًا ومساءً — فالأذى قد يعودُ فيُعادُ العَوذُ"];
 </script>
 <script>
-/* ═══════ v3.20.0 سَكينة — قرآنٌ يُسكِنُ القلب ═══════ */
+/* ═══════ v3.21.0 سَكينة — قرآنٌ يُسكِنُ القلب ═══════ */
 (function(){
   if(typeof SKX==='undefined'||typeof SKG==='undefined'||typeof SKNAMES==='undefined')return;
   var SC=document.querySelector('#skscr'),L=document.querySelector('#skList'),
       TB=document.querySelector('#skTabs'),PB=document.querySelector('#skPlay'),
       TL=document.querySelector('#skTools');
   if(!SC||!L)return;
-  var AD='https://cdn.islamic.network/quran/audio/128/ar.husary/',
-      WBW='https://audio.qurancdn.com/wbw/';
-  var FS=[1.05,1.22,1.4],TAB=0,SEQ=[],SI=0,PLAY=false,AU=null,
+  var RED={husary:'https://cdn.islamic.network/quran/audio/128/ar.husary/',minshawi:'https://cdn.islamic.network/quran/audio/128/ar.minshawi/'};
+  var EVY={sudais:'Abdurrahmaan_As-Sudais_192kbps',shuraim:'Saood_ash-Shuraym_128kbps'};
+  var FS=[1.05,1.22,1.4],TAB=0,SEQ=[],SI=0,PLAY=false,AU=null,LHT=false,
       FI=(S.skF==null||S.skF<0||S.skF>2)?1:+S.skF,
       TF=(S.skTf==null)?0:(+S.skTf?1:0),
-      PG=(S.skP==null)?0:(+S.skP?1:0),
-      MD=(S.skM==null)?0:(+S.skM?1:0);
+      PG=(S.skP==null)?0:(+S.skP?1:0);
   var BAS='بِسْمِ ٱللَّهِ ٱلرَّحْمَٰنِ ٱلرَّحِيمِ';
   var V67='«سُورَةٌ مِنَ ٱلْقُرْآنِ ثَلَاثُونَ آيَةً شَفَّعَتْ لِرَجُلٍ حَتَّىٰ غُفِرَ لَهُ» — رواه أبو داود والترمذي.';
   var V18='«مَنْ قَرَأَ سُورَةَ ٱلْكَهْفِ فِى يَوْمِ ٱلْجُمُعَةِ أَضَاءَ لَهُ مِنَ ٱلنُّورِ مَا بَيْنَ ٱلْجُمُعَتَيْنِ» — رواه الحاكم والبيهقي؛ «مَنْ حَفِظَ عَشْرَ آيَاتٍ مِنْ أَوَّلِ ٱلسُّورَةِ عُصِمَ مِنَ ٱلدَّجَّالِ» — رواه مسلم.';
   var VM='«قُلْ هُوَ ٱللَّهُ أَحَدٌ وَٱلْمُعَوِّذَتَيْنِ حِينَ تُمْسِى وَحِينَ تُصْبِحِى ثَلَاثًا تَكْفِيكَ مِنْ كُلِّ شَىْءٍ» — رواه أبو داود والترمذي.';
   var VS='آياتٌ اُنتُقيتْ لأنها مواطنُ السكينةِ في كتابِ اللهِ — اقرأها بتدبُّرٍ وقلبٍ حاضرٍ يشرحُ صدرَك.';
-  var VRQ='«مَا أُنزِلَ في كتابِ اللهِ أو أُوحِيَ إلى نبيٍّ» — سُئلتِ الجاريةُ عن رقيتِها فكانتَ الفاتحةَ (متفق عليه). جمعنا لكَ الرقيةَ منَ القرآنِ والسنةِ الصحيحةِ بلا زيادةٍ على دليلٍ.';
-  var HEADS=[{s:67,v:V67},{s:18,v:V18},{v:VS},{v:VRQ},{s:4,v:VM}];
+  var HEADS=[{s:67,v:V67},{s:18,v:V18},{v:VS},{v:null},{s:4,v:VM}];
   function an(x){return String(x).replace(/[0-9]/g,function(d){return '٠١٢٣٤٥٦٧٨٩'[+d];});}
   function p3(x){return ('00'+x).slice(-3);}
+  function adUrl(el){
+    var r=S.rcr;
+    if(r==='lohaidan'){if(!LHT){LHT=true;toast('تلاوةُ لحيدانَ متاحةٌ في ترحيبِ الدخولِ — تلاوةُ السكينةِ الآنَ بالحصريِّ');}r='husary';}
+    if(RED[r])return RED[r]+el.dataset.g+'.mp3';
+    if(EVY[r])return 'https://everyayah.com/data/'+EVY[r]+'/'+p3(+el.dataset.s)+p3(+el.dataset.i)+'.mp3';
+    return RED.husary+el.dataset.g+'.mp3';
+  }
   function introP(v){if(!v)return;var p=document.createElement('p');p.className='skvirt';p.textContent=v;L.appendChild(p);}
   function secH(t){var h=document.createElement('h4');h.className='skrqh';h.textContent=t;L.appendChild(h);}
   function tftxt(s,i){
@@ -10140,7 +10223,6 @@ const SKRQH=["النيّةُ: أنت تطلبُ الشفاءَ من اللهِ �
   }
   function ruqyaView(){
     if(!SKRQ||!SKRQS)return;
-    introP(VRQ);
     secH('الرقيةُ منَ القرآنِ');
     secH('سُورَةُ ٱلْفَاتِحَةِ');
     SKRQ.forEach(function(r){
@@ -10191,45 +10273,19 @@ const SKRQH=["النيّةُ: أنت تطلبُ الشفاءَ من اللهِ �
   function setTools(){
     TL.querySelector('#skTfs').classList.toggle('on',TF===1);
     TL.querySelector('#skPg').classList.toggle('on',PG===1);
-    TL.querySelector('#skWbw').classList.toggle('on',MD===1);
   }
   function step(i){
     SI=i;var el=SEQ[i];if(!el){stopAu();return;}
     SEQ.forEach(function(e,k){e.classList.toggle('cur',k===i);});
     try{el.scrollIntoView({block:'center',behavior:'smooth'});}catch(_){}
     if(AU){AU.pause();AU=null;}
-    if(MD===1){startWords(el);return;}
-    AU=new Audio(AD+el.dataset.g+'.mp3');
+    AU=new Audio(adUrl(el));
     AU.onended=function(){if(PLAY&&SI+1<SEQ.length)step(SI+1);else stopAu();};
     AU.onerror=function(){toast('تعذَّرَ جلبُ التلاوةِ — تحقَّقْ منَ الاتصالِ بالإنترنت');stopAu();};
     var p=AU.play();if(p&&p.catch)p.catch(function(){toast('التلاوةُ تحتاجُ اتصالًا بالإنترنت');stopAu();});
   }
-  function startWords(el){
-    var at=el.querySelector('.skat');
-    if(at.dataset.split!=='1'){
-      var txt=at.textContent.replace(/\s+$/,'');at.textContent='';
-      txt.split(' ').forEach(function(w,k){
-        var sp=document.createElement('span');sp.className='skw';sp.textContent=(k?' ':'')+w;at.appendChild(sp);
-      });
-      at.dataset.split='1';
-    }
-    var ws=at.querySelectorAll('.skw'),s=+el.dataset.s,ay=+el.dataset.i,k=0;
-    function pw(){
-      if(!PLAY)return;
-      ws.forEach(function(x){x.classList.remove('on');});
-      if(k>=ws.length){if(SI+1<SEQ.length)step(SI+1);else stopAu();return;}
-      ws[k].classList.add('on');
-      var au=new Audio(WBW+p3(s)+'_'+p3(ay)+'_'+p3(k+1)+'.mp3');
-      AU=au;
-      au.onended=function(){k++;pw();};
-      au.onerror=function(){toast('تعذَّرَ صوتُ الكلمةِ — رجعنا لإضاءةِ الآيةِ كاملةً');MD=0;S.skM=0;saveS();setTools();stopAu();startPlay();};
-      var p=au.play();if(p&&p.catch)p.catch(function(){toast('التلاوةُ تحتاجُ اتصالًا بالإنترنت');stopAu();});
-    }
-    pw();
-  }
   function stopAu(){PLAY=false;if(AU){AU.pause();AU=null;}PB.textContent='استمع';PB.classList.remove('on');
     SEQ.forEach(function(el){el.classList.remove('cur');});
-    L.querySelectorAll('.skw.on').forEach(function(x){x.classList.remove('on');});
     SEQ=[];}
   function startPlay(){var els=L.querySelectorAll('.skaya');if(!els.length)return;
     SEQ=[];els.forEach(function(e){SEQ.push(e);});PLAY=true;PB.textContent='أوقف';PB.classList.add('on');step(0);}
@@ -10247,8 +10303,6 @@ const SKRQH=["النيّةُ: أنت تطلبُ الشفاءَ من اللهِ �
     else if(b.id==='skPg'){
       if(TAB===2||TAB===3){toast('الصفحاتُ متاحةٌ في تبويباتِ السورِ والمعوِّذاتِ');return;}
       PG=1-PG;S.skP=PG;saveS();refresh();}
-    else if(b.id==='skWbw'){MD=1-MD;S.skM=MD;saveS();refresh();
-      toast(MD===1?'وضعُ الإضاءةِ كلمةً كلمةً — اضغطْ «استمع»':'رجعنا لإضاءةِ الآيةِ كاملةً');}
   });
   document.querySelector('#homeSknBtn').addEventListener('click',openSkn);
   document.querySelector('#skBack').addEventListener('click',closeSkn);
@@ -10258,6 +10312,139 @@ const SKRQH=["النيّةُ: أنت تطلبُ الشفاءَ من اللهِ �
   var svT=null;
   L.addEventListener('scroll',function(){clearTimeout(svT);svT=setTimeout(function(){
     if(SC.classList.contains('on')){S.skT=TAB;S.skY=L.scrollTop;saveS();}},400);});
+})();
+</script>
+<script>
+/* ═══════ v3.22.0 صفحةُ الدخولِ السحرية — فاتحةٌ كاملةٌ بصوتِ القارئِ ═══════ */
+(function(){
+  var SC=document.querySelector('#wlscr');if(!SC)return;
+  var RG=document.querySelector('#wlReg'),GV=document.querySelector('#wlGateView'),
+      FX=document.querySelector('#wlFx'),PTS=document.querySelector('#wlParts'),
+      BAS=document.querySelector('#wlBasTxt'),TAP=document.querySelector('#wlTap'),
+      GRT=document.querySelector('#wlGreet'),NTX=document.querySelector('#wlNameTxt'),
+      DAY=document.querySelector('#wlDay'),ENT=document.querySelector('#wlEnter');
+  /* فاتحةٌ كاملةٌ — ملفٌ واحدٌ لكلِّ قارئٍ (quranicaudio) */
+  var QUR={husary:'mahmood_khaleel_al-husaree',minshawi:'muhammad_siddeeq_al-minshaawee',sudais:'abdurrahmaan_as-sudays',shuraim:'sa3ood_al-shuraym',lohaidan:'muhammad_alhaidan'};
+  function fatUrl(r){return 'https://download.quranicaudio.com/quran/'+(QUR[r]||QUR.husary)+'/001.mp3';}
+  var AU=null,T1=null,T2=null,ST=0;
+  function stopAu(fast){
+    if(!AU)return;
+    if(fast&&AU.volume>0){
+      var v=AU.volume;
+      var iv=setInterval(function(){v-=0.12;if(v<=0){clearInterval(iv);AU.pause();}else{try{AU.volume=v;}catch(_){}}},70);
+    } else AU.pause();
+    AU=null;
+  }
+  function chips(box,val){
+    box.querySelectorAll('.wlchip').forEach(function(b){b.classList.toggle('on',b.dataset.v===val);});
+  }
+  function chipVal(box,def){
+    var on=box.querySelector('.wlchip.on');
+    return on?on.dataset.v:def;
+  }
+  function particles(){
+    PTS.innerHTML='';
+    for(var i=0;i<18;i++){
+      var s=document.createElement('span');
+      var sz=(4+Math.random()*6).toFixed(1);
+      s.style.left=(4+Math.random()*92).toFixed(1)+'%';
+      s.style.width=sz+'px';s.style.height=sz+'px';
+      s.style.animationDuration=(5+Math.random()*6).toFixed(1)+'s';
+      s.style.animationDelay=(Math.random()*4).toFixed(1)+'s';
+      s.style.opacity=(0.35+Math.random()*0.6).toFixed(2);
+      PTS.appendChild(s);
+    }
+  }
+  function startFt(){
+    var blocked=false;
+    try{
+      AU=new Audio(fatUrl(S.rcr||'husary'));AU.volume=0.85;
+      AU.onended=function(){AU=null;};
+      AU.onerror=function(){AU=null;}; /* بلا إنترنت: صمتٌ هادئٌ والبوابةُ تتمُّ بصريًّا */
+      var p=AU.play();
+      if(p&&p.catch)p.catch(function(){AU=null;blocked=true;});
+      else if(!p){AU=null;blocked=true;}
+    }catch(_){AU=null;blocked=true;}
+    return blocked;
+  }
+  function showGate(){
+    RG.hidden=true;GV.hidden=false;ST=0;
+    BAS.classList.remove('go','dim');GRT.classList.remove('go');FX.classList.remove('go');
+    TAP.hidden=true;particles();
+    if(!startFt())beginSeq();
+    else{TAP.hidden=false;ST=99;}
+    SC.onclick=function(e){
+      if(ST===99){TAP.hidden=true;startFt();beginSeq();return;} /* إن كانتَ الشبكةُ غائبةً فصمتٌ وكمالٌ بصريٌّ */
+      if(ST===1||ST===2){skipToGreet();}
+    };
+  }
+  function beginSeq(){
+    ST=1;
+    requestAnimationFrame(function(){BAS.classList.add('go');});
+    T1=setTimeout(function(){
+      ST=2;FX.classList.add('go');
+      T2=setTimeout(greet,2300);
+    },3300);
+  }
+  function skipToGreet(){
+    clearTimeout(T1);clearTimeout(T2);
+    ST=2;FX.classList.add('go');greet();
+  }
+  function greet(){
+    ST=3;
+    BAS.classList.add('dim');
+    var n=(S.usrN||'').trim();
+    NTX.textContent=n?((S.usrG==='f'?'يا أختي ':'يا أخي ')+n):'';
+    try{
+      DAY.textContent=new Date().toLocaleDateString('ar',{weekday:'long',day:'numeric',month:'long',year:'numeric'})+' — يومُكَ نورٌ وسكينةٌ إن شاء الله';
+    }catch(_){DAY.textContent='يومُكَ نورٌ وسكينةٌ إن شاء الله';}
+    GRT.classList.add('go');
+  }
+  function close(){
+    SC.classList.add('bye');stopAu(true);
+    setTimeout(function(){SC.classList.remove('on','bye');SC.onclick=null;},620);
+  }
+  ENT.addEventListener('click',function(e){e.stopPropagation();close();});
+  function reg(){
+    GV.hidden=true;RG.hidden=false;ST=0;
+    document.querySelector('#wlName').value=S.usrN||'';
+    document.querySelector('#wlBirth').value=S.usrB||'';
+    chips(document.querySelector('#wlG'),S.usrG||'m');
+    chips(document.querySelector('#wlR'),S.rcr||'husary');
+  }
+  function chipsWire(box){
+    box.addEventListener('click',function(e){
+      var b=e.target.closest('.wlchip');if(!b)return;
+      box.querySelectorAll('.wlchip').forEach(function(x){x.classList.remove('on');});
+      b.classList.add('on');
+    });
+  }
+  chipsWire(document.querySelector('#wlG'));
+  chipsWire(document.querySelector('#wlR'));
+  document.querySelector('#wlSave').addEventListener('click',function(){
+    var n=document.querySelector('#wlName').value.trim();
+    if(!n){toast('اكتبْ اسمك لِنُسلِّمَ عليكَ ✦');document.querySelector('#wlName').focus();return;}
+    S.usrN=n;S.usrB=document.querySelector('#wlBirth').value||'';
+    S.usrG=chipVal(document.querySelector('#wlG'),'m');S.rcr=chipVal(document.querySelector('#wlR'),'husary');
+    saveS();showGate();
+  });
+  /* بطاقة الإعدادات */
+  var UI=document.querySelector('#usrNameIn');
+  if(UI){
+    UI.value=S.usrN||'';
+    document.querySelector('#usrBirthIn').value=S.usrB||'';
+    chips(document.querySelector('#usrGenderSeg'),S.usrG||'m');
+    chips(document.querySelector('#usrRecSeg'),S.rcr||'husary');
+    chipsWire(document.querySelector('#usrGenderSeg'));
+    chipsWire(document.querySelector('#usrRecSeg'));
+    document.querySelector('#usrSave').addEventListener('click',function(){
+      var n=UI.value.trim();
+      S.usrN=n;S.usrB=document.querySelector('#usrBirthIn').value||'';
+      S.usrG=chipVal(document.querySelector('#usrGenderSeg'),'m');S.rcr=chipVal(document.querySelector('#usrRecSeg'),'husary');
+      saveS();toast(n?('حُفظت بطاقتُك يا '+n+' ✦'):'حُفظت بطاقتُك ✦');
+    });
+  }
+  setTimeout(function(){SC.classList.add('on');(S.usrN?showGate:reg)();},500);
 })();
 </script>
 </body>
