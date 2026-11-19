@@ -1453,13 +1453,13 @@ button.pray-loc{background:none;border:none;font-family:var(--f-ui)}
     <p class="small">ينبهك نور بلطفٍ (صوتٌ ورسالة) إلى لحظة ذكرٍ في الوقت الذي تحدده، وما دام نور مفتوحًا في متصفحك — لتسبيحةٍ هنا وهناك تملأ يومك. وعند تحويل نور إلى تطبيق هاتفٍ سيرسل لك تذكيرًا حقيقيًا حتى وهو مغلق.</p>
   </div>
   <div class="set card">
-    <h3>بطاقتي وترحيبي</h3>
-    <div class="srow"><span class="lbl2">الاسم</span><input id="usrNameIn" class="usrin" style="max-width:180px" type="text" maxlength="24" placeholder="اسمك"></div>
-    <div class="srow"><span class="lbl2">تاريخ الميلاد</span><input id="usrBirthIn" class="usrin" style="max-width:180px" type="date"></div>
-    <div class="srow"><span class="lbl2">الجنس (للتحية)</span><div class="wlchips" id="usrGenderSeg"><button type="button" class="wlchip" data-v="m">ذكر</button><button type="button" class="wlchip" data-v="f">أنثى</button></div></div>
-    <div class="srow" style="display:block"><span class="lbl2">صوتُ فاتحةِ القرآنِ عندَ فتحِ التطبيق</span><div class="wlchips" id="usrRecSeg" style="margin-top:8px"><button type="button" class="wlchip" data-v="husary">الحصري</button><button type="button" class="wlchip" data-v="minshawi">المنشاوي</button><button type="button" class="wlchip" data-v="sudais">السديس</button><button type="button" class="wlchip" data-v="shuraim">الشريم</button><button type="button" class="wlchip" data-v="lohaidan">لحيدان</button></div></div>
-    <button type="button" id="usrSave" class="btn">حفظ بطاقتي</button>
-    <p class="small">تُستخدمُ بطاقتُكَ لترحيبٍ شخصيٍّ عندَ كلِّ فتحٍ للنور: بسمِ اللهِ بصوتِكَ المختارِ ثم السلامُ عليكَ باسمِكَ. بياناتُكَ محفوظةٌ في جهازك وحده ولا تُرسلُ لأيِّ جهةٍ.</p>
+    <h3>بطاقة الترحيب</h3>
+    <div class="wlfield"><label for="usrNameIn">الاسم — كما تحبُّ أن نُناديكَ</label><input id="usrNameIn" class="usrin" type="text" maxlength="24" placeholder="مثال: عبد الرحمن"></div>
+    <div class="wlfield"><label for="usrBirthIn">تاريخُ الميلادِ <i>اختياري</i></label><input id="usrBirthIn" class="usrin" type="date"></div>
+    <div class="wlfield"><label>الجنس — للتحيةِ الصحيحةِ</label><div class="wlchips" id="usrGenderSeg"><button type="button" class="wlchip" data-v="m">ذكر</button><button type="button" class="wlchip" data-v="f">أنثى</button></div></div>
+    <div class="wlfield"><label>صوتُ فاتحةِ القرآنِ عندَ كلِّ فتحٍ للتطبيق</label><div class="wlchips" id="usrRecSeg"><button type="button" class="wlchip" data-v="husary">الحصري</button><button type="button" class="wlchip" data-v="minshawi">المنشاوي</button><button type="button" class="wlchip" data-v="sudais">السديس</button><button type="button" class="wlchip" data-v="shuraim">الشريم</button><button type="button" class="wlchip" data-v="lohaidan">لحيدان</button></div></div>
+    <button type="button" id="usrSave" class="btn">حفظ بطاقة الترحيب</button>
+    <p class="small">عندَ كلِّ فتحٍ للنور تُفتَحُ لكَ بوابةُ نورٍ: السلامُ عليكَ باسمِكَ (يا أخي/أختي) وقراءةُ الفاتحةِ كاملةً بصوتِكَ المختارِ، وإن غابتِ الشبكةُ تمَّتِ البوابةُ بصمتٍ جميلٍ. بياناتُكَ محفوظةٌ في جهازك وحده ولا تُرسلُ لأيِّ جهةٍ.</p>
   </div>
   <div class="set card">
     <h3>البيانات</h3>
@@ -1486,6 +1486,7 @@ button.pray-loc{background:none;border:none;font-family:var(--f-ui)}
     </details>
     <details class="doc">
       <summary>سجل الإصدار</summary>
+      <div class="body"><b>v3.23.0</b> — برأيِ صاحبِ التطبيقِ: أُسميتِ البطاقةُ في الإعداداتِ «بطاقة الترحيبِ» وحُسِّنَ الإدخالُ بحقولٍ عموديةٍ بعناوينَ ذهبيةٍ واضحةٍ وأزرارٍ أكبرَ وأسهلَ لمسًا، معَ توضيحِ أنَّ التسجيلَ مرَّةً واحدةً والتعديلَ منَ الإعداداتِ — وفي كلِّ دخولٍ: رسالةُ السلامِ الشخصيةِ كما هي + قراءةُ الفاتحةِ كاملةً بصوتِ القارئِ المختارِ.</div>
       <div class="body"><b>v3.22.0</b> — بناءً على رأيِ صاحبِ التطبيقِ: ترحيبُ الدخولِ صارَ بفاتحةِ القرآنِ الكاملةِ بصوتِ القارئِ المختارِ (الحصريِّ أو المنشاويِّ أو السديسِ أو الشريمِ أو لحيدانَ) — ملفٌ واحدٌ لكلِّ قارئٍ منَ quranicaudio، وتمرُّ البوابةُ صامتةً بهدوءٍ إن لم تتوفرَ الشبكةُ. وتلاوةُ السكينةِ (آيةً آيةً) كما هي على المصادرِ المجانيةِ نفسِها.</div>
       <div class="body"><b>v3.21.0</b> — برأيِ صاحبِ التطبيقِ: أُلغيتْ «كلمةٌ كلمةٌ» نهائيًّا وبقيت إضاءةُ الآيةِ كاملةً عندَ التلاوة، وتبويبُ الرقيةِ يبدأُ مباشرةً بـ«الرقيةُ منَ القرآنِ» بلا مقدمةٍ. وجديدُ النور: صفحةُ دخولٍ سحريةٍ — تسجيلُ الاسمِ وتاريخِ الميلادِ والجنسِ وصوتِ القارئِ مرةً واحدةً (تعديلُها فيما بعدُ منَ الإعداداتِ ← «بطاقتي»)، وبوابةُ نورٍ تتفتَّحُ بجسيماتِ ضوءٍ ثم «السَّلامُ عليكم ورحمةُ اللهِ وبركاتُه — يا أخي/أختي …» حسبَ الجنسِ. بياناتُ الترحيبِ في جهازك وحده.</div>
       <div class="body"><b>v3.20.0</b> — «سَكينة» بزادِها: وضعُ «صفحاتِ المصحفِ» بترقيمِ المصحفِ الإلكترونيِّ بالضبطِ (المُلْكُ ٥٦٢–٥٦٤، الكَهفُ ٢٩٣–٣٠٤، المعوِّذاتُ ٦٠٤) بورقٍ فاتحٍ وإطارٍ ذهبيٍّ مزخرفٍ ونصٍّ عثمانيٍّ موثَّقٍ يعملُ دونَ اتصال؛ التفسيرُ الميسَّرُ مضمَّنٌ تحتَ كلِّ آيةٍ بضغطةٍ (مجمعُ الملكِ فهد)؛ وتبويبُ «الرُّقيةِ الشرعيةِ»: الفاتحةُ وآيةُ الكرسيِّ وخواتيمُ البقرةِ والمعوِّذاتُ + ستُّ أدعيةٍ نبويةٍ صحيحةٍ بتصديقِها وكيفيةِ الرقيةِ — بلا زيادةٍ على دليلٍ.</div>
@@ -9868,10 +9869,13 @@ fiqhInit();
 #wlscr .wlform{width:min(92vw,430px);background:rgba(9,32,26,.72);border:1px solid var(--line);border-radius:20px;padding:18px 16px;box-shadow:0 24px 70px rgba(0,0,0,.5);backdrop-filter:blur(6px)}
 #wlscr .usrin{display:block;width:100%;box-sizing:border-box;background:rgba(255,255,255,.06);border:1px solid var(--line);border-radius:12px;color:var(--ink);font:700 .95rem/1.4 var(--f-ui);padding:12px 14px;margin:0 0 12px;outline:none}
 #wlscr .usrin:focus{border-color:var(--gold)}
-#wlscr .wlrow{display:flex;align-items:center;justify-content:space-between;gap:10px;margin:0 0 12px;flex-wrap:wrap}
-#wlscr .wlrow>span{color:var(--muted);font:700 .76rem/1.4 var(--f-ui)}
+#wlscr .wlfield{width:100%;text-align:right;margin:0 0 13px}
+#wlscr .wlfield label{display:block;font:700 .74rem/1.4 var(--f-ui);color:var(--gold2);margin-bottom:7px}
+#wlscr .wlfield label i{font-style:normal;font-weight:400;color:var(--muted)}
+#wlscr .wlfield .usrin{margin:0}
+#wlscr .wlhint{color:var(--muted);font:400 .7rem/1.7 var(--f-ui);margin:10px 0 0;text-align:center}
 #wlscr .wlchips{display:flex;gap:6px;flex-wrap:wrap}
-#wlscr .wlchip{background:transparent;border:1px solid var(--line);color:var(--ink);border-radius:999px;padding:8px 13px;font:700 .74rem/1 var(--f-ui);cursor:pointer;-webkit-tap-highlight-color:transparent}
+#wlscr .wlchip{background:transparent;border:1px solid var(--line);color:var(--ink);border-radius:999px;padding:9px 15px;font:700 .78rem/1 var(--f-ui);cursor:pointer;-webkit-tap-highlight-color:transparent}
 #wlscr .wlchip.on{background:linear-gradient(135deg,var(--gold),#b98d2f);color:#231a08;border-color:transparent}
 #wlscr .wlgo{display:block;width:100%;margin-top:6px;background:linear-gradient(135deg,var(--gold),#b98d2f);color:#231a08;border:0;border-radius:14px;padding:13px;font:700 1rem/1 var(--f-ui);cursor:pointer;-webkit-tap-highlight-color:transparent}
 #wlscr .wlgo:active{transform:scale(.985)}
@@ -9904,13 +9908,14 @@ fiqhInit();
   <div class="wlcenter" id="wlReg" hidden>
     <p class="wlbas go">بِسْمِ ٱللَّهِ ٱلرَّحْمَٰنِ ٱلرَّحِيمِ</p>
     <h2 class="wlttl">أهلًا بك في نور</h2>
-    <p class="wlsub">سجِّل اسمك مرَّةً واحدةً لِيُسلِّمَ عليكَ نورُك في كلِّ فتحٍ — بياناتُك تُحفظُ في جهازك وحده، ويمكنك تعديلُها فيما بعدُ منَ الإعداداتِ ← «بطاقتي».</p>
+    <p class="wlsub">سجِّل بياناتك مرَّةً واحدةً لِيُسلِّمَ عليكَ نورُك في كلِّ فتحٍ — وتُحفظُ في جهازك وحده، وتُعدَّلُ فيما بعدُ منَ الإعداداتِ ← «بطاقة الترحيب».</p>
     <div class="wlform">
-      <input id="wlName" class="usrin" type="text" maxlength="24" placeholder="اسمك (مثال: عبد الرحمن)" autocomplete="name">
-      <input id="wlBirth" class="usrin" type="date" aria-label="تاريخ الميلاد">
-      <div class="wlrow"><span>الجنس</span><div class="wlchips" id="wlG"><button type="button" class="wlchip on" data-v="m">ذكر</button><button type="button" class="wlchip" data-v="f">أنثى</button></div></div>
-      <div class="wlrow"><span>صوتُ فاتحةِ القرآنِ عندَ الدخول</span><div class="wlchips" id="wlR"><button type="button" class="wlchip on" data-v="husary">الحصري</button><button type="button" class="wlchip" data-v="minshawi">المنشاوي</button><button type="button" class="wlchip" data-v="sudais">السديس</button><button type="button" class="wlchip" data-v="shuraim">الشريم</button><button type="button" class="wlchip" data-v="lohaidan">لحيدان</button></div></div>
+      <div class="wlfield"><label for="wlName">الاسم — كما تحبُّ أن نُناديكَ</label><input id="wlName" class="usrin" type="text" maxlength="24" placeholder="مثال: عبد الرحمن" autocomplete="name"></div>
+      <div class="wlfield"><label for="wlBirth">تاريخُ ميلادِكَ <i>اختياري</i></label><input id="wlBirth" class="usrin" type="date"></div>
+      <div class="wlfield"><label>الجنس — للتحيةِ الصحيحةِ</label><div class="wlchips" id="wlG"><button type="button" class="wlchip on" data-v="m">ذكر</button><button type="button" class="wlchip" data-v="f">أنثى</button></div></div>
+      <div class="wlfield"><label>صوتُ فاتحةِ القرآنِ عندَ كلِّ دخولٍ</label><div class="wlchips" id="wlR"><button type="button" class="wlchip on" data-v="husary">الحصري</button><button type="button" class="wlchip" data-v="minshawi">المنشاوي</button><button type="button" class="wlchip" data-v="sudais">السديس</button><button type="button" class="wlchip" data-v="shuraim">الشريم</button><button type="button" class="wlchip" data-v="lohaidan">لحيدان</button></div></div>
       <button type="button" id="wlSave" class="wlgo">ابدأ رحلةَ النور ✦</button>
+      <p class="wlhint">تسجيلٌ مرَّةً واحدةً — وفي كلِّ دخولٍ: سلامٌ عليكَ باسمِكَ وقراءةُ الفاتحةِ بصوتِكَ المختارِ</p>
     </div>
   </div>
   <div class="wlcenter" id="wlGateView" hidden>
@@ -10441,7 +10446,7 @@ const SKRQH=["النيّةُ: أنت تطلبُ الشفاءَ من اللهِ �
       var n=UI.value.trim();
       S.usrN=n;S.usrB=document.querySelector('#usrBirthIn').value||'';
       S.usrG=chipVal(document.querySelector('#usrGenderSeg'),'m');S.rcr=chipVal(document.querySelector('#usrRecSeg'),'husary');
-      saveS();toast(n?('حُفظت بطاقتُك يا '+n+' ✦'):'حُفظت بطاقتُك ✦');
+      saveS();toast(n?('حُفظت بطاقةُ الترحيبِ يا '+n+' ✦'):'حُفظت بطاقةُ الترحيبِ ✦');
     });
   }
   setTimeout(function(){SC.classList.add('on');(S.usrN?showGate:reg)();},500);
