@@ -1454,12 +1454,19 @@ button.pray-loc{background:none;border:none;font-family:var(--f-ui)}
   </div>
   <div class="set card">
     <h3>بطاقة الترحيب</h3>
-    <div class="wlfield"><label for="usrNameIn">الاسم — كما تحبُّ أن نُناديكَ</label><input id="usrNameIn" class="usrin" type="text" maxlength="24" placeholder="مثال: عبد الرحمن"></div>
-    <div class="wlfield"><label for="usrBirthIn">تاريخُ الميلادِ <i>اختياري</i></label><input id="usrBirthIn" class="usrin" type="date"></div>
-    <div class="wlfield"><label>الجنس — للتحيةِ الصحيحةِ</label><div class="wlchips" id="usrGenderSeg"><button type="button" class="wlchip" data-v="m">ذكر</button><button type="button" class="wlchip" data-v="f">أنثى</button></div></div>
-    <div class="wlfield"><label>صوتُ فاتحةِ القرآنِ عندَ كلِّ فتحٍ للتطبيق</label><div class="wlchips" id="usrRecSeg"><button type="button" class="wlchip" data-v="husary">الحصري</button><button type="button" class="wlchip" data-v="minshawi">المنشاوي</button><button type="button" class="wlchip" data-v="sudais">السديس</button><button type="button" class="wlchip" data-v="shuraim">الشريم</button><button type="button" class="wlchip" data-v="lohaidan">لحيدان</button></div></div>
+    <div class="srow"><span class="lbl2">بطاقةُ الترحيبِ</span><div class="seg" id="usrWlMst"><button type="button">مفعَّلة</button><button type="button">معطَّلة</button></div></div>
+    <div id="usrWlBody">
+      <div class="srow"><span class="lbl2">بطاقةُ الدخولِ إلىَ التطبيقِ</span><div class="seg" id="usrWlOn"><button type="button">تفعيل</button><button type="button">تعطيل</button></div></div>
+      <div class="srow"><span class="lbl2">عندَ التفعيلِ</span><div class="seg" id="usrWlOnce"><button type="button">لمرةٍ واحدةٍ</button><button type="button">دائمًا</button></div></div>
+      <div class="srow"><span class="lbl2">صوتُ فاتحةِ الدخولِ</span><div class="chipsrow" id="usrRecSeg" style="flex:1;min-width:0;justify-content:flex-end"><button type="button" class="chip">الحصري</button><button type="button" class="chip">المنشاوي</button><button type="button" class="chip">السديس</button><button type="button" class="chip">الشريم</button><button type="button" class="chip">لحيدان</button></div></div>
+      <div class="srow"><span class="lbl2">بطاقاتُ الميزاتِ عندَ الدخولِ</span><div class="seg" id="usrFwSeg"><button type="button">أولَ اليومِ</button><button type="button">دائمًا</button><button type="button">أولَ مرةٍ</button><button type="button">إيقاف</button></div></div>
+      <div class="srow"><span class="lbl2">صوتُ آياتِ الميزاتِ</span><div class="chipsrow" id="usrFwRec" style="flex:1;min-width:0;justify-content:flex-end"><button type="button" class="chip">الحصري</button><button type="button" class="chip">المنشاوي</button><button type="button" class="chip">السديس</button><button type="button" class="chip">الشريم</button><button type="button" class="chip">لحيدان</button></div></div>
+      <div class="srow"><span class="lbl2">الاسم — كما تحبُّ أن نُناديكَ</span><input id="usrNameIn" class="inp" type="text" maxlength="24" placeholder="مثال: عبد الرحمن" autocomplete="name" style="max-width:200px"></div>
+      <div class="srow"><span class="lbl2">العمر — بالسنواتِ <i>اختياري</i></span><input id="usrAgeIn" class="inp" type="number" min="5" max="120" inputmode="numeric" placeholder="مثال: 34" style="max-width:120px"></div>
+      <div class="srow"><span class="lbl2">الجنس — للتحيةِ الصحيحةِ</span><div class="seg" id="usrGenderSeg"><button type="button">ذكر</button><button type="button">أنثى</button></div></div>
+    </div>
     <button type="button" id="usrSave" class="btn">حفظ بطاقة الترحيب</button>
-    <p class="small">عندَ كلِّ فتحٍ للنور تُفتَحُ لكَ بوابةُ نورٍ: السلامُ عليكَ باسمِكَ (يا أخي/أختي) وقراءةُ الفاتحةِ كاملةً بصوتِكَ المختارِ، وإن غابتِ الشبكةُ تمَّتِ البوابةُ بصمتٍ جميلٍ. بياناتُكَ محفوظةٌ في جهازك وحده ولا تُرسلُ لأيِّ جهةٍ.</p>
+    <p class="small">عندَ التفعيلِ: تُفتَحُ بوابةُ نورٍ عندَ دخولِ التطبيقِ (سلامٌ باسمِكَ وفاتحةٌ كاملةٌ بصوتِ قارئِ الدخولِ)، وتُفتَحُ بطاقةٌ لكلِّ ميزةٍ تدخلُها بآيةٍ تنبضُ بموضوعِها بصوتِ قارئِ الميزاتِ — وبزرِّ ✦ في كلِّ ميزةٍ تُعاودُها وقتما تحبُّ. وعندَ الضغطِ علىَ «تَفَضَّل بالدخولِ» يتوقَّفُ الصوتُ فورًا. «لمرةٍ واحدةٍ» تعني ظهورَ البوابةِ في أولِ فتحٍ بعدَ الحفظِ ثم تهدأُ. بياناتُكَ في جهازك وحده.</p>
   </div>
   <div class="set card">
     <h3>البيانات</h3>
@@ -1486,6 +1493,8 @@ button.pray-loc{background:none;border:none;font-family:var(--f-ui)}
     </details>
     <details class="doc">
       <summary>سجل الإصدار</summary>
+      <div class="body"><b>v3.25.0</b> — بأمرِ صاحبِ التطبيقِ وبمراجعةِ عينيهِ: أُلغيتْ بطاقةُ تسجيلِ البياناتِ عندَ أولِ فتحٍ نهائيًّا — فيفتحُ النورُ مباشرةً (بوابةُ النورِ عندَ التفعيلِ فقط)، وبُنيتْ «بطاقة الترحيبِ» منَ الإعداداتِ كاملةً بأصنافِ الإعداداتِ الأصليةِ المنسَّقةِ: مفتاحٌ رئيسيٌّ (مفعَّلة/معطَّلة) + بطاقةُ الدخولِ (تفعيل/تعطيل، وعندَ التفعيلِ: لمرةٍ واحدةٍ أوَ دائمًا) + الاسمُ والعمرُ والجنسُ بحقولٍ واضحةٍ تناسبَ الأندرويدَ والآيفونَ + قارئانِ منفصلانِ (فاتحةُ الدخولِ / آياتُ الميزاتِ). وشاشةُ ترحيبِ الميزاتِ صارتْ ملءَ الشاشةِ كبوابةِ الدخولِ بخلفيةٍ ساحرةٍ متحركةٍ بجسيماتِ نورٍ وهالةٍ ذهبيةٍ. وعندَ الضغطِ علىَ «تَفَضَّل بالدخولِ» يتوقَّفُ الصوتُ فورًا فلا تداخلَ — ومنَ أرادَ الاستماعَ بقيَ في شاشةِ الترحيبِ.</div>
+      <div class="body"><b>v3.24.0</b> — بسمِ اللهِ وبأمرِ صاحبِ التطبيقِ: بطاقاتُ دخولٍ لكلِّ ميزةٍ في النورِ (٢٠ بطاقةً: سَكينةٌ، مهامي، الأذكارُ، التقويمُ، الخشوعُ، ساعةُ الأسماءِ، وأدواتُ الخيرِ الأربعَ عشرةَ) — سلامٌ باسمِكَ + جملةٌ تنبضُ بروحِ الميزةِ + آيةٌ واحدةٌ تُقرأُ بصوتِ القارئِ المختارِ نفسِهِ (نصُّها العثمانيُّ مُجلَبٌ منَ المصادرِ ومُتحقَّقٌ متقاطعًا بالأرقامِ العالميةِ). والأنماطُ الأربعةُ في «بطاقة الترحيبِ»: أولَ اليومِ (افتراضيًّا) / دائمًا / أولَ مرةٍ / إيقاف — وزرُّ ✦ في كلِّ ميزةٍ يعيدُ البطاقةَ وقتما تحبُّ. بلا شبكةٍ تُفتَحُ البطاقةُ بصمتٍ جميلٍ كبوابةِ الترحيبِ.</div>
       <div class="body"><b>v3.23.0</b> — برأيِ صاحبِ التطبيقِ: أُسميتِ البطاقةُ في الإعداداتِ «بطاقة الترحيبِ» وحُسِّنَ الإدخالُ بحقولٍ عموديةٍ بعناوينَ ذهبيةٍ واضحةٍ وأزرارٍ أكبرَ وأسهلَ لمسًا، معَ توضيحِ أنَّ التسجيلَ مرَّةً واحدةً والتعديلَ منَ الإعداداتِ — وفي كلِّ دخولٍ: رسالةُ السلامِ الشخصيةِ كما هي + قراءةُ الفاتحةِ كاملةً بصوتِ القارئِ المختارِ.</div>
       <div class="body"><b>v3.22.0</b> — بناءً على رأيِ صاحبِ التطبيقِ: ترحيبُ الدخولِ صارَ بفاتحةِ القرآنِ الكاملةِ بصوتِ القارئِ المختارِ (الحصريِّ أو المنشاويِّ أو السديسِ أو الشريمِ أو لحيدانَ) — ملفٌ واحدٌ لكلِّ قارئٍ منَ quranicaudio، وتمرُّ البوابةُ صامتةً بهدوءٍ إن لم تتوفرَ الشبكةُ. وتلاوةُ السكينةِ (آيةً آيةً) كما هي على المصادرِ المجانيةِ نفسِها.</div>
       <div class="body"><b>v3.21.0</b> — برأيِ صاحبِ التطبيقِ: أُلغيتْ «كلمةٌ كلمةٌ» نهائيًّا وبقيت إضاءةُ الآيةِ كاملةً عندَ التلاوة، وتبويبُ الرقيةِ يبدأُ مباشرةً بـ«الرقيةُ منَ القرآنِ» بلا مقدمةٍ. وجديدُ النور: صفحةُ دخولٍ سحريةٍ — تسجيلُ الاسمِ وتاريخِ الميلادِ والجنسِ وصوتِ القارئِ مرةً واحدةً (تعديلُها فيما بعدُ منَ الإعداداتِ ← «بطاقتي»)، وبوابةُ نورٍ تتفتَّحُ بجسيماتِ ضوءٍ ثم «السَّلامُ عليكم ورحمةُ اللهِ وبركاتُه — يا أخي/أختي …» حسبَ الجنسِ. بياناتُ الترحيبِ في جهازك وحده.</div>
@@ -9901,23 +9910,34 @@ fiqhInit();
 #wlParts span{position:absolute;bottom:-14px;border-radius:50%;background:radial-gradient(circle,#ffefc0 0%,rgba(255,233,176,0) 70%);animation:wlfly linear infinite}
 @keyframes wlfly{to{transform:translateY(-112vh);opacity:0}}
 @media (prefers-reduced-motion:reduce){#wlFx.go .wlslit,#wlFx.go .wldoor.d1,#wlFx.go .wldoor.d2,#wlParts span{animation-duration:.01s}}
+/* ═══ v3.25.0 شاشةُ ترحيبِ الميزاتِ — ملءُ الشاشةِ بخلفيةٍ ساحرةٍ متحركةٍ ═══ */
+#fwscr{position:fixed;inset:0;z-index:1150;display:none;flex-direction:column;overflow:hidden;background:radial-gradient(130% 130% at 50% 0%,#0e382e 0%,#08211b 52%,#040f0c 100%);color:var(--ink);-webkit-tap-highlight-color:transparent}
+#fwscr.on{display:flex}
+#fwscr.bye{opacity:0;transition:opacity .45s ease}
+#fwParts{position:absolute;inset:0;z-index:1;pointer-events:none;overflow:hidden}
+#fwParts span{position:absolute;bottom:-16px;border-radius:50%;background:radial-gradient(circle,#ffefc0 0%,rgba(255,233,176,0) 70%);animation:fwfly linear infinite}
+@keyframes fwfly{to{transform:translateY(-112vh);opacity:0}}
+#fwscr .fwhalo{position:absolute;top:9%;left:50%;width:min(130vw,760px);height:min(130vw,760px);transform:translateX(-50%);border-radius:50%;background:radial-gradient(circle,rgba(255,222,140,.13) 0%,rgba(255,222,140,.05) 42%,transparent 68%);z-index:2;pointer-events:none;animation:fwhalo 6s ease-in-out infinite alternate}
+@keyframes fwhalo{from{opacity:.7;transform:translateX(-50%) scale(.96)}to{opacity:1;transform:translateX(-50%) scale(1.06)}}
+#fwscr .fwcol{position:relative;z-index:3;flex:1;overflow-y:auto;overscroll-behavior:contain;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:28px 20px calc(28px + env(safe-area-inset-bottom));width:100%;max-width:600px;margin:0 auto;animation:fwin .6s cubic-bezier(.22,.61,.36,1)}
+@keyframes fwin{from{opacity:0;transform:translateY(16px)}to{opacity:1;transform:none}}
+#fwscr .fwslm{font:700 clamp(1.2rem,5.6vw,1.7rem)/1.6 var(--f-disp);color:#fff;margin:0 0 8px;text-shadow:0 2px 26px rgba(0,0,0,.6)}
+#fwscr .fwname{font:700 clamp(1.5rem,7vw,2.1rem)/1.5 var(--f-disp);color:var(--gold2);margin:0 0 14px;text-shadow:0 0 30px rgba(214,166,66,.35)}
+#fwscr .fwchip{display:inline-block;color:var(--fwc,#e9c877);font:700 .86rem/1 var(--f-ui);border:1px solid var(--fwc,#e9c877);border-radius:999px;padding:9px 18px;margin:0 0 12px;background:rgba(255,255,255,.05);box-shadow:0 0 24px rgba(233,200,119,.12)}
+#fwscr .fwline{color:var(--muted);font:400 .88rem/1.9 var(--f-ui);max-width:480px;margin:0 auto 18px}
+#fwscr .fwaya{font-family:var(--f-read);font-size:clamp(1.25rem,5.6vw,1.75rem);line-height:2.25;color:#f3ead2;background:rgba(255,255,255,.05);border:1px solid var(--line);border-radius:18px;padding:20px 18px;margin:0 0 22px;text-shadow:0 0 26px rgba(233,200,119,.22);max-width:540px}
+#fwscr .fwayn{display:inline-block;color:var(--fwc,#e9c877);font-size:.68em;line-height:1;margin-inline-start:8px}
+#fwscr .fwgo{display:block;width:min(320px,100%);background:linear-gradient(135deg,var(--gold),#b98d2f);color:#231a08;border:0;border-radius:16px;padding:14px;font:700 1.05rem/1 var(--f-ui);cursor:pointer;-webkit-tap-highlight-color:transparent;box-shadow:0 10px 34px rgba(184,141,47,.35)}
+#fwscr .fwgo:active{transform:scale(.985)}
+#fwscr .fwtap{color:var(--gold2);background:rgba(255,255,255,.05);border:1px dashed var(--line);border-radius:999px;padding:9px 18px;font:700 .82rem/1 var(--f-ui);cursor:pointer;margin:0 0 14px;animation:wlpulse 1.6s ease-in-out infinite}
+#fwscr .fwhint{color:var(--muted);font:400 .7rem/1.8 var(--f-ui);margin:14px 0 0;max-width:440px}
+#fwFab{position:fixed;z-index:1190;bottom:calc(16px + env(safe-area-inset-bottom));left:14px;width:46px;height:46px;border-radius:50%;background:rgba(9,32,26,.88);border:1px solid var(--gold);color:var(--gold2);font:700 1.1rem/1 var(--f-ui);cursor:pointer;box-shadow:0 8px 26px rgba(0,0,0,.4);-webkit-tap-highlight-color:transparent}
+#fwFab:active{transform:scale(.94)}
+@media (prefers-reduced-motion:reduce){#fwParts span,#fwscr .fwhalo,#fwscr .fwcol{animation-duration:.01s}}
 </style>
 <section id="wlscr" aria-label="ترحيب نور">
   <div id="wlFx" aria-hidden="true"><i class="wlslit"></i><i class="wldoor d1"></i><i class="wldoor d2"></i></div>
   <div id="wlParts" aria-hidden="true"></div>
-  <div class="wlcenter" id="wlReg" hidden>
-    <p class="wlbas go">بِسْمِ ٱللَّهِ ٱلرَّحْمَٰنِ ٱلرَّحِيمِ</p>
-    <h2 class="wlttl">أهلًا بك في نور</h2>
-    <p class="wlsub">سجِّل بياناتك مرَّةً واحدةً لِيُسلِّمَ عليكَ نورُك في كلِّ فتحٍ — وتُحفظُ في جهازك وحده، وتُعدَّلُ فيما بعدُ منَ الإعداداتِ ← «بطاقة الترحيب».</p>
-    <div class="wlform">
-      <div class="wlfield"><label for="wlName">الاسم — كما تحبُّ أن نُناديكَ</label><input id="wlName" class="usrin" type="text" maxlength="24" placeholder="مثال: عبد الرحمن" autocomplete="name"></div>
-      <div class="wlfield"><label for="wlBirth">تاريخُ ميلادِكَ <i>اختياري</i></label><input id="wlBirth" class="usrin" type="date"></div>
-      <div class="wlfield"><label>الجنس — للتحيةِ الصحيحةِ</label><div class="wlchips" id="wlG"><button type="button" class="wlchip on" data-v="m">ذكر</button><button type="button" class="wlchip" data-v="f">أنثى</button></div></div>
-      <div class="wlfield"><label>صوتُ فاتحةِ القرآنِ عندَ كلِّ دخولٍ</label><div class="wlchips" id="wlR"><button type="button" class="wlchip on" data-v="husary">الحصري</button><button type="button" class="wlchip" data-v="minshawi">المنشاوي</button><button type="button" class="wlchip" data-v="sudais">السديس</button><button type="button" class="wlchip" data-v="shuraim">الشريم</button><button type="button" class="wlchip" data-v="lohaidan">لحيدان</button></div></div>
-      <button type="button" id="wlSave" class="wlgo">ابدأ رحلةَ النور ✦</button>
-      <p class="wlhint">تسجيلٌ مرَّةً واحدةً — وفي كلِّ دخولٍ: سلامٌ عليكَ باسمِكَ وقراءةُ الفاتحةِ بصوتِكَ المختارِ</p>
-    </div>
-  </div>
   <div class="wlcenter" id="wlGateView" hidden>
     <p class="wlbas" id="wlBasTxt">بِسْمِ ٱللَّهِ ٱلرَّحْمَٰنِ ٱلرَّحِيمِ</p>
     <button type="button" class="wltap" id="wlTap" hidden>اضغطْ للدخول</button>
@@ -9926,6 +9946,7 @@ fiqhInit();
       <p class="wlname" id="wlNameTxt"></p>
       <p class="wlsub2" id="wlDay"></p>
       <button type="button" id="wlEnter" class="wlgo">تَفَضَّل بالدخول</button>
+      <p class="wlhint">ضبطُ البطاقةِ منَ الإعداداتِ ← «بطاقة الترحيب»</p>
     </div>
   </div>
 </section>
@@ -9953,6 +9974,12 @@ fiqhInit();
   <div class="sklist" id="skList"></div>
   <footer class="skft" id="skFt">النصُّ القرآنيُّ بالرسمِ العثمانيِّ (حفص) — <b>المصحفُ الإلكترونيُّ، جامعةُ الملكِ سعودِ</b> quran.ksu.edu.sa · موثَّقٌ بمطابقةٍ حرفيةٍ عبرَ مسارَينِ (٢٠٦٢ آيةً) · التفسيرُ الميسَّرُ: مجمعُ الملكِ فهدِ · تلاوةُ السكينةِ: الحُصريُّ والمنشاويُّ والسديسُ والشريمُ · ترحيبُ الدخولِ: فاتحةٌ كاملةٌ بصوتِ القارئِ المختارِ — النصُّ مضمَّنٌ دونَ اتصالٍ والتلاوةُ تحتاجُ إنترنتًا</footer>
 </section>
+<section id="fwscr" aria-label="ترحيب الميزة">
+  <div id="fwParts" aria-hidden="true"></div>
+  <i class="fwhalo" aria-hidden="true"></i>
+  <div class="fwcol" id="fwGlass"></div>
+</section>
+<button type="button" id="fwFab" aria-label="بطاقة الميزة — إعادة العرض" hidden>✦</button>
 <div id="tkscr" role="dialog" aria-modal="true">
   <div class="adjback" data-tk-close></div>
   <div class="adjcard">
@@ -10317,13 +10344,15 @@ const SKRQH=["النيّةُ: أنت تطلبُ الشفاءَ من اللهِ �
   var svT=null;
   L.addEventListener('scroll',function(){clearTimeout(svT);svT=setTimeout(function(){
     if(SC.classList.contains('on')){S.skT=TAB;S.skY=L.scrollTop;saveS();}},400);});
+  /* رابطٌ عامٌّ لإيقافِ تلاوةِ السكينةِ فورًا — تُستدعى قبلَ صوتِ بطاقةِ الميزةِ لمنعِ التداخلِ (v3.25.0) */
+  window.skAuStop=function(){try{stopAu(false);}catch(_){}};
 })();
 </script>
 <script>
 /* ═══════ v3.22.0 صفحةُ الدخولِ السحرية — فاتحةٌ كاملةٌ بصوتِ القارئِ ═══════ */
 (function(){
   var SC=document.querySelector('#wlscr');if(!SC)return;
-  var RG=document.querySelector('#wlReg'),GV=document.querySelector('#wlGateView'),
+  var GV=document.querySelector('#wlGateView'),
       FX=document.querySelector('#wlFx'),PTS=document.querySelector('#wlParts'),
       BAS=document.querySelector('#wlBasTxt'),TAP=document.querySelector('#wlTap'),
       GRT=document.querySelector('#wlGreet'),NTX=document.querySelector('#wlNameTxt'),
@@ -10339,13 +10368,6 @@ const SKRQH=["النيّةُ: أنت تطلبُ الشفاءَ من اللهِ �
       var iv=setInterval(function(){v-=0.12;if(v<=0){clearInterval(iv);AU.pause();}else{try{AU.volume=v;}catch(_){}}},70);
     } else AU.pause();
     AU=null;
-  }
-  function chips(box,val){
-    box.querySelectorAll('.wlchip').forEach(function(b){b.classList.toggle('on',b.dataset.v===val);});
-  }
-  function chipVal(box,def){
-    var on=box.querySelector('.wlchip.on');
-    return on?on.dataset.v:def;
   }
   function particles(){
     PTS.innerHTML='';
@@ -10373,7 +10395,7 @@ const SKRQH=["النيّةُ: أنت تطلبُ الشفاءَ من اللهِ �
     return blocked;
   }
   function showGate(){
-    RG.hidden=true;GV.hidden=false;ST=0;
+    GV.hidden=false;ST=0;
     BAS.classList.remove('go','dim');GRT.classList.remove('go');FX.classList.remove('go');
     TAP.hidden=true;particles();
     if(!startFt())beginSeq();
@@ -10410,46 +10432,128 @@ const SKRQH=["النيّةُ: أنت تطلبُ الشفاءَ من اللهِ �
     setTimeout(function(){SC.classList.remove('on','bye');SC.onclick=null;},620);
   }
   ENT.addEventListener('click',function(e){e.stopPropagation();close();});
-  function reg(){
-    GV.hidden=true;RG.hidden=false;ST=0;
-    document.querySelector('#wlName').value=S.usrN||'';
-    document.querySelector('#wlBirth').value=S.usrB||'';
-    chips(document.querySelector('#wlG'),S.usrG||'m');
-    chips(document.querySelector('#wlR'),S.rcr||'husary');
-  }
-  function chipsWire(box){
-    box.addEventListener('click',function(e){
-      var b=e.target.closest('.wlchip');if(!b)return;
-      box.querySelectorAll('.wlchip').forEach(function(x){x.classList.remove('on');});
-      b.classList.add('on');
-    });
-  }
-  chipsWire(document.querySelector('#wlG'));
-  chipsWire(document.querySelector('#wlR'));
-  document.querySelector('#wlSave').addEventListener('click',function(){
-    var n=document.querySelector('#wlName').value.trim();
-    if(!n){toast('اكتبْ اسمك لِنُسلِّمَ عليكَ ✦');document.querySelector('#wlName').focus();return;}
-    S.usrN=n;S.usrB=document.querySelector('#wlBirth').value||'';
-    S.usrG=chipVal(document.querySelector('#wlG'),'m');S.rcr=chipVal(document.querySelector('#wlR'),'husary');
-    saveS();showGate();
-  });
-  /* بطاقة الإعدادات */
+  /* بطاقة الإعدادات — كلُّ بناءِ بطاقةِ الترحيبِ منَ الإعداداتِ بأصنافِها الأصليةِ (v3.25.0) */
+  if(S.wlMaster==null)S.wlMaster=1;
+  if(S.wlOn==null)S.wlOn=1;
+  if(S.wlOnce==null)S.wlOnce=0;
+  if(!S.rcr)S.rcr='husary';
+  if(!S.fwR)S.fwR='husary';
   var UI=document.querySelector('#usrNameIn');
   if(UI){
     UI.value=S.usrN||'';
-    document.querySelector('#usrBirthIn').value=S.usrB||'';
-    chips(document.querySelector('#usrGenderSeg'),S.usrG||'m');
-    chips(document.querySelector('#usrRecSeg'),S.rcr||'husary');
-    chipsWire(document.querySelector('#usrGenderSeg'));
-    chipsWire(document.querySelector('#usrRecSeg'));
+    document.querySelector('#usrAgeIn').value=(S.usrA==null?'':S.usrA);
+    var bodyEl=document.querySelector('#usrWlBody');
+    var paintBody=function(){if(bodyEl)bodyEl.hidden=!S.wlMaster;};
+    if(typeof bindSeg==='function'){
+      bindSeg('#usrWlMst',[1,0],'wlMaster',paintBody);
+      bindSeg('#usrWlOn',[1,0],'wlOn');
+      bindSeg('#usrWlOnce',[1,0],'wlOnce');
+      bindSeg('#usrGenderSeg',['m','f'],'usrG');
+      bindSeg('#usrRecSeg',['husary','minshawi','sudais','shuraim','lohaidan'],'rcr');
+      bindSeg('#usrFwSeg',['day','always','once','off'],'fwM');
+      bindSeg('#usrFwRec',['husary','minshawi','sudais','shuraim','lohaidan'],'fwR');
+    }
+    paintBody();
     document.querySelector('#usrSave').addEventListener('click',function(){
-      var n=UI.value.trim();
-      S.usrN=n;S.usrB=document.querySelector('#usrBirthIn').value||'';
-      S.usrG=chipVal(document.querySelector('#usrGenderSeg'),'m');S.rcr=chipVal(document.querySelector('#usrRecSeg'),'husary');
-      saveS();toast(n?('حُفظت بطاقةُ الترحيبِ يا '+n+' ✦'):'حُفظت بطاقةُ الترحيبِ ✦');
+      S.usrN=UI.value.trim();
+      var a=parseInt(document.querySelector('#usrAgeIn').value,10);
+      S.usrA=(a&&a>0&&a<130)?a:'';
+      if(S.wlOnce)S.wlEver=0; /* لمرةٍ واحدةٍ: تُعادُ البوابةُ في أولِ فتحٍ بعدَ الحفظِ */
+      saveS();toast(S.usrN?('حُفظت بطاقةُ الترحيبِ يا '+S.usrN+' ✦'):'حُفظت بطاقةُ الترحيبِ ✦');
     });
   }
-  setTimeout(function(){SC.classList.add('on');(S.usrN?showGate:reg)();},500);
+  /* الدخول: بوابةُ النورِ فقط عندَ التفعيلِ — بلا بطاقةِ تسجيلٍ نهائيًّا (v3.25.0) */
+  setTimeout(function(){
+    if(S.wlMaster&&S.wlOn&&(!S.wlOnce||!S.wlEver)){
+      S.wlEver=1;try{saveS();}catch(_){}
+      SC.classList.add('on');showGate();
+    }
+  },500);
+})();
+</script>
+<script>
+var FWX={skn:{t:"سَكينة",ln:"اسألُ اللهَ لكَ أن يلامسَ كلامُهُ قلبَكَ وأن يجعلَ القرآنَ ربيعَ قلبِكَ وجلاءَ همِّكَ وذهابَ حزنِكَ",c:"#8fd6b8",s:59,i:21,g:5147,s3:'059',i3:'021',n:"الحَشۡرِ",d:"لَوْ أَنزَلْنَا هَٰذَا ٱلْقُرْءَانَ عَلَىٰ جَبَلٍۢ لَّرَأَيْتَهُۥ خَٰشِعًۭا مُّتَصَدِّعًۭا مِّنْ خَشْيَةِ ٱللَّهِ ۚ وَتِلْكَ ٱلْأَمْثَٰلُ نَضْرِبُهَا لِلنَّاسِ لَعَلَّهُمْ يَتَفَكَّرُونَ"},azk:{t:"أذكارُ الصباحِ والمساءِ",ln:"وردُكَ اليوميُّ جنةُ يومِكَ — اذكرْ اللهَ كثيرًا بُكرةً وأصيلًا يبقى لكَ ذكرُهُ",c:"#e9c877",s:33,i:41,g:3574,s3:'033',i3:'041',n:"الأَحۡزَابِ",d:"يَٰٓأَيُّهَا ٱلَّذِينَ ءَامَنُوا۟ ٱذْكُرُوا۟ ٱللَّهَ ذِكْرًۭا كَثِيرًۭا"},tasks:{t:"مهماتي اليومية",ln:"ما أجملَ يومًا يبدأُ بعملٍ صالحٍ — سيرى اللهُ عملَكَ؛ فأسألُهُ أن يُباركَ في ساعاتِكَ ويُثمِّرَ همَّكَ",c:"#e9c877",s:9,i:105,g:1340,s3:'009',i3:'105',n:"التَّوۡبَةِ",d:"وَقُلِ ٱعْمَلُوا۟ فَسَيَرَى ٱللَّهُ عَمَلَكُمْ وَرَسُولُهُۥ وَٱلْمُؤْمِنُونَ ۖ وَسَتُرَدُّونَ إِلَىٰ عَٰلِمِ ٱلْغَيْبِ وَٱلشَّهَٰدَةِ فَيُنَبِّئُكُم بِمَا كُنتُمْ تَعْمَلُونَ"},time:{t:"عملٌ لكلِّ وقتٍ",ln:"جعلَ اللهُ الليلَ والنهارَ خِلْفَةً لمن أرادَ أن يذكَّرَ — فلنستثمرْ كلُّ ساعةٍ في خيرٍ يبقى",c:"#7fc8a9",s:25,i:62,g:2917,s3:'025',i3:'062',n:"الفُرۡقَانِ",d:"وَهُوَ ٱلَّذِى جَعَلَ ٱلَّيْلَ وَٱلنَّهَارَ خِلْفَةًۭ لِّمَنْ أَرَادَ أَن يَذَّكَّرَ أَوْ أَرَادَ شُكُورًۭا"},challenge:{t:"تحدي الدقيقة",ln:"الدقيقةُ الواحدةُ تُغيِّرُ اليومَ كله — اقتنصْها للصالحاتِ وتواصَلْ بالحقِّ والصبرِ",c:"#f0b35f",s:103,i:3,g:6179,s3:'103',i3:'003',n:"العَصۡرِ",d:"إِلَّا ٱلَّذِينَ ءَامَنُوا۟ وَعَمِلُوا۟ ٱلصَّٰلِحَٰتِ وَتَوَاصَوْا۟ بِٱلْحَقِّ وَتَوَاصَوْا۟ بِٱلصَّبْرِ"},sky:{t:"سماءُ الخيرِ",ln:"مَن عملَ صالحًا فلنفسِهِ — سماءُ الخيرِ تجمعُ أعمالَكَ في ميزانِكَ",c:"#e9c877",s:41,i:46,g:4264,s3:'041',i3:'046',n:"فُصِّلَتۡ",d:"مَّنْ عَمِلَ صَٰلِحًۭا فَلِنَفْسِهِۦ ۖ وَمَنْ أَسَآءَ فَعَلَيْهَا ۗ وَمَا رَبُّكَ بِظَلَّٰمٍۢ لِّلْعَبِيدِ"},anger:{t:"حالتي الآن",ln:"ألا بذكرِ اللهِ تطمئنُّ القلوب — اجعِلِ اللهَ أوَّلَ من تُحادثُ في كلِّ حالٍ",c:"#8fd6b8",s:13,i:28,g:1735,s3:'013',i3:'028',n:"الرَّعۡدِ",d:"ٱلَّذِينَ ءَامَنُوا۟ وَتَطْمَئِنُّ قُلُوبُهُم بِذِكْرِ ٱللَّهِ ۗ أَلَا بِذِكْرِ ٱللَّهِ تَطْمَئِنُّ ٱلْقُلُوبُ"},ideas:{t:"بنكُ الخيراتِ",ln:"في ذلكَ فليتنافسِ المتنافسون — خيراتٌ بانتظارِ من يأخذَ منها ويبدأُ الآنَ",c:"#e9c877",s:83,i:26,g:5874,s3:'083',i3:'026',n:"المُطَفِّفِينَ",d:"خِتَٰمُهُۥ مِسْكٌۭ ۚ وَفِى ذَٰلِكَ فَلْيَتَنَافَسِ ٱلْمُتَنَٰفِسُونَ"},random:{t:"ماذا أفعلُ الآن؟",ln:"فاستبقوا الخيراتِ أينما كنتم — كلُّ لحظةٍ بابٌ لعملٍ صالحٍ يأتي بكَ اللهُ جميعًا",c:"#7fc8a9",s:2,i:148,g:155,s3:'002',i3:'148',n:"البَقَرَةِ",d:"وَلِكُلٍّۢ وِجْهَةٌ هُوَ مُوَلِّيهَا ۖ فَٱسْتَبِقُوا۟ ٱلْخَيْرَٰتِ ۚ أَيْنَ مَا تَكُونُوا۟ يَأْتِ بِكُمُ ٱللَّهُ جَمِيعًا ۚ إِنَّ ٱللَّهَ عَلَىٰ كُلِّ شَىْءٍۢ قَدِيرٌۭ"},habits:{t:"العاداتُ عبادات",ln:"واعبُدْ ربَّكَ حتى يأتيَكَ اليقين — الاستمرارُ سرُّ القبولِ: قليلٌ دائمٌ خيرٌ منَ الكثيرِ المنقطعِ",c:"#e9c877",s:15,i:99,g:1901,s3:'015',i3:'099',n:"الحِجۡرِ",d:"وَٱعْبُدْ رَبَّكَ حَتَّىٰ يَأْتِيَكَ ٱلْيَقِينُ"},duas:{t:"سجلُّ الدعواتِ",ln:"قالَ ربُّكَ ادعوني أستجِبْ لكم — اكتبْ دعوةَكَ اليومَ؛ فالبابُ مفتوحٌ واللهُ قريبٌ مجيبٌ",c:"#8fd6b8",s:40,i:60,g:4193,s3:'040',i3:'060',n:"غَافِرٍ",d:"وَقَالَ رَبُّكُمُ ٱدْعُونِىٓ أَسْتَجِبْ لَكُمْ ۚ إِنَّ ٱلَّذِينَ يَسْتَكْبِرُونَ عَنْ عِبَادَتِى سَيَدْخُلُونَ جَهَنَّمَ دَاخِرِينَ"},life:{t:"كم بقِيَ منَ عمري؟",ln:"وابتغِ فيما آتاكَ اللهُ الدارَ الآخرةَ ولا تنسَ نصيبَكَ منَ الدنيا — عمركَ رأسُ مالِكَ فأنفِقْهُ بوعيٍ",c:"#e9c877",s:28,i:77,g:3329,s3:'028',i3:'077',n:"القَصَصِ",d:"وَٱبْتَغِ فِيمَآ ءَاتَىٰكَ ٱللَّهُ ٱلدَّارَ ٱلْءَاخِرَةَ ۖ وَلَا تَنسَ نَصِيبَكَ مِنَ ٱلدُّنْيَا ۖ وَأَحْسِن كَمَآ أَحْسَنَ ٱللَّهُ إِلَيْكَ ۖ وَلَا تَبْغِ ٱلْفَسَادَ فِى ٱلْأَرْضِ ۖ إِنَّ ٱللَّهَ لَا يُحِبُّ ٱلْمُفْسِدِينَ"},quran:{t:"القرآنُ وحالتي",ln:"وننزِّلُ منَ القرآنِ ما هو شفاءٌ ورحمةٌ للمؤمنين — اسألِ القرآنَ عن حالِكَ يتحدَّثْ إليكَ",c:"#7fc8a9",s:17,i:82,g:2111,s3:'017',i3:'082',n:"الإِسۡرَاءِ",d:"وَنُنَزِّلُ مِنَ ٱلْقُرْءَانِ مَا هُوَ شِفَآءٌۭ وَرَحْمَةٌۭ لِّلْمُؤْمِنِينَ ۙ وَلَا يَزِيدُ ٱلظَّٰلِمِينَ إِلَّا خَسَارًۭا"},account:{t:"محاسبتي قبلَ النومِ",ln:"ولتنظرْ نفسٌ ما قدَّمَتْ لغد — محاسبةُ ليلةٍ تُجمِّلُ صباحَ غدٍ",c:"#e9c877",s:59,i:18,g:5144,s3:'059',i3:'018',n:"الحَشۡرِ",d:"يَٰٓأَيُّهَا ٱلَّذِينَ ءَامَنُوا۟ ٱتَّقُوا۟ ٱللَّهَ وَلْتَنظُرْ نَفْسٌۭ مَّا قَدَّمَتْ لِغَدٍۢ ۖ وَٱتَّقُوا۟ ٱللَّهَ ۚ إِنَّ ٱللَّهَ خَبِيرٌۢ بِمَا تَعْمَلُونَ"},secret:{t:"نورٌ بينكَ وبينَ اللهِ",ln:"من قالَ ربُّنا اللهُ ثم استقامَ تنزِلُ عليهِمُ الملائكةُ ألا تخافوا ولا تحزنوا — سرُّكَ معَ اللهِ نورٌ لا يخيبُ",c:"#8fd6b8",s:41,i:30,g:4248,s3:'041',i3:'030',n:"فُصِّلَتۡ",d:"إِنَّ ٱلَّذِينَ قَالُوا۟ رَبُّنَا ٱللَّهُ ثُمَّ ٱسْتَقَٰمُوا۟ تَتَنَزَّلُ عَلَيْهِمُ ٱلْمَلَٰٓئِكَةُ أَلَّا تَخَافُوا۟ وَلَا تَحْزَنُوا۟ وَأَبْشِرُوا۟ بِٱلْجَنَّةِ ٱلَّتِى كُنتُمْ تُوعَدُونَ"},share:{t:"كنْ سببًا في الخيرِ",ln:"ولتكنِ منكُمْ أمةٌ يدعونَ إلىَ الخيرِ — كنْ سببًا في هدايةٍ فأجرُكَ مثلُ أجرِ العاملِ",c:"#e9c877",s:3,i:104,g:397,s3:'003',i3:'104',n:"آلِ عِمۡرَانَ",d:"وَلْتَكُن مِّنكُمْ أُمَّةٌۭ يَدْعُونَ إِلَى ٱلْخَيْرِ وَيَأْمُرُونَ بِٱلْمَعْرُوفِ وَيَنْهَوْنَ عَنِ ٱلْمُنكَرِ ۚ وَأُو۟لَٰٓئِكَ هُمُ ٱلْمُفْلِحُونَ"},qibla:{t:"اتجاهُ القبلةِ",ln:"فولِّ وجهَكَ شطرَ المسجدِ الحرامِ — قبلةُ القلبِ حيثُ قصدُهُ",c:"#7fc8a9",s:2,i:144,g:151,s3:'002',i3:'144',n:"البَقَرَةِ",d:"… فَوَلِّ وَجْهَكَ شَطْرَ ٱلْمَسْجِدِ ٱلْحَرَامِ ۚ وَحَيْثُ مَا كُنتُمْ فَوَلُّوا۟ وُجُوهَكُمْ شَطْرَه"},names:{t:"ساعةُ الأسماءِ الحسنى",ln:"وللهِ الأسماءُ الحسنى فادعوهُ بها — أجودُ ما تُمسِكُ لسانَكَ بهِ الأسماءُ الحسنى",c:"#e9c877",s:7,i:180,g:1134,s3:'007',i3:'180',n:"الأَعۡرَافِ",d:"وَلِلَّهِ ٱلْأَسْمَآءُ ٱلْحُسْنَىٰ فَٱدْعُوهُ بِهَا ۖ وَذَرُوا۟ ٱلَّذِينَ يُلْحِدُونَ فِىٓ أَسْمَٰٓئِهِۦ ۚ سَيُجْزَوْنَ مَا كَانُوا۟ يَعْمَلُونَ"},cal:{t:"التقويم",ln:"إنَّ عِدَّةَ الشهورِ عندَ اللهِ اثنا عشرَ شهرًا في كتابِ اللهِ — عِدُّ أيامَكَ وتعلَّمْ منَ الزمنِ",c:"#e9c877",s:9,i:36,g:1271,s3:'009',i3:'036',n:"التَّوۡبَةِ",d:"إِنَّ عِدَّةَ ٱلشُّهُورِ عِندَ ٱللَّهِ ٱثْنَا عَشَرَ شَهْرًۭا فِى كِتَٰبِ ٱللَّه"},khushu:{t:"الخشوعُ في الصلاةِ",ln:"إنَّ الصلاةَ كانتْ علىَ المؤمنينَ كتابًا موقوتًا — حضورُ قلبِكَ في صلاتِكَ أثمنُ ما تحملُ",c:"#8fd6b8",s:4,i:103,g:596,s3:'004',i3:'103',n:"النِّسَاءِ",d:"… فَإِذَا ٱطْمَأْنَنتُمْ فَأَقِيمُوا۟ ٱلصَّلَوٰةَ ۚ إِنَّ ٱلصَّلَوٰةَ كَانَتْ عَلَى ٱلْمُؤْمِنِينَ كِتَٰبًۭا مَّوْقُوتًۭا"}};
+/* ═══════ v3.24.0 بطاقاتُ دخولِ الميزاتِ ═══════ */
+(function(){
+  var F=document.getElementById('fwscr'),G=document.getElementById('fwGlass'),FB=document.getElementById('fwFab');
+  if(!F||!G||typeof FWX==='undefined'||typeof S==='undefined')return;
+  var KEY=null,AU=null,shown=false,P=document.getElementById('fwParts');
+  function fwParts(){if(!P)return;P.innerHTML='';
+    for(var i=0;i<16;i++){var s=document.createElement('span');
+      var sz=(4+Math.random()*7).toFixed(1);
+      s.style.left=(3+Math.random()*94).toFixed(1)+'%';
+      s.style.width=sz+'px';s.style.height=sz+'px';
+      s.style.animationDuration=(6+Math.random()*7).toFixed(1)+'s';
+      s.style.animationDelay=(Math.random()*5).toFixed(1)+'s';
+      s.style.opacity=(0.3+Math.random()*0.6).toFixed(2);
+      P.appendChild(s);}}
+  function today(){var t=new Date();return t.getFullYear()+'-'+('0'+(t.getMonth()+1)).slice(-2)+'-'+('0'+t.getDate()).slice(-2);}
+  function an(x){return String(x).replace(/[0-9]/g,function(d){return '٠١٢٣٤٥٦٧٨٩'[+d];});}
+  function fwSave(){if(typeof saveS==='function'){try{saveS();}catch(_){}}}
+  function fwUrl(d){var r=S.fwR||'husary';if(r==='lohaidan')r='husary';
+    if(r==='minshawi')return 'https://cdn.islamic.network/quran/audio/128/ar.minshawi/'+d.g+'.mp3';
+    if(r==='sudais')return 'https://everyayah.com/data/Abdurrahmaan_As-Sudais_192kbps/'+d.s3+d.i3+'.mp3';
+    if(r==='shuraim')return 'https://everyayah.com/data/Saood_ash-Shuraym_128kbps/'+d.s3+d.i3+'.mp3';
+    return 'https://cdn.islamic.network/quran/audio/128/ar.husary/'+d.g+'.mp3';}
+  function stopAu(f){if(!AU)return;if(f&&AU.volume>0){var v=AU.volume;var iv=setInterval(function(){v-=0.14;if(v<=0){clearInterval(iv);AU.pause();}else{try{AU.volume=v;}catch(_){}}},60);}else AU.pause();AU=null;}
+  function fwHint(m,manual){
+    var base=m==='off'?'البطاقاتُ معطَّلةٌ منَ الإعداداتِ — هذهِ نسخةٌ يدويةٌ بزرِّ ✦':(m==='always'?'تُفتَحُ هذهِ البطاقةُ عندَ كلِّ دخولٍ للميزةِ':(m==='once'?'تُفتَحُ مرةً واحدةً لكلِّ ميزةٍ':'تُفتَحُ عندَ أولِ دخولٍ لكلِّ يومٍ — ويمكنكَ إعادتُها بزرِّ ✦'));
+    return base+' · تعديلُ الأنماطِ منَ الإعداداتِ ← بطاقةُ الترحيبِ'+(manual?' — أعدتَها أنتَ ✦':'');
+  }
+  function fwShow(k,manual){
+    var d=FWX[k];if(!d)return;
+    if(document.querySelector('#wlscr.on'))return; /* لا تراكمَ فوقَ بوابةِ الترحيبِ */
+    try{if(window.skAuStop)window.skAuStop();}catch(_){} /* إيقافُ تلاوةِ السكينةِ قبلَ الصوتِ الجديدِ — بلا تداخلٍ */
+    stopAu(true);shown=true;FB.hidden=true;fwParts();
+    var nm=(S.usrN||'').trim();
+    G.innerHTML=
+      '<p class="fwslm">السَّلامُ عليكم ورحمةُ اللهِ وبركاتُه</p>'+
+      (nm?'<p class="fwname">'+(S.usrG==='f'?'يا أختي ':'يا أخي ')+nm+'</p>':'')+
+      '<span class="fwchip" style="--fwc:'+d.c+'">'+d.t+'</span>'+
+      '<p class="fwline">'+d.ln+'</p>'+
+      '<div class="fwaya" style="--fwc:'+d.c+'">'+d.d+' <span class="fwayn">﴿'+d.n+' '+an(d.i)+'﴾</span></div>'+
+      '<button type="button" id="fwGo" class="fwgo">تَفَضَّل بالدخول</button>'+
+      '<button type="button" id="fwTap" class="fwtap" hidden>اضغطْ للسماع ✦</button>'+
+      '<p class="fwhint">'+fwHint(S.fwM||'day',manual)+'</p>';
+    F.classList.add('on');
+    var go=G.querySelector('#fwGo');if(go)go.addEventListener('click',function(e){e.stopPropagation();fwClose();});
+    var tp=G.querySelector('#fwTap');if(tp)tp.addEventListener('click',function(e){e.stopPropagation();try{AU=new Audio(fwUrl(d));AU.volume=0.9;AU.onerror=function(){AU=null;};AU.play();}catch(_){AU=null;}tp.hidden=true;});
+    try{
+      AU=new Audio(fwUrl(d));AU.volume=0.9;
+      AU.onerror=function(){AU=null;};
+      var p=AU.play();
+      if(p&&p.catch)p.catch(function(){AU=null;var x=G.querySelector('#fwTap');if(x)x.hidden=false;});
+    }catch(_){AU=null;}
+    if(!S.fwD)S.fwD={};if(!S.fwE)S.fwE={};S.fwD[k]=today();S.fwE[k]=1;fwSave();
+  }
+  function fwClose(){F.classList.add('bye');stopAu(true);setTimeout(function(){F.classList.remove('on','bye');shown=false;FB.hidden=!KEY;},450);}
+  function fwEnter(k){
+    KEY=k;
+    var d=FWX[k];if(!d||shown)return;
+    var m=S.fwM||'day';
+    if(m==='off'){FB.hidden=false;return;}
+    if(m==='always'){fwShow(k);return;}
+    if(m==='once'){if(!S.fwE||!S.fwE[k])fwShow(k);return;}
+    if(!S.fwD||S.fwD[k]!==today())fwShow(k);
+    if(KEY&&!shown)FB.hidden=false;
+  }
+  function fwLater(k){if(!FWX[k])return;setTimeout(function(){fwEnter(k);},320);}
+  FB.addEventListener('click',function(e){e.stopPropagation();if(KEY)fwShow(KEY,true);});
+  /* ربطُ دوالِّ فتحِ الميزاتِ الحقيقيةِ */
+  function wrap(name,fn){if(typeof window[name]!=='function')return;var o=window[name];window[name]=function(a){try{fn(a);}catch(_){}return o.apply(this,arguments);};}
+  wrap('openTool',function(k){if(k&&FWX[k])fwLater(k);});
+  wrap('openTk',function(){fwLater('tasks');});
+  wrap('openCal',function(){fwLater('cal');});
+  wrap('openKhushu',function(){fwLater('khushu');});
+  wrap('go',function(id){if(id==='azk'||id==='names')fwLater(id);});
+  var SB=document.getElementById('homeSknBtn');
+  if(SB)SB.addEventListener('click',function(){fwLater('skn');},true);
+  /* إخفاءُ زرِّ ✦ عندَ إغلاقِ كلِّ الميزاتِ */
+  var VEILS=[['toolVeil','show'],['calVeil','show'],['tkscr','on'],['skscr','on'],['screen-azk','active'],['screen-names','active']];
+  function anyOpen(){for(var i=0;i<VEILS.length;i++){var el=document.getElementById(VEILS[i][0]);if(el&&el.classList.contains(VEILS[i][1]))return true;}return false;}
+  var MO=new MutationObserver(function(){if(!anyOpen())KEY=null;FB.hidden=(!KEY||shown);});
+  for(var i=0;i<VEILS.length;i++){var el=document.getElementById(VEILS[i][0]);if(el)MO.observe(el,{attributes:true,attributeFilter:['class']});}
+  FB.hidden=true;
 })();
 </script>
 </body>
